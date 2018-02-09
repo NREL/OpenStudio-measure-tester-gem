@@ -28,11 +28,14 @@
 
 require 'coveralls'
 require 'simplecov'
+require "minitest/reporters"
 
 SimpleCov.command_name 'Unit Tests'
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
-]
+])
 SimpleCov.start
+
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::HtmlReporter.new]
 

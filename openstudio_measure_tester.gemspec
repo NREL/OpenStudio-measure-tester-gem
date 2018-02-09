@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Testing framework for OpenStudio measures"
   spec.homepage      = "https://openstudio.nrel.gov"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.files         = `git ls-test_measures -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'ci_reporter_minitest', '~> 1.0.0'
   spec.add_dependency 'minitest', '~> 5.4.0'
+  spec.add_dependency 'minitest-reporters', '~> 1.1'
   spec.add_dependency "rake", "~> 12.3"
   spec.add_dependency "coveralls", "~> 0.8"
   spec.add_dependency "rubocop", "~> 0.52"
   spec.add_dependency "rubocop-checkstyle_formatter", "~> 0.4"
-
 end

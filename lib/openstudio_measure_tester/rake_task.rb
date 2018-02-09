@@ -59,6 +59,8 @@ module OpenStudioMeasureTester
     def setup_subtasks(name)
       namespace name do
         Rake::TestTask.new(:test) do |task|
+          # --require spec_helper
+          task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = ["#{Rake.application.original_dir}/**/*_test.rb"]
           task.verbose = true
