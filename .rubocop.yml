@@ -1,0 +1,2 @@
+inherit_from:
+  - https://raw.githubusercontent.com/NREL/OpenStudio-resources/develop/styles/rubocop.yml
