@@ -42,3 +42,18 @@ Currently, the project downloads the rubocops from the OpenStudio-resources Gith
 
 * Callbacks to gather results
 * MiniTest results to JSON (currently only stdout) 
+
+# Testing in Docker
+
+```bash
+
+apt-get update && apt-get install -y curl
+curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_ruby.sh
+curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
+chmod +x install_ruby.sh
+chmod +x install_openstudio.sh
+./install_ruby.sh 2.2.4 b6eff568b48e0fda76e5a36333175df049b204e91217aa32a65153cc0cdcb761
+./install_openstudio.sh 2.4.0 f58a3e1808
+export RUBYLIB=/usr/Ruby
+
+```

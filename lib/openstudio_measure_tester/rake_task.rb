@@ -39,19 +39,7 @@ module OpenStudioMeasureTester
     def initialize(*args, &task_block)
       @name = args.shift || :openstudio
 
-      # desc 'Run OpenStudio Measure Tests'
-        # task(name, *args) do |_, task_args|
-      #   RakeFileUtils.send(:verbose, verbose) do
-      #     if task_block
-      #       task_block.call(*[self, task_args].slice(0, task_block.arity))
-      #     end
-      #
-      #     # Do nothing yet
-      #   end
-      # end
-
-      # Subtasks under the @name (default: openstudio) name
-      setup_subtasks(name)
+      setup_subtasks(@name)
     end
 
     private
@@ -62,7 +50,10 @@ module OpenStudioMeasureTester
           # --require spec_helper
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
-          task.pattern = ["#{Rake.application.original_dir}/**/*_test.rb"]
+          task.pattern = [
+              "#{Rake.application.original_dir}/**/*_test.rb",
+              "#{Rake.application.original_dir}/**/*_Test.rb"
+          ]
           task.verbose = true
         end
 
