@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Testing framework for OpenStudio measures"
   spec.homepage      = "https://openstudio.nrel.gov"
 
-  spec.files         = `git ls-test_measures -z`.split("\x0").reject do |f|
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
