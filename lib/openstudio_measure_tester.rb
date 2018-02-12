@@ -31,9 +31,10 @@ require 'active_support'
 require 'active_support/core_ext'
 
 require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/rake_task'
-
 require 'openstudio_measure_tester/minitest_result'
+
+
+require 'openstudio_measure_tester/rake_task'
 
 module OpenStudioMeasureTester
   # No action here. Most of this will be rake_tasks at the moment.

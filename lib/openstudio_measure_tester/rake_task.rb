@@ -111,7 +111,8 @@ module OpenStudioMeasureTester
           FileUtils.mv "#{current_dir}/test", "#{test_results_dir}/minitest"
 
           # Load in the data into the minitest object
-          if MinitestResult.new("#{test_results_dir}/minitest")
+          mr = MinitestResult.new("#{test_results_dir}/minitest")
+          if mr.error_status
             final_error_status = 1
           end
         end

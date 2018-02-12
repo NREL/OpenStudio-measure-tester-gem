@@ -54,6 +54,7 @@ class MinitestResult
       puts "Parsing minitest report #{file}"
       hash = Hash.from_xml(File.read(file))
 
+      pp hash
       # pp hash
       # "tests"=>"2",
       # "failures"=>"0",
@@ -69,5 +70,9 @@ class MinitestResult
     end
 
     error_status = true if @total_errors > 0
+  end
+
+  def to_json
+    # save as a json and have something else parse it/plot it.
   end
 end
