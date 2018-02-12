@@ -23,8 +23,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rspec', '~> 3.0'
 
+  spec.add_dependency 'activesupport', '~> 5.1.4'
   spec.add_dependency 'ci_reporter_minitest', '~> 1.0.0'
-  spec.add_dependency 'coveralls', '~> 0.8'
+  spec.add_dependency 'simplecov', '~> 0.15'
   spec.add_dependency 'minitest', '~> 5.4.0'
   spec.add_dependency 'minitest-reporters', '~> 1.1'
   spec.add_dependency 'rake', '~> 12.3'

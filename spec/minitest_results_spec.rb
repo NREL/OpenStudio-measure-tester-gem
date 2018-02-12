@@ -26,15 +26,18 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-require 'pp'
-require 'active_support'
-require 'active_support/core_ext'
+RSpec.describe MinitestResult do
+  it 'should parse results' do
+    dir = 'spec/files/minitest'
+    mr = MinitestResult.new(dir)
 
-require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/rake_task'
+    expect(mr.total_assertions).to eq 56
+    expect(mr.total_errors).to eq 0
+    expect(mr.total_failures).to eq 0
+    expect(mr.total_skipped).to eq 0
+    expect(mr.total_tests).to eq 4
 
-require 'openstudio_measure_tester/minitest_result'
-
-module OpenStudioMeasureTester
-  # No action here. Most of this will be rake_tasks at the moment.
+    expect(mr.error_status).to eq false
+  end
 end
+

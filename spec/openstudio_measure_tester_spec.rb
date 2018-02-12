@@ -7,7 +7,7 @@ RSpec.describe OpenStudioMeasureTester do
     OpenStudioMeasureTester::RakeTask.new
 
     expect(Rake::Task.task_defined?('openstudio:test')).to be true
-    expect(Rake::Task.task_defined?('openstudio:rubocop')).to be true
+    expect(Rake::Task.task_defined?('openstudio:rubocop_core')).to be true
   end
 
   it 'should load openstudio' do
@@ -23,6 +23,7 @@ RSpec.describe OpenStudioMeasureTester do
   context 'Measure tests in non-root directory' do
     before :each do
       @curdir = Dir.pwd
+      Dir.chdir('spec/test_measures/')
     end
 
     after :each do
@@ -33,19 +34,19 @@ RSpec.describe OpenStudioMeasureTester do
       require 'openstudio'
       puts "OpenStudio Loaded. Version: #{OpenStudio.openStudioLongVersion}"
 
-      Dir.chdir('spec/test_measures/')
       Rake.application['openstudio:test'].invoke
 
-      puts "Contents: #{Dir.entries('test')}"
-      puts "Contents: #{Dir.entries('test/html_reports')}"
-      expect(File.exist?('test/html_reports/index.html')).to eq true
-      expect(File.exist?('test/reports/TEST-SetGasBurnerEfficiency-Test.xml')).to eq true
+      Dir.chdir(@curdir)
+      expect(File.exist?('test_results/minitest/html_reports/index.html')).to eq true
+      expect(File.exist?('test_results/minitest/reports/TEST-SetGasBurnerEfficiency-Test.xml')).to eq true
+      expect(File.exist?('test_results/minitest/reports/TEST-RotateBuilding-Test.xml')).to eq true
     end
 
     it 'should run rubocop' do
-      Dir.chdir('spec/test_measures/')
       Rake.application['openstudio:rubocop'].invoke
-      expect(File.exist?('rubocop-results.xml')).to eq true
+      # expect($?.success?).to eq false
+      Dir.chdir(@curdir)
+      expect(File.exist?('test_results/rubocop/rubocop-results.xml')).to eq true
     end
   end
 end

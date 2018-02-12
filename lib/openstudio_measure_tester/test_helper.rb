@@ -26,17 +26,18 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-require 'coveralls'
-require 'simplecov'
+$coverage_started = false
+unless $coverage_started
+  require 'simplecov'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+      [
+          SimpleCov::Formatter::HTMLFormatter
+      ]
+  )
+
+  SimpleCov.start
+  $coverage_started = true
+end
+
 require 'minitest/reporters'
-
-SimpleCov.command_name 'Unit Tests'
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-  [
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ]
-)
-SimpleCov.start
-
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::HtmlReporter.new]

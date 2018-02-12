@@ -26,15 +26,48 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-require 'pp'
-require 'active_support'
-require 'active_support/core_ext'
+class MinitestResult
+  attr_reader :error_status
 
-require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/rake_task'
+  attr_reader :total_assertions
+  attr_reader :total_errors
+  attr_reader :total_failures
+  attr_reader :total_skipped
+  attr_reader :total_tests
 
-require 'openstudio_measure_tester/minitest_result'
+  def initialize(path_to_results)
+    @path_to_results = path_to_results
+    @error_status = false
+    @total_tests = 0
+    @total_assertions = 0
+    @total_errors = 0
+    @total_failures = 0
+    @total_skipped = 0
 
-module OpenStudioMeasureTester
-  # No action here. Most of this will be rake_tasks at the moment.
+    parse_results
+  end
+
+  def parse_results
+    puts @path_to_results
+
+    Dir["#{@path_to_results}/reports/*.xml"].each do |file|
+      puts "Parsing minitest report #{file}"
+      hash = Hash.from_xml(File.read(file))
+
+      # pp hash
+      # "tests"=>"2",
+      # "failures"=>"0",
+      # "errors"=>"0",
+      # "skipped"=>"0",
+      # "assertions"=>"46",
+
+      @total_assertions += hash["testsuite"]["assertions"].to_i
+      @total_errors += hash["testsuite"]["errors"].to_i
+      @total_failures += hash["testsuite"]["failures"].to_i
+      @total_skipped += hash["testsuite"]["skipped"].to_i
+      @total_tests += hash["testsuite"]["tests"].to_i
+    end
+
+    error_status = true if @total_errors > 0
+  end
 end

@@ -1,12 +1,13 @@
 /.bundle/
 /.yardoc
 /_yardoc/
-**/coverage/
+/coverage/
 /doc/
 /pkg/
 /spec/reports/
 /tmp/
-**/test/
+/test/
+**/test_results/
 
 # rspec failure tracking
 .rspec_status
