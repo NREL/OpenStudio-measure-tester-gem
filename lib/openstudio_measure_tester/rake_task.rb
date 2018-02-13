@@ -111,7 +111,7 @@ module OpenStudioMeasureTester
           FileUtils.mv "#{current_dir}/test", "#{test_results_dir}/minitest"
 
           # Load in the data into the minitest object
-          mr = MinitestResult.new("#{test_results_dir}/minitest")
+          mr = OpenStudioMeasureTester::MinitestResult.new("#{test_results_dir}/minitest")
           if mr.error_status
             final_error_status = 1
           end
@@ -122,6 +122,8 @@ module OpenStudioMeasureTester
           FileUtils.rm_rf "#{test_results_dir}/rubocop" if Dir.exist? "#{test_results_dir}/rubocop"
           FileUtils.mv "#{current_dir}/rubocop", "#{test_results_dir}/rubocop"
         end
+
+        # spelling
       end
 
       return final_error_status
@@ -140,11 +142,11 @@ module OpenStudioMeasureTester
         Rake::TestTask.new(:test_core) do |task|
           # --require spec_helper
           # task.options = "--ci-reporter --working-dir=#{Rake.application.original_dir}"
-          task.options = "--ci-reporter"
+          task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
-              "#{Rake.application.original_dir}/**/*_test.rb",
-              "#{Rake.application.original_dir}/**/*_Test.rb"
+            "#{Rake.application.original_dir}/**/*_test.rb",
+            "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
         end
@@ -164,19 +166,19 @@ module OpenStudioMeasureTester
           task.fail_on_error = false
         end
 
-        task :test => ["openstudio:prepare_minitest", "openstudio:test_core"] do
+        task test: ['openstudio:prepare_minitest', 'openstudio:test_core'] do
           exit_status = post_process_results(Rake.application.original_dir)
           exit exit_status
         end
 
         desc 'Run Rubocop on measures'
-        task :rubocop => ["openstudio:prepare_rubocop", "openstudio:rubocop_core"] do
+        task rubocop: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core'] do
           exit_status = post_process_results(Rake.application.original_dir)
           exit exit_status
         end
 
         desc 'Run MiniTest and Rubocop on measures'
-        Rake::TestTask.new(:all => ["openstudio:test", "openstudio:rubocop"]) do |task|
+        Rake::TestTask.new(all: ['openstudio:test', 'openstudio:rubocop']) do |task|
           task.description = 'Run Tests and Rubocop'
         end
 
@@ -186,13 +188,10 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
-
-
         # Hide the core tasks from being displayed when calling rake -T
         Rake::Task['openstudio:rubocop_core'].clear_comments
         Rake::Task['openstudio:test_core'].clear_comments
         Rake::Task['openstudio:rubocop_core:auto_correct'].clear_comments
-
       end
     end
   end

@@ -26,10 +26,10 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-RSpec.describe MinitestResult do
+RSpec.describe OpenStudioMeasureTester::MinitestResult do
   it 'should parse results' do
     dir = 'spec/files/minitest'
-    mr = MinitestResult.new(dir)
+    mr = OpenStudioMeasureTester::MinitestResult.new(dir)
 
     expect(mr.total_assertions).to eq 56
     expect(mr.total_errors).to eq 0
@@ -40,4 +40,3 @@ RSpec.describe MinitestResult do
     expect(mr.error_status).to eq false
   end
 end
-

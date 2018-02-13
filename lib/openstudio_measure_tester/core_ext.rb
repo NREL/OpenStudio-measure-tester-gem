@@ -26,53 +26,31 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-module OpenStudioMeasureTester
-  class MinitestResult
-    attr_reader :error_status
+class String
+  def to_underscore
+    gsub(/::/, '/')
+      .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+      .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+      .tr('-', '_')
+      .downcase
+  end
 
-    attr_reader :total_assertions
-    attr_reader :total_errors
-    attr_reader :total_failures
-    attr_reader :total_skipped
-    attr_reader :total_tests
-
-    def initialize(path_to_results)
-      @path_to_results = path_to_results
-      @error_status = false
-      @total_tests = 0
-      @total_assertions = 0
-      @total_errors = 0
-      @total_failures = 0
-      @total_skipped = 0
-
-      parse_results
-    end
-
-    def parse_results
-      Dir["#{@path_to_results}/reports/*.xml"].each do |file|
-        puts "Parsing minitest report #{file}"
-        hash = Hash.from_xml(File.read(file))
-
-        pp hash
-        # pp hash
-        # "tests"=>"2",
-        # "failures"=>"0",
-        # "errors"=>"0",
-        # "skipped"=>"0",
-        # "assertions"=>"46",
-
-        @total_assertions += hash['testsuite']['assertions'].to_i
-        @total_errors += hash['testsuite']['errors'].to_i
-        @total_failures += hash['testsuite']['failures'].to_i
-        @total_skipped += hash['testsuite']['skipped'].to_i
-        @total_tests += hash['testsuite']['tests'].to_i
+  # simple method to create titles -- very custom to catch known inflections
+  def titleize
+    arr = ['a', 'an', 'the', 'by', 'to']
+    upcase_arr = ['DX', 'EDA', 'AEDG', 'LPD', 'COP']
+    r = tr('_', ' ').gsub(/\w+/) do |match|
+      match_result = match
+      if upcase_arr.include?(match.upcase)
+        match_result = upcase_arr[upcase_arr.index(match.upcase)]
+      elsif arr.include?(match)
+        match_result = match
+      else
+        match_result = match.capitalize
       end
-
-      @error_status = true if @total_errors > 0
+      match_result
     end
 
-    def to_json
-      # save as a json and have something else parse it/plot it.
-    end
+    r
   end
 end

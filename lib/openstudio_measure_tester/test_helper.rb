@@ -30,9 +30,9 @@ $coverage_started = false
 unless $coverage_started
   require 'simplecov'
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-      [
-          SimpleCov::Formatter::HTMLFormatter
-      ]
+    [
+      SimpleCov::Formatter::HTMLFormatter
+    ]
   )
 
   SimpleCov.start
