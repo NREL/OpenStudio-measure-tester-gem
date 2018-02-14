@@ -29,27 +29,49 @@
 module OpenStudioMeasureTester
   class OpenStudioStyle
     CHECKS = [
-      {
-        regex: /OpenStudio::Ruleset::ModelUserScript/,
-        message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
-        type: :deprecated,
-        severity: :error
-      }, {
-        regex: /OpenStudio::Ruleset::OSRunner/,
-        message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
-        type: :deprecated,
-        severity: :error
-      }, {
-        regex: /OpenStudio::Ruleset::OSArgumentVector/,
-        message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
-        type: :deprecated,
-        severity: :error
-      }, {
-        regex: /OpenStudio::Ruleset::OSArgumentMap/,
-        message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
-        type: :deprecated,
-        severity: :error
-      }
+        {
+            regex: /OpenStudio::Ruleset::ModelUserScript/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
+            type: :deprecated,
+            severity: :error
+        }, {
+            regex: /OpenStudio::Ruleset::OSRunner/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
+            type: :deprecated,
+            severity: :error
+        }, {
+            regex: /OpenStudio::Ruleset::OSArgumentVector/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
+            type: :deprecated,
+            severity: :error
+        }, {
+            regex: /OpenStudio::Ruleset::OSArgumentMap/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
+            type: :deprecated,
+            severity: :error
+        }, {
+            regex: /def name(.*?)end/m,
+            check_type: :if_missing,
+            message: '\'def name\' is missing.',
+            type: :syntax,
+            severity: :error
+        }, {
+            regex: /def description(.*?)end/m,
+            check_type: :if_missing,
+            message: '\'def description\' is missing.',
+            type: :syntax,
+            severity: :error
+        }, {
+            regex: /def modeler_description(.*?)end/m,
+            check_type: :if_missing,
+            message: '\'def modeler_description\' is missing.',
+            type: :syntax,
+            severity: :error
+        }
     ].freeze
 
     def initialize(measure_dir)
@@ -73,7 +95,7 @@ module OpenStudioMeasureTester
         # Some more processing for validating the data
         @measure_hash[:name_underscore] = @measure_hash[:class_name].to_underscore
         @measure_hash[:name_titleized] = @measure_hash[:name].titleize
-        #
+
         # At this point, the measure.rb file is ensured to exist
 
         # run static checks
@@ -81,17 +103,16 @@ module OpenStudioMeasureTester
 
         validate_measure_hash
 
-
         pp @measure_hash
       end
     end
 
     def log_message(line_number, message, type = :syntax, severity = :info)
       new_message = {
-        line: line_number,
-        message: message,
-        type: type,
-        severity: severity
+          line: line_number,
+          message: message,
+          type: type,
+          severity: severity
       }
       @messages << new_message
     end
@@ -113,8 +134,14 @@ module OpenStudioMeasureTester
     def run_regex_checks
       filedata = File.read("#{@measure_dir}/measure.rb")
       CHECKS.each do |check|
-        if filedata =~ check[:regex]
-          log_message(0, check[:message], check[:type], check[:severity])
+        if check[:check_type] == :if_exists
+          if filedata =~ check[:regex]
+            log_message(0, check[:message], check[:type], check[:severity])
+          end
+        elsif check[:check_type] == :if_missing
+          if filedata !~ check[:regex]
+            log_message(0, check[:message], check[:type], check[:severity])
+          end
         end
       end
     end
@@ -122,38 +149,21 @@ module OpenStudioMeasureTester
     # check the name of the measure and make sure that there are no unwanted characters
     #
     # @param String: name of the measure to parse
-    def validate_measure_name(name)
+    def validate_name(name)
       errors = []
 
       clean_name = name
       units = nil
 
       # remove everything btw parentheses
-      m = clean_name.match(/\((.+?)\)/)
-      unless m.nil?
-        errors << 'removing parentheses'
-        units = m[1]
-        clean_name = clean_name.gsub(/\((.+?)\)/, '')
-      end
-
-      # remove everything btw brackets
-      m = clean_name.match(/\[(.+?)\]/)
-      unless m.nil?
-        errors << 'removing brackets,'
-        clean_name = clean_name.gsub(/\[(.+?)\]/, '')
+      if clean_name =~ /\(.+?\)/
+        log_message(0, "Display name '#{name}' appears to have units. Set units in the setUnits method.")
       end
 
       # remove characters
-      m = clean_name.match(/(\?|\.|\#).+?/)
-      unless m.nil?
-        errors << 'removing any of following: ?.#'
-        clean_name = clean_name.gsub(/(\?|\.|\#).+?/, '')
+      if clean_name =~ /\?|\.|\#/
+        log_message(0, "Display name '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
       end
-      clean_name = clean_name.delete('.')
-      clean_name = clean_name.delete('?')
-
-      log_message(errors, :syntax, :error) unless errors.empty?
-      [clean_name.strip, units]
     end
 
     def parse_measure_xml
@@ -175,61 +185,29 @@ module OpenStudioMeasureTester
     # Validate the measure hash to make sure that it is meets the style guide. This will also perform the selection
     # of which data to use for the "actual metadata"
     def validate_measure_hash
-      # validate_measure_name(@measure_dir[:name])
-      if @measure_hash.key? :name_xml
-        if @measure_hash[:name_xml] != @measure_hash[:name]
-          log_message(
-            "Snake-cased name and the name in the XML do not match. Will default to automatic snake-cased measure name. #{@measure_hash[:name_xml]} <> #{@measure_hash[:name]}",
-            :syntax,
-            :error
-          )
-        end
+      validate_name(@measure_hash[:name])
+
+      if @measure_hash[:name] != @measure_hash[:name_underscore]
+        log_message("Measure name is not snake_case", :syntax, :error)
       end
 
       log_message('Could not find measure description in measure.', :structure, :warning) unless @measure_hash[:description]
       log_message('Could not find modeler description in measure.', :structure, :warning) unless @measure_hash[:modeler_description]
-      log_message('Could not find measure name in measure.', :structure, :warning) unless @measure_hash[:name_from_measure]
-
-      # puts "[WARNING] #{@measure_hash[:name]}:#{new_arg[:name]} has no default value... will continue"
-      # check the naming conventions
-      if @measure_hash[:display_name_from_measure]
-        if @measure_hash[:display_name_from_measure] != @measure_hash[:display_name_titleized]
-          log_message('Display name from measure and automated naming do not match. Will default to the automated name until all measures use the name method because of potential conflicts due to bad copy/pasting.', :syntax, :warning)
-        end
-      end
-      @measure_hash[:display_name] = @measure_hash.delete :display_name_titleized
-      # @measure_hash.delete :display_name_from_measure
-
-      if @measure_hash.key?(:description) && @measure_hash.key?(:description_xml)
-        if @measure_hash[:description] != @measure_hash[:description_xml]
-          log_message('Measure description and XML description differ.', :syntax, :warning)
-        end
-        @measure_hash.delete(:description_xml)
-      end
-
-      if @measure_hash.key?(:modeler_description) && @measure_hash.key?(:modeler_description_xml)
-        if @measure_hash[:modeler_description] != @measure_hash[:modeler_description_xml]
-          log_message('Measure modeler description and XML modeler description differ.', :syntax, :warning)
-        end
-        @measure_hash.delete(:modeler_description_xml)
-      end
+      log_message('Could not find display_name in measure.', :structure, :warning) unless @measure_hash[:display_name]
+      log_message('Could not find measure name in measure.', :structure, :warning) unless @measure_hash[:name]
 
       @measure_hash[:arguments].each do |arg|
-        if arg[:units_in_name]
-          log_message("It appears that units are embedded in the argument name for #{arg[:name]}.", :syntax, :error)
-          if arg[:units]
-            if arg[:units] != arg[:units_in_name]
-              log_message('Units in argument name do not match units in setUnits method. Using setUnits.', :syntax, :error)
-              arg.delete :units_in_name
-            end
-          else
-            log_message('Units appear to be in measure name. Use setUnits.', :syntax, :error)
-            arg[:units] = arg.delete :units_in_name
-          end
-        else
-          # make sure to delete if null
-          arg.delete :units_in_name
-        end
+        validate_name(arg[:display_name])
+        # {
+        #     :name => "relative_building_rotation",
+        #     :display_name =>
+        #         "Number of Degrees to Rotate Building (positive value is clockwise).",
+        #     :description => "",
+        #     :type => "Double",
+        #     :required => true,
+        #     :model_dependent => false,
+        #     :default_value => 90.0
+        # }
       end
     end
 
@@ -264,7 +242,7 @@ module OpenStudioMeasureTester
       result[:description] = measure.description
       result[:modeler_description] = measure.modelerDescription
       result[:tags] = []
-      measure.tags.each { |tag| result[:tags] << tag }
+      measure.tags.each {|tag| result[:tags] << tag}
 
       result[:outputs] = []
       begin
@@ -287,15 +265,15 @@ module OpenStudioMeasureTester
       measure.attributes.each do |a|
         value_type = a.valueType
         if value_type == 'Boolean'.to_AttributeValueType
-          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean }
+          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean}
         elsif value_type == 'Double'.to_AttributeValueType
-          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble }
+          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble}
         elsif value_type == 'Integer'.to_AttributeValueType
-          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger }
+          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger}
         elsif value_type == 'Unsigned'.to_AttributeValueType
-          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned }
+          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned}
         elsif value_type == 'String'.to_AttributeValueType
-          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsString }
+          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsString}
         end
       end
       result[:attributes] = attributes
@@ -340,9 +318,9 @@ module OpenStudioMeasureTester
         elsif type == 'Choice'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsString if argument.hasDefaultValue
           arg[:choice_values] = []
-          argument.choiceValues.each { |value| arg[:choice_values] << value }
+          argument.choiceValues.each {|value| arg[:choice_values] << value}
           arg[:choice_display_names] = []
-          argument.choiceValueDisplayNames.each { |value| arg[:choice_display_names] << value }
+          argument.choiceValueDisplayNames.each {|value| arg[:choice_display_names] << value}
 
         elsif type == 'Path'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsPath.to_s if argument.hasDefaultValue
