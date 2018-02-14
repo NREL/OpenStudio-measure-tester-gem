@@ -38,5 +38,7 @@ RSpec.describe OpenStudioMeasureTester::MinitestResult do
     expect(mr.total_tests).to eq 4
 
     expect(mr.error_status).to eq false
+
+    expect(mr.measure_results.size).to eq 2
   end
 end

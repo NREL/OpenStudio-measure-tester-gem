@@ -35,6 +35,8 @@ module OpenStudioMeasureTester
     attr_reader :total_failures
     attr_reader :total_skipped
     attr_reader :total_tests
+    attr_reader :measure_results
+    attr_reader :summary
 
     def initialize(path_to_results)
       @path_to_results = path_to_results
@@ -45,7 +47,11 @@ module OpenStudioMeasureTester
       @total_failures = 0
       @total_skipped = 0
 
+      @measure_results = []
+      @summary = []
+
       parse_results
+      to_json
     end
 
     def parse_results
@@ -53,26 +59,43 @@ module OpenStudioMeasureTester
         puts "Parsing minitest report #{file}"
         hash = Hash.from_xml(File.read(file))
 
-        pp hash
-        # pp hash
-        # "tests"=>"2",
-        # "failures"=>"0",
-        # "errors"=>"0",
-        # "skipped"=>"0",
-        # "assertions"=>"46",
+        #pp hash
 
-        @total_assertions += hash['testsuite']['assertions'].to_i
-        @total_errors += hash['testsuite']['errors'].to_i
-        @total_failures += hash['testsuite']['failures'].to_i
-        @total_skipped += hash['testsuite']['skipped'].to_i
-        @total_tests += hash['testsuite']['tests'].to_i
+        measure_name = file.split('/')[-1].split('.')[0]
+
+        mhash = {}
+
+        mhash['test_file'] = measure_name
+        mhash['measure_tests'] = hash['testsuite']['tests'].to_i
+        mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
+        mhash['measure_errors'] = hash['testsuite']['errors'].to_i
+        mhash['measure_failures'] = hash['testsuite']['failures'].to_i
+        mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
+
+        @measure_results << mhash
+
+        @total_tests += mhash['measure_tests']
+        @total_assertions += mhash['measure_assertions']
+        @total_errors += mhash['measure_errors']
+        @total_failures += mhash['measure_failures']
+        @total_skipped += mhash['measure_skipped']
+
       end
 
       @error_status = true if @total_errors > 0
+
+      pp measure_results
+
     end
 
     def to_json
       # save as a json and have something else parse it/plot it.
+
+      @summary << {'test_directory':@path_to_results}
+      @summary << @total_skipped
+      @summary << @measure_results
+
+      pp @summary
     end
   end
 end
