@@ -29,90 +29,108 @@
 module OpenStudioMeasureTester
   class OpenStudioStyle
     CHECKS = [
-        {
-            regex: /OpenStudio::Ruleset::ModelUserScript/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
-            type: :deprecated,
-            severity: :error
-        }, {
-            regex: /OpenStudio::Ruleset::OSRunner/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
-            type: :deprecated,
-            severity: :error
-        }, {
-            regex: /OpenStudio::Ruleset::OSArgumentVector/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
-            type: :deprecated,
-            severity: :error
-        }, {
-            regex: /OpenStudio::Ruleset::OSArgumentMap/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
-            type: :deprecated,
-            severity: :error
-        }, {
-            regex: /def name(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def name\' is missing.',
-            type: :syntax,
-            severity: :error
-        }, {
-            regex: /def description(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def description\' is missing.',
-            type: :syntax,
-            severity: :error
-        }, {
-            regex: /def modeler_description(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def modeler_description\' is missing.',
-            type: :syntax,
-            severity: :error
-        }
+      {
+        regex: /OpenStudio::Ruleset::ModelUserScript/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
+        type: :deprecated,
+        severity: :error
+      }, {
+        regex: /OpenStudio::Ruleset::OSRunner/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
+        type: :deprecated,
+        severity: :error
+      }, {
+        regex: /OpenStudio::Ruleset::OSArgumentVector/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
+        type: :deprecated,
+        severity: :error
+      }, {
+        regex: /OpenStudio::Ruleset::OSArgumentMap/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
+        type: :deprecated,
+        severity: :error
+      }, {
+        regex: /def name(.*?)end/m,
+        check_type: :if_missing,
+        message: '\'def name\' is missing.',
+        type: :syntax,
+        severity: :error
+      }, {
+        regex: /def description(.*?)end/m,
+        check_type: :if_missing,
+        message: '\'def description\' is missing.',
+        type: :syntax,
+        severity: :error
+      }, {
+        regex: /def modeler_description(.*?)end/m,
+        check_type: :if_missing,
+        message: '\'def modeler_description\' is missing.',
+        type: :syntax,
+        severity: :error
+      }
     ].freeze
 
     def initialize(measure_dir)
       @measure_dir = measure_dir
       @messages = []
       @measure_hash = {}
+      @measure_name = measure_dir.split('/').last
 
       # Load in the method infoExtractor which will load measure info (helpful comment huh?)
       # https://github.com/NREL/OpenStudio/blob/e7aa6be05a714814983d68ea840ca61383e9ef54/openstudiocore/src/measure/OSMeasureInfoGetter.cpp#L254
       eval(::OpenStudio::Measure.infoExtractorRubyFunction)
 
-      measure = OpenStudio::BCLMeasure.load(measure_dir)
-      if measure.empty?
-        log_message(0, "Failed to load measure '#{measure_dir}'", :general, :error)
-      else
-        measure = measure.get
-        measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
+      measure_missing = false
+      unless Dir.exist? measure_dir
+        log_message("Could not find measure directory: '#{measure_dir}'.", :general, :error)
+        measure_missing = true
+      end
 
-        @measure_hash = measure_hash(@measure_dir, measure, measure_info)
+      unless File.exist? "#{measure_dir}/measure.rb"
+        log_message("Could not find measure.rb in '#{measure_dir}'.", :general, :error)
+        measure_missing = true
+      end
 
-        # Some more processing for validating the data
-        @measure_hash[:name_underscore] = @measure_hash[:class_name].to_underscore
-        @measure_hash[:name_titleized] = @measure_hash[:name].titleize
+      unless File.exist? "#{measure_dir}/measure.xml"
+        log_message("Could not find measure.xml in '#{measure_dir}'.", :general, :error)
+        measure_missing = true
+      end
 
-        # At this point, the measure.rb file is ensured to exist
+      unless measure_missing
+        measure = OpenStudio::BCLMeasure.load(measure_dir)
+        if measure.empty?
+          log_message("Failed to load measure '#{measure_dir}'", :general, :error)
+        else
+          measure = measure.get
+          measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
 
-        # run static checks
-        run_regex_checks
+          @measure_hash = measure_hash(@measure_dir, measure, measure_info)
 
-        validate_measure_hash
+          # Some more processing for validating the data
+          @measure_hash[:name_underscore] = @measure_hash[:class_name].to_underscore
+          @measure_hash[:name_titleized] = @measure_hash[:name].titleize
 
-        pp @measure_hash
+          # At this point, the measure.rb file is ensured to exist
+
+          # run static checks
+          run_regex_checks
+
+          validate_measure_hash
+
+          pp @measure_hash
+        end
       end
     end
 
-    def log_message(line_number, message, type = :syntax, severity = :info)
+    def log_message(message, type = :syntax, severity = :info)
       new_message = {
-          line: line_number,
-          message: message,
-          type: type,
-          severity: severity
+        message: message,
+        type: type,
+        severity: severity
       }
       @messages << new_message
     end
@@ -125,9 +143,10 @@ module OpenStudioMeasureTester
       !@messages.empty?
     end
 
-    def save_results(filename)
-      File.open(filename, 'w') do |file|
-        file << JSON.pretty_generate(@results)
+    def save_results
+      FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
+      File.open("openstudio_style/#{@measure_name}.json", 'w') do |file|
+        file << JSON.pretty_generate(results)
       end
     end
 
@@ -136,11 +155,11 @@ module OpenStudioMeasureTester
       CHECKS.each do |check|
         if check[:check_type] == :if_exists
           if filedata =~ check[:regex]
-            log_message(0, check[:message], check[:type], check[:severity])
+            log_message(check[:message], check[:type], check[:severity])
           end
         elsif check[:check_type] == :if_missing
           if filedata !~ check[:regex]
-            log_message(0, check[:message], check[:type], check[:severity])
+            log_message(check[:message], check[:type], check[:severity])
           end
         end
       end
@@ -157,12 +176,12 @@ module OpenStudioMeasureTester
 
       # remove everything btw parentheses
       if clean_name =~ /\(.+?\)/
-        log_message(0, "Display name '#{name}' appears to have units. Set units in the setUnits method.")
+        log_message("Display name '#{name}' appears to have units. Set units in the setUnits method.")
       end
 
       # remove characters
       if clean_name =~ /\?|\.|\#/
-        log_message(0, "Display name '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
+        log_message("Display name '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
       end
     end
 
@@ -188,7 +207,7 @@ module OpenStudioMeasureTester
       validate_name(@measure_hash[:name])
 
       if @measure_hash[:name] != @measure_hash[:name_underscore]
-        log_message("Measure name is not snake_case", :syntax, :error)
+        log_message('Measure name is not snake_case', :syntax, :error)
       end
 
       log_message('Could not find measure description in measure.', :structure, :warning) unless @measure_hash[:description]
@@ -242,7 +261,7 @@ module OpenStudioMeasureTester
       result[:description] = measure.description
       result[:modeler_description] = measure.modelerDescription
       result[:tags] = []
-      measure.tags.each {|tag| result[:tags] << tag}
+      measure.tags.each { |tag| result[:tags] << tag }
 
       result[:outputs] = []
       begin
@@ -265,15 +284,15 @@ module OpenStudioMeasureTester
       measure.attributes.each do |a|
         value_type = a.valueType
         if value_type == 'Boolean'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean }
         elsif value_type == 'Double'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble }
         elsif value_type == 'Integer'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger }
         elsif value_type == 'Unsigned'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned }
         elsif value_type == 'String'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsString}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsString }
         end
       end
       result[:attributes] = attributes
@@ -318,9 +337,9 @@ module OpenStudioMeasureTester
         elsif type == 'Choice'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsString if argument.hasDefaultValue
           arg[:choice_values] = []
-          argument.choiceValues.each {|value| arg[:choice_values] << value}
+          argument.choiceValues.each { |value| arg[:choice_values] << value }
           arg[:choice_display_names] = []
-          argument.choiceValueDisplayNames.each {|value| arg[:choice_display_names] << value}
+          argument.choiceValueDisplayNames.each { |value| arg[:choice_display_names] << value }
 
         elsif type == 'Path'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsPath.to_s if argument.hasDefaultValue

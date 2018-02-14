@@ -28,6 +28,9 @@
 
 RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
   it 'should file when loading a non-measure' do
+    measure_path = 'spec/test_measures/RotateBuildingDNE/'
+    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+    expect(style.results.first[:message]).to eq "Could not find measure directory: 'spec/test_measures/RotateBuildingDNE/'."
   end
 
   it 'should parse an OpenStudio Measure' do
@@ -38,5 +41,6 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     expect(style.respond_to?(:infoExtractor)).to eq true
 
     puts style.results
+    expect(style.results.size).to eq 6
   end
 end

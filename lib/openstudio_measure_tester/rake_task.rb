@@ -29,8 +29,9 @@
 require 'rake'
 require 'rake/tasklib'
 require 'rake/testtask'
-
 require 'rubocop/rake_task'
+
+require_relative '../openstudio_measure_tester'
 
 module OpenStudioMeasureTester
   class RakeTask < Rake::TaskLib
@@ -85,6 +86,30 @@ module OpenStudioMeasureTester
       FileUtils.mkdir_p "#{base_dir}/test_results"
     end
 
+    # OpenStudio style check preparation
+    def pre_process_style(base_dir)
+      current_dir = Dir.pwd
+      test_results_dir = "#{base_dir}/test_results"
+
+      puts "Current directory is #{current_dir}"
+      puts "Pre-processing tests run in #{base_dir}"
+      puts "Test results will be stored in: #{test_results_dir}"
+
+      FileUtils.rm_rf "#{test_results_dir}/openstudio_style" if Dir.exist? "#{test_results_dir}/openstudio_style"
+      FileUtils.rm_rf "#{base_dir}/openstudio_style" if Dir.exist? "#{base_dir}/openstudio_style"
+      FileUtils.rm_rf "#{current_dir}/openstudio_style" if Dir.exist? "#{current_dir}/openstudio_style"
+
+      # Create the test_results directory to store all the results
+      FileUtils.mkdir_p "#{base_dir}/test_results"
+    end
+
+    def run_style(base_dir)
+      Dir["#{base_dir}/**/measure.rb"].each do |measure|
+        style = OpenStudioMeasureTester::OpenStudioStyle.new(File.dirname(measure))
+        style.save_results
+      end
+    end
+
     # Post process the various results and save them into the base_dir
     def post_process_results(base_dir)
       current_dir = Dir.pwd
@@ -123,7 +148,11 @@ module OpenStudioMeasureTester
           FileUtils.mv "#{current_dir}/rubocop", "#{test_results_dir}/rubocop"
         end
 
-        # spelling
+        # openstudio style
+        if Dir.exist? "#{current_dir}/openstudio_style"
+          FileUtils.rm_rf "#{test_results_dir}/openstudio_style" if Dir.exist? "#{test_results_dir}/openstudio_style"
+          FileUtils.mv "#{current_dir}/openstudio_style", "#{test_results_dir}/openstudio_style"
+        end
       end
 
       return final_error_status
@@ -139,19 +168,30 @@ module OpenStudioMeasureTester
           pre_process_rubocop(Rake.application.original_dir)
         end
 
+        task :prepare_style do
+          pre_process_style(Rake.application.original_dir)
+        end
+
+        desc 'Run OpenStudio Style Checks'
+        task style: ['openstudio:prepare_style'] do
+          run_style(Rake.application.original_dir)
+          exit_status = post_process_results(Rake.application.original_dir)
+          exit exit_status
+        end
+
         Rake::TestTask.new(:test_core) do |task|
           # --require spec_helper
           # task.options = "--ci-reporter --working-dir=#{Rake.application.original_dir}"
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
-            "#{Rake.application.original_dir}/**/*_test.rb",
-            "#{Rake.application.original_dir}/**/*_Test.rb"
+              "#{Rake.application.original_dir}/**/*_test.rb",
+              "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
         end
 
-        # The .rubocop.yml file downloads the rubocop rules from the OpenStudio-resources repo.
+        # The .rubocop.yml file downloads the RuboCop rules from the OpenStudio-resources repo.
         # This may cause an issue if the Gem directory does not have write access.
         RuboCop::RakeTask.new(:rubocop_core) do |task|
           # output_dir = "#{Rake.application.original_dir}/test_results/"
@@ -171,15 +211,15 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
-        desc 'Run Rubocop on measures'
+        desc 'Run RuboCop on measures'
         task rubocop: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core'] do
           exit_status = post_process_results(Rake.application.original_dir)
           exit exit_status
         end
 
-        desc 'Run MiniTest and Rubocop on measures'
-        Rake::TestTask.new(all: ['openstudio:test', 'openstudio:rubocop']) do |task|
-          task.description = 'Run Tests and Rubocop'
+        desc 'Run MiniTest and RuboCop on measures'
+        Rake::TestTask.new(all: ['openstudio:test', 'openstudio:rubocop', 'openstudio:style']) do |task|
+          task.description = 'Run Tests, RuboCop, and OpenStudio Style'
         end
 
         desc 'Post process results into one directory'
