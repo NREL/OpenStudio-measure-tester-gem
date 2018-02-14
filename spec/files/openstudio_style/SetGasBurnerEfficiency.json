@@ -1,0 +1,107 @@
+[
+  {
+    "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+    "type": "deprecated",
+    "severity": "error"
+  },
+  {
+    "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+    "type": "deprecated",
+    "severity": "error"
+  },
+  {
+    "message": "'def description' is missing.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "'def modeler_description' is missing.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  },
+  {
+    "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
+    "type": "syntax",
+    "severity": "info"
+  },
+  {
+    "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
+    "type": "syntax",
+    "severity": "error"
+  }
+]

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Minitest::Result" tests="7" time="6.779699" failures="0" errors="0" skipped="0" assertions="66" timestamp="2018-02-14T14:14:01-07:00">
+  <testcase name="test_SetGasBurnerEfficiency_all_loop" time="8.207770081004128" assertions="23">
+  </testcase>
+  <testcase name="test_SetGasBurnerEfficiency_single_loop" time="5.221952228050213" assertions="23">
+  </testcase>
+  <testcase name="test_good_argument_values" time="0.7980880070244893" assertions="6">
+  </testcase>
+  <testcase name="test_bad_argument_values" time="0.0005848950240761042" assertions="2">
+  </testcase>
+  <testcase name="test_number_of_arguments_and_argument_names" time="0.00024592498084530234" assertions="2">
+  </testcase>
+  <testcase name="test_RotateBuilding" time="0.692263473989442" assertions="7">
+  </testcase>
+  <testcase name="test_RotateBuilding_EmptySpaceNoLoadsOrSurfaces" time="0.0011311839916743338" assertions="3">
+  </testcase>
+  <system-out>
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The starting efficiency values in affected loop(s) range from 0.8 to 0.8. Initial year 0 capital costs for affected Coil Heating Gas units is $0.
+**FINAL CONDITION**
+1 Coil Heating Gas units had their Rated COP values set to 0.9. Final year 0 capital costs for affected Coil Heating Gas units is $5.
+**INFO MESSAGES**
+Changing the burner efficiency from 0.8 to 0.9 for gas heating units 'Coil Heating Gas 1' on air loop 'Packaged Rooftop Air Conditioner'
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "object",
+   "value" : "{a3a51906-9a84-471c-8162-778785896008}"
+}
+,{
+   "name" : "eff",
+   "value" : 0.90000000000000002
+}
+,{
+   "name" : "remove_costs",
+   "value" : true
+}
+,{
+   "name" : "material_cost",
+   "value" : 5
+}
+,{
+   "name" : "demolition_cost",
+   "value" : 1
+}
+,{
+   "name" : "years_until_costs_start",
+   "value" : 0
+}
+,{
+   "name" : "demo_cost_initial_const",
+   "value" : false
+}
+,{
+   "name" : "expected_life",
+   "value" : 20
+}
+,{
+   "name" : "om_cost",
+   "value" : 0.25
+}
+,{
+   "name" : "om_frequency",
+   "value" : 1
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The starting efficiency values in affected loop(s) range from 0.8 to 0.8. Initial year 0 capital costs for affected Coil Heating Gas units is $0.
+**FINAL CONDITION**
+1 Coil Heating Gas units had their Rated COP values set to 0.9. Final year 0 capital costs for affected Coil Heating Gas units is $5.
+**INFO MESSAGES**
+Changing the burner efficiency from 0.8 to 0.9 for gas heating units 'Coil Heating Gas 1' on air loop 'Packaged Rooftop Air Conditioner'
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "object",
+   "value" : "{e980ac30-8413-4ca2-8e17-9cb6b9cadd16}"
+}
+,{
+   "name" : "eff",
+   "value" : 0.90000000000000002
+}
+,{
+   "name" : "remove_costs",
+   "value" : true
+}
+,{
+   "name" : "material_cost",
+   "value" : 5
+}
+,{
+   "name" : "demolition_cost",
+   "value" : 1
+}
+,{
+   "name" : "years_until_costs_start",
+   "value" : 0
+}
+,{
+   "name" : "demo_cost_initial_const",
+   "value" : false
+}
+,{
+   "name" : "expected_life",
+   "value" : 20
+}
+,{
+   "name" : "om_cost",
+   "value" : 0.25
+}
+,{
+   "name" : "om_frequency",
+   "value" : 1
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The building started with 4 spaces.
+**FINAL CONDITION**
+The building finished with 5 spaces.
+**INFO MESSAGES**
+Space New Space was added.
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "space_name",
+   "value" : "New Space"
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+1 = Fail
+**INITIAL CONDITION**
+**FINAL CONDITION**
+**INFO MESSAGES**
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+Empty space name was entered.
+***Machine-Readable Attributes**
+[
+{
+   "name" : "space_name",
+   "value" : ""
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The building's initial rotation was 0.0 degrees.
+**FINAL CONDITION**
+The building's final rotation is 140.2 degrees.
+**INFO MESSAGES**
+The building has been rotated by 140.2 degrees.
+**WARNING MESSAGES**
+Requested rotation was not between -360 and 360. Effective relative rotation is 140.2 degrees.
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "relative_building_rotation",
+   "value" : 500.19999999999999
+}
+,{
+   "name" : "orientation_initial",
+   "value" : 0
+}
+,{
+   "name" : "orientation_final",
+   "value" : 140.19999999999999
+}
+]
+***Files Generated**
+
+
+  </system-out>
+  <system-err>
+/Users/kflemin/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter_minitest-1.0.0/lib/ci/reporter/minitest.rb:80: warning: instance variable @current_suite_class not initialized
+/Users/kflemin/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter_minitest-1.0.0/lib/ci/reporter/minitest.rb:114: warning: instance variable @current_suite not initialized
+/Users/kflemin/repos/OpenStudio-measure-tester-gem/spec/test_measures/SetGasBurnerEfficiency/measure.rb:193: warning: method redefined; discarding old neat_numbers
+/Users/kflemin/repos/OpenStudio-measure-tester-gem/spec/test_measures/SetGasBurnerEfficiency/measure.rb:193: warning: previous definition of neat_numbers was here
+/Users/kflemin/repos/OpenStudio-measure-tester-gem/spec/test_measures/SetGasBurnerEfficiency/measure.rb:204: warning: method redefined; discarding old get_total_costs_for_objects
+/Users/kflemin/repos/OpenStudio-measure-tester-gem/spec/test_measures/SetGasBurnerEfficiency/measure.rb:204: warning: previous definition of get_total_costs_for_objects was here
+  </system-err>
+</testsuite>

@@ -19,3 +19,7 @@ rspec.html
 Gemfile.lock
 .rubocop-https*
 rubocop-results.xml
+
+# mac and rbenv stuff
+.DS_Store
+.ruby-version
