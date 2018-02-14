@@ -26,6 +26,8 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
+require 'openstudio'
+
 require 'pp'
 require 'active_support'
 require 'active_support/core_ext'

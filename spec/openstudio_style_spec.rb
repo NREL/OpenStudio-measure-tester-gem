@@ -27,9 +27,15 @@
 ########################################################################################################################
 
 RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
+  it 'should file when loading a non-measure' do
+  end
+
   it 'should parse an OpenStudio Measure' do
-    measure = 'spec/test_measures/RotateBuilding/measure.rb'
-    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure)
+    measure_path = 'spec/test_measures/RotateBuilding/'
+    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+
+    # make sure that the infoExtractor method loads correctly (from OpenStudio)
+    expect(style.respond_to?(:infoExtractor)).to eq true
 
     puts style.results
   end
