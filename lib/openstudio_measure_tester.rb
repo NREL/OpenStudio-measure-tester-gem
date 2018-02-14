@@ -26,14 +26,16 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
+require 'openstudio'
+
 require 'pp'
 require 'active_support'
 require 'active_support/core_ext'
 require 'openstudio_measure_tester/core_ext'
 
 require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/minitest_result'
 require 'openstudio_measure_tester/openstudio_style'
+require 'openstudio_measure_tester/minitest_result'
 
 require 'openstudio_measure_tester/rake_task'
 
