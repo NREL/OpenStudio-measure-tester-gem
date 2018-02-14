@@ -39,8 +39,36 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
 
     # make sure that the infoExtractor method loads correctly (from OpenStudio)
     expect(style.respond_to?(:infoExtractor)).to eq true
+    # pp style.results
+    expect(style.results.size).to eq 7
+  end
 
-    puts style.results
-    expect(style.results.size).to eq 6
+  it 'should check for naming conventions' do
+    measure_path = 'spec/test_measures/pristine/'
+    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+    expect(style.errors?).to be false
+
+    style.validate_name('Name', 'period.in.names.are.bad')
+    expect(style.results.first[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
+    style.clear
+
+    style.validate_name('Name', 'snake_case_is_right', ensure_snakecase: true)
+    style.validate_name('Name', 'CamelCaseIsUpAndDown', ensure_camelcase: true)
+    expect(style.errors?).to be false
+
+    style.validate_name('Name', 'MixedUp_And_case', ensure_camelcase: true)
+    style.validate_name('Name', 'MixedUp_And_case', ensure_snakecase: true)
+    expect(style.results.first[:message]).to eq "Name 'MixedUp_And_case' is not CamelCase."
+    expect(style.results.last[:message]).to eq "Name 'MixedUp_And_case' is not snake_case."
+    style.clear
+
+    style.validate_name('Name', 'trailing_spaces ', ensure_snakecase: true)
+    style.validate_name('Name', ' trailing_spaces', ensure_snakecase: true)
+    expect(style.results.first[:message]).to eq "Name 'trailing_spaces ' has leading or trailing spaces."
+    expect(style.results.last[:message]).to eq "Name ' trailing_spaces' has leading or trailing spaces."
+    style.clear
+
+    style.validate_name('Name', 'Square Footage (ft2)')
+    expect(style.results.first[:message]).to eq "Name 'Square Footage (ft2)' appears to have units. Set units in the setUnits method."
   end
 end

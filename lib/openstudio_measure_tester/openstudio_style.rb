@@ -110,18 +110,13 @@ module OpenStudioMeasureTester
 
           @measure_hash = measure_hash(@measure_dir, measure, measure_info)
 
-          # Some more processing for validating the data
-          @measure_hash[:name_underscore] = @measure_hash[:class_name].to_underscore
-          @measure_hash[:name_titleized] = @measure_hash[:name].titleize
-
           # At this point, the measure.rb file is ensured to exist
 
           # run static checks
           run_regex_checks
 
           validate_measure_hash
-
-          pp @measure_hash
+          # pp @measure_hash
         end
       end
     end
@@ -137,6 +132,10 @@ module OpenStudioMeasureTester
 
     def results
       @messages
+    end
+
+    def clear
+      @messages.clear
     end
 
     def errors?
@@ -167,21 +166,43 @@ module OpenStudioMeasureTester
 
     # check the name of the measure and make sure that there are no unwanted characters
     #
-    # @param String: name of the measure to parse
-    def validate_name(name)
-      errors = []
-
+    # @param name_type [String] type of name that is being validated (e.g. Display Name, Class Name, etc)
+    # @param name [String] name to validate
+    # @param options [Hash] Additional checks
+    # @option options [Boolean] :ensure_camelcase
+    # @option options [Boolean] :ensure_snakecase
+    def validate_name(name_type, name, options = {})
       clean_name = name
-      units = nil
 
-      # remove everything btw parentheses
+      # Check for parenthetical names
       if clean_name =~ /\(.+?\)/
-        log_message("Display name '#{name}' appears to have units. Set units in the setUnits method.")
+        log_message("#{name_type} '#{name}' appears to have units. Set units in the setUnits method.")
       end
 
-      # remove characters
       if clean_name =~ /\?|\.|\#/
-        log_message("Display name '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
+        log_message("#{name_type} '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
+      end
+
+      if options[:ensure_camelcase]
+        # convert to snake and then back to camelcase to check if formatted correctly
+        if clean_name != clean_name.strip
+          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, :error)
+        end
+
+        if clean_name != clean_name.to_snakecase.to_camelcase
+          log_message("#{name_type} '#{name}' is not CamelCase.", :syntax, :error)
+        end
+      end
+
+      if options[:ensure_snakecase]
+        # no leading/trailing spaces
+        if clean_name != clean_name.strip
+          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, :error)
+        end
+
+        if clean_name != clean_name.to_snakecase
+          log_message("#{name_type} '#{name}' is not snake_case.", :syntax, :error)
+        end
       end
     end
 
@@ -204,11 +225,10 @@ module OpenStudioMeasureTester
     # Validate the measure hash to make sure that it is meets the style guide. This will also perform the selection
     # of which data to use for the "actual metadata"
     def validate_measure_hash
-      validate_name(@measure_hash[:name])
-
-      if @measure_hash[:name] != @measure_hash[:name_underscore]
-        log_message('Measure name is not snake_case', :syntax, :error)
-      end
+      validate_name('Measure name', @measure_hash[:name], ensure_snakecase: true)
+      validate_name('Class name', @measure_hash[:class_name], ensure_camelcase: true)
+      # check if @measure_name (which is the directory name) is snake cased
+      validate_name('Measure directory name', @measure_name, ensure_snakecase: true)
 
       log_message('Could not find measure description in measure.', :structure, :warning) unless @measure_hash[:description]
       log_message('Could not find modeler description in measure.', :structure, :warning) unless @measure_hash[:modeler_description]
@@ -216,7 +236,7 @@ module OpenStudioMeasureTester
       log_message('Could not find measure name in measure.', :structure, :warning) unless @measure_hash[:name]
 
       @measure_hash[:arguments].each do |arg|
-        validate_name(arg[:display_name])
+        validate_name('Argument display name', arg[:display_name])
         # {
         #     :name => "relative_building_rotation",
         #     :display_name =>

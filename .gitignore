@@ -9,6 +9,9 @@
 /test/
 **/test_results/
 
+# Measure test outputs
+**/tests/output/
+
 # rspec failure tracking
 .rspec_status
 rspec.html

@@ -1,0 +1,59 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>pristine</name>
+  <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
+  <version_id>c6762101-919d-4401-8fed-1c0a988a6f87</version_id>
+  <version_modified>20180214T151339Z</version_modified>
+  <xml_checksum>94317D34</xml_checksum>
+  <class_name>Pristine</class_name>
+  <display_name>Pristine</display_name>
+  <description>This measure should pass all tests</description>
+  <modeler_description>This measure should pass all tests</modeler_description>
+  <arguments>
+    <argument>
+      <name>space_name</name>
+      <display_name>New space name</display_name>
+      <description>This name will be used as the name of the new space.</description>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+  </arguments>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>People.Characteristics</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.4.1</identifier>
+        <min_compatible>2.4.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>0E3CADDA</checksum>
+    </file>
+    <file>
+      <filename>pristine_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3EE7D13F</checksum>
+    </file>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>53D14E69</checksum>
+    </file>
+  </files>
+</measure>

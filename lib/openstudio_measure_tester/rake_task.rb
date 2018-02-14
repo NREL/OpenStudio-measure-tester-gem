@@ -180,13 +180,11 @@ module OpenStudioMeasureTester
         end
 
         Rake::TestTask.new(:test_core) do |task|
-          # --require spec_helper
-          # task.options = "--ci-reporter --working-dir=#{Rake.application.original_dir}"
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
-              "#{Rake.application.original_dir}/**/*_test.rb",
-              "#{Rake.application.original_dir}/**/*_Test.rb"
+            "#{Rake.application.original_dir}/**/*_test.rb",
+            "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
         end
@@ -194,9 +192,6 @@ module OpenStudioMeasureTester
         # The .rubocop.yml file downloads the RuboCop rules from the OpenStudio-resources repo.
         # This may cause an issue if the Gem directory does not have write access.
         RuboCop::RakeTask.new(:rubocop_core) do |task|
-          # output_dir = "#{Rake.application.original_dir}/test_results/"
-          # FileUtils.mkdir_p(output_dir) unless Dir.exist? output_dir
-
           task.options = ['--no-color', '--out=rubocop/rubocop-results.xml', '--format=simple']
           task.formatters = ['RuboCop::Formatter::CheckstyleFormatter']
           task.requires = ['rubocop/formatter/checkstyle_formatter']
