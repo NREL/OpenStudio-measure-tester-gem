@@ -51,7 +51,7 @@ module OpenStudioMeasureTester
       @summary = []
 
       parse_results
-      to_json
+
     end
 
     def parse_results

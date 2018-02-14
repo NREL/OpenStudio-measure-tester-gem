@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Pristine_Test" tests="3" time="0.747815" failures="0" errors="0" skipped="0" assertions="10" timestamp="2018-02-14T15:34:10-07:00">
+  <testcase name="test_number_of_arguments_and_argument_names" time="0.000331" assertions="2">
+  </testcase>
+  <testcase name="test_good_argument_values" time="0.74452" assertions="6">
+  </testcase>
+  <testcase name="test_bad_argument_values" time="0.000585" assertions="2">
+  </testcase>
+  <system-out>
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The building started with 4 spaces.
+**FINAL CONDITION**
+The building finished with 5 spaces.
+**INFO MESSAGES**
+Space New Space was added.
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "space_name",
+   "value" : "New Space"
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+1 = Fail
+**INITIAL CONDITION**
+**FINAL CONDITION**
+**INFO MESSAGES**
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+Empty space name was entered.
+***Machine-Readable Attributes**
+[
+{
+   "name" : "space_name",
+   "value" : ""
+}
+]
+***Files Generated**
+
+
+  </system-out>
+  <system-err>
+/Users/kflemin/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
+/Users/kflemin/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
+/Users/kflemin/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
+  </system-err>
+</testsuite>
