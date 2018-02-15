@@ -97,6 +97,8 @@ module OpenStudioMeasureTester
         @measure_classname = measure_dir.split('/').last
         @results[@measure_classname] = test_measure(measure_dir)
       end
+
+      aggregate_results
     end
 
     def test_measure(measure_dir)
@@ -155,6 +157,17 @@ module OpenStudioMeasureTester
       @measure_messages.clear
       @measure_classname = nil
     end
+
+    # read the data in the results and sum up the total number of issues
+    def aggregate_results
+      total_errors = 0
+      @results.each_pair do |k, v|
+        total_errors += v.size
+      end
+
+      @results[:total_errors] = total_errors
+    end
+
 
     def save_results
       FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
