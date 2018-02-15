@@ -61,11 +61,11 @@ module OpenStudioMeasureTester
 
         #pp hash
 
-        measure_name = file.split('/')[-1].split('.')[0]
+        measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
 
         mhash = {}
 
-        mhash['test_file'] = measure_name
+        mhash['tested_class'] = measure_name
         mhash['measure_tests'] = hash['testsuite']['tests'].to_i
         mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
         mhash['measure_errors'] = hash['testsuite']['errors'].to_i
@@ -88,7 +88,7 @@ module OpenStudioMeasureTester
 
     end
 
-    def to_json
+    def to_file
       # save as a json and have something else parse it/plot it.
 
       @summary << {'test_directory':@path_to_results}
@@ -96,6 +96,11 @@ module OpenStudioMeasureTester
       @summary << @measure_results
 
       pp @summary
+
+      FileUtils.mkdir "#{@path_to_results}/openstudio_minitest" unless Dir.exist? "#{@path_to_results}/openstudio_minitest"
+      File.open("#{@path_to_results}/openstudio_minitest/minitest.json", 'w') do |file|
+        file << JSON.pretty_generate(summary)
+      end
     end
   end
 end
