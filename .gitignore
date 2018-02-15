@@ -8,7 +8,7 @@
 /tmp/
 /test/
 **/test_results/
-**/openstudio_style/
+/openstudio_style
 # Measure test outputs
 **/tests/output/
 

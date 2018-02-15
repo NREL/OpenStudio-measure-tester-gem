@@ -1,0 +1,34 @@
+{
+  "test_directory": "spec/files/minitest",
+  "total_tests": 7,
+  "total_assertions": 66,
+  "total_errors": 0,
+  "total_failures": 0,
+  "total_skipped": 0,
+  "by_measure": [
+    {
+      "tested_class": "Pristine",
+      "measure_tests": 3,
+      "measure_assertions": 10,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0
+    },
+    {
+      "tested_class": "RotateBuilding",
+      "measure_tests": 2,
+      "measure_assertions": 10,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0
+    },
+    {
+      "tested_class": "SetGasBurnerEfficiency",
+      "measure_tests": 2,
+      "measure_assertions": 46,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0
+    }
+  ]
+}
