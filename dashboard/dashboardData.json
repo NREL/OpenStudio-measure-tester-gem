@@ -1,0 +1,38 @@
+{"data":
+  { "git_repo": "OpenStudio-measures",
+    "git_branch": "develop",
+    "git_last_commit_by": "nlongisthebest",
+    "coverage":
+    {
+      "total_percent_coverage":83.69,
+      "total_lines":468,
+      "total_relevant_lines":233,
+      "total_covered_lines":195,
+      "total_missed_lines":38,
+      "by_measure":
+      [
+        { 
+          "name":"RotateBuilding",
+          "total_lines":80,
+          "percent_coverage":91.67,
+          "missed_lines":3,
+          "relevant_lines":36,
+          "covered_lines":33
+        }, {
+          "name":"SetGasBurnerEfficiency",
+          "total_lines":314,
+          "percent_coverage":81.55,
+          "missed_lines":31,
+          "relevant_lines":168,
+          "covered_lines":137
+        }, {"name":"pristine",
+          "total_lines":74,
+          "percent_coverage":86.21,
+          "missed_lines":4,
+          "relevant_lines":29,
+          "covered_lines":25
+        }
+      ]
+    }
+  }
+}

@@ -189,6 +189,12 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
+        desc 'Generate dashboard'
+        task :dashboard do
+          template = OpenStudioMeasureTester::Dashboard.new
+          template.render
+        end
+
         # Hide the core tasks from being displayed when calling rake -T
         Rake::Task['openstudio:rubocop_core'].clear_comments
         Rake::Task['openstudio:test_core'].clear_comments
