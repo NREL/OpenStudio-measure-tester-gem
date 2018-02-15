@@ -2,8 +2,8 @@
   "total_percent_coverage": 83.69,
   "total_lines": 468,
   "total_relevant_lines": 233,
-  "covered_lines": 195,
-  "missed_lines": 38,
+  "total_covered_lines": 195,
+  "total_missed_lines": 38,
   "by_measure": [
     {
       "name": "RotateBuilding",

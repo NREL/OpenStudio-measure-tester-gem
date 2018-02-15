@@ -41,9 +41,8 @@ module OpenStudioMeasureTester
       @total_percent_coverage = 0
       @total_lines = 0
       @total_relevant_lines = 0
-      @covered_lines = 0
-      @missed_lines = 0
-      @avg_hits_per_line = 0
+      @total_covered_lines = 0
+      @total_missed_lines = 0
 
       @measure_coverages = []
 
@@ -81,15 +80,15 @@ module OpenStudioMeasureTester
 	    		mhash['relevant_lines'] = data.size
 	    		mhash['covered_lines'] = cov
 	    		@total_relevant_lines += data.size
-	    		@covered_lines += cov
-	    		@missed_lines += data.size - cov
+	    		@total_covered_lines += cov
+	    		@total_missed_lines += data.size - cov
 
 	    		@measure_coverages << mhash
 	    	end
 	    end
 	    pp @measure_coverages
 	    lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
-	    @total_percent_coverage = (@covered_lines.to_f / lines.to_f * 100).round(2)
+	    @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
 	    pp "Total Coverage: #{@total_percent_coverage}"
 	    
     end
@@ -99,8 +98,8 @@ module OpenStudioMeasureTester
     	results['total_percent_coverage'] = @total_percent_coverage
     	results['total_lines'] = @total_lines
     	results['total_relevant_lines'] = @total_relevant_lines
-    	results['covered_lines'] = @covered_lines
-    	results['missed_lines'] = @missed_lines
+    	results['total_covered_lines'] = @total_covered_lines
+    	results['total_missed_lines'] = @total_missed_lines
     	results['by_measure'] = @measure_coverages
     	pp results
 
