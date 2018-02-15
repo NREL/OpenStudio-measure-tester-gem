@@ -37,6 +37,7 @@ require 'openstudio_measure_tester/version'
 require 'openstudio_measure_tester/openstudio_style'
 require 'openstudio_measure_tester/minitest_result'
 require 'openstudio_measure_tester/coverage'
+require 'openstudio_measure_tester/openstudio_testing_result'
 
 require 'openstudio_measure_tester/rake_task'
 

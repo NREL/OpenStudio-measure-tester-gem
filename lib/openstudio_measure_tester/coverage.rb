@@ -28,15 +28,15 @@
 
 module OpenStudioMeasureTester
   class Coverage
-  	attr_reader :total_percent_coverage
-  	attr_reader :total_lines
-  	attr_reader :total_relevant_lines
-  	attr_reader :covered_lines
-  	attr_reader :missed_lines
-  	attr_reader :avg_hits_per_line
-  	attr_reader :measure_coverages
+    attr_reader :total_percent_coverage
+    attr_reader :total_lines
+    attr_reader :total_relevant_lines
+    attr_reader :covered_lines
+    attr_reader :missed_lines
+    attr_reader :avg_hits_per_line
+    attr_reader :measure_coverages
 
-  	def initialize(path_to_results)
+    def initialize(path_to_results)
       @path_to_results = path_to_results
       @total_percent_coverage = 0
       @total_lines = 0
@@ -47,67 +47,67 @@ module OpenStudioMeasureTester
       @measure_coverages = []
 
       parse_results
-      
+
     end
-    
+
     def parse_results
       file = "#{@path_to_results}/.resultset.json"
 
-		  puts 'Parsing coverage results'
-		  jsonData = File.read(file)
-		  hash = JSON.parse(jsonData);
+      puts 'Parsing coverage results'
+      jsonData = File.read(file)
+      hash = JSON.parse(jsonData);
 
-		  #pp hash
+      #pp hash
 
-	    hash['RSpec']['coverage'].each do |key, data|
-				pp key
-	    	# just do measure.rb for now
-	    	parts = key.split('/')
-	    	if parts.last == 'measure.rb'
-	    		name = parts[-2]
-	    		pp name
-	    		
-	    		mhash = {}
-	    		mhash['name'] = name
-	    		mhash['total_lines'] = data.size
-	    		@total_lines += data.size
-	    		# remove nils from array
-	    		data.delete(nil)
-	    		
-	    		cov = data.count { |x| x > 0 }
-	    		mhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
-	    		mhash['missed_lines'] = data.size - cov
-	    		mhash['relevant_lines'] = data.size
-	    		mhash['covered_lines'] = cov
-	    		@total_relevant_lines += data.size
-	    		@total_covered_lines += cov
-	    		@total_missed_lines += data.size - cov
+      hash['RSpec']['coverage'].each do |key, data|
+        pp key
+        # just do measure.rb for now
+        parts = key.split('/')
+        if parts.last == 'measure.rb'
+          name = parts[-2]
+          pp name
 
-	    		@measure_coverages << mhash
-	    	end
-	    end
-	    pp @measure_coverages
-	    lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
-	    @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
-	    pp "Total Coverage: #{@total_percent_coverage}"
-	    
+          mhash = {}
+          mhash['name'] = name
+          mhash['total_lines'] = data.size
+          @total_lines += data.size
+          # remove nils from array
+          data.delete(nil)
+
+          cov = data.count {|x| x > 0}
+          mhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
+          mhash['missed_lines'] = data.size - cov
+          mhash['relevant_lines'] = data.size
+          mhash['covered_lines'] = cov
+          @total_relevant_lines += data.size
+          @total_covered_lines += cov
+          @total_missed_lines += data.size - cov
+
+          @measure_coverages << mhash
+        end
+      end
+      pp @measure_coverages
+      lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
+      @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
+      pp "Total Coverage: #{@total_percent_coverage}"
+
     end
 
     def to_hash
-    	results = {};
-    	results['total_percent_coverage'] = @total_percent_coverage
-    	results['total_lines'] = @total_lines
-    	results['total_relevant_lines'] = @total_relevant_lines
-    	results['total_covered_lines'] = @total_covered_lines
-    	results['total_missed_lines'] = @total_missed_lines
-    	results['by_measure'] = @measure_coverages
-    	pp results
+      results = {};
+      results['total_percent_coverage'] = @total_percent_coverage
+      results['total_lines'] = @total_lines
+      results['total_relevant_lines'] = @total_relevant_lines
+      results['total_covered_lines'] = @total_covered_lines
+      results['total_missed_lines'] = @total_missed_lines
+      results['by_measure'] = @measure_coverages
+      pp results
 
-    	results
+      results
     end
 
     def save_results
-    	res_hash = to_hash
+      res_hash = to_hash
       File.open("#{@path_to_results}/coverage.json", 'w') do |file|
         file << JSON.pretty_generate(res_hash)
       end

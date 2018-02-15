@@ -119,41 +119,9 @@ module OpenStudioMeasureTester
 
       FileUtils.mkdir_p test_results_dir
 
-      # remove the coverage directory if it already exists
-      final_error_status = 0
-      if test_results_dir != current_dir
-        # coverage
-        if Dir.exist? "#{current_dir}/coverage"
-          FileUtils.rm_rf "#{test_results_dir}/coverage" if Dir.exist? "#{test_results_dir}/coverage"
-          FileUtils.mv "#{current_dir}/coverage", "#{test_results_dir}/."
-        end
-
-        # minitest
-        if Dir.exist? "#{current_dir}/test"
-          FileUtils.rm_rf "#{test_results_dir}/minitest" if Dir.exist? "#{test_results_dir}/minitest"
-          FileUtils.mv "#{current_dir}/test", "#{test_results_dir}/minitest"
-
-          # Load in the data into the minitest object
-          mr = OpenStudioMeasureTester::MinitestResult.new("#{test_results_dir}/minitest")
-          if mr.error_status
-            final_error_status = 1
-          end
-        end
-
-        # rubocop
-        if Dir.exist? "#{current_dir}/rubocop"
-          FileUtils.rm_rf "#{test_results_dir}/rubocop" if Dir.exist? "#{test_results_dir}/rubocop"
-          FileUtils.mv "#{current_dir}/rubocop", "#{test_results_dir}/rubocop"
-        end
-
-        # openstudio style
-        if Dir.exist? "#{current_dir}/openstudio_style"
-          FileUtils.rm_rf "#{test_results_dir}/openstudio_style" if Dir.exist? "#{test_results_dir}/openstudio_style"
-          FileUtils.mv "#{current_dir}/openstudio_style", "#{test_results_dir}/openstudio_style"
-        end
-      end
-
-      return final_error_status
+      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(current_dir, test_results_dir)
+      results.save_results # one single file for dashboard
+      return results.exit_code
     end
 
     def setup_subtasks(name)
