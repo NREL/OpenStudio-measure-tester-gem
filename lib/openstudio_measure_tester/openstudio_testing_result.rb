@@ -90,7 +90,11 @@ module OpenStudioMeasureTester
 
     def load_results
       filename = "#{@test_results_dir}/combined_results.json"
-      @results = JSON.parse(File.read(filename)) if File.exist? filename
+      begin
+        @results = JSON.parse(File.read(filename)) if File.exist? filename
+      rescue
+        @results = {}
+      end
     end
 
     def save_results
