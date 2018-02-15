@@ -48,9 +48,10 @@ module OpenStudioMeasureTester
       @total_skipped = 0
 
       @measure_results = []
-      @summary = []
+      @summary = {}
 
       parse_results
+      to_file
 
     end
 
@@ -84,16 +85,20 @@ module OpenStudioMeasureTester
 
       @error_status = true if @total_errors > 0
 
-      pp measure_results
+      #pp measure_results
 
     end
 
     def to_file
       # save as a json and have something else parse it/plot it.
 
-      @summary << {'test_directory':@path_to_results}
-      @summary << @total_skipped
-      @summary << @measure_results
+      @summary['test_directory'] = @path_to_results
+      @summary['total_tests'] = @total_tests
+      @summary['total_assertions'] = @total_assertions
+      @summary['total_errors'] = @total_errors
+      @summary['total_failures'] = @total_failures
+      @summary['total_skipped'] = @total_skipped
+      @summary['by_measure'] = @measure_results
 
       pp @summary
 
