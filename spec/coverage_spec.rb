@@ -31,7 +31,7 @@ RSpec.describe OpenStudioMeasureTester::Coverage do
     dir = 'spec/files/coverage'
     c = OpenStudioMeasureTester::Coverage.new(dir)
 
-    expect(c.total_coverage).to eq 84
+    expect(c.total_percent_coverage).to eq 83.69
     expect(c.measure_coverages.size).to eq 3
   end
 
@@ -42,7 +42,7 @@ RSpec.describe OpenStudioMeasureTester::Coverage do
 
     expect(res).to be_instance_of(Hash)
     expect(res.key?('by_measure')).to eq true
-    expect(res.key?('total')).to eq true
+    expect(res.key?('total_percent_coverage')).to eq true
 
   end
 end

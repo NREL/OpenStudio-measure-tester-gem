@@ -28,16 +28,22 @@
 
 module OpenStudioMeasureTester
   class Coverage
-  	attr_reader :total_coverage
-  	attr_reader :measure_coverages
+  	attr_reader :total_percent_coverage
   	attr_reader :total_lines
+  	attr_reader :total_relevant_lines
   	attr_reader :covered_lines
+  	attr_reader :missed_lines
+  	attr_reader :avg_hits_per_line
+  	attr_reader :measure_coverages
 
   	def initialize(path_to_results)
       @path_to_results = path_to_results
-      @total_coverage = 0
+      @total_percent_coverage = 0
       @total_lines = 0
+      @total_relevant_lines = 0
       @covered_lines = 0
+      @missed_lines = 0
+      @avg_hits_per_line = 0
 
       @measure_coverages = []
 
@@ -61,28 +67,40 @@ module OpenStudioMeasureTester
 	    	if parts.last == 'measure.rb'
 	    		name = parts[-2]
 	    		pp name
-	    		# remove nils from array
-	    		data.delete(nil)
+	    		
 	    		mhash = {}
 	    		mhash['name'] = name
-	    		cov = data.count { |x| x > 0 }
-	    		mhash['coverage'] = ((cov.to_f / data.size.to_f) * 100).round
+	    		mhash['total_lines'] = data.size
 	    		@total_lines += data.size
+	    		# remove nils from array
+	    		data.delete(nil)
+	    		
+	    		cov = data.count { |x| x > 0 }
+	    		mhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
+	    		mhash['missed_lines'] = data.size - cov
+	    		mhash['relevant_lines'] = data.size
+	    		mhash['covered_lines'] = cov
+	    		@total_relevant_lines += data.size
 	    		@covered_lines += cov
+	    		@missed_lines += data.size - cov
 
 	    		@measure_coverages << mhash
 	    	end
 	    end
 	    pp @measure_coverages
-	    lines = @total_lines # unnecessary but breaks formatting otherwise
-	    @total_coverage = (@covered_lines.to_f / lines.to_f * 100).round
-	    pp "Total Coverage: #{@total_coverage}"
+	    lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
+	    @total_percent_coverage = (@covered_lines.to_f / lines.to_f * 100).round(2)
+	    pp "Total Coverage: #{@total_percent_coverage}"
 	    
     end
 
     def to_json
     	results = {};
-    	results['total'] = @total_coverage
+    	results['total_percent_coverage'] = @total_percent_coverage
+    	results['total_lines'] = @total_lines
+    	results['total_relevant_lines'] = @total_relevant_lines
+    	results['covered_lines'] = @covered_lines
+    	results['missed_lines'] = @missed_lines
     	results['by_measure'] = @measure_coverages
     	pp results
 
