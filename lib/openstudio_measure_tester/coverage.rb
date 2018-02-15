@@ -94,7 +94,7 @@ module OpenStudioMeasureTester
 	    
     end
 
-    def to_json
+    def to_hash
     	results = {};
     	results['total_percent_coverage'] = @total_percent_coverage
     	results['total_lines'] = @total_lines
@@ -105,6 +105,13 @@ module OpenStudioMeasureTester
     	pp results
 
     	results
+    end
+
+    def save_results
+    	res_hash = to_hash
+      File.open("#{@path_to_results}/coverage.json", 'w') do |file|
+        file << JSON.pretty_generate(res_hash)
+      end
     end
 
   end

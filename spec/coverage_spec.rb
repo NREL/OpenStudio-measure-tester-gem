@@ -38,11 +38,19 @@ RSpec.describe OpenStudioMeasureTester::Coverage do
   it 'should return a hash of results' do
     dir = 'spec/files/coverage'
     c = OpenStudioMeasureTester::Coverage.new(dir)
-    res = c.to_json
+    res = c.to_hash
 
     expect(res).to be_instance_of(Hash)
     expect(res.key?('by_measure')).to eq true
     expect(res.key?('total_percent_coverage')).to eq true
 
+  end
+
+  it 'should save a json file' do
+    dir = 'spec/files/coverage'
+    c = OpenStudioMeasureTester::Coverage.new(dir)
+    res = c.save_results
+    filename = "#{dir}/coverage.json"
+    expect(File.exist?(filename)).to be true
   end
 end
