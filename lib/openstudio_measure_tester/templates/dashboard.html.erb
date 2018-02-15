@@ -1,0 +1,190 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Measure Testing Dashboard </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-4 col-md-3 mr-0" href="#">OpenStudio Measure Testing Dashboard</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
+<!--           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+          </div> -->
+          <div class="row">
+            <div class="col-sm">
+              <div class="card">
+                <div class="card-block">
+                  <div class="card-body">
+                    <h5 class="card-title">Tests</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card">
+                <div class="card-block">
+                  <div class="card-body">
+                    <h5 class="card-title">OpenStudio Style</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card">
+                <div class="card-block">
+                  <div class="card-body">
+                    <h5 class="card-title">RuboCop</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card donut">
+                <div class="card-block">
+                  <div class="card-body">
+                    <h5 class="card-title">Coverage</h5>
+                    <div class="canvas-container">
+                      <canvas id="cov"></canvas>
+                      <span id="covPercent" class="status">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="py-5">
+            <h2>Results By Measure</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1,001</td>
+                    <td>Lorem</td>
+                    <td>ipsum</td>
+                    <td>dolor</td>
+                    <td>sit</td>
+                  </tr>
+                  <tr>
+                    <td>1,002</td>
+                    <td>amet</td>
+                    <td>consectetur</td>
+                    <td>adipiscing</td>
+                    <td>elit</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+      (function(){
+      var t;
+
+      function size(animate){
+        if (animate == undefined){
+          animate = false;
+        }
+        clearTimeout(t);
+        t = setTimeout(function(){
+          $("canvas").each(function(i,el){
+            $(el).attr({
+              "width":$(el).parent().width(),
+              "height":$(el).parent().outerHeight()
+            });
+          });
+          redraw(animate);
+          var m = 0;
+          $(".card").height("");
+          $(".card").each(function(i,el){ m = Math.max(m,$(el).height()); });
+          $(".card").height(m);
+        }, 30);
+      }
+      $(window).on('resize', function(){ size(false); });
+
+
+      function redraw(animation){
+        var data =  <%= @data %>;
+        var covData = data['coverage'];
+        // set % coverage
+        document.getElementById("covPercent").innerHTML = covData['total_percent_coverage'] + '%';
+
+        var options = {animation:{}};
+        if (!animation){
+          options.animation.animateRotate = false;
+        } else {
+          options.animation.animateRotate = true;
+        }
+        var data = {
+          datasets:[{
+            data: [
+            covData['total_covered_lines'],
+            covData['total_missed_lines'],
+            ],
+            backgroundColor: [
+            "#50AE54",
+            "#F2453D"
+            ]
+          }],
+          labels: [
+            "lines covered", 
+            "lines missed",
+          ]
+        };
+
+        var config = {type: 'doughnut', data: data, options: options};
+        var canvas = document.getElementById("cov");
+        var ctx = canvas.getContext("2d");
+        var doughnut = new Chart(ctx, config);
+      }
+      size(true);
+
+      }());
+
+    </script>
+  </body>
+</html>
