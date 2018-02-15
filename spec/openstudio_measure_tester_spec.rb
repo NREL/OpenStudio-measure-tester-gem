@@ -89,7 +89,7 @@ RSpec.describe OpenStudioMeasureTester do
           puts line
         end
       end
-      expect(File.exist?('test_results/openstudio_style/pristine.json')).to eq true
+      expect(File.exist?('test_results/openstudio_style/openstudio_style.json')).to eq true
     end
   end
 end

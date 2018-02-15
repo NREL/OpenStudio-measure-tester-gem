@@ -28,6 +28,9 @@
 
 module OpenStudioMeasureTester
   class OpenStudioStyle
+    attr_reader :results
+    attr_reader :measure_messages
+
     CHECKS = [
       {
         regex: /OpenStudio::Ruleset::ModelUserScript/,
@@ -74,15 +77,31 @@ module OpenStudioMeasureTester
       }
     ].freeze
 
-    def initialize(measure_dir)
-      @measure_dir = measure_dir
-      @messages = []
-      @measure_hash = {}
-      @measure_name = measure_dir.split('/').last
+    # Pass in the measures_glob with the filename (typically measure.rb)
+    def initialize(measures_glob)
+      @measures_glob = measures_glob
+      @results = {}
+
+      # Individual measure messages
+      @measure_messages = []
 
       # Load in the method infoExtractor which will load measure info (helpful comment huh?)
       # https://github.com/NREL/OpenStudio/blob/e7aa6be05a714814983d68ea840ca61383e9ef54/openstudiocore/src/measure/OSMeasureInfoGetter.cpp#L254
       eval(::OpenStudio::Measure.infoExtractorRubyFunction)
+
+      Dir[@measures_glob].each do |measure|
+        measure_dir = File.dirname(measure)
+
+        # initialize the measure name from the directory until the measure_hash is loaded.
+        # The test_measure method can fail but still report errors, so we need a place to store the results.
+        @measure_classname = measure_dir.split('/').last
+        @results[@measure_classname] = test_measure(measure_dir)
+      end
+    end
+
+    def test_measure(measure_dir)
+      # reset the instance variables for this measure
+      clear
 
       measure_missing = false
       unless Dir.exist? measure_dir
@@ -108,17 +127,19 @@ module OpenStudioMeasureTester
           measure = measure.get
           measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
 
-          @measure_hash = measure_hash(@measure_dir, measure, measure_info)
-
+          measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
+          @measure_classname = measure_hash[:class_name]
           # At this point, the measure.rb file is ensured to exist
 
-          # run static checks
-          run_regex_checks
+          # run static checks on the files in the measure directory
+          run_regex_checks(measure_dir)
 
-          validate_measure_hash
+          validate_measure_hash(measure_hash)
           # pp @measure_hash
         end
       end
+
+      return @measure_messages
     end
 
     def log_message(message, type = :syntax, severity = :info)
@@ -127,30 +148,23 @@ module OpenStudioMeasureTester
         type: type,
         severity: severity
       }
-      @messages << new_message
-    end
-
-    def results
-      @messages
+      @measure_messages << new_message
     end
 
     def clear
-      @messages.clear
-    end
-
-    def errors?
-      !@messages.empty?
+      @measure_messages.clear
+      @measure_classname = nil
     end
 
     def save_results
       FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
-      File.open("openstudio_style/#{@measure_name}.json", 'w') do |file|
-        file << JSON.pretty_generate(results)
+      File.open("openstudio_style/openstudio_style.json", 'w') do |file|
+        file << JSON.pretty_generate(@results)
       end
     end
 
-    def run_regex_checks
-      filedata = File.read("#{@measure_dir}/measure.rb")
+    def run_regex_checks(measure_dir)
+      filedata = File.read("#{measure_dir}/measure.rb")
       CHECKS.each do |check|
         if check[:check_type] == :if_exists
           if filedata =~ check[:regex]
@@ -206,36 +220,21 @@ module OpenStudioMeasureTester
       end
     end
 
-    def parse_measure_xml
-      h = Hash.from_xml(File.read(@filename_xml))
-
-      # pull out some information
-      @measure_hash[:name_xml] = h['measure']['name']
-      @measure_hash[:uid] = h['measure']['uid']
-      @measure_hash[:version_id] = h['measure']['version_id']
-      if h['measure']['tags'].is_a? Hash
-        @measure_hash[:tags] = h['measure']['tags']['tag']
-      end
-      pp @measure_hash
-
-      @measure_hash[:modeler_description_xml] = h['measure']['modeler_description']
-      @measure_hash[:description_xml] = h['measure']['description']
-    end
-
     # Validate the measure hash to make sure that it is meets the style guide. This will also perform the selection
     # of which data to use for the "actual metadata"
-    def validate_measure_hash
-      validate_name('Measure name', @measure_hash[:name], ensure_snakecase: true)
-      validate_name('Class name', @measure_hash[:class_name], ensure_camelcase: true)
+    def validate_measure_hash(measure_hash)
+      validate_name('Measure name', measure_hash[:name], ensure_snakecase: true)
+      validate_name('Class name', measure_hash[:class_name], ensure_camelcase: true)
       # check if @measure_name (which is the directory name) is snake cased
-      validate_name('Measure directory name', @measure_name, ensure_snakecase: true)
 
-      log_message('Could not find measure description in measure.', :structure, :warning) unless @measure_hash[:description]
-      log_message('Could not find modeler description in measure.', :structure, :warning) unless @measure_hash[:modeler_description]
-      log_message('Could not find display_name in measure.', :structure, :warning) unless @measure_hash[:display_name]
-      log_message('Could not find measure name in measure.', :structure, :warning) unless @measure_hash[:name]
+      validate_name('Measure directory name', measure_hash[:measure_dir].split('/').last, ensure_snakecase: true)
 
-      @measure_hash[:arguments].each do |arg|
+      log_message('Could not find measure description in measure.', :structure, :warning) unless measure_hash[:description]
+      log_message('Could not find modeler description in measure.', :structure, :warning) unless measure_hash[:modeler_description]
+      log_message('Could not find display_name in measure.', :structure, :warning) unless measure_hash[:display_name]
+      log_message('Could not find measure name in measure.', :structure, :warning) unless measure_hash[:name]
+
+      measure_hash[:arguments].each do |arg|
         validate_name('Argument display name', arg[:display_name])
         # {
         #     :name => "relative_building_rotation",
@@ -256,7 +255,7 @@ module OpenStudioMeasureTester
     #
     # https://github.com/NREL/OpenStudio/blob/7865ba413ef52e8c41b8b95d6643d68eb949f1c4/openstudiocore/src/cli/measure_manager.rb#L355
     ###################################################################################################################
-    def measure_hash(measure_dir, measure, measure_info)
+    def generate_measure_hash(measure_dir, measure, measure_info)
       result = {}
       result[:measure_dir] = measure_dir
       result[:name] = measure.name
