@@ -1,9 +1,12 @@
 require 'openstudio'
 require 'openstudio/measure/ShowRunnerOutput'
+
 require 'minitest/autorun'
+
 require_relative '../measure.rb'
-require 'fileutils'
 require 'openstudio_measure_tester/test_helper.rb'
+
+require 'fileutils'
 
 class Pristine_Test < MiniTest::Unit::TestCase
 
