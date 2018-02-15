@@ -31,6 +31,7 @@ require 'openstudio'
 require 'pp'
 require 'active_support'
 require 'active_support/core_ext'
+require 'git'
 require 'openstudio_measure_tester/core_ext'
 
 require 'openstudio_measure_tester/version'
