@@ -38,6 +38,15 @@ module OpenStudioMeasureTester
       @test_results_dir = test_results_dir
       @results = {}
 
+      # get the repository info
+      g = Git.open(Dir.pwd)
+      config = g.config
+      repo_name = config['remote.origin.url'].split('/')[1].split('.')[0]
+      current_branch = g.branch.name
+      @results['repo_name'] = repo_name
+      @results['current_branch'] = current_branch
+      # TODO add failsafe
+
       # check if the results data already exist, and if so, then load the file now to keep the results
       load_results
       aggregate_results
