@@ -104,10 +104,8 @@ module OpenStudioMeasureTester
     end
 
     def run_style(base_dir)
-      Dir["#{base_dir}/**/measure.rb"].each do |measure|
-        style = OpenStudioMeasureTester::OpenStudioStyle.new(File.dirname(measure))
-        style.save_results
-      end
+      style = OpenStudioMeasureTester::OpenStudioStyle.new("#{base_dir}/**/measure.rb")
+      style.save_results
     end
 
     # Post process the various results and save them into the base_dir

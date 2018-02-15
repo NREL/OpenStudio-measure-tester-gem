@@ -1,5 +1,7 @@
 # OpenStudio Measure Tester
 
+[![Build Status](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem.svg?branch=master)](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem)
+
 The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing OpenStudio measures.
 
 ## Installation
