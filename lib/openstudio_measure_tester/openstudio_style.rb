@@ -139,8 +139,6 @@ module OpenStudioMeasureTester
           run_regex_checks(measure_dir)
 
           validate_measure_hash(measure_hash)
-          puts @measure_messages.size
-          pp @measure_messages
         end
       end
 

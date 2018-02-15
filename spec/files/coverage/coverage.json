@@ -4,8 +4,8 @@
   "total_relevant_lines": 233,
   "total_covered_lines": 195,
   "total_missed_lines": 38,
-  "by_measure": [
-    {
+  "by_measure": {
+    "RotateBuilding": {
       "name": "RotateBuilding",
       "total_lines": 80,
       "percent_coverage": 91.67,
@@ -13,7 +13,7 @@
       "relevant_lines": 36,
       "covered_lines": 33
     },
-    {
+    "SetGasBurnerEfficiency": {
       "name": "SetGasBurnerEfficiency",
       "total_lines": 314,
       "percent_coverage": 81.55,
@@ -21,7 +21,7 @@
       "relevant_lines": 168,
       "covered_lines": 137
     },
-    {
+    "pristine": {
       "name": "pristine",
       "total_lines": 74,
       "percent_coverage": 86.21,
@@ -29,5 +29,5 @@
       "relevant_lines": 29,
       "covered_lines": 25
     }
-  ]
+  }
 }

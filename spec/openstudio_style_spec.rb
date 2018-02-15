@@ -31,7 +31,7 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     measure_path = 'spec/test_measures/RotateBuildingDNE/*'
     style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
 
-    expect(style.results.empty?).to eq true
+    expect(style.results[:by_measure].empty?).to eq true
   end
 
   it 'should parse an OpenStudio Measure' do
@@ -40,9 +40,8 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
 
     # make sure that the infoExtractor method loads correctly (from OpenStudio)
     expect(style.respond_to?(:infoExtractor)).to eq true
-
-
-    expect(style.results['RotateBuilding'].size).to eq 7
+    expect(style.results[:by_measure][:RotateBuilding][:errors]).to eq 7
+    expect(style.results[:by_measure][:RotateBuilding][:issues].size).to eq 7
   end
 
   it 'should check for naming conventions' do
@@ -51,7 +50,7 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
 
     style.validate_name('Name', 'period.in.names.are.bad')
     expect(style.measure_messages.first[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
-    style.clear
+    style.measure_messages.clear
 
     style.validate_name('Name', 'snake_case_is_right', ensure_snakecase: true)
     style.validate_name('Name', 'CamelCaseIsUpAndDown', ensure_camelcase: true)
@@ -60,13 +59,13 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     style.validate_name('Name', 'MixedUp_And_case', ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'MixedUp_And_case' is not CamelCase."
     expect(style.measure_messages.last[:message]).to eq "Name 'MixedUp_And_case' is not snake_case."
-    style.clear
+    style.measure_messages.clear
 
     style.validate_name('Name', 'trailing_spaces ', ensure_snakecase: true)
     style.validate_name('Name', ' trailing_spaces', ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'trailing_spaces ' has leading or trailing spaces."
     expect(style.measure_messages.last[:message]).to eq "Name ' trailing_spaces' has leading or trailing spaces."
-    style.clear
+    style.measure_messages.clear
 
     style.validate_name('Name', 'Square Footage (ft2)')
     expect(style.measure_messages.first[:message]).to eq "Name 'Square Footage (ft2)' appears to have units. Set units in the setUnits method."
