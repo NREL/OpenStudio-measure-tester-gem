@@ -7,6 +7,7 @@ module OpenStudioMeasureTester
       @template = File.read('lib/openstudio_measure_tester/templates/dashboard.html.erb')
       file = File.read('test_results/combined_results.json')
       @data = file
+      @hash = JSON.parse(@data)
     end
 
     def render

@@ -81,6 +81,7 @@ module OpenStudioMeasureTester
     def initialize(measures_glob)
       @measures_glob = measures_glob
       @results = {}
+      @results['by_measure'] = {}  # measure-specific results
 
       # Individual measure messages
       @measure_messages = []
@@ -95,7 +96,7 @@ module OpenStudioMeasureTester
         # initialize the measure name from the directory until the measure_hash is loaded.
         # The test_measure method can fail but still report errors, so we need a place to store the results.
         @measure_classname = measure_dir.split('/').last
-        @results[@measure_classname] = test_measure(measure_dir)
+        @results['by_measure'][@measure_classname] = test_measure(measure_dir)
       end
 
       aggregate_results

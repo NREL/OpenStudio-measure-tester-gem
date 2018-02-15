@@ -47,7 +47,7 @@ module OpenStudioMeasureTester
       @total_failures = 0
       @total_skipped = 0
 
-      @measure_results = []
+      @measure_results = {}
       @summary = {}
 
       parse_results
@@ -73,7 +73,7 @@ module OpenStudioMeasureTester
         mhash['measure_failures'] = hash['testsuite']['failures'].to_i
         mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
 
-        @measure_results << mhash
+        @measure_results[measure_name] = mhash
 
         @total_tests += mhash['measure_tests']
         @total_assertions += mhash['measure_assertions']

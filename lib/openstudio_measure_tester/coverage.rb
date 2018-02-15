@@ -44,7 +44,7 @@ module OpenStudioMeasureTester
       @total_covered_lines = 0
       @total_missed_lines = 0
 
-      @measure_coverages = []
+      @measure_coverages = {}
 
       parse_results
 
@@ -83,7 +83,7 @@ module OpenStudioMeasureTester
           @total_covered_lines += cov
           @total_missed_lines += data.size - cov
 
-          @measure_coverages << mhash
+          @measure_coverages[name] =  mhash
         end
       end
       pp @measure_coverages

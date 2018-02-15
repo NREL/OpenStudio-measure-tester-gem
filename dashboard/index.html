@@ -24,9 +24,9 @@
     <div class="container-fluid">
       <div class="row">
         <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
-<!--           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-          </div> -->
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Overview</h1>
+          </div>
           <div class="row">
             <div class="col-sm">
               <div class="card">
@@ -72,33 +72,39 @@
             </div>
           </div>
           <div class="py-5">
-            <h2>Results By Measure</h2>
+            <h2>Measures</h2>
             <div class="table-responsive">
               <table class="table table-striped table-sm">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                    <th>Measure Name</th>
+                    <th>Coverage</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  
                   <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
+                    <td>ChangeBuildingLocation</td>
+                    <td>79.69 %</td>
                   </tr>
+                  
                   <tr>
-                    <td>1,002</td>
-                    <td>amet</td>
-                    <td>consectetur</td>
-                    <td>adipiscing</td>
-                    <td>elit</td>
+                    <td>RotateBuilding</td>
+                    <td>91.67 %</td>
                   </tr>
+                  
+                  <tr>
+                    <td>SetGasBurnerEfficiency</td>
+                    <td>81.55 %</td>
+                  </tr>
+                  
+                  <tr>
+                    <td>pristine</td>
+                    <td>86.21 %</td>
+                  </tr>
+                  
                 </tbody>
               </table>
             </div>
@@ -627,8 +633,8 @@
     "total_relevant_lines": 361,
     "total_covered_lines": 297,
     "total_missed_lines": 64,
-    "by_measure": [
-      {
+    "by_measure": {
+      "ChangeBuildingLocation": {
         "name": "ChangeBuildingLocation",
         "total_lines": 210,
         "percent_coverage": 79.69,
@@ -636,7 +642,7 @@
         "relevant_lines": 128,
         "covered_lines": 102
       },
-      {
+      "RotateBuilding": {
         "name": "RotateBuilding",
         "total_lines": 80,
         "percent_coverage": 91.67,
@@ -644,7 +650,7 @@
         "relevant_lines": 36,
         "covered_lines": 33
       },
-      {
+      "SetGasBurnerEfficiency": {
         "name": "SetGasBurnerEfficiency",
         "total_lines": 314,
         "percent_coverage": 81.55,
@@ -652,7 +658,7 @@
         "relevant_lines": 168,
         "covered_lines": 137
       },
-      {
+      "pristine": {
         "name": "pristine",
         "total_lines": 74,
         "percent_coverage": 86.21,
@@ -660,7 +666,7 @@
         "relevant_lines": 29,
         "covered_lines": 25
       }
-    ]
+    }
   }
 };
         var covData = data['coverage'];
