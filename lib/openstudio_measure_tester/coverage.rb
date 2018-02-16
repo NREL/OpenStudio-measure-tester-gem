@@ -65,6 +65,8 @@ module OpenStudioMeasureTester
         parts = key.split('/')
         if parts.last == 'measure.rb'
           name = parts[-2]
+          # ensure UpperCamelCase
+          name = name.camelize
           pp name
 
           mhash = {}

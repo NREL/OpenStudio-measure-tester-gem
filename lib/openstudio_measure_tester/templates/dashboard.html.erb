@@ -18,7 +18,7 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-4 col-md-3 mr-0" href="#">OpenStudio Measure Testing Dashboard</a>
+      <a class="navbar-brand col-sm-5 col-md-4 mr-0" href="#">OpenStudio Measure Testing Dashboard</a>
     </nav>
 
     <div class="container-fluid">
@@ -33,7 +33,26 @@
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">Tests</h5>
-                    <p class="card-text"></p>
+             
+                    <% if @hash['minitest'] && @hash['minitest']['total_failures'] %>
+                      <div class="row pt-5">
+                      <% if @hash['minitest']['total_failures'] > 0 %>
+                        <div class="col-sm-4 offset-sm-1 badge-height badge badge-danger"><span class='large-text'><%= @hash['minitest']['total_failures'] %></span></div>
+                      <% else %>
+                        <div class="col-sm-4 offset-sm-1 badge-height badge badge-success"><span class='large-text'><%= @hash['minitest']['total_failures'] %></span></div>
+                      <% end %>
+                      <% if @hash['minitest']['total_errors'] > 0 %>
+                        <div class="col-sm-4 offset-sm-2 badge-height badge badge-danger"><span class='large-text'><%= @hash['minitest']['total_errors'] %></span></div>
+                      <% else %>
+                        <div class="col-sm-4 offset-sm-2 badge-height badge badge-success"><span class='large-text'><%= @hash['minitest']['total_errors'] %></span></div>
+                      <% end %>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4 offset-sm-1 center-text"><span class="badge-text">Failures</span></div>
+                        <div class="col-sm-4 offset-sm-2 center-text"><span class="badge-text">Errors</span></div>
+                      </div>
+                    <% end %>
+                 
                   </div>
                 </div>
               </div>
@@ -43,7 +62,20 @@
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">OpenStudio Style</h5>
-                    <p class="card-text"></p>
+                    <div>
+                      <% if @hash['openstudio_style'] && @hash['openstudio_style']['total_errors'] %>
+                        <div class="row pt-5">
+                        <% if @hash['openstudio_style']['total_errors'] > 0 %>
+                          <div class="col-sm-4 offset-sm-4 badge-height badge badge-danger"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
+                        <% else %>
+                          <div class="col-sm-4 offset-sm-4 badge-height badge badge-success"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
+                        <% end %>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4 offset-sm-4 center-text"><span class="badge-text">Errors</span></div>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -74,19 +106,35 @@
           <div class="py-5">
             <h2>Measures</h2>
             <div class="table-responsive">
-              <table class="table table-striped table-sm">
+              <table class="table table-striped table-sm table-text">
                 <thead>
                   <tr>
                     <th>Measure Name</th>
+                    <th>Tests</th>
+                    <th>OS Style Errors</th>
+                    <th>RuboCop</th>
                     <th>Coverage</th>
-                    <th></th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @hash['coverage']['by_measure'].each do |name, measure| %>
                   <tr>
                     <td><%= name %></td>
+                    <td>  
+                      <% if  @hash['minitest']['by_measure'][name] %>
+                        <span class="badge badge-danger"><%= @hash['minitest']['by_measure'][name]['measure_failures'] %></span>
+                        <span class="badge badge-warning"><%= @hash['minitest']['by_measure'][name]['measure_errors'] %></span> 
+                      <% end %>
+                    </td>
+                    <td><% if @hash['openstudio_style'] && @hash['openstudio_style']['by_measure'][name] %>
+                          <% if @hash['openstudio_style']['by_measure'][name]['errors'] > 0 %>
+                            <span class="badge badge-danger"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
+                          <% elsif @hash['openstudio_style']['by_measure'][name]['errors'] == 0 %>
+                            <span class="badge badge-success"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
+                          <% end %>
+                        <% end %>  
+                    </td>
+                    <td></td>
                     <td><%= measure['percent_coverage'] %> %</td>
                   </tr>
                   <% end %>
@@ -140,6 +188,7 @@
 
       function redraw(animation){
         var data =  <%= @data %>;
+        console.log('DATA: ', data);
         var covData = data['coverage'];
         // set % coverage
         document.getElementById("covPercent").innerHTML = covData['total_percent_coverage'] + '%';

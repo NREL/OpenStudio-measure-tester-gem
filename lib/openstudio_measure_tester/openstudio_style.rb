@@ -162,8 +162,8 @@ module OpenStudioMeasureTester
     # read the data in the results and sum up the total number of issues
     def aggregate_results
       total_errors = 0
-      @results.each_pair do |k, v|
-        total_errors += v.size
+      @results[:by_measure].each_pair do |k, v|
+        total_errors += v[:errors]
       end
 
       @results[:total_errors] = total_errors

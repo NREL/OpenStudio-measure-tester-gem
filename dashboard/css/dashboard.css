@@ -100,19 +100,42 @@ body {
 }
 
 .donut .status {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 30%;
-    height: 0;
-    padding-top: 10%;
-    padding-bottom: 15%;
-    color: #444;
-    margin-top: -5%;
-    margin-left: -15%;
-    font-size: 1.4em;
-    font-weight: 700;
-    text-align: center;
-    border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 0;
+  padding-top: 10%;
+  padding-bottom: 15%;
+  color: #444;
+  margin-top: -5%;
+  margin-left: -15%;
+  font-size: 1.4em;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.badge-height {
+  min-height: 80px;
+  padding-top:15%;
+  padding-bottom:15%;
+}
+
+.badge-text {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.large-text {
+  font-size: 5em;
+}
+
+.table-text {
+  font-size: 1.1em;
 }
