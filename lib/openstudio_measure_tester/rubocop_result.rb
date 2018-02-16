@@ -27,7 +27,7 @@
 ########################################################################################################################
 
 module OpenStudioMeasureTester
-  class MinitestResult
+  class RubocopResult
     attr_reader :error_status
 
     attr_reader :total_assertions
@@ -56,30 +56,32 @@ module OpenStudioMeasureTester
     end
 
     def parse_results
-      Dir["#{@path_to_results}/reports/*.xml"].each do |file|
-        puts "Parsing minitest report #{file}"
+      # needs rescue
+      puts @path_to_results
+      Dir["#{@path_to_results}/rubocop-results.xml"].each do |file|
+        puts "Parsing Rubocop report #{file}"
         hash = Hash.from_xml(File.read(file))
 
-        #pp hash
+        pp hash
 
-        measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
+        #measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
 
-        mhash = {}
+        #mhash = {}
 
-        mhash['tested_class'] = measure_name
-        mhash['measure_tests'] = hash['testsuite']['tests'].to_i
-        mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
-        mhash['measure_errors'] = hash['testsuite']['errors'].to_i
-        mhash['measure_failures'] = hash['testsuite']['failures'].to_i
-        mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
+        #mhash['tested_class'] = measure_name
+        #mhash['measure_tests'] = hash['testsuite']['tests'].to_i
+        #mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
+        #mhash['measure_errors'] = hash['testsuite']['errors'].to_i
+        #mhash['measure_failures'] = hash['testsuite']['failures'].to_i
+        #mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
 
-        @measure_results[measure_name] = mhash
+        #@measure_results[measure_name] = mhash
 
-        @total_tests += mhash['measure_tests']
-        @total_assertions += mhash['measure_assertions']
-        @total_errors += mhash['measure_errors']
-        @total_failures += mhash['measure_failures']
-        @total_skipped += mhash['measure_skipped']
+        #@total_tests += mhash['measure_tests']
+        #@total_assertions += mhash['measure_assertions']
+        #@total_errors += mhash['measure_errors']
+        #@total_failures += mhash['measure_failures']
+        #@total_skipped += mhash['measure_skipped']
 
       end
 
@@ -92,19 +94,19 @@ module OpenStudioMeasureTester
     def to_file
       # save as a json and have something else parse it/plot it.
 
-      @summary['test_directory'] = @path_to_results
-      @summary['total_tests'] = @total_tests
-      @summary['total_assertions'] = @total_assertions
-      @summary['total_errors'] = @total_errors
-      @summary['total_failures'] = @total_failures
-      @summary['total_skipped'] = @total_skipped
-      @summary['by_measure'] = @measure_results
+      #@summary['test_directory'] = @path_to_results
+      #@summary['total_tests'] = @total_tests
+      #@summary['total_assertions'] = @total_assertions
+      #@summary['total_errors'] = @total_errors
+      #@summary['total_failures'] = @total_failures
+      #@summary['total_skipped'] = @total_skipped
+      #@summary['by_measure'] = @measure_results
 
-      pp @summary
+      #pp @summary
 
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
-      File.open("#{@path_to_results}/minitest.json", 'w') do |file|
-        file << JSON.pretty_generate(summary)
+      File.open("#{@path_to_results}/rubocop-results.json", 'w') do |file|
+        file << "Whazzzaaaauppp?!" #JSON.pretty_generate(summary)
       end
     end
   end
