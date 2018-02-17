@@ -191,7 +191,7 @@ module OpenStudioMeasureTester
 
         desc 'Generate dashboard'
         task :dashboard do
-          template = OpenStudioMeasureTester::Dashboard.new
+          template = OpenStudioMeasureTester::Dashboard.new(Rake.application.original_dir)
           template.render
         end
 
