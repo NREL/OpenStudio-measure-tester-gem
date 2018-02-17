@@ -100,7 +100,7 @@ module OpenStudioMeasureTester
       @summary['total_skipped'] = @total_skipped
       @summary['by_measure'] = @measure_results
 
-      pp @summary
+      # pp @summary
 
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/minitest.json", 'w') do |file|

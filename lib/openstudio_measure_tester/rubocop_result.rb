@@ -57,12 +57,12 @@ module OpenStudioMeasureTester
 
     def parse_results
       # needs rescue
-      puts @path_to_results
       Dir["#{@path_to_results}/rubocop-results.xml"].each do |file|
         puts "Parsing Rubocop report #{file}"
         hash = Hash.from_xml(File.read(file))
 
         pp hash
+        @summary = hash
 
         #measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
 
@@ -102,11 +102,12 @@ module OpenStudioMeasureTester
       #@summary['total_skipped'] = @total_skipped
       #@summary['by_measure'] = @measure_results
 
+      
       #pp @summary
 
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
-      File.open("#{@path_to_results}/rubocop-results.json", 'w') do |file|
-        file << "Whazzzaaaauppp?!" #JSON.pretty_generate(summary)
+      File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
+        file << JSON.pretty_generate(@summary)
       end
     end
   end
