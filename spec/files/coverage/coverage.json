@@ -21,8 +21,8 @@
       "relevant_lines": 168,
       "covered_lines": 137
     },
-    "pristine": {
-      "name": "pristine",
+    "Pristine": {
+      "name": "Pristine",
       "total_lines": 74,
       "percent_coverage": 86.21,
       "missed_lines": 4,

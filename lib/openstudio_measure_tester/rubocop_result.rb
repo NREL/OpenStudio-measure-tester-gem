@@ -105,7 +105,7 @@ module OpenStudioMeasureTester
       
       #pp @summary
 
-      FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
+      FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
         file << JSON.pretty_generate(@summary)
       end
