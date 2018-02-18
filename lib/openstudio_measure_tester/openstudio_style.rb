@@ -37,43 +37,57 @@ module OpenStudioMeasureTester
             check_type: :if_exists,
             message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
             type: :deprecated,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /OpenStudio::Ruleset::OSRunner/,
             check_type: :if_exists,
             message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
             type: :deprecated,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /OpenStudio::Ruleset::OSArgumentVector/,
             check_type: :if_exists,
             message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
             type: :deprecated,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /OpenStudio::Ruleset::OSArgumentMap/,
             check_type: :if_exists,
             message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
             type: :deprecated,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /def name(.*?)end/m,
             check_type: :if_missing,
             message: '\'def name\' is missing.',
             type: :syntax,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /def description(.*?)end/m,
             check_type: :if_missing,
             message: '\'def description\' is missing.',
             type: :syntax,
-            severity: :error
+            severity: :error,
+            file_type: :measure
         }, {
             regex: /def modeler_description(.*?)end/m,
             check_type: :if_missing,
             message: '\'def modeler_description\' is missing.',
             type: :syntax,
-            severity: :error
+            severity: :error,
+            file_type: :measure
+        }, {
+            regex: /require .openstudio_measure_tester\/test_helper\.rb./,
+            check_type: :if_missing,
+            message: "Must include 'require 'openstudio_measure_tester/test_helper.rb'' in Test file to report coverage correctly",
+            type: :syntax,
+            severity: :error,
+            file_type: :test
         }
     ].freeze
 
@@ -178,16 +192,29 @@ module OpenStudioMeasureTester
     end
 
     def run_regex_checks(measure_dir)
-      filedata = File.read("#{measure_dir}/measure.rb")
-      CHECKS.each do |check|
+      def check(data, check)
         if check[:check_type] == :if_exists
-          if filedata =~ check[:regex]
+          if data =~ check[:regex]
             log_message(check[:message], check[:type], check[:severity])
           end
         elsif check[:check_type] == :if_missing
-          if filedata !~ check[:regex]
+          if data !~ check[:regex]
             log_message(check[:message], check[:type], check[:severity])
           end
+        end
+      end
+
+      file_data = File.read("#{measure_dir}/measure.rb")
+      test_files = Dir["#{measure_dir}/**/*_[tT]est.rb"]
+      CHECKS.each do |check|
+        if check[:file_type] == :test
+          test_files.each do |test_file|
+            puts test_file
+            test_filedata = File.read(test_file)
+            check(test_filedata, check)
+          end
+        elsif check[:file_type] == :measure
+          check(file_data, check)
         end
       end
     end
