@@ -1,14 +1,16 @@
 require 'openstudio'
-require 'openstudio/measure/ShowRunnerOutput'
-
+require 'openstudio/ruleset/ShowRunnerOutput'
 require 'minitest/autorun'
-
 require_relative '../measure.rb'
-require 'openstudio_measure_tester/test_helper.rb'
-
 require 'fileutils'
 
-class Pristine_Test < MiniTest::Unit::TestCase
+begin
+  require 'openstudio_measure_tester/test_helper.rb'
+rescue LoadError
+  puts "OpenStudio Measure Tester Gem not installed -- will not be able to aggregate and dashboard the results of tests"
+end
+
+class Pristine_Test < MiniTest::Test
 
   # def setup
   # end
@@ -78,7 +80,7 @@ class Pristine_Test < MiniTest::Unit::TestCase
 
     # load the test model
     translator = OpenStudio::OSVersion::VersionTranslator.new
-    path = OpenStudio::Path.new(File.dirname(__FILE__) + "/example_model.osm")
+    path = File.dirname(__FILE__) + "/example_model.osm"
     model = translator.loadModel(path)
     assert((not model.empty?))
     model = model.get
@@ -121,7 +123,7 @@ class Pristine_Test < MiniTest::Unit::TestCase
     assert_equal(1, model.getSpaces.size - num_spaces_seed)
 
     # save the model to test output directory
-    output_file_path = OpenStudio::Path.new(File.dirname(__FILE__) + "/output/test_output.osm")
+    output_file_path = File.dirname(__FILE__) + "/output/test_output.osm"
     model.save(output_file_path,true)
   end
 
