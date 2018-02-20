@@ -64,11 +64,11 @@ module OpenStudioMeasureTester
         hash = Hash.from_xml(File.read(file))
 
         files = ""
-        total_files = hash['checkstyle']['file'].length
-        total_issues = 0
-        total_info = 0
-        total_warnings = 0
-        file_issues = 0
+        @total_files = hash['checkstyle']['file'].length
+        @total_issues = 0
+        @total_info = 0
+        @total_warnings = 0
+        @file_issues = 0
 
         @summary = hash
 
@@ -79,27 +79,26 @@ module OpenStudioMeasureTester
             if key['error']
 
               if key['error'].class == Array
-                file_issues = key['error'].length
+                @file_issues = key['error'].length
                 key['error'].each do |s|
                   if s['severity'] === "info"
-                    total_info += 1
+                    @total_info += 1
                   elsif s['severity'] === "warning"
-                    total_warnings += 1
+                    @total_warnings += 1
                   end
                 end
               end
 
               if key['error'].class == Hash
-                puts "iuyiuyiuiuy #{key['error']['severity']}"
-                file_issues = 1
+                @file_issues = 1
                 if key['error']['severity'] === "info"
-                  total_info += 1
+                  @total_info += 1
                 elsif key['error']['severity'] === "warning"
-                  total_warnings += 1
+                  @total_warnings += 1
                 end
               end
-                
-              total_issues += file_issues
+
+              @total_issues += @file_issues
 
             end
 
@@ -107,10 +106,7 @@ module OpenStudioMeasureTester
 
         puts "tested files (#{total_files}):\n#{files}"
         puts "total files: #{total_files}"
-        puts "total issues: #{total_issues}"
-        puts "total info: #{total_info}"
-        puts "total warnings: #{total_warnings}"
-        
+        puts "total issues: #{total_issues} (#{total_info} info, #{total_warnings} warnings)"        
 
         #measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
 
@@ -125,12 +121,9 @@ module OpenStudioMeasureTester
 
         #@measure_results[measure_name] = mhash
 
-        #@total_tests += mhash['measure_tests']
-        #@total_assertions += mhash['measure_assertions']
         #@total_errors += mhash['measure_errors']
         #@total_failures += mhash['measure_failures']
-        #@total_skipped += mhash['measure_skipped']
-
+ 
       end
 
       @error_status = true if @total_errors > 0
@@ -141,7 +134,7 @@ module OpenStudioMeasureTester
       # save as a json and have something else parse it/plot it.
 
       @summary['test_directory'] = @path_to_results
-      @summary['tested_files'] = @tested_files
+      @summary['total_files'] = @total_files
       @summary['total_issues'] = @total_issues
       @summary['total_info'] = @total_info
       @summary['total_warnings'] = @total_warnings
