@@ -61,13 +61,6 @@ module OpenStudioMeasureTester
             severity: :error,
             file_type: :measure
         }, {
-            regex: /def name(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def name\' is missing.',
-            type: :syntax,
-            severity: :error,
-            file_type: :measure
-        }, {
             regex: /def description(.*?)end/m,
             check_type: :if_missing,
             message: '\'def description\' is missing.',
@@ -153,6 +146,8 @@ module OpenStudioMeasureTester
           measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
 
           measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
+          measure_hash.merge!(get_attributes_from_measure(measure_dir, measure_hash[:class_name]))
+
           @measure_classname = measure_hash[:class_name]
           # At this point, the measure.rb file is ensured to exist
 
@@ -160,13 +155,15 @@ module OpenStudioMeasureTester
           run_regex_checks(measure_dir)
 
           validate_measure_hash(measure_hash)
+
+          pp measure_hash
         end
       end
 
       return {
           @measure_classname.to_sym => {
-            errors: @measure_messages.size,
-            issues: @measure_messages.clone
+              errors: @measure_messages.size,
+              issues: @measure_messages.clone
           }
       }
     end
@@ -277,10 +274,28 @@ module OpenStudioMeasureTester
 
       validate_name('Measure directory name', measure_hash[:measure_dir].split('/').last, ensure_snakecase: true)
 
-      log_message('Could not find measure description in measure.', :structure, :warning) unless measure_hash[:description]
-      log_message('Could not find modeler description in measure.', :structure, :warning) unless measure_hash[:modeler_description]
+      log_message('Could not find measure description in XML.', :structure, :warning) if measure_hash[:description].empty?
+      log_message('Could not find modeler description in XML.', :structure, :warning) unless measure_hash[:modeler_description]
       log_message('Could not find display_name in measure.', :structure, :warning) unless measure_hash[:display_name]
       log_message('Could not find measure name in measure.', :structure, :warning) unless measure_hash[:name]
+
+      if measure_hash[:values_from_file][:name].empty?
+        log_message('Could not find "def name" in measure.rb', :structure, :error)
+      elsif measure_hash[:name] != measure_hash[:values_from_file][:name]
+        log_message('Name in measure.rb differs from name in XML', :structure, :error)
+      end
+
+      if measure_hash[:values_from_file][:description].empty?
+        log_message('Could not find "def description" in measure.rb', :structure, :error)
+      elsif measure_hash[:description] != measure_hash[:values_from_file][:description]
+        log_message('Description in measure.rb differs from description in XML', :structure, :error)
+      end
+
+      if measure_hash[:values_from_file][:description].empty?
+        log_message('Could not find "def modeler_description" in measure.rb', :structure, :error) if measure_hash[:values_from_file][:description].empty?
+      elsif measure_hash[:description] != measure_hash[:values_from_file][:description]
+        log_message('Modeler description in measure.rb differs from modeler description in XML', :structure, :error)
+      end
 
       measure_hash[:arguments].each do |arg|
         validate_name('Argument display name', arg[:display_name])
@@ -295,6 +310,31 @@ module OpenStudioMeasureTester
         #     :default_value => 90.0
         # }
       end
+    end
+
+    def get_attributes_from_measure(measure_dir, class_name)
+      result = {
+          values_from_file: {
+              name: '',
+              description: '',
+              modeler_description: ''
+          }
+      }
+
+      begin
+        # file exists because the init checks for its existence
+        require "#{measure_dir}/measure.rb"
+        measure = Object.const_get(class_name).new
+      rescue LoadError => e
+        log_message("Could not load measure into memory with error #{e.message}", :initialize, :error)
+        return result
+      end
+
+      result[:values_from_file][:name] = measure.name
+      result[:values_from_file][:description] = measure.description
+      result[:values_from_file][:modeler_description] = measure.modeler_description
+
+      result
     end
 
     ###################################################################################################################

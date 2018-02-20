@@ -1,0 +1,59 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>model_measure_name</name>
+  <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
+  <version_id>cd7f99d8-daf5-401a-8797-141729d027cd</version_id>
+  <version_modified>20180220T213043Z</version_modified>
+  <xml_checksum>94317D34</xml_checksum>
+  <class_name>ModelMeasureName</class_name>
+  <display_name>model_measure_name</display_name>
+  <description>DESCRIPTION TEXT</description>
+  <modeler_description>MODELER DESCRIPTION TEXT</modeler_description>
+  <arguments>
+    <argument>
+      <name>space_name</name>
+      <display_name>New space name</display_name>
+      <description>This name will be used as the name of the new space.</description>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+  </arguments>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>People.Characteristics</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>53D14E69</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.4.1</identifier>
+        <min_compatible>2.4.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>6CF77534</checksum>
+    </file>
+    <file>
+      <filename>model_measure_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6A4B5A69</checksum>
+    </file>
+  </files>
+</measure>

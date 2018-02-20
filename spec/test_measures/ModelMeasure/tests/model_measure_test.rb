@@ -1,5 +1,5 @@
 require 'openstudio'
-require 'openstudio/ruleset/ShowRunnerOutput'
+require 'openstudio/measure/ShowRunnerOutput'
 require 'minitest/autorun'
 require_relative '../measure.rb'
 require 'fileutils'
@@ -10,7 +10,7 @@ rescue LoadError
   puts "OpenStudio Measure Tester Gem not installed -- will not be able to aggregate and dashboard the results of tests"
 end
 
-class Pristine_Test < MiniTest::Test
+class ModelMeasureName_Test < Minitest::Test
 
   # def setup
   # end
@@ -20,7 +20,7 @@ class Pristine_Test < MiniTest::Test
 
   def test_number_of_arguments_and_argument_names
     # create an instance of the measure
-    measure = Pristine.new
+    measure = ModelMeasureName.new
 
     # make an empty model
     model = OpenStudio::Model::Model.new
@@ -33,7 +33,7 @@ class Pristine_Test < MiniTest::Test
 
   def test_bad_argument_values
     # create an instance of the measure
-    measure = Pristine.new
+    measure = ModelMeasureName.new
 
     # create runner with empty OSW
     osw = OpenStudio::WorkflowJSON.new
@@ -72,7 +72,7 @@ class Pristine_Test < MiniTest::Test
 
   def test_good_argument_values
     # create an instance of the measure
-    measure = Pristine.new
+    measure = ModelMeasureName.new
 
     # create runner with empty OSW
     osw = OpenStudio::WorkflowJSON.new
@@ -80,7 +80,7 @@ class Pristine_Test < MiniTest::Test
 
     # load the test model
     translator = OpenStudio::OSVersion::VersionTranslator.new
-    path = File.dirname(__FILE__) + "/example_model.osm"
+    path = OpenStudio::Path.new(File.dirname(__FILE__) + "/example_model.osm")
     model = translator.loadModel(path)
     assert((not model.empty?))
     model = model.get
@@ -123,7 +123,7 @@ class Pristine_Test < MiniTest::Test
     assert_equal(1, model.getSpaces.size - num_spaces_seed)
 
     # save the model to test output directory
-    output_file_path = File.dirname(__FILE__) + "/output/test_output.osm"
+    output_file_path = OpenStudio::Path.new(File.dirname(__FILE__) + "/output/test_output.osm")
     model.save(output_file_path,true)
   end
 

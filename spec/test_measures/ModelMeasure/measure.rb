@@ -2,21 +2,21 @@
 # http://nrel.github.io/OpenStudio-user-documentation/reference/measure_writing_guide/
 
 # start the measure
-class Pristine < OpenStudio::Measure::ModelMeasure
+class ModelMeasureName < OpenStudio::Measure::ModelMeasure
 
   # human readable name
   def name
-    return "Pristine"
+    return "model_measure_name"
   end
 
   # human readable description
   def description
-    return "This measure should pass all tests"
+    return "DESCRIPTION TEXT"
   end
 
   # human readable description of modeling approach
   def modeler_description
-    return "This measure should pass all tests"
+    return "MODELER DESCRIPTION TEXT"
   end
 
   # define the arguments that the user will input
@@ -71,4 +71,4 @@ class Pristine < OpenStudio::Measure::ModelMeasure
 end
 
 # register the measure to be used by the application
-Pristine.new.registerWithApplication
+ModelMeasureName.new.registerWithApplication

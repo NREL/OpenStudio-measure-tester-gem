@@ -20,7 +20,7 @@
       "type": "syntax",
       "severity": "error"
     },
-    {
+    {w
       "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
       "type": "syntax",
       "severity": "error"
