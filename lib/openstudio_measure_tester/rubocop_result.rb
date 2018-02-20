@@ -30,22 +30,24 @@ module OpenStudioMeasureTester
   class RubocopResult
     attr_reader :error_status
 
-    attr_reader :total_assertions
+    attr_reader :total_issues
     attr_reader :total_errors
-    attr_reader :total_failures
-    attr_reader :total_skipped
-    attr_reader :total_tests
-    attr_reader :measure_results
+    attr_reader :total_info
+    attr_reader :total_warnings
+    attr_reader :total_files
+    attr_reader :tested_files
+    attr_reader :file_issues
     attr_reader :summary
 
     def initialize(path_to_results)
       @path_to_results = path_to_results
       @error_status = false
-      @total_tests = 0
-      @total_assertions = 0
+      @total_issues = 0
+      @tested_files = 0
       @total_errors = 0
-      @total_failures = 0
-      @total_skipped = 0
+      @total_warnings = 0
+      @total_info = 0
+      @file_issues = 0
 
       @measure_results = {}
       @summary = {}
@@ -61,8 +63,54 @@ module OpenStudioMeasureTester
         puts "Parsing Rubocop report #{file}"
         hash = Hash.from_xml(File.read(file))
 
-        pp hash
+        files = ""
+        total_files = hash['checkstyle']['file'].length
+        total_issues = 0
+        total_info = 0
+        total_warnings = 0
+        file_issues = 0
+
         @summary = hash
+
+        hash['checkstyle']['file'].each do |key,value|
+            file = key['name']
+            files += file + "\n"
+
+            if key['error']
+
+              if key['error'].class == Array
+                file_issues = key['error'].length
+                key['error'].each do |s|
+                  if s['severity'] === "info"
+                    total_info += 1
+                  elsif s['severity'] === "warning"
+                    total_warnings += 1
+                  end
+                end
+              end
+
+              if key['error'].class == Hash
+                puts "iuyiuyiuiuy #{key['error']['severity']}"
+                file_issues = 1
+                if key['error']['severity'] === "info"
+                  total_info += 1
+                elsif key['error']['severity'] === "warning"
+                  total_warnings += 1
+                end
+              end
+                
+              total_issues += file_issues
+
+            end
+
+        end
+
+        puts "tested files (#{total_files}):\n#{files}"
+        puts "total files: #{total_files}"
+        puts "total issues: #{total_issues}"
+        puts "total info: #{total_info}"
+        puts "total warnings: #{total_warnings}"
+        
 
         #measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
 
@@ -87,28 +135,23 @@ module OpenStudioMeasureTester
 
       @error_status = true if @total_errors > 0
 
-      #pp measure_results
-
     end
 
     def to_file
       # save as a json and have something else parse it/plot it.
 
-      #@summary['test_directory'] = @path_to_results
-      #@summary['total_tests'] = @total_tests
-      #@summary['total_assertions'] = @total_assertions
-      #@summary['total_errors'] = @total_errors
-      #@summary['total_failures'] = @total_failures
-      #@summary['total_skipped'] = @total_skipped
-      #@summary['by_measure'] = @measure_results
-
+      @summary['test_directory'] = @path_to_results
+      @summary['tested_files'] = @tested_files
+      @summary['total_issues'] = @total_issues
+      @summary['total_info'] = @total_info
+      @summary['total_warnings'] = @total_warnings
       
-      #pp @summary
-
       FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
         file << JSON.pretty_generate(@summary)
+      
       end
+
     end
   end
 end
