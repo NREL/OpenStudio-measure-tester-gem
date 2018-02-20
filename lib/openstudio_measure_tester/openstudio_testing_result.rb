@@ -65,9 +65,14 @@ module OpenStudioMeasureTester
         end
 
         # minitest
-        if Dir.exist? "#{@results_dir}/test"
+        if Dir.exist?("#{@results_dir}/test/html_reports") || Dir.exist?("#{@results_dir}/test/reports")
           FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
-          FileUtils.mv "#{@results_dir}/test", "#{@test_results_dir}/minitest"
+          FileUtils.mkdir_p "#{@test_results_dir}/minitest"
+          FileUtils.mv "#{@results_dir}/test/html_reports", "#{@test_results_dir}/minitest/html_reports"
+          FileUtils.mv "#{@results_dir}/test/reports", "#{@test_results_dir}/minitest/reports"
+
+          # Delete the test folder if it is empty
+          FileUtils.rm_rf "#{@results_dir}/test" if Dir.entries("#{@results_dir}/test").size == 2
 
           # Load in the data into the minitest object
           mr = OpenStudioMeasureTester::MinitestResult.new("#{@test_results_dir}/minitest")

@@ -56,7 +56,12 @@ module OpenStudioMeasureTester
       puts "Test results will be stored in: #{test_results_dir}"
 
       FileUtils.rm_rf "#{test_results_dir}/coverage" if Dir.exist? "#{test_results_dir}/coverage"
-      FileUtils.rm_rf "#{test_results_dir}/test" if Dir.exist? "#{test_results_dir}/test"
+      FileUtils.rm_rf "#{test_results_dir}/test/html_reports" if Dir.exist? "#{test_results_dir}/test/html_reports"
+      FileUtils.rm_rf "#{test_results_dir}/test/reports" if Dir.exist? "#{test_results_dir}/test/reports"
+      # remove the test directory if it is empty (size == 2 for . and ..)
+      if Dir.exist?("#{test_results_dir}/test") && Dir.entries("#{test_results_dir}/test").size == 2
+        FileUtils.rm_rf "#{test_results_dir}/test"
+      end
       FileUtils.rm_rf "#{test_results_dir}/minitest" if Dir.exist? "#{test_results_dir}/minitest"
       FileUtils.rm_rf "#{base_dir}/coverage" if Dir.exist? "#{base_dir}/coverage"
       FileUtils.rm_rf "#{base_dir}/test" if Dir.exist? "#{base_dir}/test"
