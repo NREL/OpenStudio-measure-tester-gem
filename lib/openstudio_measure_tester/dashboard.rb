@@ -24,8 +24,8 @@ module OpenStudioMeasureTester
       # copy over all the resource files to display the website correctly.
       resource_path = File.expand_path('../../dashboard', File.dirname(__FILE__))
       # KAF: for some reason, not overwriting the files.  delete them from destination first
-      FileUtils.remove_dir("#{save_dir}/css")
-      FileUtils.remove_dir("#{save_dir}/js")
+      FileUtils.remove_dir("#{save_dir}/css") if Dir.exist?"#{save_dir}/css"
+      FileUtils.remove_dir("#{save_dir}/js") if Dir.exist? "#{save_dir}/js"
       FileUtils.cp_r("#{resource_path}/css", "#{save_dir}/css", :remove_destination => true )
       FileUtils.cp_r("#{resource_path}/js", "#{save_dir}/js", :remove_destination => true )
 

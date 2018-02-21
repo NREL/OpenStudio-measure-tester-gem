@@ -87,7 +87,7 @@ module OpenStudioMeasureTester
           # need to create parser here!
           # trying!!! &^&%##%@((@*&()))!!
           rc = OpenStudioMeasureTester::RubocopResult.new("#{@test_results_dir}/rubocop")
-          #@results['rubocop'] = rc.summary
+          @results['rubocop'] = rc.summary
 
         end
 

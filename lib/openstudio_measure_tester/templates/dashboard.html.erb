@@ -87,11 +87,15 @@
               </div>
             </div>
             <div class="col-sm">
-              <div class="card">
+              <div class="card donut">
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">RuboCop</h5>
                     <% if @hash['rubocop'] %>
+                        <div class="canvas-container">
+                          <canvas id="rubocop"></canvas>
+                          <span id="ruboTotal" class="status adjust-pos">issues</span>
+                        </div>
                     <% else %>
                       <div class="row pt-5">
                         <div class="col-sm-6 offset-sm-3 badge-height badge badge-warning badge-text"><i data-feather="alert-triangle" class="size48"></i><br><span class="pt-2">No Data</span> </div>
@@ -299,11 +303,14 @@
 
 
       function redraw(animation){
-        var data =  <%= @data %>;
+        var data = <%= @data %>;
         console.log('DATA: ', data);
         var covData = data['coverage'];
+        var ruboData = data['rubocop'];
         // set % coverage
         document.getElementById("covPercent").innerHTML = covData['total_percent_coverage'] + '%';
+        // set total rubocop issues
+          document.getElementById("ruboTotal").innerHTML = ruboData['total_issues'] + '<br/> issues';
 
         var options = {animation:{}};
         if (!animation){
@@ -311,11 +318,11 @@
         } else {
           options.animation.animateRotate = true;
         }
-        var data = {
+        var dataCov = {
           datasets:[{
             data: [
             covData['total_covered_lines'],
-            covData['total_missed_lines'],
+            covData['total_missed_lines']
             ],
             backgroundColor: [
             "#50AE54",
@@ -328,10 +335,32 @@
           ]
         };
 
-        var config = {type: 'doughnut', data: data, options: options};
+        var dataRubocop =  {
+            datasets:[{
+                data: [
+                    ruboData['total_info'],
+                    ruboData['total_warnings']
+                ],
+                backgroundColor: [
+                    "#25A2B7",
+                    "#FDC02F"
+                ]
+            }],
+            labels: [
+                "info",
+                "warnings"
+            ]
+        };
+
+        var config = {type: 'doughnut', data: dataCov, options: options};
         var canvas = document.getElementById("cov");
         var ctx = canvas.getContext("2d");
         var doughnut = new Chart(ctx, config);
+
+        var config2 = {type: 'doughnut', data: dataRubocop, options: options};
+          var canvas2 = document.getElementById("rubocop");
+          var ctx2 = canvas2.getContext("2d");
+          var doughnut2 = new Chart(ctx2, config2);
       }
       size(true);
 
