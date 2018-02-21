@@ -150,7 +150,7 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
-        Rake::TestTask.new(:test_core) do |task|
+        Rake::TestTask.new(:test_core_command) do |task|
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
@@ -158,6 +158,16 @@ module OpenStudioMeasureTester
             "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
+        end
+
+        task :test_core do
+          begin
+            Rake.application['openstudio:test_core_command'].invoke
+          rescue
+            puts "Test failures in openstudio:test. Will continue to post-processing."
+          ensure
+            Rake.application['openstudio:test_core_command'].reenable
+          end
         end
 
         # The .rubocop.yml file downloads the RuboCop rules from the OpenStudio-resources repo.
@@ -202,7 +212,7 @@ module OpenStudioMeasureTester
 
         # Hide the core tasks from being displayed when calling rake -T
         Rake::Task['openstudio:rubocop_core'].clear_comments
-        Rake::Task['openstudio:test_core'].clear_comments
+        Rake::Task['openstudio:test_core_command'].clear_comments
         Rake::Task['openstudio:rubocop_core:auto_correct'].clear_comments
       end
     end
