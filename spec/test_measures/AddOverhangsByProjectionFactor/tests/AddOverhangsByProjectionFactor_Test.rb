@@ -196,7 +196,7 @@ class AddOverhangsByProjectionFactor_Test < MiniTest::Unit::TestCase
   end
 
   def test_failure
-    raise 'This will be a failure'
+    raise 'This will be an error'
   end
 
 end
