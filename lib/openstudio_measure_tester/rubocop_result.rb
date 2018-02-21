@@ -37,17 +37,20 @@ module OpenStudioMeasureTester
     attr_reader :total_files
     attr_reader :tested_files
     attr_reader :file_issues
+    attr_reader :file_info
+    attr_reader :file_warnings
+    attr_reader :file_errors
     attr_reader :summary
 
     def initialize(path_to_results)
+
       @path_to_results = path_to_results
       @error_status = false
-      @total_issues = 0
       @tested_files = 0
+      @total_issues = 0
       @total_errors = 0
       @total_warnings = 0
       @total_info = 0
-      @file_issues = 0
 
       @measure_results = {}
       @summary = {}
@@ -65,26 +68,30 @@ module OpenStudioMeasureTester
 
         files = ""
         @total_files = hash['checkstyle']['file'].length
-        @total_issues = 0
-        @total_info = 0
-        @total_warnings = 0
-        @file_issues = 0
 
         @summary = hash
 
         hash['checkstyle']['file'].each do |key,value|
             file = key['name']
+            measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
             files += file + "\n"
 
             if key['error']
+
+              @file_issues = 0
+              @file_info = 0
+              @file_warnings = 0
+              @file_errors = 0
 
               if key['error'].class == Array
                 @file_issues = key['error'].length
                 key['error'].each do |s|
                   if s['severity'] === "info"
-                    @total_info += 1
+                    @file_info += 1
                   elsif s['severity'] === "warning"
-                    @total_warnings += 1
+                    @file_warnings += 1
+                  elsif s['severity'] === "error" #is this even correct?? 
+                    @file_errors += 1
                   end
                 end
               end
@@ -92,40 +99,39 @@ module OpenStudioMeasureTester
               if key['error'].class == Hash
                 @file_issues = 1
                 if key['error']['severity'] === "info"
-                  @total_info += 1
+                  @file_info += 1
                 elsif key['error']['severity'] === "warning"
-                  @total_warnings += 1
+                  @file_warnings += 1
+                elsif key['error']['severity'] === "error"
+                  @file_errors += 1
                 end
+
               end
+              
+              mhash = {}
+
+              mhash['tested_class'] = measure_name
+              mhash['measure_issues'] = @file_issues
+              mhash['measure_info'] = @file_info
+              mhash['measure_warnings'] = @file_warnings              
+              mhash['measure_errors'] = @file_errors
+              @measure_results[measure_name] = mhash
 
               @total_issues += @file_issues
-
+              @total_info += @file_info
+              @total_warnings += @file_warnings 
+              @total_errors += @file_errors
+            
             end
 
         end
 
-        puts "tested files (#{total_files}):\n#{files}"
-        puts "total files: #{total_files}"
-        puts "total issues: #{total_issues} (#{total_info} info, #{total_warnings} warnings)"        
-
-        #measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
-
-        #mhash = {}
-
-        #mhash['tested_class'] = measure_name
-        #mhash['measure_tests'] = hash['testsuite']['tests'].to_i
-        #mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
-        #mhash['measure_errors'] = hash['testsuite']['errors'].to_i
-        #mhash['measure_failures'] = hash['testsuite']['failures'].to_i
-        #mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
-
-        #@measure_results[measure_name] = mhash
-
-        #@total_errors += mhash['measure_errors']
-        #@total_failures += mhash['measure_failures']
- 
       end
 
+      puts "total files: #{total_files}"
+      puts "total issues: #{@total_issues} (#{@total_info} info, #{@total_warnings} warnings, #{@total_errors} errors)"
+
+      # TODO: still need to get errors ID'd
       @error_status = true if @total_errors > 0
 
     end
@@ -138,6 +144,7 @@ module OpenStudioMeasureTester
       @summary['total_issues'] = @total_issues
       @summary['total_info'] = @total_info
       @summary['total_warnings'] = @total_warnings
+      @summary['total_errors'] = @total_errors
       
       FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
