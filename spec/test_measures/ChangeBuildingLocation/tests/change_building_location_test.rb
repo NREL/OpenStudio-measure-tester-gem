@@ -1,7 +1,7 @@
 require 'openstudio'
 require 'openstudio/ruleset/ShowRunnerOutput'
 
-require 'openstudio_measure_tester/test_helper.rb'
+require 'openstudio_measure_tester/test_helper'
 
 require 'minitest/autorun'
 

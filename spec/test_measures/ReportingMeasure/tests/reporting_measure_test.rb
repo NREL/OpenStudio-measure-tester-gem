@@ -1,16 +1,16 @@
 require 'openstudio'
 require 'openstudio/measure/ShowRunnerOutput'
-require 'minitest/autorun'
-
-require_relative '../measure.rb'
-
 require 'fileutils'
 
 begin
-  require 'openstudio_measure_tester/test_helper.rb'
+  # Need to load the test_helper before loading the measure.rb file to get coverage
+  require 'openstudio_measure_tester/test_helper'
 rescue LoadError
   puts "OpenStudio Measure Tester Gem not installed -- will not be able to aggregate and dashboard the results of tests"
 end
+
+require_relative '../measure.rb'
+require 'minitest/autorun'
 
 class ReportingMeasureName_Test < Minitest::Test
 

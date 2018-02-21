@@ -1,8 +1,8 @@
 require 'openstudio'
 require 'openstudio/ruleset/ShowRunnerOutput'
-require 'openstudio_measure_tester/test_helper.rb'
 
-require "#{File.dirname(__FILE__)}/../measure.rb"
+require "#{File.dirname(__FILE__)}/../measure"
+require 'openstudio_measure_tester/test_helper'
 
 require 'minitest/autorun'
 

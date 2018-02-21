@@ -19,9 +19,11 @@
 
 require 'openstudio'
 require 'openstudio/ruleset/ShowRunnerOutput'
-require 'openstudio_measure_tester/test_helper.rb'
 
-require "#{File.dirname(__FILE__)}/../measure.rb"
+# Need to load the test_helper before loading the measure.rb file to get coverage
+require 'openstudio_measure_tester/test_helper'
+
+require_relative '../measure.rb'
 
 require 'minitest/autorun'
 

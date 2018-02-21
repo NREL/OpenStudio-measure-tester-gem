@@ -54,12 +54,17 @@ module OpenStudioMeasureTester
       file = "#{@path_to_results}/.resultset.json"
 
       puts 'Parsing coverage results'
-      jsonData = File.read(file)
-      hash = JSON.parse(jsonData);
+      json_data = File.read(file)
+      hash = JSON.parse(json_data)
 
-      #pp hash
+      # pp hash
 
-      hash['RSpec']['coverage'].each do |key, data|
+      # Sometimes the coverage is RSpec, sometimes MiniTest. Depends if running
+      # tests in this Gem, or using this gem where MiniTest is already loaded.
+      k, coverage_results = hash.first
+      puts "Coverage results are of type #{k}"
+
+      coverage_results['coverage'].each do |key, data|
         pp key
         # just do measure.rb for now
         parts = key.split('/')
@@ -85,12 +90,16 @@ module OpenStudioMeasureTester
           @total_covered_lines += cov
           @total_missed_lines += data.size - cov
 
-          @measure_coverages[name] =  mhash
+          @measure_coverages[name] = mhash
         end
       end
+
       pp @measure_coverages
       lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
-      @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
+      # lines can be zero if coverage doesn't run correctly
+      if lines != 0
+        @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
+      end
       pp "Total Coverage: #{@total_percent_coverage}"
 
     end

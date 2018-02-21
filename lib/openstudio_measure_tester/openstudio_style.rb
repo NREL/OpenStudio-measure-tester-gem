@@ -75,9 +75,9 @@ module OpenStudioMeasureTester
             severity: :error,
             file_type: :measure
         }, {
-            regex: /require .openstudio_measure_tester\/test_helper\.rb./,
+            regex: /require .openstudio_measure_tester\/test_helper./,
             check_type: :if_missing,
-            message: "Must include 'require 'openstudio_measure_tester/test_helper.rb'' in Test file to report coverage correctly.",
+            message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
             type: :syntax,
             severity: :error,
             file_type: :test
