@@ -187,7 +187,16 @@
                           <% end %>
                       </td>
                       <td></td>
-                      <td><% if @hash['coverage'] %><%= @hash['coverage']['by_measure'][name]['percent_coverage'] %> % <% end %></td>
+                      <td><% if @hash['coverage'] %>
+                        <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
+                            <% label = 'success' %>
+                        <% elsif @hash['coverage']['by_measure'][name]['percent_coverage'] >= 60 %>
+                            <% label = 'warning' %>
+                        <% else %>
+                            <% label = 'danger' %>
+                        <% end %>
+                        <span class="badge badge-<%=label %>"><%= @hash['coverage']['by_measure'][name]['percent_coverage'] %> % </span>
+                      <% end %></td>
                       <td><button type="button" class="btn btn-accent" data-toggle="modal" data-target="#<%= name %>">
                         View Details
                       </button></td>
@@ -216,7 +225,18 @@
                 <div class="row pb-3">
                   <div class="col-sm-6">
                     <h4>Coverage</h4>
-                    <% if @hash['coverage'] %><%= @hash['coverage']['by_measure'][name]['percent_coverage'] %>%<% end %>
+                    <% if @hash['coverage'] %>
+                      <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
+                          <% label = 'success' %>
+                      <% elsif @hash['coverage']['by_measure'][name]['percent_coverage'] >= 60 %>
+                          <% label = 'warning' %>
+                      <% else %>
+                          <% label = 'danger' %>
+                      <% end %>
+                      <span class="badge badge-<%= label %>"><%= @hash['coverage']['by_measure'][name]['percent_coverage'] %>%</span>
+                    <% else %>
+                      <span class="badge badge-danger">NO DATA</span>  Test was not run
+                    <% end %>
                   </div>
                 </div>
 
