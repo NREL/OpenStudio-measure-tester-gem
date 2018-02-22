@@ -73,6 +73,10 @@ module OpenStudioMeasureTester
         mhash['measure_failures'] = hash['testsuite']['failures'].to_i
         mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
 
+        # Note: only 1 failure and 1 error possible per test
+        errors, failures = parse_measure(hash)
+        mhash['issues'] = {errors: errors, failures: failures}
+
         @measure_results[measure_name] = mhash
 
         @total_tests += mhash['measure_tests']
@@ -106,6 +110,35 @@ module OpenStudioMeasureTester
       File.open("#{@path_to_results}/minitest.json", 'w') do |file|
         file << JSON.pretty_generate(summary)
       end
+    end
+
+    private
+
+    def parse_measure(measure)
+
+      errors = []
+      failures = []
+
+      # check if testcase is hash or array
+      if measure['testsuite']
+
+        if measure['testsuite']['testcase'].class == Hash
+          # convert to array
+          measure['testsuite']['testcase'] = [measure['testsuite']['testcase']]
+        end
+        measure['testsuite']['testcase'].each do |test|
+          if test['error']
+            errors << test['error']
+          end
+
+          if test['failure']
+            failures << test['failure']
+          end
+        end
+      end
+
+      return errors, failures
+
     end
   end
 end

@@ -235,6 +235,34 @@
 
                 <div class="row pb-3">
                   <div class="col-sm-12">
+                    <h4>Tests</h4>
+                    <% if @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] && @hash['minitest']['by_measure'][name]['issues'] %>
+                      <% if @hash['minitest']['by_measure'][name]['issues']['failures'].length > 0 || @hash['minitest']['by_measure'][name]['issues']['errors'].length > 0 %>
+                        <table class="table table-striped">
+                          <tr>
+                            <th>Type</th>
+                            <th>Message</th>
+                          </tr>
+                          <% @hash['minitest']['by_measure'][name]['issues']['failures'].each do |failure| %>
+                            <tr>
+                              <td><span class="badge badge-danger">Failure</span></td>
+                              <td><%= failure %></td>
+                            </tr>
+                          <% end %>
+                          <% @hash['minitest']['by_measure'][name]['issues']['errors'].each do |err| %>
+                            <tr>
+                              <td><span class="badge badge-dark">Error</span></td>
+                              <td><%= err %></td>
+                            </tr>
+                          <% end %>
+                        </table>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="row pb-3">
+                  <div class="col-sm-12">
                     <h4>RuboCop</h4>
                     <% if @hash['rubocop'] && @hash['rubocop']['by_measure'] && @hash['rubocop']['by_measure'][name] && @hash['rubocop']['by_measure'][name]['issues'] %>
                       <% @hash['rubocop']['by_measure'][name]['issues'].each do |issue| %>
