@@ -276,13 +276,31 @@
                   <div class="col-sm-12">
                     <h4>OpenStudio Style</h4>
                     <% if @hash['openstudio_style'] && @hash['openstudio_style']['by_measure'] && @hash['openstudio_style']['by_measure'][name] && @hash['openstudio_style']['by_measure'][name]['issues'] %>
-                      <% @hash['openstudio_style']['by_measure'][name]['issues'].each do |issue| %>
-                        <div>
-                          <span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span> (<%= issue['type'] %>) <%= issue['message'] %>
-                        </div>
-                      <% end %>
                       <% if @hash['openstudio_style']['by_measure'][name]['issues'].length == 0 %>
                         <div>No errors</div>
+                      <% else %>
+                        <table class="table table-striped">
+                          <thead>
+                          <tr>
+                            <th>Severity</th>
+                            <th>Type</th>
+                            <th>Message</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <% @hash['openstudio_style']['by_measure'][name]['issues'].each do |issue| %>
+                              <tr>
+                                <td>
+                                  <span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span>
+                                </td>
+                                <td>
+                                  <%= issue['type'] %>
+                                </td>
+                                <td><%= issue['message'] %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
                       <% end %>
                     <% else %>
                       <div>
@@ -298,10 +316,13 @@
                     <% if @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] && @hash['minitest']['by_measure'][name]['issues'] %>
                       <% if @hash['minitest']['by_measure'][name]['issues']['failures'].length > 0 || @hash['minitest']['by_measure'][name]['issues']['errors'].length > 0 %>
                         <table class="table table-striped">
-                          <tr>
-                            <th>Type</th>
-                            <th>Message</th>
-                          </tr>
+                          <thead>
+                            <tr>
+                              <th>Severity</th>
+                              <th>Message</th>
+                            </tr>
+                          </thead>
+                          <tbody>
                           <% @hash['minitest']['by_measure'][name]['issues']['failures'].each do |failure| %>
                             <tr>
                               <td><span class="badge badge-danger">Failure</span></td>
@@ -314,6 +335,7 @@
                               <td><%= err %></td>
                             </tr>
                           <% end %>
+                          </tbody>
                         </table>
                       <% end %>
                     <% end %>
