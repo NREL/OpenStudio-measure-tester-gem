@@ -223,8 +223,7 @@
               </div>
               <div class="modal-body">
                 <div class="row pb-3">
-                  <div class="col-sm-6">
-                    <h4>Coverage</h4>
+                  <div class="col-sm-12">
                     <% if @hash['coverage'] %>
                       <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
                           <% label = 'success' %>
@@ -233,7 +232,40 @@
                       <% else %>
                           <% label = 'danger' %>
                       <% end %>
+                      <h4>Coverage
                       <span class="badge badge-<%= label %>"><%= @hash['coverage']['by_measure'][name]['percent_coverage'] %>%</span>
+                      </h4>
+                    <% else %>
+                      <h4>Coverage</h4>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="row pb-2">
+                  <div class="col-sm-12">
+                    <% if @hash['coverage'] %>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>File</th>
+                            <th>Coverage</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <% @hash['coverage']['by_measure'][name]['files'].each do |file| %>
+                          <% if file['percent_coverage'] >= 80 %>
+                              <% label = 'success' %>
+                          <% elsif file['percent_coverage'] >= 60 %>
+                              <% label = 'warning' %>
+                          <% else %>
+                              <% label = 'danger' %>
+                          <% end %>
+                          <tr>
+                            <td><%= file['name'] %></td>
+                            <td><span class="badge badge-<%= label %>"><%= file['percent_coverage'] %>%</span></td>
+                          </tr>
+                        <% end %>
+                        </tbody>
+                      </table>
                     <% else %>
                       <span class="badge badge-danger">NO DATA</span>  Test was not run
                     <% end %>

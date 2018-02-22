@@ -64,34 +64,63 @@ module OpenStudioMeasureTester
       k, coverage_results = hash.first
       puts "Coverage results are of type #{k}"
 
+      # find all measure names
+      measure_names = []
       coverage_results['coverage'].each do |key, data|
-        pp key
-        # just do measure.rb for now
         parts = key.split('/')
         if parts.last == 'measure.rb'
           name = parts[-2]
-          # ensure UpperCamelCase
-          name = name.camelize
           pp name
+          measure_names << name
+        end
+      end
 
-          mhash = {}
-          mhash['name'] = name
-          mhash['total_lines'] = data.size
-          @total_lines += data.size
+      measure_names.each do |measure_name|
+        results = coverage_results['coverage'].select {|key, data| key.include? measure_name }
+
+        pp "RESULTS for #{measure_name}:  #{results.inspect}"
+
+        mhash = {}
+        mhash['total_lines'] = 0
+        mhash['relevant_lines'] = 0
+        mhash['missed_lines'] = 0
+        mhash['covered_lines'] = 0
+        mhash['percent_coverage'] = 0
+        mhash['files'] = []
+
+        pp mhash
+        results.each do |key, data|
+          fhash = {}
+          fhash['name'] = key.partition(measure_name + '/').last
+          fhash['total_lines'] = data.size
+
+          mhash['total_lines'] += fhash['total_lines']
           # remove nils from array
           data.delete(nil)
 
           cov = data.count {|x| x > 0}
-          mhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
-          mhash['missed_lines'] = data.size - cov
-          mhash['relevant_lines'] = data.size
-          mhash['covered_lines'] = cov
-          @total_relevant_lines += data.size
-          @total_covered_lines += cov
-          @total_missed_lines += data.size - cov
+          fhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
+          fhash['missed_lines'] = data.size - cov
+          fhash['relevant_lines'] = data.size
+          fhash['covered_lines'] = cov
 
-          @measure_coverages[name] = mhash
+          # measure-level totals
+          mhash['relevant_lines'] += fhash['relevant_lines']
+          mhash['covered_lines'] += fhash['covered_lines']
+          mhash['missed_lines'] += fhash['missed_lines']
+
+          mhash['files'] << fhash
+
         end
+        mhash['percent_coverage'] = (mhash['covered_lines'].to_f / mhash['relevant_lines'].to_f * 100).round(2)
+        # ensure UpperCamelCase
+        measure_name = measure_name.camelize
+        @measure_coverages[measure_name] = mhash
+        @total_lines += mhash['total_lines']
+        @total_relevant_lines += mhash['relevant_lines']
+        @total_covered_lines += mhash['covered_lines']
+        @total_missed_lines += mhash['missed_lines']
+
       end
 
       pp @measure_coverages
