@@ -337,7 +337,13 @@
                           <% end %>
                           </tbody>
                         </table>
+                      <% else %>
+                          <div> <span class="badge badge-success">All passed</span></div>
                       <% end %>
+                    <% else %>
+                      <div>
+                        <span class="badge badge-danger">NO DATA</span>  Test was not run
+                      </div>
                     <% end %>
                   </div>
                 </div>
