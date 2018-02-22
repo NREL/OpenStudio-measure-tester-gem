@@ -129,11 +129,16 @@ body {
 
 }
 
-
-.badge-height {
+.badge-lg-height {
   min-height: 80px;
   padding-top:15%;
   padding-bottom:15%;
+}
+
+.badge-med-height {
+  min-height: 40px;
+  padding-top:5%;
+  padding-bottom:5%;
 }
 
 .badge-text {
@@ -147,6 +152,10 @@ body {
 
 .large-text {
   font-size: 5em;
+}
+
+.med-text {
+  font-size: 3em;
 }
 
 .small-text {
