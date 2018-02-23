@@ -30,30 +30,34 @@ module OpenStudioMeasureTester
   class RubocopResult
     attr_reader :error_status
 
-    attr_reader :total_issues
-    attr_reader :total_errors
-    attr_reader :total_info
-    attr_reader :total_warnings
-    attr_reader :total_files
-    attr_reader :tested_files
     attr_reader :file_issues
     attr_reader :file_info
     attr_reader :file_warnings
     attr_reader :file_errors
+
+    attr_reader :total_measures
+    attr_reader :total_files
+
+    attr_reader :total_issues
+    attr_reader :total_info
+    attr_reader :total_warnings
+    attr_reader :total_errors
+
     attr_reader :summary
+    attr_reader :by_measure
 
     def initialize(path_to_results)
 
       @path_to_results = path_to_results
       @error_status = false
-      @tested_files = 0
+      @total_files = 0
       @total_issues = 0
       @total_errors = 0
       @total_warnings = 0
       @total_info = 0
+      @total_measures = 0
 
-      @measure_results = {}
-      @summary = {}
+      @by_measure = {}
 
       parse_results
       to_file
@@ -66,15 +70,37 @@ module OpenStudioMeasureTester
         puts "Parsing Rubocop report #{file}"
         hash = Hash.from_xml(File.read(file))
 
-        files = ""
+        # get measure names
+        measure_names = []
+        hash['checkstyle']['file'].each do |key, data|
+            parts = key['name'].split('/')
+            if parts.last == 'measure.rb'
+             name = parts[-2]
+             measure_names << name
+            end
+        end
+
+        @total_measures = measure_names.length
         @total_files = hash['checkstyle']['file'].length
 
-        @summary = hash
+        puts "total files: #{@total_files}"
+        puts "total measures: #{@total_measures}"
 
-        hash['checkstyle']['file'].each do |key,value|
-            file = key['name']
-            measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
-            files += file + "\n"
+        measure_names.each do |measure_name|
+
+          results = hash['checkstyle']['file'].select {|data| data['name'].include? measure_name }
+
+          mhash = {}
+          mhash['measure_name'] = measure_name
+          mhash['measure_issues'] = 0
+          mhash['measure_info'] = 0
+          mhash['measure_warnings'] = 0              
+          mhash['measure_errors'] = 0
+          mhash['files'] = []
+
+          results.each do |key, data|
+            fhash = {}
+            fhash['file_name'] = key['name'].split('/')[-1]
 
             if key['error']
 
@@ -90,7 +116,7 @@ module OpenStudioMeasureTester
                     @file_info += 1
                   elsif s['severity'] === "warning"
                     @file_warnings += 1
-                  elsif s['severity'] === "error" #is this even correct?? 
+                  elsif s['severity'] === "error" #TODO: look up complete list of codes 
                     @file_errors += 1
                   end
                 end
@@ -105,24 +131,30 @@ module OpenStudioMeasureTester
                 elsif key['error']['severity'] === "error"
                   @file_errors += 1
                 end
-
               end
               
-              mhash = {}
-
-              mhash['tested_class'] = measure_name
-              mhash['measure_issues'] = @file_issues
-              mhash['measure_info'] = @file_info
-              mhash['measure_warnings'] = @file_warnings              
-              mhash['measure_errors'] = @file_errors
-              @measure_results[measure_name] = mhash
+              fhash['issues'] = @file_issues
+              fhash['info'] = @file_info
+              fhash['warning'] = @file_warnings
+              fhash['error'] = @file_errors
+              
+              mhash['measure_issues'] += @file_issues
+              mhash['measure_info'] += @file_info
+              mhash['measure_warnings'] += @file_warnings
+              mhash['measure_errors'] += @file_errors
 
               @total_issues += @file_issues
               @total_info += @file_info
               @total_warnings += @file_warnings 
               @total_errors += @file_errors
-            
+              
             end
+            mhash['files'] << fhash
+            puts mhash
+          end
+
+        #@summary << mhash
+        @by_measure[measure_name] = mhash
 
         end
 
@@ -136,19 +168,25 @@ module OpenStudioMeasureTester
 
     end
 
+    def to_hash
+      results = {};
+      results['total_measures'] = @total_measures
+      results['total_files'] = @total_files
+      results['total_issues'] = @total_issues
+      results['total_warnings'] = @total_warnings
+      results['total_errors'] = @total_errors
+      results['by_measure'] = @by_measure
+      #pp results
+
+      results
+    end
+
     def to_file
       # save as a json and have something else parse it/plot it.
-
-      @summary['test_directory'] = @path_to_results
-      @summary['total_files'] = @total_files
-      @summary['total_issues'] = @total_issues
-      @summary['total_info'] = @total_info
-      @summary['total_warnings'] = @total_warnings
-      @summary['total_errors'] = @total_errors
-      
+      res_hash = to_hash
       FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
-        file << JSON.pretty_generate(@summary)
+        file << JSON.pretty_generate(res_hash)
       
       end
 
