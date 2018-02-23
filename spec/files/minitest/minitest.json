@@ -12,7 +12,15 @@
       "measure_assertions": 10,
       "measure_errors": 0,
       "measure_failures": 0,
-      "measure_skipped": 0
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
     },
     "RotateBuilding": {
       "tested_class": "RotateBuilding",
@@ -20,7 +28,15 @@
       "measure_assertions": 10,
       "measure_errors": 0,
       "measure_failures": 0,
-      "measure_skipped": 0
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
     },
     "SetGasBurnerEfficiency": {
       "tested_class": "SetGasBurnerEfficiency",
@@ -28,7 +44,15 @@
       "measure_assertions": 46,
       "measure_errors": 0,
       "measure_failures": 0,
-      "measure_skipped": 0
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
     }
   }
 }

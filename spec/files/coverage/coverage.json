@@ -1,33 +1,76 @@
 {
-  "total_percent_coverage": 83.69,
-  "total_lines": 468,
-  "total_relevant_lines": 233,
-  "total_covered_lines": 195,
+  "total_percent_coverage": 90.87,
+  "total_lines": 780,
+  "total_relevant_lines": 416,
+  "total_covered_lines": 378,
   "total_missed_lines": 38,
   "by_measure": {
     "RotateBuilding": {
-      "name": "RotateBuilding",
       "total_lines": 80,
-      "percent_coverage": 91.67,
-      "missed_lines": 3,
       "relevant_lines": 36,
-      "covered_lines": 33
+      "missed_lines": 3,
+      "covered_lines": 33,
+      "percent_coverage": 91.67,
+      "files": [
+        {
+          "name": "measure.rb",
+          "total_lines": 80,
+          "percent_coverage": 91.67,
+          "missed_lines": 3,
+          "relevant_lines": 36,
+          "covered_lines": 33
+        }
+      ]
     },
     "SetGasBurnerEfficiency": {
-      "name": "SetGasBurnerEfficiency",
-      "total_lines": 314,
-      "percent_coverage": 81.55,
+      "total_lines": 501,
+      "relevant_lines": 292,
       "missed_lines": 31,
-      "relevant_lines": 168,
-      "covered_lines": 137
+      "covered_lines": 261,
+      "percent_coverage": 89.38,
+      "files": [
+        {
+          "name": "tests/SetGasBurnerEfficiency_Test.rb",
+          "total_lines": 187,
+          "percent_coverage": 100.0,
+          "missed_lines": 0,
+          "relevant_lines": 124,
+          "covered_lines": 124
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 314,
+          "percent_coverage": 81.55,
+          "missed_lines": 31,
+          "relevant_lines": 168,
+          "covered_lines": 137
+        }
+      ]
     },
     "Pristine": {
-      "name": "Pristine",
-      "total_lines": 74,
-      "percent_coverage": 86.21,
+      "total_lines": 199,
+      "relevant_lines": 88,
       "missed_lines": 4,
-      "relevant_lines": 29,
-      "covered_lines": 25
+      "covered_lines": 84,
+      "percent_coverage": 95.45,
+      "files": [
+        {
+          "name": "tests/pristine_test.rb",
+          "total_lines": 125,
+          "percent_coverage": 100.0,
+          "missed_lines": 0,
+          "relevant_lines": 59,
+          "covered_lines": 59
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 74,
+          "percent_coverage": 86.21,
+          "missed_lines": 4,
+          "relevant_lines": 29,
+          "covered_lines": 25
+        }
+      ]
     }
   }
 }
