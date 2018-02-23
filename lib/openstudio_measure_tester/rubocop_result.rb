@@ -57,6 +57,8 @@ module OpenStudioMeasureTester
       @total_info = 0
       @total_measures = 0
 
+      @summary = {}
+
       @by_measure = {}
 
       parse_results
@@ -82,9 +84,6 @@ module OpenStudioMeasureTester
 
         @total_measures = measure_names.length
         @total_files = hash['checkstyle']['file'].length
-
-        puts "total files: #{@total_files}"
-        puts "total measures: #{@total_measures}"
 
         measure_names.each do |measure_name|
 
@@ -149,8 +148,9 @@ module OpenStudioMeasureTester
               @total_errors += @file_errors
               
             end
+            
             mhash['files'] << fhash
-            puts mhash
+
           end
 
         #@summary << mhash
@@ -176,7 +176,6 @@ module OpenStudioMeasureTester
       results['total_warnings'] = @total_warnings
       results['total_errors'] = @total_errors
       results['by_measure'] = @by_measure
-      #pp results
 
       results
     end
@@ -184,12 +183,12 @@ module OpenStudioMeasureTester
     def to_file
       # save as a json and have something else parse it/plot it.
       res_hash = to_hash
+      @summary = res_hash
       FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
         file << JSON.pretty_generate(res_hash)
       
       end
-
     end
   end
 end
