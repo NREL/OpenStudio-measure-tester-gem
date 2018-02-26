@@ -353,83 +353,41 @@
                     <h4>RuboCop</h4>
                     <% if @hash['rubocop'] && @hash['rubocop']['by_measure'] && @hash['rubocop']['by_measure'][name] %>
                       <div class="py-2">
-                        <span class="badge badge-info"><%= @hash['rubocop']['by_measure'][name]['measure_issues'] %></span> total issues
+                        <span class="badge badge-info"><%= @hash['rubocop']['by_measure'][name]['measure_issues'] %></span> total violations
                       </div>
-
-                        <% @hash['rubocop']['by_measure'][name]['files'].each_with_index do |file, findex| %>
-                          <% if @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].length > 0 %>
-
-                            <div class="pb-1">
-                              <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#file-<%=file['file_name']%>" aria-expanded="false" aria-controls="<%=file['file_name'] %>">
-                                <%= file['file_name'] %>
-                              </button>
-                            </div>
-                            <div class="collapse" id="file-<%= file['file_name'] %>">
-                              <div class="p-1">
-                                <table class="table table-striped">
-                                  <thead>
+                      <% @hash['rubocop']['by_measure'][name]['files'].each_with_index do |file, findex| %>
+                        <% if @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].length > 0 %>
+                          <div class="pb-1">
+                            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#file-<%=file['file_name']%>" aria-expanded="false" aria-controls="<%=file['file_name'] %>">
+                              <%= file['file_name'] %>
+                            </button>
+                          </div>
+                          <div class="collapse" id="file-<%= file['file_name'] %>">
+                            <div class="p-1">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Severity</th>
+                                    <th>Line, Col</th>
+                                    <th>Message</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].each do |issue| %>
                                     <tr>
-                                      <th>Severity</th>
-                                      <th>Line, Col</th>
-                                      <th>Message</th>
+                                      <td><span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span></td>
+                                      <td><%= issue['line'] %>, <%= issue['column'] %></td>
+                                      <td><%= issue['message'] %></td>
                                     </tr>
-                                  </thead>
-                                  <tbody>
-                                    <% @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].each do |issue| %>
-                                      <tr>
-                                        <td><span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span></td>
-                                        <td><%= issue['line'] %>, <%= issue['column'] %></td>
-                                        <td><%= issue['message'] %></td>
-                                      </tr>
-                                    <% end %>
-                                  </tbody>
-                                </table>
-                              </div>
+                                  <% end %>
+                                </tbody>
+                              </table>
                             </div>
-                          <% end %>
+                          </div>
+                        <% else %>
+                          <div>No errors</div>
                         <% end %>
-
-                      <!--<div id="accordion">-->
-                        <!--<%# @hash['rubocop']['by_measure'][name]['files'].each_with_index do |file, findex| %>-->
-                          <!--<%# if @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].length > 0 %>-->
-                            <!--<div class="card">-->
-                              <!--<div class="card-header" id="<%#= findex %>-heading">-->
-                                <!--<h5 class="mb-0">-->
-                                  <!--<button class="btn btn-link" data-toggle="collapse" data-target="#file<%#= findex %>" aria-expanded="true" aria-controls="<%#= findex %>">-->
-                                    <!--<%#= file['file_name'] %>-->
-                                  <!--</button>-->
-                                <!--</h5>-->
-                              <!--</div>-->
-
-                              <!--<div id="file<%#= findex %>" class="collapse show" aria-labelledby="<%#= findex %>-heading" data-parent="#accordion">-->
-                                <!--&lt;!&ndash;<div class="card-body">&ndash;&gt;-->
-
-                                  <!--&lt;!&ndash;<table class="table table-striped">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<thead>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                                      <!--&lt;!&ndash;<th>Severity</th>&ndash;&gt;-->
-                                      <!--&lt;!&ndash;<th>Line, Col</th>&ndash;&gt;-->
-                                      <!--&lt;!&ndash;<th>Message</th>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</thead>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<%# @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].each do |issue| %>&ndash;&gt;-->
-                                      <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<td><span class="badge badge-<%#= issue['severity'] %>"><%#= issue['severity'] %></span></td>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<td><%#= issue['line'] %>, <%#= issue['column'] %></td>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<td><%#= issue['message'] %></td>&ndash;&gt;-->
-                                      <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<%# end %>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
-                                  <!--&lt;!&ndash;</table>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                              <!--</div>-->
-                            <!--</div>-->
-                          <!--<%# else %>-->
-                            <!--<div>No errors</div>-->
-                          <!--<%# end %>-->
-                        <!--<%# end %>-->
-                      <!--</div>-->
+                      <% end %>
                     <% else %>
                       <div>
                         <span class="badge badge-danger">NO DATA</span>  Test was not run
