@@ -28,7 +28,6 @@ module OpenStudioMeasureTester
       FileUtils.remove_dir("#{save_dir}/js") if Dir.exist? "#{save_dir}/js"
       FileUtils.cp_r("#{resource_path}/css", "#{save_dir}/css", :remove_destination => true )
       FileUtils.cp_r("#{resource_path}/js", "#{save_dir}/js", :remove_destination => true )
-
     end
   end
 end

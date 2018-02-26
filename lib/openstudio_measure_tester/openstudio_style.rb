@@ -300,10 +300,15 @@ module OpenStudioMeasureTester
       log_message('Could not find display_name in measure.', :structure, :warning) unless measure_hash[:display_name]
       log_message('Could not find measure name in measure.', :structure, :warning) unless measure_hash[:name]
 
-      if measure_hash[:values_from_file][:name].empty?
+      # def name is the display name in the XML!
+      if measure_hash[:values_from_file][:display_name].empty?
         log_message('Could not find "def name" in measure.rb', :structure, :error)
-      elsif measure_hash[:name] != measure_hash[:values_from_file][:name]
-        log_message('Name in measure.rb differs from name in XML', :structure, :error)
+      elsif measure_hash[:display_name] != measure_hash[:values_from_file][:display_name]
+        log_message("'def name' in measure.rb differs from <display_name> in XML. Run openstudio measure -u .", :structure, :error)
+      end
+
+      if measure_hash[:values_from_file][:name] != measure_hash[:name]
+        log_message("Measure class as snake_case name does not match <name> in XML. Run openstudio measure -u .", :structure, :error)
       end
 
       if measure_hash[:values_from_file][:description].empty?
@@ -337,6 +342,7 @@ module OpenStudioMeasureTester
       result = {
           values_from_file: {
               name: '',
+              display_name: '',
               description: '',
               modeler_description: ''
           }
@@ -351,7 +357,8 @@ module OpenStudioMeasureTester
         return result
       end
 
-      result[:values_from_file][:name] = measure.name
+      result[:values_from_file][:name] = class_name.to_snakecase
+      result[:values_from_file][:display_name] = measure.name
       result[:values_from_file][:description] = measure.description
       result[:values_from_file][:modeler_description] = measure.modeler_description
 

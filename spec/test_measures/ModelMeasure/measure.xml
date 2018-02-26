@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>model_measure_name</name>
   <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
-  <version_id>cd7f99d8-daf5-401a-8797-141729d027cd</version_id>
-  <version_modified>20180220T213043Z</version_modified>
+  <version_id>dac9c215-3a07-4139-9fdc-ec0b9ec461f6</version_id>
+  <version_modified>20180226T201813Z</version_modified>
   <xml_checksum>94317D34</xml_checksum>
   <class_name>ModelMeasureName</class_name>
   <display_name>model_measure_name</display_name>
@@ -39,6 +39,12 @@
       <checksum>53D14E69</checksum>
     </file>
     <file>
+      <filename>model_measure_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B58ABCBC</checksum>
+    </file>
+    <file>
       <version>
         <software_program>OpenStudio</software_program>
         <identifier>2.4.1</identifier>
@@ -48,12 +54,6 @@
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
       <checksum>6CF77534</checksum>
-    </file>
-    <file>
-      <filename>model_measure_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>6A4B5A69</checksum>
     </file>
   </files>
 </measure>
