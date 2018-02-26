@@ -47,9 +47,23 @@ module OpenStudioMeasureTester
             severity: :error,
             file_type: :measure
         }, {
+            regex: /OpenStudio::Ruleset::OSRunner/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
+            type: :deprecated,
+            severity: :error,
+            file_type: :test
+        }, {
             regex: /OpenStudio::Ruleset::OSArgumentVector/,
             check_type: :if_exists,
             message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
+            type: :deprecated,
+            severity: :error,
+            file_type: :measure
+        }, {
+            regex: /OpenStudio::Ruleset::OSArgument/,
+            check_type: :if_exists,
+            message: 'OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.',
             type: :deprecated,
             severity: :error,
             file_type: :measure
