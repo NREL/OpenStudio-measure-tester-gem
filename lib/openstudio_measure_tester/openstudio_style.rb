@@ -42,14 +42,14 @@ module OpenStudioMeasureTester
         }, {
             regex: /OpenStudio::Ruleset::OSRunner/,
             check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
+            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
             type: :deprecated,
             severity: :error,
             file_type: :measure
         }, {
             regex: /OpenStudio::Ruleset::OSRunner/,
             check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner instead.',
+            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
             type: :deprecated,
             severity: :error,
             file_type: :test
@@ -70,7 +70,7 @@ module OpenStudioMeasureTester
         }, {
             regex: /OpenStudio::Ruleset::OSArgumentMap/,
             check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure::OSArgumentMap instead.',
+            message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure.convertOSArgumentVectorToMap(arguments) instead.',
             type: :deprecated,
             severity: :error,
             file_type: :measure
@@ -99,6 +99,13 @@ module OpenStudioMeasureTester
             regex: /MiniTest::Unit::TestCase/,
             check_type: :if_exists,
             message: "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
+            type: :syntax,
+            severity: :warning,
+            file_type: :test
+        }, {
+            regex: /require .openstudio\/ruleset  /,
+            check_type: :if_exists,
+            message: "Require openstudio/ruleset/* is deprecated. Use require 'openstudio/measure/*'",
             type: :syntax,
             severity: :warning,
             file_type: :test
