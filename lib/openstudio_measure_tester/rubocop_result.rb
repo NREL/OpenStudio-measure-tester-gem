@@ -180,6 +180,7 @@ module OpenStudioMeasureTester
       results['total_measures'] = @total_measures
       results['total_files'] = @total_files
       results['total_issues'] = @total_issues
+      results['total_info'] = @total_info
       results['total_warnings'] = @total_warnings
       results['total_errors'] = @total_errors
       results['by_measure'] = @by_measure

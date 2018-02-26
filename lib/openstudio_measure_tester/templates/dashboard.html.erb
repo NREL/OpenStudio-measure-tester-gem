@@ -73,13 +73,13 @@
                       <% if @hash['openstudio_style'] && @hash['openstudio_style']['total_errors'] %>
                         <div class="row pt-5">
                         <% if @hash['openstudio_style']['total_errors'] > 0 %>
-                          <div class="col-sm-4 offset-sm-4 badge-lg-height badge badge-danger"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
+                          <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-danger"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
                         <% else %>
-                          <div class="col-sm-4 offset-sm-4 badge-lg-height badge badge-success"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
+                          <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-success"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
                         <% end %>
                         </div>
                         <div class="row">
-                          <div class="col-sm-4 offset-sm-4 center-text"><span class="badge-text">Errors</span></div>
+                          <div class="col-sm-6 offset-sm-3 center-text"><span class="badge-text">Errors</span></div>
                         </div>
                       <% else %>
                         <div class="row pt-5">
@@ -351,15 +351,85 @@
                 <div class="row pb-3">
                   <div class="col-sm-12">
                     <h4>RuboCop</h4>
-                    <% if @hash['rubocop'] && @hash['rubocop']['by_measure'] && @hash['rubocop']['by_measure'][name] && @hash['rubocop']['by_measure'][name]['issues'] %>
-                      <% @hash['rubocop']['by_measure'][name]['issues'].each do |issue| %>
-                        <div>
-                          <span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span> (<%= issue['type'] %>) <%= issue['message'] %>
-                        </div>
-                      <% end %>
-                      <% if @hash['rubocop']['by_measure'][name]['issues'].length == 0 %>
-                        <div>No errors</div>
-                      <% end %>
+                    <% if @hash['rubocop'] && @hash['rubocop']['by_measure'] && @hash['rubocop']['by_measure'][name] %>
+                      <div class="py-2">
+                        <span class="badge badge-info"><%= @hash['rubocop']['by_measure'][name]['measure_issues'] %></span> total issues
+                      </div>
+
+                        <% @hash['rubocop']['by_measure'][name]['files'].each_with_index do |file, findex| %>
+                          <% if @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].length > 0 %>
+
+                            <div class="pb-1">
+                              <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#file-<%=file['file_name']%>" aria-expanded="false" aria-controls="<%=file['file_name'] %>">
+                                <%= file['file_name'] %>
+                              </button>
+                            </div>
+                            <div class="collapse" id="file-<%= file['file_name'] %>">
+                              <div class="p-1">
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>Severity</th>
+                                      <th>Line, Col</th>
+                                      <th>Message</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].each do |issue| %>
+                                      <tr>
+                                        <td><span class="badge badge-<%= issue['severity'] %>"><%= issue['severity'] %></span></td>
+                                        <td><%= issue['line'] %>, <%= issue['column'] %></td>
+                                        <td><%= issue['message'] %></td>
+                                      </tr>
+                                    <% end %>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          <% end %>
+                        <% end %>
+
+                      <!--<div id="accordion">-->
+                        <!--<%# @hash['rubocop']['by_measure'][name]['files'].each_with_index do |file, findex| %>-->
+                          <!--<%# if @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].length > 0 %>-->
+                            <!--<div class="card">-->
+                              <!--<div class="card-header" id="<%#= findex %>-heading">-->
+                                <!--<h5 class="mb-0">-->
+                                  <!--<button class="btn btn-link" data-toggle="collapse" data-target="#file<%#= findex %>" aria-expanded="true" aria-controls="<%#= findex %>">-->
+                                    <!--<%#= file['file_name'] %>-->
+                                  <!--</button>-->
+                                <!--</h5>-->
+                              <!--</div>-->
+
+                              <!--<div id="file<%#= findex %>" class="collapse show" aria-labelledby="<%#= findex %>-heading" data-parent="#accordion">-->
+                                <!--&lt;!&ndash;<div class="card-body">&ndash;&gt;-->
+
+                                  <!--&lt;!&ndash;<table class="table table-striped">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<thead>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                      <!--&lt;!&ndash;<th>Severity</th>&ndash;&gt;-->
+                                      <!--&lt;!&ndash;<th>Line, Col</th>&ndash;&gt;-->
+                                      <!--&lt;!&ndash;<th>Message</th>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</thead>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<%# @hash['rubocop']['by_measure'][name]['files'][findex]['violations'].each do |issue| %>&ndash;&gt;-->
+                                      <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td><span class="badge badge-<%#= issue['severity'] %>"><%#= issue['severity'] %></span></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td><%#= issue['line'] %>, <%#= issue['column'] %></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td><%#= issue['message'] %></td>&ndash;&gt;-->
+                                      <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<%# end %>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
+                                  <!--&lt;!&ndash;</table>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                              <!--</div>-->
+                            <!--</div>-->
+                          <!--<%# else %>-->
+                            <!--<div>No errors</div>-->
+                          <!--<%# end %>-->
+                        <!--<%# end %>-->
+                      <!--</div>-->
                     <% else %>
                       <div>
                         <span class="badge badge-danger">NO DATA</span>  Test was not run
