@@ -108,9 +108,12 @@ module OpenStudioMeasureTester
               @file_warnings = 0
               @file_errors = 0
 
+              violations = []
+
               if key['error'].class == Array
                 @file_issues = key['error'].length
                 key['error'].each do |s|
+
                   if s['severity'] === "info"
                     @file_info += 1
                   elsif s['severity'] === "warning"
@@ -118,8 +121,10 @@ module OpenStudioMeasureTester
                   elsif s['severity'] === "error" #TODO: look up complete list of codes 
                     @file_errors += 1
                   end
+                  violations << {line: s['line'], column: s['column'], severity: s['severity'], message: s['message']}
                 end
               end
+
 
               if key['error'].class == Hash
                 @file_issues = 1
@@ -130,12 +135,14 @@ module OpenStudioMeasureTester
                 elsif key['error']['severity'] === "error"
                   @file_errors += 1
                 end
+                violations << {line: key['error']['line'], column: key['error']['column'], severity: key['error']['severity'], message: key['error']['message']}
               end
-              
+
               fhash['issues'] = @file_issues
               fhash['info'] = @file_info
               fhash['warning'] = @file_warnings
               fhash['error'] = @file_errors
+              fhash['violations'] = violations
               
               mhash['measure_issues'] += @file_issues
               mhash['measure_info'] += @file_info
