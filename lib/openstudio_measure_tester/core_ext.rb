@@ -42,7 +42,7 @@ class String
   # simple method to create titles -- very custom to catch known inflections
   def titleize
     arr = ['a', 'an', 'the', 'by', 'to']
-    upcase_arr = ['DX', 'EDA', 'AEDG', 'LPD', 'COP']
+    upcase_arr = ['DX', 'EDA', 'AEDG', 'LPD', 'COP', 'GHLEP', 'ZEDG', 'QAQC', 'PV']
     r = tr('_', ' ').gsub(/\w+/) do |match|
       match_result = match
       if upcase_arr.include?(match.upcase)
