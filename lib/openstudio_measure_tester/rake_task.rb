@@ -143,19 +143,20 @@ module OpenStudioMeasureTester
           pre_process_style(Rake.application.original_dir)
         end
 
-        desc 'Run OpenStudio Style Checks'
-        task style: ['openstudio:prepare_style'] do
+        task style_core: [] do
           run_style(Rake.application.original_dir)
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
+        end
+
+        task :post_process_core do
+          post_process_results(Rake.application.original_dir)
         end
 
         Rake::TestTask.new(:test_core_command) do |task|
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
-            "#{Rake.application.original_dir}/**/*_test.rb",
-            "#{Rake.application.original_dir}/**/*_Test.rb"
+              "#{Rake.application.original_dir}/**/*_test.rb",
+              "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
         end
@@ -182,6 +183,7 @@ module OpenStudioMeasureTester
           task.fail_on_error = false
         end
 
+        desc 'Run OpenStudio Measure Unit Tests'
         task test: ['openstudio:prepare_minitest', 'openstudio:test_core'] do
           exit_status = post_process_results(Rake.application.original_dir)
           exit exit_status
@@ -193,9 +195,10 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
-        desc 'Run MiniTest and RuboCop on measures'
-        Rake::TestTask.new(all: ['openstudio:test', 'openstudio:rubocop', 'openstudio:style']) do |task|
-          task.description = 'Run Tests, RuboCop, and OpenStudio Style'
+        desc 'Run OpenStudio Style Checks'
+        task style: ['openstudio:prepare_style', 'openstudio:style_core'] do
+          exit_status = post_process_results(Rake.application.original_dir)
+          exit exit_status
         end
 
         desc 'Post process results into one directory'
@@ -208,6 +211,19 @@ module OpenStudioMeasureTester
         task :dashboard do
           template = OpenStudioMeasureTester::Dashboard.new(Rake.application.original_dir)
           template.render
+        end
+
+        desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
+        task all: ['openstudio:prepare_minitest',
+                   'openstudio:test_core',
+                   'openstudio:prepare_rubocop',
+                   'openstudio:rubocop_core',
+                   'openstudio:prepare_style',
+                   'openstudio:style_core',
+                   'openstudio:post_process_core',
+                   'openstudio:dashboard'] do
+          exit_status = post_process_results(Rake.application.original_dir)
+          exit exit_status
         end
 
         # Hide the core tasks from being displayed when calling rake -T

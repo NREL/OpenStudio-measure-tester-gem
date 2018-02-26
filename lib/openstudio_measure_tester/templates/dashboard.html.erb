@@ -187,7 +187,7 @@
                           <% end %>
                       </td>
                       <td></td>
-                      <td><% if @hash['coverage'] %>
+                      <td><% if @hash['coverage'] && @hash['coverage']['by_measure'][name] %>
                         <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
                             <% label = 'success' %>
                         <% elsif @hash['coverage']['by_measure'][name]['percent_coverage'] >= 60 %>
@@ -224,7 +224,7 @@
               <div class="modal-body">
                 <div class="row pb-3">
                   <div class="col-sm-12">
-                    <% if @hash['coverage'] %>
+                    <% if @hash['coverage'] && @hash['coverage']['by_measure'][name] %>
                       <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
                           <% label = 'success' %>
                       <% elsif @hash['coverage']['by_measure'][name]['percent_coverage'] >= 60 %>
@@ -242,7 +242,7 @@
                 </div>
                 <div class="row pb-2">
                   <div class="col-sm-12">
-                    <% if @hash['coverage'] %>
+                    <% if @hash['coverage'] && @hash['coverage']['by_measure'][name] %>
                       <table class="table table-striped">
                         <thead>
                           <tr>

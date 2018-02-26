@@ -124,7 +124,7 @@ module OpenStudioMeasureTester
     # Return the exit code based on some arbitrary limit across all the tests
     def exit_code
       # TODO: fill this out
-      return 0
+      return 1
     end
   end
 end
