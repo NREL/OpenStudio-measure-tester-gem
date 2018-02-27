@@ -2,11 +2,11 @@
   <schema_version>3.0</schema_version>
   <name>reporting_measure_name</name>
   <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
-  <version_id>363d281f-82c2-43d6-819c-9e2cc27458fe</version_id>
-  <version_modified>20180220T211020Z</version_modified>
+  <version_id>c524733e-30b5-49c8-8906-9275dd340c71</version_id>
+  <version_modified>20180227T164640Z</version_modified>
   <xml_checksum>94317D34</xml_checksum>
   <class_name>ReportingMeasureName</class_name>
-  <display_name>name_text</display_name>
+  <display_name>Reporting Measure Name</display_name>
   <description>DESCRIPTION TEXT</description>
   <modeler_description>MODELER DESCRIPTION TEXT</modeler_description>
   <arguments/>
@@ -24,23 +24,6 @@
   </attributes>
   <files>
     <file>
-      <version>
-        <software_program>OpenStudio</software_program>
-        <identifier>2.4.1</identifier>
-        <min_compatible>2.4.1</min_compatible>
-      </version>
-      <filename>measure.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>script</usage_type>
-      <checksum>0FB5DADC</checksum>
-    </file>
-    <file>
-      <filename>reporting_measure_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>5D356322</checksum>
-    </file>
-    <file>
       <filename>example_model.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
@@ -57,6 +40,23 @@
       <filetype>in</filetype>
       <usage_type>resource</usage_type>
       <checksum>3F69E3FB</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.4.1</identifier>
+        <min_compatible>2.4.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>D51502B7</checksum>
+    </file>
+    <file>
+      <filename>reporting_measure_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>19EBF25E</checksum>
     </file>
   </files>
 </measure>

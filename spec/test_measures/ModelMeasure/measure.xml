@@ -2,11 +2,11 @@
   <schema_version>3.0</schema_version>
   <name>model_measure_name</name>
   <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
-  <version_id>dac9c215-3a07-4139-9fdc-ec0b9ec461f6</version_id>
-  <version_modified>20180226T201813Z</version_modified>
+  <version_id>4767516b-8306-48ed-ae33-89b3950e8442</version_id>
+  <version_modified>20180227T164726Z</version_modified>
   <xml_checksum>94317D34</xml_checksum>
   <class_name>ModelMeasureName</class_name>
-  <display_name>model_measure_name</display_name>
+  <display_name>Model Measure Name</display_name>
   <description>DESCRIPTION TEXT</description>
   <modeler_description>MODELER DESCRIPTION TEXT</modeler_description>
   <arguments>
@@ -42,7 +42,7 @@
       <filename>model_measure_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>B58ABCBC</checksum>
+      <checksum>CF008CE9</checksum>
     </file>
     <file>
       <version>
@@ -53,7 +53,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>6CF77534</checksum>
+      <checksum>18979400</checksum>
     </file>
   </files>
 </measure>
