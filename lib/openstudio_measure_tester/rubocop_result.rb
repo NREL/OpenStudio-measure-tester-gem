@@ -100,9 +100,9 @@ module OpenStudioMeasureTester
           results.each do |key, data|
             fhash = {}
             fhash['file_name'] = key['name'].split('/')[-1]
+            fhash['violations'] = []
 
             if key['error']
-
               @file_issues = 0
               @file_info = 0
               @file_warnings = 0
@@ -124,7 +124,6 @@ module OpenStudioMeasureTester
                   violations << {line: s['line'], column: s['column'], severity: s['severity'], message: s['message']}
                 end
               end
-
 
               if key['error'].class == Hash
                 @file_issues = 1
