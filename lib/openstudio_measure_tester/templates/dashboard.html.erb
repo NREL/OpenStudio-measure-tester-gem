@@ -65,28 +65,20 @@
               </div>
             </div>
             <div class="col-sm">
-              <div class="card">
+              <div class="card donut">
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">OpenStudio Style</h5>
-                    <div>
-                      <% if @hash['openstudio_style'] && @hash['openstudio_style']['total_errors'] %>
-                        <div class="row pt-5">
-                        <% if @hash['openstudio_style']['total_errors'] > 0 %>
-                          <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-danger"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
-                        <% else %>
-                          <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-success"><span class='large-text'><%= @hash['openstudio_style']['total_errors'] %></span></div>
-                        <% end %>
+                    <% if @hash['openstudio_style'] %>
+                        <div class="canvas-container">
+                          <canvas id="style"></canvas>
+                          <span id="styleTotal" class="status adjust-pos">issues</span>
                         </div>
-                        <div class="row">
-                          <div class="col-sm-6 offset-sm-3 center-text"><span class="badge-text">Errors</span></div>
-                        </div>
-                      <% else %>
+                    <% else %>
                         <div class="row pt-5">
                           <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-warning badge-text"><i data-feather="alert-triangle" class="size48"></i><br><span class="pt-2">No Data</span> </div>
                         </div>
-                      <% end %>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -138,8 +130,8 @@
                   <tr>
                     <th>Measure Name</th>
                     <th>Tests<br/><span class="small-text">Passed - Failures - Errors</span></th>
-                    <th>OS Style Errors</th>
-                    <th>RuboCop</th>
+                    <th>OS Style Errors<br/><span class="small-text">Errors - Warnings - Info</span></th>
+                    <th>RuboCop<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th>Coverage</th>
                     <th>&nbsp;</th>
                   </tr>
@@ -178,15 +170,36 @@
                           <span class="badge badge-<%= label %>"><%= @hash['minitest']['by_measure'][name]['measure_errors'] %></span>
                         <% end %>
                       </td>
-                      <td><% if @hash['openstudio_style'] && @hash['openstudio_style']['by_measure'][name] %>
-                            <% if @hash['openstudio_style']['by_measure'][name]['errors'] > 0 %>
-                              <span class="badge badge-danger"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
-                            <% elsif @hash['openstudio_style']['by_measure'][name]['errors'] == 0 %>
-                              <span class="badge badge-success"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
-                            <% end %>
+                      <td>
+                        <% if @hash['openstudio_style'] && @hash['openstudio_style']['by_measure'][name] %>
+                          <% if @hash['openstudio_style']['by_measure'][name]['measure_errors'] > 0 %>
+                            <span class="badge badge-danger"><%= @hash['openstudio_style']['by_measure'][name]['measure_errors'] %></span>
+                          <% elsif @hash['openstudio_style']['by_measure'][name]['measure_errors'] == 0 %>
+                            <span class="badge badge-success"><%= @hash['openstudio_style']['by_measure'][name]['measure_errors'] %></span>
                           <% end %>
+                          <% if @hash['openstudio_style']['by_measure'][name]['measure_warnings'] > 0 %>
+                            <span class="badge badge-warning"><%= @hash['openstudio_style']['by_measure'][name]['measure_warnings'] %></span>
+                          <% end %>
+                          <% if @hash['openstudio_style']['by_measure'][name]['measure_info'] > 0 %>
+                            <span class="badge badge-info"><%= @hash['openstudio_style']['by_measure'][name]['measure_info'] %></span>
+                          <% end %>
+                        <% end %>
                       </td>
-                      <td></td>
+                      <td>
+                        <% if @hash['rubocop'] && @hash['rubocop']['by_measure'][name] %>
+                          <% if @hash['rubocop']['by_measure'][name]['measure_errors'] > 0 %>
+                              <span class="badge badge-danger"><%= @hash['rubocop']['by_measure'][name]['measure_errors'] %></span>
+                          <% elsif @hash['rubocop']['by_measure'][name]['measure_errors'] == 0 %>
+                              <span class="badge badge-success"><%= @hash['rubocop']['by_measure'][name]['measure_errors'] %></span>
+                          <% end %>
+                          <% if @hash['rubocop']['by_measure'][name]['measure_warnings'] > 0 %>
+                              <span class="badge badge-warning"><%= @hash['rubocop']['by_measure'][name]['measure_warnings'] %></span>
+                          <% end %>
+                          <% if @hash['rubocop']['by_measure'][name]['measure_info'] > 0 %>
+                              <span class="badge badge-info"><%= @hash['rubocop']['by_measure'][name]['measure_info'] %></span>
+                          <% end %>
+                        <% end %>
+                      </td>
                       <td><% if @hash['coverage'] && @hash['coverage']['by_measure'][name] %>
                         <% if @hash['coverage']['by_measure'][name]['percent_coverage'] >= 80 %>
                             <% label = 'success' %>
@@ -492,16 +505,19 @@
               datasets:[{
                   data: [
                       ruboData['total_info'],
-                      ruboData['total_warnings']
+                      ruboData['total_warnings'],
+                      ruboData['total_errors']
                   ],
                   backgroundColor: [
                       "#25A2B7",
-                      "#FDC02F"
+                      "#FDC02F",
+                      "#DA3849"
                   ]
               }],
               labels: [
                   "info",
-                  "warnings"
+                  "warnings",
+                  "errors"
               ]
           };
           var config2 = {type: 'doughnut', data: dataRubocop, options: options};
@@ -509,6 +525,37 @@
           var ctx2 = canvas2.getContext("2d");
           var doughnut2 = new Chart(ctx2, config2);
         }
+          if ('openstudio_style' in data) {
+              var styleData = data['openstudio_style'];
+              // set total style issues
+              var total = styleData['total_errors'] + styleData['total_info'] + styleData['total_warnings'];
+
+              document.getElementById("styleTotal").innerHTML = total + '<br/> issues';
+              var dataStyle =  {
+                  datasets:[{
+                      data: [
+                          styleData['total_info'],
+                          styleData['total_warnings'],
+                          styleData['total_errors']
+                      ],
+                      backgroundColor: [
+                          "#25A2B7",
+                          "#FDC02F",
+                          "#DA3849"
+                      ]
+                  }],
+                  labels: [
+                      "info",
+                      "warnings",
+                      "errors"
+                  ]
+              };
+              var config3 = {type: 'doughnut', data: dataStyle, options: options};
+              var canvas3 = document.getElementById("style");
+              var ctx3 = canvas3.getContext("2d");
+              var doughnut3 = new Chart(ctx3, config3);
+          }
+
       }
       size(true);
 
