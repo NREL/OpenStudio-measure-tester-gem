@@ -78,7 +78,7 @@ module OpenStudioMeasureTester
       measure_names.each do |measure_name|
         results = coverage_results['coverage'].select {|key, data| key.include? measure_name }
 
-        pp "RESULTS for #{measure_name}:  #{results.inspect}"
+        # pp "RESULTS for #{measure_name}:  #{results.inspect}"
 
         mhash = {}
         mhash['total_lines'] = 0
