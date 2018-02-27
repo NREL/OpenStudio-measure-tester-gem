@@ -155,8 +155,8 @@ module OpenStudioMeasureTester
           task.options = '--ci-reporter'
           task.description = 'Run measures tests recursively from current directory'
           task.pattern = [
-              "#{Rake.application.original_dir}/**/*_test.rb",
-              "#{Rake.application.original_dir}/**/*_Test.rb"
+            "#{Rake.application.original_dir}/**/*_test.rb",
+            "#{Rake.application.original_dir}/**/*_Test.rb"
           ]
           task.verbose = true
         end
@@ -164,8 +164,8 @@ module OpenStudioMeasureTester
         task :test_core do
           begin
             Rake.application['openstudio:test_core_command'].invoke
-          rescue
-            puts "Test failures in openstudio:test. Will continue to post-processing."
+          rescue StandardError
+            puts 'Test failures in openstudio:test. Will continue to post-processing.'
           ensure
             Rake.application['openstudio:test_core_command'].reenable
           end
@@ -189,11 +189,19 @@ module OpenStudioMeasureTester
           exit exit_status
         end
 
-        desc 'Run RuboCop on measures'
-        task rubocop: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core'] do
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
+        # Need to create a namespace so that we can have openstudio:rubocop and openstudio:rubocop:auto_correct.
+        namespace :rubocop do
+          task check: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core'] do
+            exit_status = post_process_results(Rake.application.original_dir)
+            exit exit_status
+          end
+
+          desc 'Run RuboCop Auto Correct on Measures'
+          task auto_correct: 'openstudio:rubocop_core:auto_correct'
         end
+
+        desc 'Run RuboCop on Measures'
+        task rubocop: 'openstudio:rubocop:check'
 
         desc 'Run OpenStudio Style Checks'
         task style: ['openstudio:prepare_style', 'openstudio:style_core'] do
