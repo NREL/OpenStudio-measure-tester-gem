@@ -2,6 +2,7 @@ require 'openstudio'
 require 'openstudio/measure/ShowRunnerOutput'
 require 'fileutils'
 
+# This can be removed once openstudio upgrades its dependencies in 2.4.2 probably
 begin
   # Need to load the test_helper before loading the measure.rb file to get coverage
   require 'openstudio_measure_tester/test_helper'
