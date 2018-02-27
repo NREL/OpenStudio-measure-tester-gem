@@ -133,9 +133,32 @@ module OpenStudioMeasureTester
         end
       end
 
-      if final_exit_code != 0
-        puts 'Errors were found. Open ./test_results/dashboard/index.html to view.'
+      if @results['openstudio_style']
+        if @results['openstudio_style']['total_errors'] > 0
+          puts 'OpenStudio Style errors found.'
+          final_exit_code = 1
+        end
+        if @results['openstudio_style']['total_warnings'] > 10
+          puts 'More than 10 OpenStudio Style warnings found, reporting as error'
+          final_exit_code = 1
+        end
       end
+
+      if @results['minitest']
+        if @results['minitest']['total_errors'] > 0 || @results['minitest']['total_failures'] > 0
+          puts 'Unit Test (MiniTest) errors/failures found.'
+          final_exit_code = 1
+        end
+      end
+
+      if @results['coverage']
+        if @results['coverage']['total_percent_coverage'] < 70
+          puts 'Code coverage is less than 70%, raising error.'
+          final_exit_code = 1
+        end
+      end
+
+      puts 'Open ./test_results/dashboard/index.html to view measure testing dashboard.'
 
       return final_exit_code
     end
