@@ -123,7 +123,7 @@ module OpenStudioMeasureTester
 
       end
 
-      pp @measure_coverages
+      # pp @measure_coverages
       lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
       # lines can be zero if coverage doesn't run correctly
       if lines != 0

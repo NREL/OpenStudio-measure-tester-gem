@@ -176,14 +176,18 @@ module OpenStudioMeasureTester
           run_regex_checks(measure_dir)
 
           validate_measure_hash(measure_hash)
-
-          pp measure_hash
         end
       end
 
+      # pp @measure_messages
+
+      # calculate the info, warnings, errors and return the measure data
+      # TODO: break out the issues by file
       return {
           @measure_classname.to_sym => {
-              errors: @measure_messages.size,
+              measure_info: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :info},
+              measure_warnings: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :warning},
+              measure_errors: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :error},
               issues: @measure_messages.clone
           }
       }
@@ -198,16 +202,20 @@ module OpenStudioMeasureTester
       @measure_messages << new_message
     end
 
-    # read the data in the results and sum up the total number of issues
+    # read the data in the results and sum up the total number of issues for all measures
     def aggregate_results
+      total_info = 0
+      total_warnings = 0
       total_errors = 0
       @results[:by_measure].each_pair do |k, v|
-        total_errors += v[:errors]
+        total_info += v[:measure_info]
+        total_warnings += v[:measure_warnings]
+        total_errors += v[:measure_errors]
       end
-
+      @results[:total_info] = total_info
+      @results[:total_warnings] = total_warnings
       @results[:total_errors] = total_errors
     end
-
 
     def save_results
       FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
@@ -248,40 +256,41 @@ module OpenStudioMeasureTester
     #
     # @param name_type [String] type of name that is being validated (e.g. Display Name, Class Name, etc)
     # @param name [String] name to validate
+    # @param name [Symbol] severity, [:info, :warning, :error]
     # @param options [Hash] Additional checks
     # @option options [Boolean] :ensure_camelcase
     # @option options [Boolean] :ensure_snakecase
-    def validate_name(name_type, name, options = {})
+    def validate_name(name_type, name, severity = :info, options = {})
       clean_name = name
 
       # Check for parenthetical names
       if clean_name =~ /\(.+?\)/
-        log_message("#{name_type} '#{name}' appears to have units. Set units in the setUnits method.")
+        log_message("#{name_type} '#{name}' appears to have units. Set units in the setUnits method.", severity)
       end
 
       if clean_name =~ /\?|\.|\#/
-        log_message("#{name_type} '#{name}' cannot contain ?#.[] characters.", :syntax, :error)
+        log_message("#{name_type} '#{name}' cannot contain ?#.[] characters.", :syntax, severity)
       end
 
       if options[:ensure_camelcase]
         # convert to snake and then back to camelcase to check if formatted correctly
         if clean_name != clean_name.strip
-          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, :error)
+          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, severity)
         end
 
         if clean_name != clean_name.to_snakecase.to_camelcase
-          log_message("#{name_type} '#{name}' is not CamelCase.", :syntax, :error)
+          log_message("#{name_type} '#{name}' is not CamelCase.", :syntax, severity)
         end
       end
 
       if options[:ensure_snakecase]
         # no leading/trailing spaces
         if clean_name != clean_name.strip
-          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, :error)
+          log_message("#{name_type} '#{name}' has leading or trailing spaces.", :syntax, severity)
         end
 
         if clean_name != clean_name.to_snakecase
-          log_message("#{name_type} '#{name}' is not snake_case.", :syntax, :error)
+          log_message("#{name_type} '#{name}' is not snake_case.", :syntax, severity)
         end
       end
     end
@@ -289,11 +298,14 @@ module OpenStudioMeasureTester
     # Validate the measure hash to make sure that it is meets the style guide. This will also perform the selection
     # of which data to use for the "actual metadata"
     def validate_measure_hash(measure_hash)
-      validate_name('Measure name', measure_hash[:name], ensure_snakecase: true)
-      validate_name('Class name', measure_hash[:class_name], ensure_camelcase: true)
+      validate_name('Measure name', measure_hash[:name], :error, ensure_snakecase: true)
+      validate_name('Class name', measure_hash[:class_name], :error, ensure_camelcase: true)
       # check if @measure_name (which is the directory name) is snake cased
 
-      validate_name('Measure directory name', measure_hash[:measure_dir].split('/').last, ensure_snakecase: true)
+      validate_name('Measure directory name',
+                    measure_hash[:measure_dir].split('/').last,
+                    :warning,
+                    ensure_snakecase: true)
 
       log_message('Could not find measure description in XML.', :structure, :warning) if measure_hash[:description].empty?
       log_message('Could not find modeler description in XML.', :structure, :warning) unless measure_hash[:modeler_description]
@@ -324,7 +336,7 @@ module OpenStudioMeasureTester
       end
 
       measure_hash[:arguments].each do |arg|
-        validate_name('Argument display name', arg[:display_name])
+        validate_name('Argument display name', arg[:display_name], :error)
         # {
         #     :name => "relative_building_rotation",
         #     :display_name =>

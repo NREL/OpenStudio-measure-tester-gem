@@ -40,7 +40,9 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
 
     # make sure that the infoExtractor method loads correctly (from OpenStudio)
     expect(style.respond_to?(:infoExtractor)).to eq true
-    expect(style.results[:by_measure][:RotateBuilding][:errors]).to eq 15
+    expect(style.results[:by_measure][:RotateBuilding][:measure_errors]).to eq 12
+    expect(style.results[:by_measure][:RotateBuilding][:measure_warnings]).to eq 2
+    expect(style.results[:by_measure][:RotateBuilding][:measure_info]).to eq 1
     expect(style.results[:by_measure][:RotateBuilding][:issues].size).to eq 15
   end
 
@@ -52,17 +54,17 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     expect(style.measure_messages.first[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
     style.measure_messages.clear
 
-    style.validate_name('Name', 'snake_case_is_right', ensure_snakecase: true)
-    style.validate_name('Name', 'CamelCaseIsUpAndDown', ensure_camelcase: true)
+    style.validate_name('Name', 'snake_case_is_right', :warning,ensure_snakecase: true)
+    style.validate_name('Name', 'CamelCaseIsUpAndDown', :warning,ensure_camelcase: true)
 
-    style.validate_name('Name', 'MixedUp_And_case', ensure_camelcase: true)
-    style.validate_name('Name', 'MixedUp_And_case', ensure_snakecase: true)
+    style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_camelcase: true)
+    style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'MixedUp_And_case' is not CamelCase."
     expect(style.measure_messages.last[:message]).to eq "Name 'MixedUp_And_case' is not snake_case."
     style.measure_messages.clear
 
-    style.validate_name('Name', 'trailing_spaces ', ensure_snakecase: true)
-    style.validate_name('Name', ' trailing_spaces', ensure_snakecase: true)
+    style.validate_name('Name', 'trailing_spaces ', :warning,ensure_snakecase: true)
+    style.validate_name('Name', ' trailing_spaces', :warning,ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'trailing_spaces ' has leading or trailing spaces."
     expect(style.measure_messages.last[:message]).to eq "Name ' trailing_spaces' has leading or trailing spaces."
     style.measure_messages.clear
