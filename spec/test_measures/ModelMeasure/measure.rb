@@ -5,7 +5,8 @@
 class ModelMeasureName < OpenStudio::Measure::ModelMeasure
   # human readable name
   def name
-    return 'model_measure_name'
+    # Measure name should be the title case of the class name.
+    return 'Model Measure Name'
   end
 
   # human readable description

@@ -179,9 +179,9 @@
                         <% end %>
                       </td>
                       <td><% if @hash['openstudio_style'] && @hash['openstudio_style']['by_measure'][name] %>
-                            <% if @hash['openstudio_style']['by_measure'][name]['errors'] > 0 %>
+                            <% if @hash['openstudio_style']['by_measure'][name]['measure_errors'] > 0 %>
                               <span class="badge badge-danger"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
-                            <% elsif @hash['openstudio_style']['by_measure'][name]['errors'] == 0 %>
+                            <% elsif @hash['openstudio_style']['by_measure'][name]['measure_errors'] == 0 %>
                               <span class="badge badge-success"><%= @hash['openstudio_style']['by_measure'][name]['errors'] %></span>
                             <% end %>
                           <% end %>

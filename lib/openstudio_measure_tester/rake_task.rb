@@ -126,7 +126,18 @@ module OpenStudioMeasureTester
 
       results = OpenStudioMeasureTester::OpenStudioTestingResult.new(current_dir, test_results_dir)
       results.save_results # one single file for dashboard
+
+      # call the create dashboard command now that we have results
+      dashboard(base_dir)
+
+      # return the results exit code
       return results.exit_code
+    end
+
+    # Run ERB to create the dashboard
+    def dashboard(base_dir)
+      template = OpenStudioMeasureTester::Dashboard.new(base_dir)
+      template.render
     end
 
     def setup_subtasks(name)
@@ -217,8 +228,7 @@ module OpenStudioMeasureTester
 
         desc 'Generate dashboard'
         task :dashboard do
-          template = OpenStudioMeasureTester::Dashboard.new(Rake.application.original_dir)
-          template.render
+          dashboard(Rake.application.original_dir)
         end
 
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
@@ -227,9 +237,7 @@ module OpenStudioMeasureTester
                    'openstudio:prepare_rubocop',
                    'openstudio:rubocop_core',
                    'openstudio:prepare_style',
-                   'openstudio:style_core',
-                   'openstudio:post_process_core',
-                   'openstudio:dashboard'] do
+                   'openstudio:style_core'] do
           exit_status = post_process_results(Rake.application.original_dir)
           exit exit_status
         end

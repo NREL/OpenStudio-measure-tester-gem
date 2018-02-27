@@ -2,11 +2,11 @@
   <schema_version>3.0</schema_version>
   <name>energyplus_measure_name</name>
   <uid>7decfd2a-16d3-4d52-a4f9-87b7de0301ee</uid>
-  <version_id>136dd48d-8e95-403d-812b-efcbe4c5a344</version_id>
-  <version_modified>20180220T191029Z</version_modified>
+  <version_id>16f003ce-aa4e-4107-9801-d6d861f34901</version_id>
+  <version_modified>20180227T171219Z</version_modified>
   <xml_checksum>94317D34</xml_checksum>
   <class_name>EnergyPlusMeasureName</class_name>
-  <display_name>name_text</display_name>
+  <display_name>EnergyPlus Measure Name</display_name>
   <description>DESCRIPTION TEXT</description>
   <modeler_description>MODELER DESCRIPTION TEXT</modeler_description>
   <arguments>
@@ -41,13 +41,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>EFB21913</checksum>
+      <checksum>B26B34DC</checksum>
     </file>
     <file>
       <filename>energyplus_measure_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>2139A357</checksum>
+      <checksum>C1498C90</checksum>
     </file>
   </files>
 </measure>
