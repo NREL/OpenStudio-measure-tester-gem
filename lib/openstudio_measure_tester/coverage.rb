@@ -93,6 +93,7 @@ module OpenStudioMeasureTester
 
         # pp mhash
         results.each do |key, data|
+          next if key.include? '/tests/'
           fhash = {}
           fhash['name'] = key.partition(measure_name + '/').last
           fhash['total_lines'] = data.size
