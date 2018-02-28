@@ -74,12 +74,13 @@ module OpenStudioMeasureTester
 
         # get measure names
         measure_names = []
+        cn= ''
         hash['checkstyle']['file'].each do |key, data|
-            parts = key['name'].split('/')
-            if parts.last == 'measure.rb'
-             name = parts[-2]
-             measure_names << name
-            end
+          parts = key['name'].split('/')
+          if parts.last == 'measure.rb'
+           name = parts[-2]
+           measure_names << name
+          end
         end
 
         @total_measures = measure_names.length
@@ -87,10 +88,10 @@ module OpenStudioMeasureTester
 
         measure_names.each do |measure_name|
 
+          cn= ''
           results = hash['checkstyle']['file'].select {|data| data['name'].include? measure_name }
 
           mhash = {}
-          mhash['measure_name'] = measure_name
           mhash['measure_issues'] = 0
           mhash['measure_info'] = 0
           mhash['measure_warnings'] = 0              
@@ -101,6 +102,16 @@ module OpenStudioMeasureTester
             fhash = {}
             fhash['file_name'] = key['name'].split('/')[-1]
             fhash['violations'] = []
+
+            # get the class name
+            if fhash['file_name'] == 'measure.rb'
+              File.readlines(key['name']).each do |line|
+                if (line.include? 'class') && line.split(' ')[0] == 'class'
+                    cn = line.split(' ')[1]
+                    break
+                end
+              end
+            end
 
             if key['error']
               @file_issues = 0
@@ -160,7 +171,7 @@ module OpenStudioMeasureTester
           end
 
         #@summary << mhash
-        @by_measure[measure_name] = mhash
+        @by_measure[cn] = mhash
 
         end
 

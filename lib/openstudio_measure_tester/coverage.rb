@@ -66,6 +66,7 @@ module OpenStudioMeasureTester
 
       # find all measure names
       measure_names = []
+      cn = ''
       coverage_results['coverage'].each do |key, data|
         parts = key.split('/')
         if parts.last == 'measure.rb'
@@ -73,9 +74,11 @@ module OpenStudioMeasureTester
           pp name
           measure_names << name
         end
+
       end
 
       measure_names.each do |measure_name|
+        cn = ''
         results = coverage_results['coverage'].select {|key, data| key.include? measure_name }
 
         # pp "RESULTS for #{measure_name}:  #{results.inspect}"
@@ -88,11 +91,21 @@ module OpenStudioMeasureTester
         mhash['percent_coverage'] = 0
         mhash['files'] = []
 
-        pp mhash
+        # pp mhash
         results.each do |key, data|
           fhash = {}
           fhash['name'] = key.partition(measure_name + '/').last
           fhash['total_lines'] = data.size
+
+          # get the class name
+          if fhash['name'] == 'measure.rb'
+            File.readlines(key).each do |line|
+              if (line.include? 'class') && line.split(' ')[0] == 'class'
+                  cn = line.split(' ')[1]
+                  break
+              end
+            end
+          end
 
           mhash['total_lines'] += fhash['total_lines']
           # remove nils from array
@@ -113,9 +126,7 @@ module OpenStudioMeasureTester
 
         end
         mhash['percent_coverage'] = (mhash['covered_lines'].to_f / mhash['relevant_lines'].to_f * 100).round(2)
-        # ensure UpperCamelCase
-        measure_name = measure_name.camelize
-        @measure_coverages[measure_name] = mhash
+        @measure_coverages[cn] = mhash
         @total_lines += mhash['total_lines']
         @total_relevant_lines += mhash['relevant_lines']
         @total_covered_lines += mhash['covered_lines']
