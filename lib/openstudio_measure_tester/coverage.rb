@@ -81,8 +81,6 @@ module OpenStudioMeasureTester
         cn = ''
         results = coverage_results['coverage'].select {|key, data| key.include? measure_name }
 
-        # pp "RESULTS for #{measure_name}:  #{results.inspect}"
-
         mhash = {}
         mhash['total_lines'] = 0
         mhash['relevant_lines'] = 0
@@ -91,9 +89,8 @@ module OpenStudioMeasureTester
         mhash['percent_coverage'] = 0
         mhash['files'] = []
 
-        # pp mhash
         results.each do |key, data|
-          next if key.include? '/tests/'
+          # next if key.include? '/tests/' # never mind
           fhash = {}
           fhash['name'] = key.partition(measure_name + '/').last
           fhash['total_lines'] = data.size
