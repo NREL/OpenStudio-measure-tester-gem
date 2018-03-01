@@ -150,7 +150,7 @@ module OpenStudioMeasureTester
       results['total_covered_lines'] = @total_covered_lines
       results['total_missed_lines'] = @total_missed_lines
       results['by_measure'] = @measure_coverages
-      pp results
+      # pp results
 
       results
     end

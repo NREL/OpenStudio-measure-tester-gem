@@ -124,7 +124,7 @@ module OpenStudioMeasureTester
     # Return the exit code based on some arbitrary limit across all the tests
     def exit_code
       # there must be no unit test failures
-      pp @results
+      # pp @results
       final_exit_code = 0
       if @results['rubocop']
         if @results['rubocop']['total_errors'] > 0
