@@ -31,14 +31,14 @@ RSpec.describe OpenStudioMeasureTester::MinitestResult do
     dir = 'spec/files/minitest'
     mr = OpenStudioMeasureTester::MinitestResult.new(dir)
 
-    expect(mr.total_assertions).to eq 66
-    expect(mr.total_errors).to eq 0
-    expect(mr.total_failures).to eq 0
+    expect(mr.total_assertions).to eq 144
+    expect(mr.total_errors).to eq 1
+    expect(mr.total_failures).to eq 1
     expect(mr.total_skipped).to eq 0
-    expect(mr.total_tests).to eq 7
+    expect(mr.total_tests).to eq 20
 
-    expect(mr.error_status).to eq false
+    expect(mr.error_status).to eq true
 
-    expect(mr.measure_results.size).to eq 3
+    expect(mr.measure_results.size).to eq 7
   end
 end

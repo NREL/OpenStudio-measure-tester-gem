@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AddOverhangsByProjectionFactor_Test" tests="4" time="9.747513" failures="1" errors="1" skipped="0" assertions="39" timestamp="2018-02-28T18:06:04-07:00">
+  <testcase name="test_AddOverhangsByProjectionFactor_bad" time="0.002269" assertions="7">
+  </testcase>
+  <testcase name="test_failure" time="3.0e-05" assertions="0">
+    <error type="RuntimeError" message="RuntimeError: This will be an error...">
+RuntimeError: This will be an error
+    /Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199:in `test_failure' (RuntimeError)
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199    </error>
+  </testcase>
+  <testcase name="test_AddOverhangsByProjectionFactor_good" time="2.705313" assertions="25">
+    <failure type="Minitest::Assertion" message="Expected: 1...">
+Expected: 1
+  Actual: 5 (Minitest::Assertion)
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:138    </failure>
+  </testcase>
+  <testcase name="test_AddOverhangsByProjectionFactor_good_noDefault" time="2.508815" assertions="7">
+  </testcase>
+  <system-out>
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The initial building had 2 space shading surfaces.
+**FINAL CONDITION**
+The final building has 3 space shading surfaces. Initial capital costs associated with the improvements are $0.
+**INFO MESSAGES**
+Removed all 2 space shading surface groups from the model.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 3 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 3' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 5 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 5' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 1 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 1' with projection factor 0.5 and offset 0.
+**WARNING MESSAGES**
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "projection_factor",
+   "value" : 0.5
+}
+,{
+   "name" : "facade",
+   "value" : "South"
+}
+,{
+   "name" : "remove_ext_space_shading",
+   "value" : true
+}
+,{
+   "name" : "construction",
+   "value" : "{7637dc40-61ee-48cd-b120-3672a87ad41e}"
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The initial building had 3 space shading surfaces.
+**FINAL CONDITION**
+The final building has 0 space shading surfaces. Initial capital costs associated with the improvements are $0.
+**INFO MESSAGES**
+Removed all 2 space shading surface groups from the model.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 3 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 3' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 5 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 5' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 1 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 1' with projection factor 0.5 and offset 0.
+Removed all 3 space shading surface groups from the model.
+**WARNING MESSAGES**
+The requested projection factor of 0.0 seems unusually small, no overhangs will be added.
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "projection_factor",
+   "value" : 0.5
+}
+,{
+   "name" : "facade",
+   "value" : "South"
+}
+,{
+   "name" : "remove_ext_space_shading",
+   "value" : true
+}
+,{
+   "name" : "construction",
+   "value" : "{7637dc40-61ee-48cd-b120-3672a87ad41e}"
+}
+,{
+   "name" : "projection_factor",
+   "value" : 0
+}
+,{
+   "name" : "facade",
+   "value" : "South"
+}
+,{
+   "name" : "remove_ext_space_shading",
+   "value" : true
+}
+,{
+   "name" : "construction",
+   "value" : "{7637dc40-61ee-48cd-b120-3672a87ad41e}"
+}
+]
+***Files Generated**
+
+
+**MEASURE APPLICABILITY**
+0 = Success
+**INITIAL CONDITION**
+The initial building had 2 space shading surfaces.
+**FINAL CONDITION**
+The final building has 4 space shading surfaces. Initial capital costs associated with the improvements are $0.
+**INFO MESSAGES**
+No construction was chosen.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 3 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 3' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 5 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 5' with projection factor 0.5 and offset 0.
+Added overhang Object of type 'OS:ShadingSurface' and named 'Sub Surface 1 - Overhang' to Object of type 'OS:SubSurface' and named 'Sub Surface 1' with projection factor 0.5 and offset 0.
+**WARNING MESSAGES**
+Removed pre-existing window shade named 'Sub Surface 5 - Overhang'.
+**ERROR MESSAGES**
+***Machine-Readable Attributes**
+[
+{
+   "name" : "projection_factor",
+   "value" : 0.5
+}
+,{
+   "name" : "facade",
+   "value" : "South"
+}
+,{
+   "name" : "remove_ext_space_shading",
+   "value" : false
+}
+]
+***Files Generated**
+
+
+  </system-out>
+  <system-err>
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:115: warning: method redefined; discarding old neat_numbers
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:115: warning: previous definition of neat_numbers was here
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:126: warning: method redefined; discarding old unit_helper
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:126: warning: previous definition of unit_helper was here
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:131: warning: method redefined; discarding old get_total_costs_for_objects
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:131: warning: previous definition of get_total_costs_for_objects was here
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:115: warning: method redefined; discarding old neat_numbers
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:115: warning: previous definition of neat_numbers was here
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:126: warning: method redefined; discarding old unit_helper
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:126: warning: previous definition of unit_helper was here
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:131: warning: method redefined; discarding old get_total_costs_for_objects
+/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/measure.rb:131: warning: previous definition of get_total_costs_for_objects was here
+  </system-err>
+</testsuite>

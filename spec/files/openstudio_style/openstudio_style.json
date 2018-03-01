@@ -1,430 +1,401 @@
 {
-  "ChangeBuildingLocation": [
-    {
-      "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
-      "type": "deprecated",
-      "severity": "error"
+  "by_measure": {
+    "AddOverhangsByProjectionFactor": {
+      "measure_info": 1,
+      "measure_warnings": 2,
+      "measure_errors": 10,
+      "issues": [
+        {
+          "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "'def description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "'def modeler_description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Measure directory name 'AddOverhangsByProjectionFactor' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Could not find \"def description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Could not find \"def modeler_description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Projection Factor (overhang depth / window height)' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Remove Existing Space Shading Surfaces From the Model?' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Optionally Choose a Construction for the Overhangs.' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        }
+      ]
     },
-    {
-      "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
-      "type": "deprecated",
-      "severity": "error"
+    "ChangeBuildingLocation": {
+      "measure_info": 0,
+      "measure_warnings": 1,
+      "measure_errors": 9,
+      "issues": [
+        {
+          "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "'def description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "'def modeler_description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Measure directory name 'ChangeBuildingLocation' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Could not find \"def description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Could not find \"def modeler_description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Climate Zone.' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        }
+      ]
     },
-    {
-      "message": "'def description' is missing.",
-      "type": "syntax",
-      "severity": "error"
+    "EnergyPlusMeasureName": {
+      "measure_info": 0,
+      "measure_warnings": 1,
+      "measure_errors": 2,
+      "issues": [
+        {
+          "message": "Measure directory name 'EnergyPlusMeasure' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Description in measure.rb differs from description in XML",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Modeler description in measure.rb differs from modeler description in XML",
+          "type": "structure",
+          "severity": "error"
+        }
+      ]
     },
-    {
-      "message": "'def modeler_description' is missing.",
-      "type": "syntax",
-      "severity": "error"
+    "ModelMeasureName": {
+      "measure_info": 0,
+      "measure_warnings": 1,
+      "measure_errors": 2,
+      "issues": [
+        {
+          "message": "Measure directory name 'ModelMeasure' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Description in measure.rb differs from description in XML",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Modeler description in measure.rb differs from modeler description in XML",
+          "type": "structure",
+          "severity": "error"
+        }
+      ]
     },
-    {w
-      "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
-      "type": "syntax",
-      "severity": "error"
+    "ReportingMeasureName": {
+      "measure_info": 0,
+      "measure_warnings": 1,
+      "measure_errors": 2,
+      "issues": [
+        {
+          "message": "Measure directory name 'ReportingMeasure' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Description in measure.rb differs from description in XML",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Modeler description in measure.rb differs from modeler description in XML",
+          "type": "structure",
+          "severity": "error"
+        }
+      ]
     },
-    {
-      "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
+    "RotateBuilding": {
+      "measure_info": 1,
+      "measure_warnings": 2,
+      "measure_errors": 9,
+      "issues": [
+        {
+          "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "'def description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "'def modeler_description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Measure directory name 'RotateBuilding' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Could not find \"def description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Could not find \"def modeler_description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Number of Degrees to Rotate Building (positive value is clockwise).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Number of Degrees to Rotate Building (positive value is clockwise).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        }
+      ]
     },
-    {
-      "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
+    "SetGasBurnerEfficiency": {
+      "measure_info": 7,
+      "measure_warnings": 1,
+      "measure_errors": 17,
+      "issues": [
+        {
+          "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "'def description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "'def modeler_description' is missing.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
+          "type": "syntax",
+          "severity": "warning"
+        },
+        {
+          "message": "Could not find \"def description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Could not find \"def modeler_description\" in measure.rb",
+          "type": "structure",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        },
+        {
+          "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
+          "type": "error",
+          "severity": "info"
+        },
+        {
+          "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
+          "type": "syntax",
+          "severity": "error"
+        }
+      ]
     }
-  ],
-  "pristine": [
-    {
-      "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "'def description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "'def modeler_description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    }
-  ],
-  "RotateBuilding": [
-    {
-      "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "'def description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "'def modeler_description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    }
-  ],
-  "SetGasBurnerEfficiency": [
-    {
-      "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
-      "type": "deprecated",
-      "severity": "error"
-    },
-    {
-      "message": "'def description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "'def modeler_description' is missing.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Measure directory name 'SetGasBurnerEfficiency' is not snake_case.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Choose an Air Loop with a two speed DX Cooling Unit to Alter.' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Burner Efficiency (fractional)' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Remove Baseline Costs From Effected Cooling Coil DX Two Speed Units?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Material and Installation Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Years Until Costs Start (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Demolition Costs Occur During Initial Construction?' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'Expected Life (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Costs per Cooling Coil DX Two Speed Unit ($).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' appears to have units. Set units in the setUnits method.",
-      "type": "syntax",
-      "severity": "info"
-    },
-    {
-      "message": "Argument display name 'O & M Frequency (whole years).' cannot contain ?#.[] characters.",
-      "type": "syntax",
-      "severity": "error"
-    }
-  ]
+  },
+  "total_info": 9,
+  "total_warnings": 9,
+  "total_errors": 51
 }

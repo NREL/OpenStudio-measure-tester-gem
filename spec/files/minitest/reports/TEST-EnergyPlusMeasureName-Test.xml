@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EnergyPlusMeasureName_Test" tests="3" time="0.005558" failures="0" errors="0" skipped="0" assertions="12" timestamp="2018-02-28T18:06:04-07:00">
+  <testcase name="test_bad_argument_values" time="0.000595" assertions="4">
+  </testcase>
+  <testcase name="test_good_argument_values" time="0.002076" assertions="6">
+  </testcase>
+  <testcase name="test_number_of_arguments_and_argument_names" time="0.000355" assertions="2">
+  </testcase>
+  <system-err>
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
+/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
+  </system-err>
+</testsuite>

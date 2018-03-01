@@ -1,35 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RotateBuilding_Test" tests="2" time="1.094734" failures="0" errors="0" skipped="0" assertions="10" timestamp="2018-02-28T18:05:28-07:00">
-  <testcase name="test_RotateBuilding_EmptySpaceNoLoadsOrSurfaces" time="0.009391" assertions="3">
+<testsuite name="ReportingMeasureNameTest" tests="2" time="34.990198" failures="0" errors="0" skipped="0" assertions="14" timestamp="2018-02-28T18:05:29-07:00">
+  <testcase name="test_number_of_arguments_and_argument_names" time="2.4e-05" assertions="1">
   </testcase>
-  <testcase name="test_RotateBuilding" time="1.093946" assertions="7">
+  <testcase name="test_good_argument_values" time="34.989011" assertions="13">
   </testcase>
   <system-out>
+"/Applications/OpenStudio-2.4.1/Ruby/../bin/openstudio" run -w "/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/ReportingMeasure/tests/output/test_good_argument_values/in.osw"
 **MEASURE APPLICABILITY**
 0 = Success
 **INITIAL CONDITION**
-The building's initial rotation was 0.0 degrees.
 **FINAL CONDITION**
-The building's final rotation is 140.2 degrees.
 **INFO MESSAGES**
-The building has been rotated by 140.2 degrees.
+Found timeseries.
 **WARNING MESSAGES**
-Requested rotation was not between -360 and 360. Effective relative rotation is 140.2 degrees.
 **ERROR MESSAGES**
 ***Machine-Readable Attributes**
 [
-{
-   "name" : "relative_building_rotation",
-   "value" : 500.19999999999999
-}
-,{
-   "name" : "orientation_initial",
-   "value" : 0
-}
-,{
-   "name" : "orientation_final",
-   "value" : 140.19999999999999
-}
+
 ]
 ***Files Generated**
 

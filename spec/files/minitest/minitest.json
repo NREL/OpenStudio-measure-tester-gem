@@ -1,15 +1,79 @@
 {
   "test_directory": "spec/files/minitest",
-  "total_tests": 7,
-  "total_assertions": 66,
-  "total_errors": 0,
-  "total_failures": 0,
+  "total_tests": 20,
+  "total_assertions": 144,
+  "total_errors": 1,
+  "total_failures": 1,
   "total_skipped": 0,
   "by_measure": {
-    "Pristine": {
-      "tested_class": "Pristine",
+    "AddOverhangsByProjectionFactor": {
+      "tested_class": "AddOverhangsByProjectionFactor",
+      "measure_tests": 4,
+      "measure_assertions": 39,
+      "measure_errors": 1,
+      "measure_failures": 1,
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+          "\nRuntimeError: This will be an error\n    /Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199:in `test_failure' (RuntimeError)\n/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199    "
+        ],
+        "failures": [
+          "\nExpected: 1\n  Actual: 5 (Minitest::Assertion)\n/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:138    "
+        ]
+      }
+    },
+    "ChangeBuildingLocation": {
+      "tested_class": "ChangeBuildingLocation",
+      "measure_tests": 4,
+      "measure_assertions": 13,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
+    },
+    "EnergyPlusMeasureName": {
+      "tested_class": "EnergyPlusMeasureName",
+      "measure_tests": 3,
+      "measure_assertions": 12,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
+    },
+    "ModelMeasureNameTest": {
+      "tested_class": "ModelMeasureNameTest",
       "measure_tests": 3,
       "measure_assertions": 10,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ]
+      }
+    },
+    "ReportingMeasureNameTest": {
+      "tested_class": "ReportingMeasureNameTest",
+      "measure_tests": 2,
+      "measure_assertions": 14,
       "measure_errors": 0,
       "measure_failures": 0,
       "measure_skipped": 0,

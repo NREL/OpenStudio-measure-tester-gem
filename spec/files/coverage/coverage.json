@@ -1,17 +1,158 @@
 {
-  "total_percent_coverage": 90.87,
-  "total_lines": 780,
-  "total_relevant_lines": 416,
-  "total_covered_lines": 378,
-  "total_missed_lines": 38,
+  "total_percent_coverage": 87.54,
+  "total_lines": 2404,
+  "total_relevant_lines": 1244,
+  "total_covered_lines": 1089,
+  "total_missed_lines": 155,
   "by_measure": {
-    "RotateBuilding": {
-      "total_lines": 80,
-      "relevant_lines": 36,
-      "missed_lines": 3,
-      "covered_lines": 33,
-      "percent_coverage": 91.67,
+    "AddOverhangsByProjectionFactor": {
+      "total_lines": 266,
+      "relevant_lines": 142,
+      "missed_lines": 22,
+      "covered_lines": 120,
+      "percent_coverage": 84.51,
       "files": [
+        {
+          "name": "measure.rb",
+          "total_lines": 266,
+          "percent_coverage": 84.51,
+          "missed_lines": 22,
+          "relevant_lines": 142,
+          "covered_lines": 120
+        }
+      ]
+    },
+    "ChangeBuildingLocation": {
+      "total_lines": 722,
+      "relevant_lines": 389,
+      "missed_lines": 72,
+      "covered_lines": 317,
+      "percent_coverage": 81.49,
+      "files": [
+        {
+          "name": "tests/change_building_location_test.rb",
+          "total_lines": 128,
+          "percent_coverage": 96.97,
+          "missed_lines": 2,
+          "relevant_lines": 66,
+          "covered_lines": 64
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 210,
+          "percent_coverage": 79.69,
+          "missed_lines": 26,
+          "relevant_lines": 128,
+          "covered_lines": 102
+        },
+        {
+          "name": "resources/stat_file.rb",
+          "total_lines": 190,
+          "percent_coverage": 79.81,
+          "missed_lines": 21,
+          "relevant_lines": 104,
+          "covered_lines": 83
+        },
+        {
+          "name": "resources/epw.rb",
+          "total_lines": 194,
+          "percent_coverage": 74.73,
+          "missed_lines": 23,
+          "relevant_lines": 91,
+          "covered_lines": 68
+        }
+      ]
+    },
+    "EnergyPlusMeasureName": {
+      "total_lines": 197,
+      "relevant_lines": 84,
+      "missed_lines": 5,
+      "covered_lines": 79,
+      "percent_coverage": 94.05,
+      "files": [
+        {
+          "name": "tests/energyplus_measure_test.rb",
+          "total_lines": 107,
+          "percent_coverage": 98.0,
+          "missed_lines": 1,
+          "relevant_lines": 50,
+          "covered_lines": 49
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 90,
+          "percent_coverage": 88.24,
+          "missed_lines": 4,
+          "relevant_lines": 34,
+          "covered_lines": 30
+        }
+      ]
+    },
+    "ModelMeasureName": {
+      "total_lines": 202,
+      "relevant_lines": 90,
+      "missed_lines": 5,
+      "covered_lines": 85,
+      "percent_coverage": 94.44,
+      "files": [
+        {
+          "name": "tests/model_measure_test.rb",
+          "total_lines": 131,
+          "percent_coverage": 98.36,
+          "missed_lines": 1,
+          "relevant_lines": 61,
+          "covered_lines": 60
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 71,
+          "percent_coverage": 86.21,
+          "missed_lines": 4,
+          "relevant_lines": 29,
+          "covered_lines": 25
+        }
+      ]
+    },
+    "ReportingMeasureName": {
+      "total_lines": 308,
+      "relevant_lines": 161,
+      "missed_lines": 15,
+      "covered_lines": 146,
+      "percent_coverage": 90.68,
+      "files": [
+        {
+          "name": "tests/reporting_measure_test.rb",
+          "total_lines": 158,
+          "percent_coverage": 96.59,
+          "missed_lines": 3,
+          "relevant_lines": 88,
+          "covered_lines": 85
+        },
+        {
+          "name": "measure.rb",
+          "total_lines": 150,
+          "percent_coverage": 83.56,
+          "missed_lines": 12,
+          "relevant_lines": 73,
+          "covered_lines": 61
+        }
+      ]
+    },
+    "RotateBuilding": {
+      "total_lines": 202,
+      "relevant_lines": 83,
+      "missed_lines": 4,
+      "covered_lines": 79,
+      "percent_coverage": 95.18,
+      "files": [
+        {
+          "name": "tests/RotateBuilding_Test.rb",
+          "total_lines": 122,
+          "percent_coverage": 97.87,
+          "missed_lines": 1,
+          "relevant_lines": 47,
+          "covered_lines": 46
+        },
         {
           "name": "measure.rb",
           "total_lines": 80,
@@ -23,19 +164,19 @@
       ]
     },
     "SetGasBurnerEfficiency": {
-      "total_lines": 501,
-      "relevant_lines": 292,
-      "missed_lines": 31,
-      "covered_lines": 261,
-      "percent_coverage": 89.38,
+      "total_lines": 507,
+      "relevant_lines": 295,
+      "missed_lines": 32,
+      "covered_lines": 263,
+      "percent_coverage": 89.15,
       "files": [
         {
           "name": "tests/SetGasBurnerEfficiency_Test.rb",
-          "total_lines": 187,
-          "percent_coverage": 100.0,
-          "missed_lines": 0,
-          "relevant_lines": 124,
-          "covered_lines": 124
+          "total_lines": 193,
+          "percent_coverage": 99.21,
+          "missed_lines": 1,
+          "relevant_lines": 127,
+          "covered_lines": 126
         },
         {
           "name": "measure.rb",
@@ -44,31 +185,6 @@
           "missed_lines": 31,
           "relevant_lines": 168,
           "covered_lines": 137
-        }
-      ]
-    },
-    "Pristine": {
-      "total_lines": 199,
-      "relevant_lines": 88,
-      "missed_lines": 4,
-      "covered_lines": 84,
-      "percent_coverage": 95.45,
-      "files": [
-        {
-          "name": "tests/pristine_test.rb",
-          "total_lines": 125,
-          "percent_coverage": 100.0,
-          "missed_lines": 0,
-          "relevant_lines": 59,
-          "covered_lines": 59
-        },
-        {
-          "name": "measure.rb",
-          "total_lines": 74,
-          "percent_coverage": 86.21,
-          "missed_lines": 4,
-          "relevant_lines": 29,
-          "covered_lines": 25
         }
       ]
     }

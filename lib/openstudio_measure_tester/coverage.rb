@@ -66,7 +66,6 @@ module OpenStudioMeasureTester
 
       # find all measure names
       measure_names = []
-      cn = ''
       coverage_results['coverage'].each do |key, data|
         parts = key.split('/')
         if parts.last == 'measure.rb'
@@ -74,12 +73,11 @@ module OpenStudioMeasureTester
           pp name
           measure_names << name
         end
-
       end
 
       measure_names.each do |measure_name|
         cn = ''
-        results = coverage_results['coverage'].select {|key, data| key.include? measure_name }
+        results = coverage_results['coverage'].select {|key, _data| key.include? measure_name}
 
         mhash = {}
         mhash['total_lines'] = 0
@@ -97,10 +95,19 @@ module OpenStudioMeasureTester
 
           # get the class name
           if fhash['name'] == 'measure.rb'
+            unless File.exist? key
+              # magically try to find the path name by dropping the first element of array
+              puts "Trying to determine the file path of unknown measure #{key}"
+              until File.exist?(key) || key.split('/').size == 0
+                key = key.split('/')[1..-1].join('/')
+              end
+            end
+
+            # file should exist now
             File.readlines(key).each do |line|
               if (line.include? 'class') && line.split(' ')[0] == 'class'
-                  cn = line.split(' ')[1]
-                  break
+                cn = line.split(' ')[1]
+                break
               end
             end
           end
