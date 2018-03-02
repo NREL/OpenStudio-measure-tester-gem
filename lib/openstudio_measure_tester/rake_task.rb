@@ -147,6 +147,12 @@ module OpenStudioMeasureTester
         end
 
         task :prepare_rubocop do
+          # copy over the .rubocop.yml file
+          shared_rubocop_file = File.expand_path('../../.rubocop.yml', File.dirname(__FILE__))
+          dest_file = "#{Dir.pwd}/.rubocop.yml"
+          if shared_rubocop_file != dest_file
+            FileUtils.copy(shared_rubocop_file, dest_file)
+          end
           pre_process_rubocop(Rake.application.original_dir)
         end
 
