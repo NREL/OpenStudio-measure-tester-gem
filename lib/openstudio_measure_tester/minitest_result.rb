@@ -62,7 +62,7 @@ module OpenStudioMeasureTester
 
         #pp hash
 
-        measure_name = file.split('/')[-1].split('.')[0].split('-')[1]
+        measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/,''
 
         mhash = {}
 

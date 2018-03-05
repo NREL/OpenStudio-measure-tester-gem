@@ -76,7 +76,7 @@ module OpenStudioMeasureTester
       end
 
       measure_names.each do |measure_name|
-        #cn = ''
+        cn = ''
         results = coverage_results['coverage'].select {|key, _data| key.include? measure_name}
 
         mhash = {}
@@ -92,24 +92,24 @@ module OpenStudioMeasureTester
           fhash['name'] = key.partition(measure_name + '/').last
           fhash['total_lines'] = data.size
 
-          # get the class name
-          # if fhash['name'] == 'measure.rb'
-          #   unless File.exist? key
-          #     # magically try to find the path name by dropping the first element of array
-          #     puts "Trying to determine the file path of unknown measure #{key}"
-          #     until File.exist?(key) || key.split('/').size == 0
-          #       key = key.split('/')[1..-1].join('/')
-          #     end
-          #   end
+          #get the class name
+          if fhash['name'] == 'measure.rb'
+            unless File.exist? key
+              # magically try to find the path name by dropping the first element of array
+              puts "Trying to determine the file path of unknown measure #{key}"
+              until File.exist?(key) || key.split('/').size == 0
+                key = key.split('/')[1..-1].join('/')
+              end
+            end
 
-          #   # file should exist now
-          #   File.readlines(key).each do |line|
-          #     if (line.include? 'class') && line.split(' ')[0] == 'class'
-          #       cn = line.split(' ')[1]
-          #       break
-          #     end
-          #   end
-          # end
+            # file should exist now
+            File.readlines(key).each do |line|
+              if (line.include? 'class') && line.split(' ')[0] == 'class'
+                cn = line.split(' ')[1].gsub /_?[tT]est\z/,''
+                break
+              end
+            end
+          end
 
           mhash['total_lines'] += fhash['total_lines']
           # remove nils from array
@@ -130,8 +130,7 @@ module OpenStudioMeasureTester
 
         end
         mhash['percent_coverage'] = (mhash['covered_lines'].to_f / mhash['relevant_lines'].to_f * 100).round(2)
-        #@measure_coverages[cn] = mhash
-        @measure_coverages[measure_name] = mhash
+        @measure_coverages[cn] = mhash
         @total_lines += mhash['total_lines']
         @total_relevant_lines += mhash['relevant_lines']
         @total_covered_lines += mhash['covered_lines']
