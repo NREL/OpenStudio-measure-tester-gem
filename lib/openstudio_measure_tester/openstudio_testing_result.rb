@@ -39,16 +39,25 @@ module OpenStudioMeasureTester
       @results = {}
 
       # get the repository info
+      # TODO add failsafe
       g = Git.open(Dir.pwd)
       config = g.config
-      repo_name = config['remote.origin.url'].split('/')[1].split('.')[0]
-      current_branch = g.branch.name
-      @results['repo_name'] = repo_name
-      @results['current_branch'] = current_branch
-      # TODO add failsafe
+      repo_name = config['remote.origin.url'] ? config['remote.origin.url'].split('/').last.chomp('.git') : nil
+      current_branch = g.branch.name ? g.branch.name : nil
+      logs = g.log
+      sha = nil
+      if logs.size > 0
+        sha = logs.first.sha
+      end
 
       # check if the results data already exist, and if so, then load the file now to keep the results
       load_results
+
+      # add/overwrite repo info in results
+      @results['repo_name'] = repo_name
+      @results['current_branch'] = current_branch
+      @results['sha'] = sha
+
       aggregate_results
     end
 
@@ -116,6 +125,10 @@ module OpenStudioMeasureTester
     end
 
     def save_results
+
+      puts "WRITING SAVE RESULTS FILE!"
+      puts "SHA: #{@results['sha']}"
+
       File.open("#{@test_results_dir}/combined_results.json", 'w') do |file|
         file << JSON.pretty_generate(@results)
       end

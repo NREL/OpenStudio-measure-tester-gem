@@ -26,6 +26,13 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2 accent">Overview</h1>
           </div>
+          <div class="justify-content-between align-items-center pb-2 mb-3 border-bottom">
+            <div class="row px-1">
+              <div class="col-sm-4"><span class="h5 pr-1">Repo</span><% if @hash['repo_name'] %><%= @hash['repo_name'] %><% end %></div>
+              <div class="col-sm-3"><span class="h5 pr-1">Branch</span><% if @hash['current_branch'] %><%= @hash['current_branch'] %><% end %></div>
+              <div class="col-sm-5"><span class="h5 pr-1">Commit</span><% if @hash['sha'] %><%= @hash['sha'] %><% end %></div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-sm">
               <div class="card">
