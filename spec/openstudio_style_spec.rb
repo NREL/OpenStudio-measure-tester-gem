@@ -40,10 +40,10 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
 
     # make sure that the infoExtractor method loads correctly (from OpenStudio)
     expect(style.respond_to?(:infoExtractor)).to eq true
-    expect(style.results[:by_measure][:RotateBuilding][:measure_errors]).to eq 12
+    expect(style.results[:by_measure][:RotateBuilding][:measure_errors]).to eq 10
     expect(style.results[:by_measure][:RotateBuilding][:measure_warnings]).to eq 2
     expect(style.results[:by_measure][:RotateBuilding][:measure_info]).to eq 1
-    expect(style.results[:by_measure][:RotateBuilding][:issues].size).to eq 15
+    expect(style.results[:by_measure][:RotateBuilding][:issues].size).to eq 13
   end
 
   it 'should check for naming conventions' do

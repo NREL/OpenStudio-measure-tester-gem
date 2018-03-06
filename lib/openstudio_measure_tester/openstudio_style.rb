@@ -75,20 +75,6 @@ module OpenStudioMeasureTester
             severity: :error,
             file_type: :measure
         }, {
-            regex: /def description(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def description\' is missing.',
-            type: :syntax,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /def modeler_description(.*?)end/m,
-            check_type: :if_missing,
-            message: '\'def modeler_description\' is missing.',
-            type: :syntax,
-            severity: :error,
-            file_type: :measure
-        }, {
             regex: /require .openstudio_measure_tester\/test_helper./,
             check_type: :if_missing,
             message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
