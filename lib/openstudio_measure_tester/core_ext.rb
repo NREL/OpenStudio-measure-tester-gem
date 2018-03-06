@@ -67,3 +67,12 @@ class String
     r
   end
 end
+
+# Extend the Git log to add an empty method - for rubocop autocorrect happiness.
+module Git
+  class Log
+    def empty?
+      size.zero? # rubocop:disable Style/ZeroLengthPredicate
+    end
+  end
+end
