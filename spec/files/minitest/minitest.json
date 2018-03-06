@@ -54,8 +54,8 @@
         ]
       }
     },
-    "ModelMeasureNameTest": {
-      "tested_class": "ModelMeasureNameTest",
+    "ModelMeasureName": {
+      "tested_class": "ModelMeasureName",
       "measure_tests": 3,
       "measure_assertions": 10,
       "measure_errors": 0,
@@ -70,8 +70,8 @@
         ]
       }
     },
-    "ReportingMeasureNameTest": {
-      "tested_class": "ReportingMeasureNameTest",
+    "ReportingMeasureName": {
+      "tested_class": "ReportingMeasureName",
       "measure_tests": 2,
       "measure_assertions": 14,
       "measure_errors": 0,
