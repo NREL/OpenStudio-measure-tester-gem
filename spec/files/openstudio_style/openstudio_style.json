@@ -36,7 +36,7 @@
           "severity": "error"
         },
         {
-          "message": "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
+          "message": "MiniTest::Unit::TestCase is deprecated. Use Minitest::Test.",
           "type": "syntax",
           "severity": "warning"
         },
@@ -231,7 +231,7 @@
           "severity": "error"
         },
         {
-          "message": "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
+          "message": "MiniTest::Unit::TestCase is deprecated. Use Minitest::Test.",
           "type": "syntax",
           "severity": "warning"
         },

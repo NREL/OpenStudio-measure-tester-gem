@@ -13,7 +13,7 @@ require_relative '../measure.rb'
 require 'minitest/autorun'
 
 
-class ChangeBuildingLocation_Test < MiniTest::Test
+class ChangeBuildingLocation_Test < Minitest::Test
 
   def run_dir(test_name)
 
