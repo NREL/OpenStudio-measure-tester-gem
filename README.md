@@ -18,7 +18,7 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
         
         # or
         
-        gem 'openstudio_measure_tester', path: '../<path-to-checkout'
+        gem 'openstudio_measure_tester', path: '../<path-to-checkout>'
         ```
     
     * Rakefile
