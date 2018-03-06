@@ -125,9 +125,6 @@ module OpenStudioMeasureTester
     end
 
     def save_results
-      puts 'WRITING SAVE RESULTS FILE!'
-      puts "SHA: #{@results['sha']}"
-
       File.open("#{@test_results_dir}/combined_results.json", 'w') do |file|
         file << JSON.pretty_generate(@results)
       end

@@ -70,6 +70,11 @@ module OpenStudioMeasureTester
         puts "Parsing Rubocop report #{file}"
         hash = Hash.from_xml(File.read(file))
 
+        if hash.nil?
+          puts 'Error reporting Rubocop'
+          return
+        end
+
         # get measure names
         measure_names = []
         # cn= ''
