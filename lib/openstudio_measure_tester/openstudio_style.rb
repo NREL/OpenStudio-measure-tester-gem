@@ -32,76 +32,76 @@ module OpenStudioMeasureTester
     attr_reader :measure_messages
 
     CHECKS = [
-        {
-            regex: /OpenStudio::Ruleset::ModelUserScript/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /OpenStudio::Ruleset::OSRunner/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /OpenStudio::Ruleset::OSRunner/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :test
-        }, {
-            regex: /OpenStudio::Ruleset::OSArgumentVector/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /OpenStudio::Ruleset::OSArgument/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /OpenStudio::Ruleset::OSArgumentMap/,
-            check_type: :if_exists,
-            message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure.convertOSArgumentVectorToMap(arguments) instead.',
-            type: :deprecated,
-            severity: :error,
-            file_type: :measure
-        }, {
-            regex: /require .openstudio_measure_tester\/test_helper./,
-            check_type: :if_missing,
-            message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
-            type: :syntax,
-            severity: :error,
-            file_type: :test
-        }, {
-            regex: /MiniTest::Unit::TestCase/,
-            check_type: :if_exists,
-            message: "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
-            type: :syntax,
-            severity: :warning,
-            file_type: :test
-        }, {
-            regex: /require .openstudio\/ruleset  /,
-            check_type: :if_exists,
-            message: "Require openstudio/ruleset/* is deprecated. Use require 'openstudio/measure/*'",
-            type: :syntax,
-            severity: :warning,
-            file_type: :test
-        }
+      {
+        regex: /OpenStudio::Ruleset::ModelUserScript/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /OpenStudio::Ruleset::OSRunner/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /OpenStudio::Ruleset::OSRunner/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :test
+      }, {
+        regex: /OpenStudio::Ruleset::OSArgumentVector/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /OpenStudio::Ruleset::OSArgument/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /OpenStudio::Ruleset::OSArgumentMap/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::OSArgumentMap is deprecated, use OpenStudio::Measure.convertOSArgumentVectorToMap(arguments) instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /require .openstudio_measure_tester\/test_helper./,
+        check_type: :if_missing,
+        message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
+        type: :syntax,
+        severity: :error,
+        file_type: :test
+      }, {
+        regex: /MiniTest::Unit::TestCase/,
+        check_type: :if_exists,
+        message: 'MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.',
+        type: :syntax,
+        severity: :warning,
+        file_type: :test
+      }, {
+        regex: /require .openstudio\/ruleset  /,
+        check_type: :if_exists,
+        message: "Require openstudio/ruleset/* is deprecated. Use require 'openstudio/measure/*'",
+        type: :syntax,
+        severity: :warning,
+        file_type: :test
+      }
     ].freeze
 
     # Pass in the measures_glob with the filename (typically measure.rb)
     def initialize(measures_glob)
       @measures_glob = measures_glob
-      @results = {by_measure: {}}
+      @results = { by_measure: {} }
 
       # Individual measure messages
       @measure_messages = []
@@ -170,20 +170,20 @@ module OpenStudioMeasureTester
       # calculate the info, warnings, errors and return the measure data
       # TODO: break out the issues by file
       return {
-          @measure_classname.to_sym => {
-              measure_info: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :info},
-              measure_warnings: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :warning},
-              measure_errors: @measure_messages.nil? ? 0 : @measure_messages.count{|h| h[:severity] == :error},
-              issues: @measure_messages.clone
-          }
+        @measure_classname.to_sym => {
+          measure_info: @measure_messages.nil? ? 0 : @measure_messages.count { |h| h[:severity] == :info },
+          measure_warnings: @measure_messages.nil? ? 0 : @measure_messages.count { |h| h[:severity] == :warning },
+          measure_errors: @measure_messages.nil? ? 0 : @measure_messages.count { |h| h[:severity] == :error },
+          issues: @measure_messages.clone
+        }
       }
     end
 
     def log_message(message, type = :syntax, severity = :info)
       new_message = {
-          message: message,
-          type: type,
-          severity: severity
+        message: message,
+        type: type,
+        severity: severity
       }
       @measure_messages << new_message
     end
@@ -205,7 +205,7 @@ module OpenStudioMeasureTester
 
     def save_results
       FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
-      File.open("openstudio_style/openstudio_style.json", 'w') do |file|
+      File.open('openstudio_style/openstudio_style.json', 'w') do |file|
         file << JSON.pretty_generate(@results)
       end
     end
@@ -306,7 +306,7 @@ module OpenStudioMeasureTester
       end
 
       if measure_hash[:values_from_file][:name] != measure_hash[:name]
-        log_message("Measure class as snake_case name does not match <name> in XML. Run openstudio measure -u .", :structure, :error)
+        log_message('Measure class as snake_case name does not match <name> in XML. Run openstudio measure -u .', :structure, :error)
       end
 
       if measure_hash[:values_from_file][:description].empty?
@@ -338,12 +338,12 @@ module OpenStudioMeasureTester
 
     def get_attributes_from_measure(measure_dir, class_name)
       result = {
-          values_from_file: {
-              name: '',
-              display_name: '',
-              description: '',
-              modeler_description: ''
-          }
+        values_from_file: {
+          name: '',
+          display_name: '',
+          description: '',
+          modeler_description: ''
+        }
       }
 
       begin
@@ -394,7 +394,7 @@ module OpenStudioMeasureTester
       result[:description] = measure.description
       result[:modeler_description] = measure.modelerDescription
       result[:tags] = []
-      measure.tags.each {|tag| result[:tags] << tag}
+      measure.tags.each { |tag| result[:tags] << tag }
 
       result[:outputs] = []
       begin
@@ -417,15 +417,15 @@ module OpenStudioMeasureTester
       measure.attributes.each do |a|
         value_type = a.valueType
         if value_type == 'Boolean'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsBoolean }
         elsif value_type == 'Double'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsDouble }
         elsif value_type == 'Integer'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsInteger }
         elsif value_type == 'Unsigned'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsUnsigned }
         elsif value_type == 'String'.to_AttributeValueType
-          attributes << {name: a.name, display_name: a.displayName(true).get, value: a.valueAsString}
+          attributes << { name: a.name, display_name: a.displayName(true).get, value: a.valueAsString }
         end
       end
       result[:attributes] = attributes
@@ -470,9 +470,9 @@ module OpenStudioMeasureTester
         elsif type == 'Choice'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsString if argument.hasDefaultValue
           arg[:choice_values] = []
-          argument.choiceValues.each {|value| arg[:choice_values] << value}
+          argument.choiceValues.each { |value| arg[:choice_values] << value }
           arg[:choice_display_names] = []
-          argument.choiceValueDisplayNames.each {|value| arg[:choice_display_names] << value}
+          argument.choiceValueDisplayNames.each { |value| arg[:choice_display_names] << value }
 
         elsif type == 'Path'.to_OSArgumentType
           arg[:default_value] = argument.defaultValueAsPath.to_s if argument.hasDefaultValue

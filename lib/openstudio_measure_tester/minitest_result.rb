@@ -52,7 +52,6 @@ module OpenStudioMeasureTester
 
       parse_results
       to_file
-
     end
 
     def parse_results
@@ -60,9 +59,9 @@ module OpenStudioMeasureTester
         puts "Parsing minitest report #{file}"
         hash = Hash.from_xml(File.read(file))
 
-        #pp hash
+        # pp hash
 
-        measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/,''
+        measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/, ''
 
         mhash = {}
 
@@ -75,7 +74,7 @@ module OpenStudioMeasureTester
 
         # Note: only 1 failure and 1 error possible per test
         errors, failures = parse_measure(hash)
-        mhash['issues'] = {errors: errors, failures: failures}
+        mhash['issues'] = { errors: errors, failures: failures }
 
         @measure_results[measure_name] = mhash
 
@@ -84,13 +83,11 @@ module OpenStudioMeasureTester
         @total_errors += mhash['measure_errors']
         @total_failures += mhash['measure_failures']
         @total_skipped += mhash['measure_skipped']
-
       end
 
       @error_status = true if @total_errors > 0
 
-      #pp measure_results
-
+      # pp measure_results
     end
 
     def to_file
@@ -115,7 +112,6 @@ module OpenStudioMeasureTester
     private
 
     def parse_measure(measure)
-
       errors = []
       failures = []
 
@@ -138,7 +134,6 @@ module OpenStudioMeasureTester
       end
 
       return errors, failures
-
     end
   end
 end

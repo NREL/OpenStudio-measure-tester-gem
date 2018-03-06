@@ -43,7 +43,6 @@ RSpec.describe OpenStudioMeasureTester::Coverage do
     expect(res).to be_instance_of(Hash)
     expect(res.key?('by_measure')).to eq true
     expect(res.key?('total_percent_coverage')).to eq true
-
   end
 
   it 'should save a json file' do

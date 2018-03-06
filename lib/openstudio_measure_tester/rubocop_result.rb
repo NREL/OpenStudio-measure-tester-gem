@@ -47,7 +47,6 @@ module OpenStudioMeasureTester
     attr_reader :by_measure
 
     def initialize(path_to_results)
-
       @path_to_results = path_to_results
       @error_status = false
       @total_files = 0
@@ -63,7 +62,6 @@ module OpenStudioMeasureTester
 
       parse_results
       to_file
-
     end
 
     def parse_results
@@ -74,12 +72,12 @@ module OpenStudioMeasureTester
 
         # get measure names
         measure_names = []
-        #cn= ''
+        # cn= ''
         hash['checkstyle']['file'].each do |key, data|
           parts = key['name'].split('/')
           if parts.last == 'measure.rb'
-           name = parts[-2]
-           measure_names << name
+            name = parts[-2]
+            measure_names << name
           end
         end
 
@@ -87,14 +85,13 @@ module OpenStudioMeasureTester
         @total_files = hash['checkstyle']['file'].length
 
         measure_names.each do |measure_name|
-
-          cn= ''
-          results = hash['checkstyle']['file'].select {|data| data['name'].include? measure_name }
+          cn = ''
+          results = hash['checkstyle']['file'].select { |data| data['name'].include? measure_name }
 
           mhash = {}
           mhash['measure_issues'] = 0
           mhash['measure_info'] = 0
-          mhash['measure_warnings'] = 0              
+          mhash['measure_warnings'] = 0
           mhash['measure_errors'] = 0
           mhash['files'] = []
 
@@ -103,12 +100,12 @@ module OpenStudioMeasureTester
             fhash['file_name'] = key['name'].split('/')[-1]
             fhash['violations'] = []
 
-            #get the class name
+            # get the class name
             if fhash['file_name'] == 'measure.rb'
               File.readlines(key['name']).each do |line|
                 if (line.include? 'class') && line.split(' ')[0] == 'class'
-                    cn = line.split(' ')[1].gsub /_?[tT]est\z/,''
-                    break
+                  cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
+                  break
                 end
               end
             end
@@ -124,28 +121,27 @@ module OpenStudioMeasureTester
               if key['error'].class == Array
                 @file_issues = key['error'].length
                 key['error'].each do |s|
-
-                  if s['severity'] === "info"
+                  if s['severity'] === 'info'
                     @file_info += 1
-                  elsif s['severity'] === "warning"
+                  elsif s['severity'] === 'warning'
                     @file_warnings += 1
-                  elsif s['severity'] === "error" #TODO: look up complete list of codes 
+                  elsif s['severity'] === 'error' # TODO: look up complete list of codes
                     @file_errors += 1
                   end
-                  violations << {line: s['line'], column: s['column'], severity: s['severity'], message: s['message']}
+                  violations << { line: s['line'], column: s['column'], severity: s['severity'], message: s['message'] }
                 end
               end
 
               if key['error'].class == Hash
                 @file_issues = 1
-                if key['error']['severity'] === "info"
+                if key['error']['severity'] === 'info'
                   @file_info += 1
-                elsif key['error']['severity'] === "warning"
+                elsif key['error']['severity'] === 'warning'
                   @file_warnings += 1
-                elsif key['error']['severity'] === "error"
+                elsif key['error']['severity'] === 'error'
                   @file_errors += 1
                 end
-                violations << {line: key['error']['line'], column: key['error']['column'], severity: key['error']['severity'], message: key['error']['message']}
+                violations << { line: key['error']['line'], column: key['error']['column'], severity: key['error']['severity'], message: key['error']['message'] }
               end
 
               fhash['issues'] = @file_issues
@@ -153,7 +149,7 @@ module OpenStudioMeasureTester
               fhash['warning'] = @file_warnings
               fhash['error'] = @file_errors
               fhash['violations'] = violations
-              
+
               mhash['measure_issues'] += @file_issues
               mhash['measure_info'] += @file_info
               mhash['measure_warnings'] += @file_warnings
@@ -161,31 +157,27 @@ module OpenStudioMeasureTester
 
               @total_issues += @file_issues
               @total_info += @file_info
-              @total_warnings += @file_warnings 
+              @total_warnings += @file_warnings
               @total_errors += @file_errors
-              
-            end
-            
-            mhash['files'] << fhash
 
+            end
+
+            mhash['files'] << fhash
           end
 
-        #@summary << mhash
-        @by_measure[cn] = mhash
-
+          # @summary << mhash
+          @by_measure[cn] = mhash
         end
-
       end
 
       puts "total files: #{total_files}"
       puts "total issues: #{@total_issues} (#{@total_info} info, #{@total_warnings} warnings, #{@total_errors} errors)"
 
       @error_status = true if @total_errors > 0
-
     end
 
     def to_hash
-      results = {};
+      results = {}
       results['total_measures'] = @total_measures
       results['total_files'] = @total_files
       results['total_issues'] = @total_issues
@@ -204,7 +196,6 @@ module OpenStudioMeasureTester
       FileUtils.mkdir_p "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/rubocop.json", 'w') do |file|
         file << JSON.pretty_generate(res_hash)
-      
       end
     end
   end

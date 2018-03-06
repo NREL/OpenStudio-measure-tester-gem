@@ -47,7 +47,6 @@ module OpenStudioMeasureTester
       @measure_coverages = {}
 
       parse_results
-
     end
 
     def parse_results
@@ -77,7 +76,7 @@ module OpenStudioMeasureTester
 
       measure_names.each do |measure_name|
         cn = ''
-        results = coverage_results['coverage'].select {|key, _data| key.include? measure_name}
+        results = coverage_results['coverage'].select { |key, _data| key.include? measure_name }
 
         mhash = {}
         mhash['total_lines'] = 0
@@ -92,20 +91,18 @@ module OpenStudioMeasureTester
           fhash['name'] = key.partition(measure_name + '/').last
           fhash['total_lines'] = data.size
 
-          #get the class name
+          # get the class name
           if fhash['name'] == 'measure.rb'
             unless File.exist? key
               # magically try to find the path name by dropping the first element of array
               puts "Trying to determine the file path of unknown measure #{key}"
-              until File.exist?(key) || key.split('/').size == 0
-                key = key.split('/')[1..-1].join('/')
-              end
+              key = key.split('/')[1..-1].join('/') until File.exist?(key) || key.split('/').empty?
             end
 
             # file should exist now
             File.readlines(key).each do |line|
               if (line.include? 'class') && line.split(' ')[0] == 'class'
-                cn = line.split(' ')[1].gsub /_?[tT]est\z/,''
+                cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
                 break
               end
             end
@@ -115,7 +112,7 @@ module OpenStudioMeasureTester
           # remove nils from array
           data.delete(nil)
 
-          cov = data.count {|x| x > 0}
+          cov = data.count { |x| x > 0 }
           fhash['percent_coverage'] = ((cov.to_f / data.size.to_f) * 100).round(2)
           fhash['missed_lines'] = data.size - cov
           fhash['relevant_lines'] = data.size
@@ -127,7 +124,6 @@ module OpenStudioMeasureTester
           mhash['missed_lines'] += fhash['missed_lines']
 
           mhash['files'] << fhash
-
         end
         mhash['percent_coverage'] = (mhash['covered_lines'].to_f / mhash['relevant_lines'].to_f * 100).round(2)
         @measure_coverages[cn] = mhash
@@ -135,7 +131,6 @@ module OpenStudioMeasureTester
         @total_relevant_lines += mhash['relevant_lines']
         @total_covered_lines += mhash['covered_lines']
         @total_missed_lines += mhash['missed_lines']
-
       end
 
       # pp @measure_coverages
@@ -145,11 +140,10 @@ module OpenStudioMeasureTester
         @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
       end
       pp "Total Coverage: #{@total_percent_coverage}"
-
     end
 
     def to_hash
-      results = {};
+      results = {}
       results['total_percent_coverage'] = @total_percent_coverage
       results['total_lines'] = @total_lines
       results['total_relevant_lines'] = @total_relevant_lines
@@ -167,7 +161,5 @@ module OpenStudioMeasureTester
         file << JSON.pretty_generate(res_hash)
       end
     end
-
   end
-
 end

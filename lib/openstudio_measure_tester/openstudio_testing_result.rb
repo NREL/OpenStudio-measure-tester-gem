@@ -46,7 +46,7 @@ module OpenStudioMeasureTester
       current_branch = g.branch.name ? g.branch.name : nil
       logs = g.log
       sha = nil
-      if logs.size > 0
+      if !logs.empty?
         sha = logs.first.sha
       end
 
@@ -70,7 +70,7 @@ module OpenStudioMeasureTester
           FileUtils.mv "#{@results_dir}/coverage", "#{@test_results_dir}/."
 
           cov = OpenStudioMeasureTester::Coverage.new("#{@test_results_dir}/coverage")
-          @results["coverage"] = cov.to_hash
+          @results['coverage'] = cov.to_hash
         end
 
         # minitest
@@ -119,14 +119,13 @@ module OpenStudioMeasureTester
       filename = "#{@test_results_dir}/combined_results.json"
       begin
         @results = JSON.parse(File.read(filename)) if File.exist? filename
-      rescue
+      rescue StandardError
         @results = {}
       end
     end
 
     def save_results
-
-      puts "WRITING SAVE RESULTS FILE!"
+      puts 'WRITING SAVE RESULTS FILE!'
       puts "SHA: #{@results['sha']}"
 
       File.open("#{@test_results_dir}/combined_results.json", 'w') do |file|
@@ -177,4 +176,3 @@ module OpenStudioMeasureTester
     end
   end
 end
-

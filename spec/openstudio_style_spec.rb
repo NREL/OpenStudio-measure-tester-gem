@@ -54,8 +54,8 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     expect(style.measure_messages.first[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
     style.measure_messages.clear
 
-    style.validate_name('Name', 'snake_case_is_right', :warning,ensure_snakecase: true)
-    style.validate_name('Name', 'CamelCaseIsUpAndDown', :warning,ensure_camelcase: true)
+    style.validate_name('Name', 'snake_case_is_right', :warning, ensure_snakecase: true)
+    style.validate_name('Name', 'CamelCaseIsUpAndDown', :warning, ensure_camelcase: true)
 
     style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_camelcase: true)
     style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_snakecase: true)
@@ -63,8 +63,8 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     expect(style.measure_messages.last[:message]).to eq "Name 'MixedUp_And_case' is not snake_case."
     style.measure_messages.clear
 
-    style.validate_name('Name', 'trailing_spaces ', :warning,ensure_snakecase: true)
-    style.validate_name('Name', ' trailing_spaces', :warning,ensure_snakecase: true)
+    style.validate_name('Name', 'trailing_spaces ', :warning, ensure_snakecase: true)
+    style.validate_name('Name', ' trailing_spaces', :warning, ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'trailing_spaces ' has leading or trailing spaces."
     expect(style.measure_messages.last[:message]).to eq "Name ' trailing_spaces' has leading or trailing spaces."
     style.measure_messages.clear

@@ -26,12 +26,12 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-RSpec.describe "CoreExt" do
+RSpec.describe 'CoreExt' do
   it 'should snakecase energyplus and openstudio correctly' do
-    expect("EnergyPlusTestCase".to_snakecase).to eq "energyplus_test_case"
-    expect("OpenStudioTestCase".to_snakecase).to eq "openstudio_test_case"
-    expect("openstudio_test_case".to_camelcase).to eq "OpenStudioTestCase"
-    expect("open_studio_test_case".to_camelcase).to eq "OpenStudioTestCase"
-    expect("openstudio_test_case".titleize).to eq "OpenStudio Test Case"
+    expect('EnergyPlusTestCase'.to_snakecase).to eq 'energyplus_test_case'
+    expect('OpenStudioTestCase'.to_snakecase).to eq 'openstudio_test_case'
+    expect('openstudio_test_case'.to_camelcase).to eq 'OpenStudioTestCase'
+    expect('open_studio_test_case'.to_camelcase).to eq 'OpenStudioTestCase'
+    expect('openstudio_test_case'.titleize).to eq 'OpenStudio Test Case'
   end
 end

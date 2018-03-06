@@ -28,7 +28,7 @@
 
 $coverage_started = false
 unless $coverage_started
-  puts "Coverage starting"
+  puts 'Coverage starting'
   require 'simplecov'
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
     [
