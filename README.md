@@ -1,4 +1,4 @@
-# OpenStudio Measure Tester
+# OpenStudio® Measure Tester
 
 [![Build Status](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem.svg?branch=develop)](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem)
 [![Gem Version](https://badge.fury.io/rb/openstudio_measure_tester.svg)](https://badge.fury.io/rb/openstudio_measure_tester)
