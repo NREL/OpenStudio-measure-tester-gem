@@ -39,15 +39,21 @@ module OpenStudioMeasureTester
       @results = {}
 
       # get the repository info
-      # TODO add failsafe
-      g = Git.open(Dir.pwd)
-      config = g.config
-      repo_name = config['remote.origin.url'] ? config['remote.origin.url'].split('/').last.chomp('.git') : nil
-      current_branch = g.branch.name ? g.branch.name : nil
-      logs = g.log
-      sha = nil
-      if !logs.empty?
-        sha = logs.first.sha
+      repo_name = 'unknown'
+      current_branch = 'unknown'
+      sha = 'unknown'
+      begin
+        g = Git.open(Dir.pwd)
+        config = g.config
+        repo_name = config['remote.origin.url'] ? config['remote.origin.url'].split('/').last.chomp('.git') : nil
+        current_branch = g.branch.name ? g.branch.name : nil
+        logs = g.log
+        sha = nil
+        if !logs.empty?
+          sha = logs.first.sha
+        end
+      rescue StandardError => error 
+        puts "Could not find .git for measure(s), will not be able to report git information"
       end
 
       # check if the results data already exist, and if so, then load the file now to keep the results
