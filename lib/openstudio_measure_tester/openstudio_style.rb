@@ -144,6 +144,12 @@ module OpenStudioMeasureTester
         measure_missing = true
       end
 
+      # Test the existence of LICENSE.md
+      unless File.exist? "#{measure_dir}/LICENSE.md"
+        log_message("Could not find LICENSE.md in '#{measure_dir}'.", :general, :warning)
+      end
+
+
       unless measure_missing
         measure = OpenStudio::BCLMeasure.load(measure_dir)
         if measure.empty?
@@ -166,6 +172,8 @@ module OpenStudioMeasureTester
       end
 
       # pp @measure_messages
+
+
 
       # calculate the info, warnings, errors and return the measure data
       # TODO: break out the issues by file
