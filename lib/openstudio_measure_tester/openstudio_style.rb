@@ -156,9 +156,14 @@ module OpenStudioMeasureTester
           log_message("Failed to load measure '#{measure_dir}'", :general, :error)
         else
           measure = measure.get
-          measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
+          begin
+            measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
 
-          measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
+          rescue NameError => error
+            log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
+          end
+
+          measure_hash = generate_measure_hash(measure_dir, measure, measure_info)  
           measure_hash.merge!(get_attributes_from_measure(measure_dir, measure_hash[:class_name]))
 
           @measure_classname = measure_hash[:class_name]
