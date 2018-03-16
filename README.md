@@ -11,7 +11,8 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
 
     * Gemfile
         ```ruby
-        gem 'openstudio_measure_tester', '~> 0.1'
+        source 'https://rubygems.org'
+        gem 'openstudio_measure_tester'
         
         # or 
         gem 'openstudio_measure_tester', github: 'NREL/openstudio_measure_tester_gem'
@@ -30,7 +31,12 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
     
 * Run `bundle update`
 * run `bundle exec rake -T` to see the new tests that are available.
-* In existing measure directory, run `bundle exec rake openstudio:test`
+* In existing measure directory, run `bundle exec rake openstudio:all`
+* Minitest, Coverage, Rubocop, and OpenStudio Style will run. The last message that appears to the screen is the location of the dashboard.
+
+    ```
+    Open ./test_results/dashboard/index.html to view measure testing dashboard.
+    ```
 
 ## Disclaimer
 
@@ -39,12 +45,6 @@ This project is under active development and will be changing significantly.
 ## Potential Issues
 
 Currently, the project downloads the rubocops from the OpenStudio-resources Github repo and saves them to the gem's installation location. This may be write protected on some machines.
-
-
-# TODOS
-
-* Callbacks to gather results
-* MiniTest results to JSON (currently only stdout) 
 
 # Testing in Docker
 
@@ -58,5 +58,4 @@ chmod +x install_openstudio.sh
 ./install_ruby.sh 2.2.4 b6eff568b48e0fda76e5a36333175df049b204e91217aa32a65153cc0cdcb761
 ./install_openstudio.sh 2.4.0 f58a3e1808
 export RUBYLIB=/usr/Ruby
-
 ```
