@@ -42,10 +42,6 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
 
 This project is under active development and will be changing significantly.
 
-## Potential Issues
-
-Currently, the project downloads the rubocops from the OpenStudio-resources Github repo and saves them to the gem's installation location. This may be write protected on some machines.
-
 # Testing in Docker
 
 ```bash
