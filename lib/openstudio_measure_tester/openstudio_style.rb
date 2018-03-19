@@ -74,13 +74,13 @@ module OpenStudioMeasureTester
         type: :deprecated,
         severity: :error,
         file_type: :measure
-      }, {
-        regex: /require .openstudio_measure_tester\/test_helper./,
-        check_type: :if_missing,
-        message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
-        type: :syntax,
-        severity: :error,
-        file_type: :test
+        # }, {
+        #   regex: /require .openstudio_measure_tester\/test_helper./,
+        #   check_type: :if_missing,
+        #   message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
+        #   type: :syntax,
+        #   severity: :error,
+        #   file_type: :test
       }, {
         regex: /MiniTest::Unit::TestCase/,
         check_type: :if_exists,
@@ -149,7 +149,6 @@ module OpenStudioMeasureTester
         log_message("Could not find LICENSE.md in '#{measure_dir}'.", :general, :warning)
       end
 
-
       unless measure_missing
         measure = OpenStudio::BCLMeasure.load(measure_dir)
         if measure.empty?
@@ -158,12 +157,11 @@ module OpenStudioMeasureTester
           measure = measure.get
           begin
             measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
-
           rescue NameError => error
             log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
           end
 
-          measure_hash = generate_measure_hash(measure_dir, measure, measure_info)  
+          measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
           measure_hash.merge!(get_attributes_from_measure(measure_dir, measure_hash[:class_name]))
 
           @measure_classname = measure_hash[:class_name]
@@ -177,8 +175,6 @@ module OpenStudioMeasureTester
       end
 
       # pp @measure_messages
-
-
 
       # calculate the info, warnings, errors and return the measure data
       # TODO: break out the issues by file

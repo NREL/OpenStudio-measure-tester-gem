@@ -52,8 +52,8 @@ module OpenStudioMeasureTester
         if !logs.empty?
           sha = logs.first.sha
         end
-      rescue StandardError => error 
-        puts "Could not find .git for measure(s), will not be able to report git information"
+      rescue StandardError => error
+        puts 'Could not find .git for measure(s), will not be able to report git information'
       end
 
       # check if the results data already exist, and if so, then load the file now to keep the results

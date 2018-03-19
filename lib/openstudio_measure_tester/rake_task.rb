@@ -214,7 +214,7 @@ module OpenStudioMeasureTester
           end
 
           desc 'Run RuboCop Auto Correct on Measures'
-          task auto_correct: 'openstudio:rubocop_core:auto_correct'
+          task auto_correct: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core:auto_correct']
         end
 
         desc 'Run RuboCop on Measures'
