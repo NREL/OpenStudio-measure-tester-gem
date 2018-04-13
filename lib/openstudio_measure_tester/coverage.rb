@@ -57,10 +57,10 @@ module OpenStudioMeasureTester
         measure_file = measure_file.split('/')[1..-1].join('/') until File.exist?(measure_file) || measure_file.split('/').empty?
       end
 
-      # file should exist now
+      # file should exist now. Read from the class name
       File.readlines(measure_file).each do |line|
         if (line.include? 'class') && line.split(' ')[0] == 'class'
-          return line.split(' ')[1].gsub /_?[tT]est\z/, ''
+          return line.match(/class\s(.*)\s</)[1]
         end
       end
     end
@@ -96,7 +96,7 @@ module OpenStudioMeasureTester
           class_name = parse_class_name(key)
           measure_maps[class_name] = {
               class_name: class_name,
-              path: File.dirname(key),
+              root_path: File.dirname(key),
               files: [key]
           }
         end
@@ -107,7 +107,7 @@ module OpenStudioMeasureTester
         next if key.split('/').last == 'measure.rb'
 
         measure_maps.each do |m_key, m_value|
-          if key.include? m_value[:path]
+          if key.include? m_value[:root_path]
             measure_maps[m_key][:files] << key
           end
         end
@@ -126,7 +126,9 @@ module OpenStudioMeasureTester
         measure_map[:files].each do |test_file|
           cov_results_by_line = coverage_results['coverage'][test_file]
           fhash = {}
-          fhash['name'] = class_name
+          # get the relative file path
+
+          fhash['name'] = test_file.gsub("#{measure_map[:root_path]}/", '')
           fhash['total_lines'] = cov_results_by_line.size
           mhash['total_lines'] += fhash['total_lines']
 
