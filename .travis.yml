@@ -12,4 +12,9 @@ before_script:
   - sudo ./install_openstudio.sh $OPENSTUDIO_VERSION $OPENSTUDIO_SHA
 script:
   - rake
-
+deploy:
+  provider: rubygems
+  api_key:
+    secure: iZtVULO6jjNob6oPimyyZZ9hUj25B7654q5/I3eQC9HBP8pGmm3H1dNKw/BYegyr8/Eu9unO5E8WIesGKHehR6DAhZ5hljvKxGw9OJMusQeH91x/EoMwSdIKW96fFXGeBugi6l9vUfw5dUBYF8h9hSyePmqmuTmoteq/lF8mlptPYM2S9+W62q2YkvfqLV+D9a9O+zIOg8tK9W/QtThpyRp4rr1JN5/xkkLeLTW0u8qfo/3Q9k9op3XvPpZMD0CzPI6CL+4y1kHsqyQHIjEk5e0HAvOKrI23zvq1KKybcgdSDUSt9uO+pJFM3qkh6sZ9rjscFgqS71BEIzQQqt9QBc4ZQVn7RnuX3c+2x1RkFF5zYWohbzjId2fowFKITFDK6CpLPPEMQDHdtRaj0qwu4lv71+oRvQDm3bwbaYp4c3/YTzZCIOumAakhzR2wSNok+lDAGkpQfa5vk4+6mzQC5YcUS5i6GAqAuC/N9feYKJHZiKz8cxm9iet97ha02KZdQJrgzpysM1xK2UtKPAKxfgIy5N7aYNCDlPiACmtBykw2UyMl3U18SYOuLL7fnSIXSy0pDPeT0U2ZQrDD51Jsyo+WXuGX6KwTEUAoUFd+v3NbA/mRUjOA8I5y5J6HnxDn8kwwxQ8ATdHmBaKLrHyavH2YggGRqokl07fphH0YE4U=
+  on:
+    branch: master

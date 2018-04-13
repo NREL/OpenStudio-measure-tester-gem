@@ -1,0 +1,48 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <error>uninitialized constant TestBrokenMeasure::THIS_CONSTANT_INTENTIONALLY_NOT_DEFINED_FOR_TESTING_MEASURE_MANAGER</error>
+  <name>test_broken_measure</name>
+  <uid>0ba4d818-39e1-4a13-a361-645b6fd2365b</uid>
+  <version_id>b946cc42-3397-42c8-a87b-d945e09a0df0</version_id>
+  <version_modified>20170316T220554Z</version_modified>
+  <xml_checksum>2C38F48B</xml_checksum>
+  <class_name>TestBrokenMeasure</class_name>
+  <display_name>Test Broken Measure</display_name>
+  <description>This Measure intentionally has invalid ruby code inside the arguments method.  It should be used for testing how Measure Manager handles this scenario.</description>
+  <modeler_description>This Measure intentionally has invalid ruby code inside the arguments method.  It should be used for testing how Measure Manager handles this scenario.</modeler_description>
+  <arguments>
+    <argument>
+      <name>space_name</name>
+      <display_name>New space name</display_name>
+      <description>This name will be used as the name of the new space.</description>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+  </arguments>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>Whole Building.Space Types</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.0.3</identifier>
+        <min_compatible>2.0.3</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>2A9F66B4</checksum>
+    </file>
+  </files>
+</measure>

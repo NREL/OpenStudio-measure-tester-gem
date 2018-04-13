@@ -1,3 +1,7 @@
+# Version 0.1.3 (Unreleased)
+
+* Catch when infoExtractor is unable to parse measure arguments
+
 # Version 0.1.2
 
 * Do not crash when the current measure is not in a Git repository
