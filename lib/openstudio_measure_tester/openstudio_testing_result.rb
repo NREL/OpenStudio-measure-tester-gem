@@ -76,6 +76,7 @@ module OpenStudioMeasureTester
           FileUtils.mv "#{@results_dir}/coverage", "#{@test_results_dir}/."
 
           cov = OpenStudioMeasureTester::Coverage.new("#{@test_results_dir}/coverage")
+          cov.parse_results
           @results['coverage'] = cov.to_hash
         end
 
