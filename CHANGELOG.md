@@ -1,6 +1,9 @@
-# Version 0.1.3 (Unreleased)
+# Version 0.1.3
 
 * Catch when infoExtractor is unable to parse measure arguments
+* Allow a measure name to include "test"
+* Lock down versions of dependencies
+* Add a broken measure to the test
 
 # Version 0.1.2
 
