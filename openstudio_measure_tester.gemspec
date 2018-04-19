@@ -31,5 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rake', '12.3.1'
   spec.add_dependency 'rubocop', '0.54.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '0.4'
-  #spec.add_dependency 'simplecov', '0.16.1'
+  spec.add_dependency 'simplecov', '0.16.1'
 end
