@@ -28,17 +28,22 @@
 
 RSpec.describe OpenStudioMeasureTester::RubocopResult do
   it 'should parse results' do
-    dir = 'test_measures/test_results/rubocop'
+    dir = 'spec/files/rubocop'
     mr = OpenStudioMeasureTester::RubocopResult.new(dir)
 
-    # expect(mr.total_assertions).to eq 66
-    # expect(mr.total_errors).to eq 0
-    # expect(mr.total_failures).to eq 0
-    # expect(mr.total_skipped).to eq 0
-    # expect(mr.total_tests).to eq 7
+    expect(mr.error_status).to eq true
+    expect(mr.total_files).to eq 17
+    expect(mr.total_issues).to eq 479
+    expect(mr.total_errors).to eq 423
+    expect(mr.total_measures).to eq 8
+  end
 
-    # expect(mr.error_status).to eq false
+  it 'should write the json file' do
+    dir = 'spec/files/rubocop'
+    write_file = "#{dir}/rubocop.json"
+    File.delete(write_file) if File.exists? write_file
 
-    # expect(mr.measure_results.size).to eq 3
+    mr = OpenStudioMeasureTester::RubocopResult.new(dir)
+    expect(File.exist?(write_file)).to be true
   end
 end

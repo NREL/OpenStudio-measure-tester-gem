@@ -1,3 +1,4 @@
+/.idea/
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -15,10 +16,10 @@
 # rspec failure tracking
 .rspec_status
 rspec.html
-.idea/
 Gemfile.lock
 .rubocop-https*
-rubocop-results.xml
+spec/files/rubocop/rubocop-results.xml
+spec/files/rubocop/rubocop.json
 
 # mac and rbenv stuff
 .DS_Store
