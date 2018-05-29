@@ -37,7 +37,7 @@ RSpec.describe OpenStudioMeasureTester do
 
   it 'should have new rake tasks' do
     expect(Rake::Task.task_defined?('openstudio:test')).to be true
-    expect(Rake::Task.task_defined?('openstudio:rubocop_core')).to be true
+    expect(Rake::Task.task_defined?('openstudio:rubocop')).to be true
   end
 
   it 'should load openstudio' do

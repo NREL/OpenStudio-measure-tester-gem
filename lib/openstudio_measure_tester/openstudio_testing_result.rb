@@ -68,6 +68,21 @@ module OpenStudioMeasureTester
     end
 
     def aggregate_results
+      # openstudio style is stored in the correct location (the test_results directory)
+      # OpenStudio Style will have already run, so just grab the results out of the directory and jam into
+      # the @results hash
+      filename = "#{@test_results_dir}/openstudio_style/openstudio_style.json"
+      if File.exist? filename
+        @results['openstudio_style'] = JSON.parse(File.read(filename))
+      end
+
+      # rubocop now saves the files in the correct place
+      if Dir.exist? "#{@test_results_dir}/rubocop"
+        # need to create parser here!
+        rc = OpenStudioMeasureTester::RubocopResult.new("#{@test_results_dir}/rubocop")
+        @results['rubocop'] = rc.summary
+      end
+
       # TODO: check if we need this check of directories
       if @test_results_dir != @results_dir
         # coverage
@@ -99,31 +114,6 @@ module OpenStudioMeasureTester
           # Load in the data into the minitest object
           mr = OpenStudioMeasureTester::MinitestResult.new("#{@test_results_dir}/minitest")
           @results['minitest'] = mr.summary
-        end
-
-        # rubocop
-        if Dir.exist? "#{@results_dir}/rubocop"
-          FileUtils.rm_rf "#{@test_results_dir}/rubocop" if Dir.exist? "#{@test_results_dir}/rubocop"
-          FileUtils.mv "#{@results_dir}/rubocop", "#{@test_results_dir}/rubocop"
-
-          # need to create parser here!
-          # trying!!! &^&%##%@((@*&()))!!
-          rc = OpenStudioMeasureTester::RubocopResult.new("#{@test_results_dir}/rubocop")
-          @results['rubocop'] = rc.summary
-
-        end
-
-        # openstudio style
-        if Dir.exist? "#{@results_dir}/openstudio_style"
-          FileUtils.rm_rf "#{@test_results_dir}/openstudio_style" if Dir.exist? "#{@test_results_dir}/openstudio_style"
-          FileUtils.mv "#{@results_dir}/openstudio_style", "#{@test_results_dir}/openstudio_style"
-
-          # OpenStudio Style will have already run, so just grab the results out of the directory and jam into
-          # the @results hash
-          filename = "#{@test_results_dir}/openstudio_style/openstudio_style.json"
-          if File.exist? filename
-            @results['openstudio_style'] = JSON.parse(File.read(filename))
-          end
         end
       end
     end
@@ -180,6 +170,7 @@ module OpenStudioMeasureTester
         end
       end
 
+      # Since the data are relative to the directory from which it has been run, then just show from current dir (.)
       puts 'Open ./test_results/dashboard/index.html to view measure testing dashboard.'
 
       return final_exit_code

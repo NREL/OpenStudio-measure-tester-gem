@@ -26,28 +26,47 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-require 'openstudio'
+RSpec.describe OpenStudioMeasureTester::Runner do
+  it 'should run openstudio style checks on single measure' do
+    measure_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
 
-require 'pp'
-require 'active_support'
-require 'active_support/core_ext'
-require 'git'
-require 'openstudio_measure_tester/core_ext'
+    runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
-# Rubocop loads a lot of objects, anyway to minimize would be nice.
-require 'rubocop'
+    # this measure does not pass
+    expect(runner.run_style).to eq 1
 
-require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/openstudio_style'
-require 'openstudio_measure_tester/minitest_result'
-require 'openstudio_measure_tester/coverage'
-require 'openstudio_measure_tester/rubocop_result'
-require 'openstudio_measure_tester/openstudio_testing_result'
-require 'openstudio_measure_tester/dashboard'
-require 'openstudio_measure_tester/runner'
+    # verify that the results live in the base_dir
+    expect(Dir.exist?("#{measure_dir}/test_results/openstudio_style/openstudio_style.json"))
+    expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
+  end
 
-require 'openstudio_measure_tester/rake_task'
+  it 'should run rubocop on single measure' do
+    measure_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
 
-module OpenStudioMeasureTester
-  # No action here. Most of this will be rake_tasks at the moment.
+    runner = OpenStudioMeasureTester::Runner.new(measure_dir)
+
+    # this measure does not pass
+    expect(runner.run_rubocop).to eq 1
+
+    # verify that the results live in the base_dir
+    expect(Dir.exist?("#{measure_dir}/test_results"))
+
+    expect(Dir.exist?("#{measure_dir}/test_results/rubocop/rubocop.json"))
+    expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
+  end
+
+  it 'should run minitest on single measure' do
+    measure_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
+
+    runner = OpenStudioMeasureTester::Runner.new(measure_dir)
+
+    # this measure does not pass
+    expect(runner.run_test).to eq 1
+
+    # verify that the results live in the base_dir
+    expect(Dir.exist?("#{measure_dir}/test_results"))
+
+    expect(Dir.exist?("#{measure_dir}/test_results/rubocop/rubocop.json"))
+    expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
+  end
 end

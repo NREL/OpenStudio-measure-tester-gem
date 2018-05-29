@@ -99,9 +99,10 @@ module OpenStudioMeasureTester
     ].freeze
 
     # Pass in the measures_glob with the filename (typically measure.rb)
-    def initialize(measures_glob)
+    def initialize(results_dir, measures_glob)
       @measures_glob = measures_glob
       @results = { by_measure: {} }
+      @results_dir = results_dir
 
       # Individual measure messages
       @measure_messages = []
@@ -213,8 +214,8 @@ module OpenStudioMeasureTester
     end
 
     def save_results
-      FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
-      File.open('openstudio_style/openstudio_style.json', 'w') do |file|
+      FileUtils.mkdir_p "#{@results_dir}/openstudio_style" unless Dir.exist? "#{@results_dir}/openstudio_style"
+      File.open("#{@results_dir}/openstudio_style/openstudio_style.json", 'w') do |file|
         file << JSON.pretty_generate(@results)
       end
     end
