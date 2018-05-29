@@ -2,12 +2,6 @@ require 'openstudio'
 require 'openstudio/ruleset/ShowRunnerOutput'
 require 'fileutils'
 
-begin
-  require 'openstudio_measure_tester/test_helper'
-rescue LoadError
-  puts "OpenStudio Measure Tester Gem not installed -- will not be able to aggregate and dashboard the results of tests"
-end
-
 require_relative '../measure.rb'
 require 'minitest/autorun'
 

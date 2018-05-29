@@ -33,9 +33,11 @@ module OpenStudioMeasureTester
     # Pass in the results_dir where all the results are stored
     # @param results_dir [String]: Directory where the results are scattered. Typically the root dir or where rake was executed
     # @param test_results_dir [String]: Where the final results are to be stored
-    def initialize(results_dir, test_results_dir)
+    # @param orig_results_dir [String]: Optional directory where results are sometimes thrown into that need to be moved (coverage and minitest)
+    def initialize(results_dir, test_results_dir, orig_results_dir = nil)
       @results_dir = results_dir
       @test_results_dir = test_results_dir
+      @orig_results_dir = orig_results_dir
       @results = {}
 
       # get the repository info
@@ -83,33 +85,35 @@ module OpenStudioMeasureTester
         @results['rubocop'] = rc.summary
       end
 
-      # TODO: check if we need this check of directories
-      if @test_results_dir != @results_dir
+      # don't copy if the directories are the same
+      if @test_results_dir != @orig_results_dir
         # coverage
-        if Dir.exist? "#{@results_dir}/coverage"
+        if Dir.exist? "#{@orig_results_dir}/coverage"
           FileUtils.rm_rf "#{@test_results_dir}/coverage" if Dir.exist? "#{@test_results_dir}/coverage"
-          FileUtils.mv "#{@results_dir}/coverage", "#{@test_results_dir}/."
+          FileUtils.cp_r "#{@orig_results_dir}/coverage/.", "#{@test_results_dir}/coverage"
 
+          # Do not delete the converage results as it causes some issues with simplecov at_exit command
+          # FileUtils.rm_rf "#{@orig_results_dir}/coverage" if Dir.exist? "#{@orig_results_dir}/coverage"
           cov = OpenStudioMeasureTester::Coverage.new("#{@test_results_dir}/coverage")
           cov.parse_results
           @results['coverage'] = cov.to_hash
         end
 
         # minitest
-        if Dir.exist?("#{@results_dir}/test/html_reports") || Dir.exist?("#{@results_dir}/test/reports")
+        if Dir.exist?("#{@orig_results_dir}/test/html_reports") || Dir.exist?("#{@orig_results_dir}/test/reports")
           FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
           FileUtils.mkdir_p "#{@test_results_dir}/minitest"
 
-          if Dir.exist?("#{@results_dir}/test/html_reports")
-            FileUtils.mv "#{@results_dir}/test/html_reports", "#{@test_results_dir}/minitest/html_reports"
+          if Dir.exist?("#{@orig_results_dir}/test/html_reports")
+            FileUtils.mv "#{@orig_results_dir}/test/html_reports", "#{@test_results_dir}/minitest/html_reports"
           end
 
-          if Dir.exist?("#{@results_dir}/test/reports")
-            FileUtils.mv "#{@results_dir}/test/reports", "#{@test_results_dir}/minitest/reports"
+          if Dir.exist?("#{@orig_results_dir}/test/reports")
+            FileUtils.mv "#{@orig_results_dir}/test/reports", "#{@test_results_dir}/minitest/reports"
           end
 
           # Delete the test folder if it is empty
-          FileUtils.rm_rf "#{@results_dir}/test" if Dir.entries("#{@results_dir}/test").size == 2
+          FileUtils.rm_rf "#{@orig_results_dir}/test" if Dir.exist?("#{@orig_results_dir}/test") && Dir.entries("#{@orig_results_dir}/test").size == 2
 
           # Load in the data into the minitest object
           mr = OpenStudioMeasureTester::MinitestResult.new("#{@test_results_dir}/minitest")

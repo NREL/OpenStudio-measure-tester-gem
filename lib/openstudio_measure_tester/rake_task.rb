@@ -48,36 +48,13 @@ module OpenStudioMeasureTester
     def setup_subtasks(name)
       namespace name do
         ####################################### Minitest and Coverage #######################################
-        task :prepare_minitest do
-          OpenStudioMeasureTester::Runner.pre_process_minitest(Rake.application.original_dir, Dir.pwd)
-        end
-
-        Rake::TestTask.new(:test_core_command) do |task|
-          task.options = '--ci-reporter'
-          task.description = 'Run measures tests recursively from current directory'
-          task.pattern = [
-              "#{Rake.application.original_dir}/**/*_test.rb",
-              "#{Rake.application.original_dir}/**/*_Test.rb"
-          ]
-          task.verbose = true
-        end
-
-        task :test_core do
-          begin
-            Rake.application['openstudio:test_core_command'].invoke
-          rescue StandardError
-            puts 'Test failures in openstudio:test. Will continue to post-processing.'
-          ensure
-            Rake.application['openstudio:test_core_command'].reenable
-          end
-        end
-
-        desc 'Run OpenStudio Measure Unit Tests'
-        task test: ['openstudio:prepare_minitest', 'openstudio:test_core'] do
+        desc 'new test task'
+        task :test do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
-          exit runner.post_process_results
+          # Need to pass in the current directory because the results of minitest and coverage end up going into
+          # the root directorys
+          exit runner.run_test(Dir.pwd)
         end
-
 
         ####################################### RuboCop #######################################
         # Need to create a namespace so that we can have openstudio:rubocop and openstudio:rubocop:auto_correct.
@@ -121,13 +98,13 @@ module OpenStudioMeasureTester
         end
 
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
-        task all: ['openstudio:prepare_minitest', 'openstudio:test_core', 'openstudio:style_core'] do
-          exit_status = post_process_results(Rake.application.original_dir, Dir.pwd)
+        task all: ['openstudio:rubocop', 'openstudio:style', 'openstudio:test'] do
+          exit_status = post_process_results
           exit exit_status
         end
 
         # Hide the core tasks from being displayed when calling rake -T
-        Rake::Task['openstudio:test_core_command'].clear_comments
+        # Rake::Task['openstudio:test_core_command'].clear_comments
       end
     end
   end

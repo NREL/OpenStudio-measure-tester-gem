@@ -61,12 +61,27 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass
-    expect(runner.run_test).to eq 1
+    expect(runner.run_test(Dir.pwd)).to eq 1
 
     # verify that the results live in the base_dir
     expect(Dir.exist?("#{measure_dir}/test_results"))
 
-    expect(Dir.exist?("#{measure_dir}/test_results/rubocop/rubocop.json"))
+    expect(Dir.exist?("#{measure_dir}/test_results/reports/TEST-AddOverhangsByProjectionFactor-Test.xml"))
+    expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
+  end
+
+  it 'should run all on single measure' do
+    measure_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
+
+    runner = OpenStudioMeasureTester::Runner.new(measure_dir)
+
+    # this measure does not pass
+    expect(runner.run_all(Dir.pwd)).to eq 1
+
+    # verify that the results live in the base_dir
+    expect(Dir.exist?("#{measure_dir}/test_results"))
+
+    expect(Dir.exist?("#{measure_dir}/test_results/reports/TEST-AddOverhangsByProjectionFactor-Test.xml"))
     expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
   end
 end

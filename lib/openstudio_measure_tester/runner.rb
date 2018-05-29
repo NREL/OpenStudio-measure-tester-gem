@@ -16,6 +16,7 @@ module OpenStudioMeasureTester
     def test_results_dir
       dir = "#{@base_dir}/test_results"
       FileUtils.mkdir_p dir unless Dir.exist? dir
+
       return dir
     end
 
@@ -28,32 +29,31 @@ module OpenStudioMeasureTester
     # Prepare the current directory and the root directory to remove old test results before running
     # the new tests
     #
-    # @param base_dir [string] Base directory where results will be stored. If called from rake it is the location of the Rakefile.
-    # @param current_dir [string] The current working directory. If called from Rake it is the active directory.
-    def self.pre_process_minitest(base_dir, current_dir)
-      test_results_dir = "#{base_dir}/test_results"
-
-      puts "Current directory is #{current_dir}"
-      puts "Pre-processing tests run in #{base_dir}"
+    # @param orig_results_dir [string] Location on where there results of minitest/coverage will be stored.
+    def pre_process_minitest(orig_results_dir)
+      puts "Current directory is #{@base_dir}"
+      puts "Pre-processed tests run data in #{orig_results_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
+      # There is a bunch of moving that needs to happen with coverage/minitest...
+      FileUtils.rm_rf "#{orig_results_dir}/coverage" if Dir.exist? "#{orig_results_dir}/coverage"
+      FileUtils.rm_rf "#{@base_dir}/coverage" if Dir.exist? "#{@base_dir}/coverage"
       FileUtils.rm_rf "#{test_results_dir}/coverage" if Dir.exist? "#{test_results_dir}/coverage"
-      FileUtils.rm_rf "#{test_results_dir}/test/html_reports" if Dir.exist? "#{test_results_dir}/test/html_reports"
-      FileUtils.rm_rf "#{test_results_dir}/test/reports" if Dir.exist? "#{test_results_dir}/test/reports"
+
+      FileUtils.rm_rf "#{orig_results_dir}/minitest" if Dir.exist? "#{orig_results_dir}/minitest"
+      FileUtils.rm_rf "#{@base_dir}/minitest" if Dir.exist? "#{@base_dir}/minitest"
+      FileUtils.rm_rf "#{test_results_dir}/minitest" if Dir.exist? "#{test_results_dir}/minitest"
+
+      FileUtils.rm_rf "#{orig_results_dir}/test" if Dir.exist? "#{orig_results_dir}/test"
+      FileUtils.rm_rf "#{@base_dir}/test" if Dir.exist? "#{@base_dir}/test"
       # remove the test directory if it is empty (size == 2 for . and ..)
       if Dir.exist?("#{test_results_dir}/test") && Dir.entries("#{test_results_dir}/test").size == 2
         FileUtils.rm_rf "#{test_results_dir}/test"
       end
       FileUtils.rm_rf "#{test_results_dir}/minitest" if Dir.exist? "#{test_results_dir}/minitest"
-      FileUtils.rm_rf "#{base_dir}/coverage" if Dir.exist? "#{base_dir}/coverage"
-      FileUtils.rm_rf "#{base_dir}/test" if Dir.exist? "#{base_dir}/test"
-      FileUtils.rm_rf "#{base_dir}/minitest" if Dir.exist? "#{base_dir}/minitest"
-      FileUtils.rm_rf "#{current_dir}/coverage" if Dir.exist? "#{current_dir}/coverage"
-      FileUtils.rm_rf "#{current_dir}/test" if Dir.exist? "#{current_dir}/test"
-      FileUtils.rm_rf "#{current_dir}/minitest" if Dir.exist? "#{current_dir}/minitest"
 
       # Create the test_results directory to store all the results
-      FileUtils.mkdir_p "#{base_dir}/test_results"
+      return test_results_dir
     end
 
     # Rubocop stores the results (for now) in the test_results directory
@@ -78,12 +78,12 @@ module OpenStudioMeasureTester
 
     # Post process the various results and save them into the base_dir
     #
-    # @param measures_dir [string] The current working directory. If called from Rake it is the active directory.
-    def post_process_results
+    # @param original_results_directory [string] Location of the results from coverag and minitest
+    def post_process_results(original_results_directory=nil)
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
-      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(@base_dir, test_results_dir)
+      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(@base_dir, test_results_dir, original_results_directory)
       results.save_results # one single file for dashboard
 
       # call the create dashboard command now that we have results
@@ -108,24 +108,25 @@ module OpenStudioMeasureTester
       return test_results_dir
     end
 
-    def run_style
+    def run_style(skip_post_process)
       pre_process_style
 
       # Run the style tests
-      style = OpenStudioMeasureTester::OpenStudioStyle.new(test_results_dir,"#{@base_dir}/**/measure.rb")
+      style = OpenStudioMeasureTester::OpenStudioStyle.new(test_results_dir, "#{@base_dir}/**/measure.rb")
       style.save_results
 
       # postprocess the results
-      return post_process_results
+      post_process_results unless skip_post_process
+
+      true
     end
 
-
-    def run_rubocop(auto_correct=false)
+    def run_rubocop(skip_post_process, auto_correct = false)
       pre_process_rubocop
 
       rubocop_results_file = "#{test_results_dir}/rubocop/rubocop-results.xml"
       # The documentation on running RuboCop from the Ruby source is not really helpful. I reversed engineered this
-      # by putting in puts statements to my locally install rubocop gem to see how options were passed.
+      # by putting in puts statements in my local install rubocop gem to see how options were passed.
       #
       # https://github.com/bbatsov/rubocop/blob/9bdbaba9dcaa3dedad5e857b440d0d8988b806f5/lib/rubocop/runner.rb#L25
       require 'rubocop/formatter/checkstyle_formatter'
@@ -146,37 +147,54 @@ module OpenStudioMeasureTester
       rc_runner = RuboCop::Runner.new(options, config_store)
       rc_runner.run(["#{File.expand_path(@base_dir)}/**/*.rb"])
 
-      # postprocess the results
-      return post_process_results
+      post_process_results unless skip_post_process
+
+      true
     end
 
-    def run_test
-      puts "trying to run the unit tests"
+    # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
+    def run_test(skip_post_process, original_results_directory)
+      # not sure what @base_dir has to be right now
+      pre_process_minitest(original_results_directory)
 
+      # Specify the minitest reporters
+      require 'minitest/reporters'
+      Minitest::Reporters.use! [
+                                   Minitest::Reporters::HtmlReporter.new,
+                                   Minitest::Reporters::JUnitReporter.new
+                               ]
 
+      # Load in the coverage before loading the test files
+      require 'simplecov'
+      SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+          [
+              SimpleCov::Formatter::HTMLFormatter
+          ]
+      )
+      SimpleCov.start
 
+      Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].each do |file|
+        require File.expand_path(file)
+      end
+
+      # Now call run on the loaded files. Note that the Minitest.autorun method has been nulled out in the
+      # openstudio_measure_tester.rb file, so it will not run.
+      Minitest.run ['--verbose']
+
+      # manually tell simple cov to save the results after the minitests are finished running (instead of waiting
+      # at_exit)
+      SimpleCov.result.format!
+
+      post_process_results unless skip_post_process
+
+      return post_process_results(original_results_directory)
     end
 
-    # at_exit do
-    #   if $!.success?
-    #     puts self
-    #     puts "what teh hell, why not"
-    #   else
-    #     puts "there was an error"
-    #   end
-    #
-    # end
+    def run_all(original_results_directory)
+      self.run_rubocop(true)
+      self.run_style(true)
+      self.run_test(true, original_results_directory)
+      self.post_process_results(original_results_directory)
+    end
   end
 end
-
-# Module.new do
-#   at_exit do
-#     if $!.nil?
-#       puts "Ran successfully... now what?"
-#       exit 0
-#     else
-#       puts "There was an error running OpenStudio Measure Tester"
-#     end
-#   end
-# end
-

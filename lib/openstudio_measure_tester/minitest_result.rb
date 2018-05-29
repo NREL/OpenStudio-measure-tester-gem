@@ -66,11 +66,11 @@ module OpenStudioMeasureTester
         mhash = {}
 
         mhash['tested_class'] = measure_name
-        mhash['measure_tests'] = hash['testsuite']['tests'].to_i
-        mhash['measure_assertions'] = hash['testsuite']['assertions'].to_i
-        mhash['measure_errors'] = hash['testsuite']['errors'].to_i
-        mhash['measure_failures'] = hash['testsuite']['failures'].to_i
-        mhash['measure_skipped'] = hash['testsuite']['skipped'].to_i
+        mhash['measure_tests'] = hash['test_suites']['testsuite']['testcase'].length
+        mhash['measure_assertions'] = hash['test_suites']['testsuite']['assertions'].to_i
+        mhash['measure_errors'] = hash['test_suites']['testsuite']['errors'].to_i
+        mhash['measure_failures'] = hash['test_suites']['testsuite']['failures'].to_i
+        mhash['measure_skipped'] = hash['test_suites']['testsuite']['skipped'].to_i
 
         # Note: only 1 failure and 1 error possible per test
         errors, failures = parse_measure(hash)
@@ -116,13 +116,12 @@ module OpenStudioMeasureTester
       failures = []
 
       # check if testcase is hash or array
-      if measure['testsuite']
-
-        if measure['testsuite']['testcase'].class == Hash
+      if measure['test_suites']['testsuite']
+        if measure['test_suites']['testsuite']['testcase'].class == Hash
           # convert to array
-          measure['testsuite']['testcase'] = [measure['testsuite']['testcase']]
+          measure['test_suites']['testsuite']['testcase'] = [measure['test_suites']['testsuite']['testcase']]
         end
-        measure['testsuite']['testcase'].each do |test|
+        measure['test_suites']['testsuite']['testcase'].each do |test|
           if test['error']
             errors << test['error']
           end

@@ -15,10 +15,10 @@
       "measure_skipped": 0,
       "issues": {
         "errors": [
-          "\nRuntimeError: This will be an error\n    /Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199:in `test_failure' (RuntimeError)\n/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:199    "
+          "\nFailure:\ntest_failure(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:193]:\nRuntimeError: This will be an error\n    /Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:193:in `test_failure'\n    "
         ],
         "failures": [
-          "\nExpected: 1\n  Actual: 5 (Minitest::Assertion)\n/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:138    "
+          "\nFailure:\ntest_AddOverhangsByProjectionFactor_good(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:132]:\nExpected: 1\n  Actual: 5\n    "
         ]
       }
     },

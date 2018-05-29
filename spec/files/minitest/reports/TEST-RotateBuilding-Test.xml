@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RotateBuilding_Test" tests="2" time="1.094734" failures="0" errors="0" skipped="0" assertions="10" timestamp="2018-02-28T18:05:28-07:00">
-  <testcase name="test_RotateBuilding_EmptySpaceNoLoadsOrSurfaces" time="0.009391" assertions="3">
-  </testcase>
-  <testcase name="test_RotateBuilding" time="1.093946" assertions="7">
-  </testcase>
-  <system-out>
-**MEASURE APPLICABILITY**
-0 = Success
-**INITIAL CONDITION**
-The building's initial rotation was 0.0 degrees.
-**FINAL CONDITION**
-The building's final rotation is 140.2 degrees.
-**INFO MESSAGES**
-The building has been rotated by 140.2 degrees.
-**WARNING MESSAGES**
-Requested rotation was not between -360 and 360. Effective relative rotation is 140.2 degrees.
-**ERROR MESSAGES**
-***Machine-Readable Attributes**
-[
-{
-   "name" : "relative_building_rotation",
-   "value" : 500.19999999999999
-}
-,{
-   "name" : "orientation_initial",
-   "value" : 0
-}
-,{
-   "name" : "orientation_final",
-   "value" : 140.19999999999999
-}
-]
-***Files Generated**
-
-
-  </system-out>
-  <system-err>
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
-  </system-err>
-</testsuite>
+<test_suites>
+  <testsuite name="RotateBuilding_Test" filepath="spec/test_measures/RotateBuilding/tests/RotateBuilding_Test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="10" time="1.333272">
+    <testcase name="test_RotateBuilding" lineno="36" classname="RotateBuilding_Test" assertions="7" time="1.331065">
+    </testcase>
+    <testcase name="test_RotateBuilding_EmptySpaceNoLoadsOrSurfaces" lineno="77" classname="RotateBuilding_Test" assertions="3" time="0.002207">
+    </testcase>
+  </testsuite>
+</test_suites>

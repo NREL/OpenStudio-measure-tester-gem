@@ -26,18 +26,20 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ########################################################################################################################
 
-$coverage_started = false
-unless $coverage_started
-  require 'simplecov'
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-    [
-      SimpleCov::Formatter::HTMLFormatter
-    ]
-  )
-
-  SimpleCov.start
-  $coverage_started = true
-end
-
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::HtmlReporter.new]
+# $coverage_started = false
+# unless $coverage_started
+#   require 'simplecov'
+#   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+#     [
+#       SimpleCov::Formatter::HTMLFormatter
+#     ]
+#   )
+#
+#   SimpleCov.start
+#   $coverage_started = true
+# end
+#
+# # require 'minitest/reporters'
+# require 'minitest/reporters/json_reporter'
+# # Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::HtmlReporter.new]
+# Minitest::Reporters.use! [ Minitest::Reporters::JsonReporter.new ]

@@ -74,13 +74,6 @@ module OpenStudioMeasureTester
         type: :deprecated,
         severity: :error,
         file_type: :measure
-        # }, {
-        #   regex: /require .openstudio_measure_tester\/test_helper./,
-        #   check_type: :if_missing,
-        #   message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
-        #   type: :syntax,
-        #   severity: :error,
-        #   file_type: :test
       }, {
         regex: /MiniTest::Unit::TestCase/,
         check_type: :if_exists,

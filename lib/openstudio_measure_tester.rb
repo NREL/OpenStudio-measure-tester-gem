@@ -33,6 +33,12 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'git'
 require 'openstudio_measure_tester/core_ext'
+require 'minitest'
+
+# Override the minitest autorun, to, well, not autorun
+def Minitest.autorun
+end
+
 
 # Rubocop loads a lot of objects, anyway to minimize would be nice.
 require 'rubocop'
@@ -47,6 +53,10 @@ require 'openstudio_measure_tester/dashboard'
 require 'openstudio_measure_tester/runner'
 
 require 'openstudio_measure_tester/rake_task'
+
+
+# for minitest exit
+$running_tests = true
 
 module OpenStudioMeasureTester
   # No action here. Most of this will be rake_tasks at the moment.
