@@ -33,7 +33,7 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass
-    expect(runner.run_style).to eq 1
+    expect(runner.run_style(false)).to eq 1
 
     # verify that the results live in the base_dir
     expect(Dir.exist?("#{measure_dir}/test_results/openstudio_style/openstudio_style.json"))
@@ -46,7 +46,7 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass
-    expect(runner.run_rubocop).to eq 1
+    expect(runner.run_rubocop(false)).to eq 1
 
     # verify that the results live in the base_dir
     expect(Dir.exist?("#{measure_dir}/test_results"))
@@ -61,7 +61,7 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass
-    expect(runner.run_test(Dir.pwd)).to eq 1
+    expect(runner.run_test(false, Dir.pwd)).to eq 1
 
     # verify that the results live in the base_dir
     expect(Dir.exist?("#{measure_dir}/test_results"))

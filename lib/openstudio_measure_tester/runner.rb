@@ -115,10 +115,11 @@ module OpenStudioMeasureTester
       style = OpenStudioMeasureTester::OpenStudioStyle.new(test_results_dir, "#{@base_dir}/**/measure.rb")
       style.save_results
 
-      # postprocess the results
-      post_process_results unless skip_post_process
-
-      true
+      if skip_post_process
+        return true
+      else
+        return post_process_results 
+      end
     end
 
     def run_rubocop(skip_post_process, auto_correct = false)
@@ -147,9 +148,11 @@ module OpenStudioMeasureTester
       rc_runner = RuboCop::Runner.new(options, config_store)
       rc_runner.run(["#{File.expand_path(@base_dir)}/**/*.rb"])
 
-      post_process_results unless skip_post_process
-
-      true
+      if skip_post_process
+        return true
+      else
+        return post_process_results 
+      end
     end
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
@@ -165,7 +168,6 @@ module OpenStudioMeasureTester
                                ]
 
       # Load in the coverage before loading the test files
-      require 'simplecov'
       SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
           [
               SimpleCov::Formatter::HTMLFormatter
@@ -181,13 +183,18 @@ module OpenStudioMeasureTester
       # openstudio_measure_tester.rb file, so it will not run.
       Minitest.run ['--verbose']
 
-      # manually tell simple cov to save the results after the minitests are finished running (instead of waiting
-      # at_exit)
-      SimpleCov.result.format!
+      # There is no easy way to grab the results of coverage without adding it into the at_exit method. The problem
+      # with calling SimpleCov.at_exit.call or SimpleCov.result.format!.
 
-      post_process_results unless skip_post_process
+      # Other items to look into: SimpleCov.at_exit.call or the links below:
+      # https://github.com/colszowka/simplecov/blob/92a7b4df103978f3131b803fa499477fe7d8387e/lib/simplecov/defaults.rb#L22
+      # https://github.com/colszowka/simplecov/blob/92a7b4df103978f3131b803fa499477fe7d8387e/lib/simplecov.rb#L197-L207
 
-      return post_process_results(original_results_directory)
+      if skip_post_process
+        return true
+      else
+        return post_process_results(original_results_directory) 
+      end
     end
 
     def run_all(original_results_directory)
@@ -198,3 +205,5 @@ module OpenStudioMeasureTester
     end
   end
 end
+
+

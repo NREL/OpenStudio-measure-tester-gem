@@ -33,8 +33,8 @@ RSpec.describe OpenStudioMeasureTester::RubocopResult do
 
     expect(mr.error_status).to eq true
     expect(mr.total_files).to eq 17
-    expect(mr.total_issues).to eq 479
-    expect(mr.total_errors).to eq 423
+    expect(mr.total_issues).to eq 476
+    expect(mr.total_errors).to eq 420
     expect(mr.total_measures).to eq 8
   end
 

@@ -53,7 +53,7 @@ module OpenStudioMeasureTester
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
           # Need to pass in the current directory because the results of minitest and coverage end up going into
           # the root directorys
-          exit runner.run_test(Dir.pwd)
+          exit runner.run_test(false, Dir.pwd)
         end
 
         ####################################### RuboCop #######################################
@@ -63,7 +63,7 @@ module OpenStudioMeasureTester
             # original_dir is the location where Rakefile exists, Dir.pwd is where the rake task was called.
             runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
 
-            exit runner.run_rubocop
+            exit runner.run_rubocop(false)
           end
 
           desc 'Run RuboCop Auto Correct on Measures'
@@ -71,7 +71,7 @@ module OpenStudioMeasureTester
             # original_dir is the location where Rakefile exists, Dir.pwd is where the rake task was called.
             runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir, Dir.pwd)
 
-            exit runner.run_rubocop(true)
+            exit runner.run_rubocop(false, true)
           end
         end
 
@@ -82,24 +82,25 @@ module OpenStudioMeasureTester
         desc 'Run OpenStudio Style Checks'
         task :style do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
-          exit runner.run_style
+          exit runner.run_style(false)
         end
 
         ####################################### Post Processing and Dashboarding #######################################
         desc 'Post process results into one directory'
         task :post_process do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
-          exit runner.post_process_results
+          exit runner.post_process_results(false)
         end
 
         desc 'Generate dashboard'
         task :dashboard do
-          dashboard(Rake.application.original_dir)
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          runner.dashboard
         end
 
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
         task all: ['openstudio:rubocop', 'openstudio:style', 'openstudio:test'] do
-          exit_status = post_process_results
+          exit_status = post_process_results(false)
           exit exit_status
         end
 

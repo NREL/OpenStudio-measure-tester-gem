@@ -34,6 +34,12 @@ require 'active_support/core_ext'
 require 'git'
 require 'openstudio_measure_tester/core_ext'
 require 'minitest'
+require 'simplecov'
+
+# override the default at_exit call
+SimpleCov.at_exit do
+  SimpleCov.result.format!
+end
 
 # Override the minitest autorun, to, well, not autorun
 def Minitest.autorun
