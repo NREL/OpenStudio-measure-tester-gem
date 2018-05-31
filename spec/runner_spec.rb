@@ -116,25 +116,4 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     expect(!Dir.exist?("#{Dir.pwd}/minitest"))
   end
   
-  it 'should run all on single measure' do
-    measure_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
-    
-    FileUtils.rm_rf "#{measure_dir}/test_results" if Dir.exist? "#{measure_dir}/test_results"
-    expect(!Dir.exist?("#{measure_dir}/test_results"))
-
-    runner = OpenStudioMeasureTester::Runner.new(measure_dir)
-
-    # this measure does not pass
-    expect(runner.run_all(Dir.pwd)).to eq 1
-
-    # verify that the results live in the base_dir
-    expect(Dir.exist?("#{measure_dir}/test_results"))
-
-    expect(Dir.exist?("#{measure_dir}/test_results/reports/TEST-AddOverhangsByProjectionFactor-Test.xml"))
-    expect(Dir.exist?("#{measure_dir}/test_results/combined_results.json"))
-    
-    # verify that coverage and minitest results are not cluttering up current directory
-    expect(!Dir.exist?("#{Dir.pwd}/coverage"))
-    expect(!Dir.exist?("#{Dir.pwd}/minitest"))
-  end
 end
