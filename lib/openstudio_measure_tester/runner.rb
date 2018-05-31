@@ -183,12 +183,16 @@ module OpenStudioMeasureTester
       # openstudio_measure_tester.rb file, so it will not run.
       Minitest.run ['--verbose']
 
-      # There is no easy way to grab the results of coverage without adding it into the at_exit method. The problem
-      # with calling SimpleCov.at_exit.call or SimpleCov.result.format!.
-
-      # Other items to look into: SimpleCov.at_exit.call or the links below:
-      # https://github.com/colszowka/simplecov/blob/92a7b4df103978f3131b803fa499477fe7d8387e/lib/simplecov/defaults.rb#L22
-      # https://github.com/colszowka/simplecov/blob/92a7b4df103978f3131b803fa499477fe7d8387e/lib/simplecov.rb#L197-L207
+      # Shutdown SimpleCov and collect results
+      # This will set SimpleCov.running to false which will prevent from running again at_exit 
+      begin
+        SimpleCov.end_now
+      rescue NoMethodError 
+        SimpleCov.set_exit_exception
+        exit_status = SimpleCov.exit_status_from_exception
+        SimpleCov.result.format!
+        exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+      end
 
       if skip_post_process
         return true

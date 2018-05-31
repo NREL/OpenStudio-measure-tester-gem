@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'openstudio_measure_tester'
+
+runner = OpenStudioMeasureTester::Runner.new(ARGV[0])
+runner.run_all(Dir.pwd)
