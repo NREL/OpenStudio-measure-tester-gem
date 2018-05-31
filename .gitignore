@@ -17,7 +17,7 @@
 .rspec_status
 rspec.html
 Gemfile.lock
-.rubocop-https*
+.rubocop-http*
 spec/files/rubocop/rubocop.json
 spec/**/.rubocop.yml
 
