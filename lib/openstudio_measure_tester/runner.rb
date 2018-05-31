@@ -201,7 +201,7 @@ module OpenStudioMeasureTester
           return post_process_results(original_results_directory) 
         end
       else
-        puts "#{num_tests} inspected"
+        puts "Inspected #{num_tests} tests"
       end
       
       # Now call run on the loaded files. Note that the Minitest.autorun method has been nulled out in the

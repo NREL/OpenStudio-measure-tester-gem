@@ -175,8 +175,8 @@ module OpenStudioMeasureTester
         end
       end
 
-      puts "total files: #{total_files}"
-      puts "total issues: #{@total_issues} (#{@total_info} info, #{@total_warnings} warnings, #{@total_errors} errors)"
+      puts "Total files: #{total_files}"
+      puts "Total issues: #{@total_issues} (#{@total_info} info, #{@total_warnings} warnings, #{@total_errors} errors)"
 
       @error_status = true if @total_errors > 0
     end

@@ -75,7 +75,7 @@ class ChangeBuildingLocation_Test < Minitest::Test
     end
 
     # show the output
-    puts "measure results for #{test_name}"
+    puts "Measure results for #{test_name}"
     show_output(result)
 
     # assert that it ran correctly

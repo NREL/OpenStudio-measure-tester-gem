@@ -9,7 +9,6 @@ if !File.exist?(measure_dir)
   exit
 end
 
-
 begin
   runner = OpenStudioMeasureTester::Runner.new(measure_dir)
   runner.run_all(Dir.pwd) 
@@ -18,4 +17,6 @@ rescue => exception
   puts '!!!!!!!!!!!!!!!!!!!!! Error Occurred !!!!!!!!!!!!!!!!!!!!!'
   puts exception.message
   puts exception.backtrace
+  puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+  puts
 end
