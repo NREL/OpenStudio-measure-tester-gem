@@ -173,11 +173,23 @@ module OpenStudioMeasureTester
               SimpleCov::Formatter::HTMLFormatter
           ]
       )
-      SimpleCov.start
+      
+      SimpleCov.start do
+        # Track all files inside of @base_dir
+        track_files "#{@base_dir}/**/*.rb"
+        
+        # Exclude all files outside of @base_dir
+        root_filter = nil
+        add_filter do |src|
+          root_filter ||= /\A#{Regexp.escape(@base_dir + File::SEPARATOR)}/io
+          src.filename !~ root_filter
+        end
+      
+      end
 
       num_tests = 0
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].each do |file|
-        require File.expand_path(file)
+        load File.expand_path(file)
         num_tests += 1
       end
 
@@ -208,12 +220,13 @@ module OpenStudioMeasureTester
       # Shutdown SimpleCov and collect results
       # This will set SimpleCov.running to false which will prevent from running again at_exit 
       begin
-        SimpleCov.end_now
+        simplecov_exit_status = SimpleCov.end_now
       rescue NoMethodError 
+        # in case using some other version of SimpleCov
         SimpleCov.set_exit_exception
         exit_status = SimpleCov.exit_status_from_exception
         SimpleCov.result.format!
-        exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+        simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
       end
 
       if skip_post_process
@@ -224,9 +237,9 @@ module OpenStudioMeasureTester
     end
 
     def run_all(original_results_directory)
+      self.run_test(true, original_results_directory)
       self.run_rubocop(true)
       self.run_style(true)
-      self.run_test(true, original_results_directory)
       self.post_process_results(original_results_directory)
     end
   end

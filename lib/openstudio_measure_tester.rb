@@ -36,15 +36,9 @@ require 'openstudio_measure_tester/core_ext'
 require 'minitest'
 require 'simplecov'
 
-# override the default at_exit call
-SimpleCov.at_exit do
-  SimpleCov.result.format!
-end
-
 # Override the minitest autorun, to, well, not autorun
 def Minitest.autorun
 end
-
 
 # Rubocop loads a lot of objects, anyway to minimize would be nice.
 require 'rubocop'
