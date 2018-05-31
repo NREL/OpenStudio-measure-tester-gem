@@ -175,13 +175,35 @@ module OpenStudioMeasureTester
       )
       SimpleCov.start
 
+      num_tests = 0
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].each do |file|
         require File.expand_path(file)
+        num_tests += 1
       end
 
+      if num_tests < 1
+        puts "No tests found"
+        if skip_post_process
+          return true
+        else
+          return post_process_results(original_results_directory) 
+        end
+      else
+        puts "#{num_tests} inspected"
+      end
+      
       # Now call run on the loaded files. Note that the Minitest.autorun method has been nulled out in the
       # openstudio_measure_tester.rb file, so it will not run.
-      Minitest.run ['--verbose']
+      begin
+        Minitest.run ['--verbose']
+      rescue => exception
+        puts
+        puts '!!!!!!!!!!!!!!!!!!!!! Minitest Error Occurred !!!!!!!!!!!!!!!!!!!!!'
+        puts exception.message
+        puts exception.backtrace
+        puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+        puts
+      end
 
       # Shutdown SimpleCov and collect results
       # This will set SimpleCov.running to false which will prevent from running again at_exit 

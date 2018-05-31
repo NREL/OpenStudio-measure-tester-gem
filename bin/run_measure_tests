@@ -2,5 +2,20 @@
 
 require 'openstudio_measure_tester'
 
-runner = OpenStudioMeasureTester::Runner.new(ARGV[0])
-runner.run_all(Dir.pwd)
+measure_dir = File.absolute_path(ARGV[0], Dir.pwd)
+
+if !File.exist?(measure_dir)
+  puts "'#{measure_dir}}' does not exist"
+  exit
+end
+
+
+begin
+  runner = OpenStudioMeasureTester::Runner.new(measure_dir)
+  runner.run_all(Dir.pwd) 
+rescue => exception
+  puts
+  puts '!!!!!!!!!!!!!!!!!!!!! Error Occurred !!!!!!!!!!!!!!!!!!!!!'
+  puts exception.message
+  puts exception.backtrace
+end
