@@ -34,6 +34,9 @@ require 'rexml/document'
 require 'minitest'
 require 'simplecov'
 
+# override the default at_exit call
+SimpleCov.at_exit do
+end
 
 # Override the minitest autorun, to, well, not autorun
 def Minitest.autorun

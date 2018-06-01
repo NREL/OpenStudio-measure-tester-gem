@@ -178,6 +178,8 @@ module OpenStudioMeasureTester
         # Track all files inside of @base_dir
         track_files "#{@base_dir}/**/*.rb"
         
+        use_merging false
+        
         # Exclude all files outside of @base_dir
         root_filter = nil
         add_filter do |src|
@@ -195,6 +197,17 @@ module OpenStudioMeasureTester
 
       if num_tests < 1
         puts "No tests found"
+        
+        begin
+          simplecov_exit_status = SimpleCov.end_now
+        rescue NoMethodError 
+          # in case using some other version of SimpleCov
+          SimpleCov.set_exit_exception
+          exit_status = SimpleCov.exit_status_from_exception
+          SimpleCov.result.format!
+          simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+        end
+        
         if skip_post_process
           return true
         else
