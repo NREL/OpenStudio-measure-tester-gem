@@ -65,34 +65,30 @@ module OpenStudioMeasureTester
     end
 
     def parse_results
-      # needs rescue
       Dir["#{@path_to_results}/rubocop-results.xml"].each do |file|
         puts "Parsing Rubocop report #{file}"
-        hash = Hash.from_xml(File.read(file))
 
-        if hash.nil?
-          puts 'Error reporting Rubocop'
-          return
-        end
-
-        # get measure names
         measure_names = []
-        # cn= ''
-        hash['checkstyle']['file'].each do |key, data|
-          parts = key['name'].split('/')
-          if parts.last == 'measure.rb'
-            name = parts[-2]
-            measure_names << name
+
+        @total_files = 0
+        doc =  REXML::Document.new(File.open(file)).root
+
+        # Go through the XML and find all the measure names first
+        doc.elements.each('file') do |rc_file|
+          @total_files += 1
+          measure_name = rc_file.attributes['name']
+          if measure_name
+            parts = measure_name.split('/')
+            if parts.last == 'measure.rb'
+              measure_names << parts[-2]
+            end
           end
         end
 
         @total_measures = measure_names.length
-        @total_files = hash['checkstyle']['file'].length
 
+        # now go find the specific data about the measure
         measure_names.each do |measure_name|
-          cn = ''
-          results = hash['checkstyle']['file'].select { |data| data['name'].include? measure_name }
-
           mhash = {}
           mhash['measure_issues'] = 0
           mhash['measure_info'] = 0
@@ -100,77 +96,66 @@ module OpenStudioMeasureTester
           mhash['measure_errors'] = 0
           mhash['files'] = []
 
-          results.each do |key, data|
-            fhash = {}
-            fhash['file_name'] = key['name'].split('/')[-1]
-            fhash['violations'] = []
+          cn = ''
+          doc.elements.each('file') do |rc_file|
 
-            # get the class name
-            if fhash['file_name'] == 'measure.rb'
-              File.readlines(key['name']).each do |line|
-                if (line.include? 'class') && line.split(' ')[0] == 'class'
-                  cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
-                  break
+            if rc_file.attributes['name'].include? measure_name
+              # Save off the file information
+              fhash = {}
+              fhash['file_name'] = rc_file.attributes['name'].split('/')[-1]
+              fhash['violations'] = []
+
+              # get the class name out of the measure file! wow, okay... sure why not.
+              if fhash['file_name'] == 'measure.rb'
+                File.readlines(rc_file.attributes['name']).each do |line|
+                  if (line.include? 'class') && line.split(' ')[0] == 'class'
+                    cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
+                    break
+                  end
                 end
               end
-            end
 
-            if key['error']
               @file_issues = 0
               @file_info = 0
               @file_warnings = 0
               @file_errors = 0
 
               violations = []
-
-              if key['error'].class == Array
-                @file_issues = key['error'].length
-                key['error'].each do |s|
-                  if s['severity'] === 'info'
-                    @file_info += 1
-                  elsif s['severity'] === 'warning'
-                    @file_warnings += 1
-                  elsif s['severity'] === 'error' # TODO: look up complete list of codes
-                    @file_errors += 1
-                  end
-                  violations << { line: s['line'], column: s['column'], severity: s['severity'], message: s['message'] }
-                end
-              end
-
-              if key['error'].class == Hash
-                @file_issues = 1
-                if key['error']['severity'] === 'info'
+              rc_file.elements.each('error') do |rc_error|
+                @file_issues += 1
+                if rc_error.attributes['severity'] == 'info'
                   @file_info += 1
-                elsif key['error']['severity'] === 'warning'
+                elsif rc_error.attributes['severity'] == 'warning'
                   @file_warnings += 1
-                elsif key['error']['severity'] === 'error'
+                elsif rc_error.attributes['severity'] == 'error'
                   @file_errors += 1
                 end
-                violations << { line: key['error']['line'], column: key['error']['column'], severity: key['error']['severity'], message: key['error']['message'] }
+                violations << {
+                    line: rc_error.attributes['line'],
+                    column: rc_error.attributes['column'],
+                    severity: rc_error.attributes['severity'],
+                    message: rc_error.attributes['message']
+                }
               end
-
               fhash['issues'] = @file_issues
               fhash['info'] = @file_info
               fhash['warning'] = @file_warnings
               fhash['error'] = @file_errors
               fhash['violations'] = violations
-
-              mhash['measure_issues'] += @file_issues
-              mhash['measure_info'] += @file_info
-              mhash['measure_warnings'] += @file_warnings
-              mhash['measure_errors'] += @file_errors
-
-              @total_issues += @file_issues
-              @total_info += @file_info
-              @total_warnings += @file_warnings
-              @total_errors += @file_errors
-
             end
+
+            mhash['measure_issues'] += @file_issues
+            mhash['measure_info'] += @file_info
+            mhash['measure_warnings'] += @file_warnings
+            mhash['measure_errors'] += @file_errors
+
+            @total_issues += @file_issues
+            @total_info += @file_info
+            @total_warnings += @file_warnings
+            @total_errors += @file_errors
 
             mhash['files'] << fhash
           end
-
-          # @summary << mhash
           @by_measure[cn] = mhash
         end
       end

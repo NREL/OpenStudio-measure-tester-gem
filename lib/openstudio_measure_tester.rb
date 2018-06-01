@@ -29,6 +29,7 @@
 require 'openstudio'
 
 require 'pp'
+require 'rexml/document'
 require 'active_support'
 require 'active_support/core_ext'
 require 'git'
