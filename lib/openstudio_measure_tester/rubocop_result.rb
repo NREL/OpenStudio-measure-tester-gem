@@ -98,51 +98,50 @@ module OpenStudioMeasureTester
 
           cn = ''
           doc.elements.each('file') do |rc_file|
+            next unless rc_file.attributes['name'].include? measure_name
 
-            if rc_file.attributes['name'].include? measure_name
-              # Save off the file information
-              fhash = {}
-              fhash['file_name'] = rc_file.attributes['name'].split('/')[-1]
-              fhash['violations'] = []
+            # Save off the file information
+            fhash = {}
+            fhash['file_name'] = rc_file.attributes['name'].split('/')[-1]
+            fhash['violations'] = []
 
-              # get the class name out of the measure file! wow, okay... sure why not.
-              if fhash['file_name'] == 'measure.rb'
-                File.readlines(rc_file.attributes['name']).each do |line|
-                  if (line.include? 'class') && line.split(' ')[0] == 'class'
-                    cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
-                    break
-                  end
+            # get the class name out of the measure file! wow, okay... sure why not.
+            if fhash['file_name'] == 'measure.rb'
+              File.readlines(rc_file.attributes['name']).each do |line|
+                if (line.include? 'class') && line.split(' ')[0] == 'class'
+                  cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
+                  break
                 end
               end
-
-              @file_issues = 0
-              @file_info = 0
-              @file_warnings = 0
-              @file_errors = 0
-
-              violations = []
-              rc_file.elements.each('error') do |rc_error|
-                @file_issues += 1
-                if rc_error.attributes['severity'] == 'info'
-                  @file_info += 1
-                elsif rc_error.attributes['severity'] == 'warning'
-                  @file_warnings += 1
-                elsif rc_error.attributes['severity'] == 'error'
-                  @file_errors += 1
-                end
-                violations << {
-                    line: rc_error.attributes['line'],
-                    column: rc_error.attributes['column'],
-                    severity: rc_error.attributes['severity'],
-                    message: rc_error.attributes['message']
-                }
-              end
-              fhash['issues'] = @file_issues
-              fhash['info'] = @file_info
-              fhash['warning'] = @file_warnings
-              fhash['error'] = @file_errors
-              fhash['violations'] = violations
             end
+
+            @file_issues = 0
+            @file_info = 0
+            @file_warnings = 0
+            @file_errors = 0
+
+            violations = []
+            rc_file.elements.each('error') do |rc_error|
+              @file_issues += 1
+              if rc_error.attributes['severity'] == 'info'
+                @file_info += 1
+              elsif rc_error.attributes['severity'] == 'warning'
+                @file_warnings += 1
+              elsif rc_error.attributes['severity'] == 'error'
+                @file_errors += 1
+              end
+              violations << {
+                  line: rc_error.attributes['line'],
+                  column: rc_error.attributes['column'],
+                  severity: rc_error.attributes['severity'],
+                  message: rc_error.attributes['message']
+              }
+            end
+            fhash['issues'] = @file_issues
+            fhash['info'] = @file_info
+            fhash['warning'] = @file_warnings
+            fhash['error'] = @file_errors
+            fhash['violations'] = violations
 
             mhash['measure_issues'] += @file_issues
             mhash['measure_info'] += @file_info
