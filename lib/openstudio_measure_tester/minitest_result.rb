@@ -57,24 +57,25 @@ module OpenStudioMeasureTester
     def parse_results
       Dir["#{@path_to_results}/reports/*.xml"].each do |file|
         puts "Parsing minitest report #{file}"
-        hash = Hash.from_xml(File.read(file))
-
-        # pp hash
+        doc = REXML::Document.new(File.open(file)).root
 
         measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/, ''
 
         mhash = {}
-
         mhash['tested_class'] = measure_name
-        mhash['measure_tests'] = hash['test_suites']['testsuite']['testcase'].length
-        mhash['measure_assertions'] = hash['test_suites']['testsuite']['assertions'].to_i
-        mhash['measure_errors'] = hash['test_suites']['testsuite']['errors'].to_i
-        mhash['measure_failures'] = hash['test_suites']['testsuite']['failures'].to_i
-        mhash['measure_skipped'] = hash['test_suites']['testsuite']['skipped'].to_i
 
         # Note: only 1 failure and 1 error possible per test
-        errors, failures = parse_measure(hash)
-        mhash['issues'] = { errors: errors, failures: failures }
+        testsuite_element = doc.elements['testsuite']
+        errors, failures = parse_measure(testsuite_element)
+
+        mhash['measure_tests'] = testsuite_element.attributes['tests'].to_i
+        mhash['measure_assertions'] = testsuite_element.attributes['assertions'].to_i
+        mhash['measure_errors'] = testsuite_element.attributes['errors'].to_i
+        mhash['measure_failures'] = testsuite_element.attributes['failures'].to_i
+        mhash['measure_skipped'] = testsuite_element.attributes['skipped'].to_i
+
+
+        mhash['issues'] = {errors: errors, failures: failures}
 
         @measure_results[measure_name] = mhash
 
@@ -86,8 +87,6 @@ module OpenStudioMeasureTester
       end
 
       @error_status = true if @total_errors > 0
-
-      # pp measure_results
     end
 
     def to_file
@@ -111,24 +110,15 @@ module OpenStudioMeasureTester
 
     private
 
-    def parse_measure(measure)
+    def parse_measure(testsuite_element)
       errors = []
       failures = []
 
-      # check if testcase is hash or array
-      if measure['test_suites']['testsuite']
-        if measure['test_suites']['testsuite']['testcase'].class == Hash
-          # convert to array
-          measure['test_suites']['testsuite']['testcase'] = [measure['test_suites']['testsuite']['testcase']]
-        end
-        measure['test_suites']['testsuite']['testcase'].each do |test|
-          if test['error']
-            errors << test['error']
-          end
-
-          if test['failure']
-            failures << test['failure']
-          end
+      testsuite_element.elements.each('testcase') do |testcase|
+        if testcase.elements['error']
+          errors << testcase.elements['error']
+        elsif testcase.elements['failure']
+          failures << testcase.elements['failure']
         end
       end
 

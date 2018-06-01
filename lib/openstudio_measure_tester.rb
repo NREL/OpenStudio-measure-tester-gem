@@ -29,13 +29,11 @@
 require 'openstudio'
 
 require 'pp'
-require 'rexml/document'
-require 'active_support'
-require 'active_support/core_ext'
 require 'git'
-require 'openstudio_measure_tester/core_ext'
+require 'rexml/document'
 require 'minitest'
 require 'simplecov'
+
 
 # Override the minitest autorun, to, well, not autorun
 def Minitest.autorun
@@ -44,6 +42,7 @@ end
 # Rubocop loads a lot of objects, anyway to minimize would be nice.
 require 'rubocop'
 
+require 'openstudio_measure_tester/core_ext'
 require 'openstudio_measure_tester/version'
 require 'openstudio_measure_tester/openstudio_style'
 require 'openstudio_measure_tester/minitest_result'
@@ -54,7 +53,6 @@ require 'openstudio_measure_tester/dashboard'
 require 'openstudio_measure_tester/runner'
 
 require 'openstudio_measure_tester/rake_task'
-
 
 # for minitest exit
 $running_tests = true

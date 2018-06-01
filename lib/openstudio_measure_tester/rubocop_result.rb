@@ -71,7 +71,7 @@ module OpenStudioMeasureTester
         measure_names = []
 
         @total_files = 0
-        doc =  REXML::Document.new(File.open(file)).root
+        doc = REXML::Document.new(File.open(file)).root
 
         # Go through the XML and find all the measure names first
         doc.elements.each('file') do |rc_file|
