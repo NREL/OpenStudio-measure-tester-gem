@@ -23,13 +23,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '1.16.1'
   spec.add_development_dependency 'rspec', '3.7.0'
 
-  spec.add_dependency 'activesupport', '5.1.5'
+  spec.add_dependency 'activesupport', '5.1.6'
   spec.add_dependency 'ci_reporter_minitest', '1.0.0'
   spec.add_dependency 'git', '1.3.0'
   spec.add_dependency 'minitest', '5.4.3'
-  spec.add_dependency 'minitest-reporters', '1.1.19'
-  spec.add_dependency 'rake', '12.3'
-  spec.add_dependency 'rubocop', '0.53.0'
+  spec.add_dependency 'minitest-reporters', '1.2.0'
+  spec.add_dependency 'rake', '12.3.1'
+  spec.add_dependency 'rubocop', '0.54.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '0.4'
-  spec.add_dependency 'simplecov', '0.16'
+  spec.add_dependency 'simplecov', '0.16.1'
 end

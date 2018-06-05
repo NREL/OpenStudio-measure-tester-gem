@@ -1,3 +1,7 @@
+# Version 0.1.4
+
+* Use simplecov from NREL's fork. Do not rely on JSON.
+
 # Version 0.1.3
 
 * Catch when infoExtractor is unable to parse measure arguments
