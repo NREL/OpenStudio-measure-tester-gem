@@ -59,6 +59,9 @@ module OpenStudioMeasureTester
         puts "Parsing minitest report #{file}"
         hash = Hash.from_xml(File.read(file))
 
+        # continue if hash is empty
+        next unless hash
+
         # pp hash
 
         measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/, ''
