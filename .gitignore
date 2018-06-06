@@ -17,7 +17,7 @@
 rspec.html
 .idea/
 Gemfile.lock
-.rubocop-https*
+.rubocop-http*
 rubocop-results.xml
 
 # mac and rbenv stuff

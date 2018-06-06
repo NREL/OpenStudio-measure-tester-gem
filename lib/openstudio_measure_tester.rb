@@ -44,6 +44,12 @@ require 'openstudio_measure_tester/dashboard'
 
 require 'openstudio_measure_tester/rake_task'
 
+
+# Set the encoding to UTF-8. OpenStudio Docker images do not have this set by default
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
+
 module OpenStudioMeasureTester
   # No action here. Most of this will be rake_tasks at the moment.
 end
