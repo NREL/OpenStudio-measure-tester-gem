@@ -194,7 +194,7 @@ module OpenStudioMeasureTester
       end
 
       num_tests = 0
-      Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].each do |file|
+      Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].uniq.each do |file|
         puts "Loading file for testing: #{file}"
         load File.expand_path(file)
         num_tests += 1
