@@ -103,12 +103,13 @@ module OpenStudioMeasureTester
           FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
           FileUtils.mkdir_p "#{@test_results_dir}/minitest"
 
+          # Copy the files over in case the folder is locked.
           if Dir.exist?("#{@orig_results_dir}/test/html_reports")
-            FileUtils.mv "#{@orig_results_dir}/test/html_reports", "#{@test_results_dir}/minitest/html_reports"
+            FileUtils.cp_r "#{@orig_results_dir}/test/html_reports/.", "#{@test_results_dir}/minitest/html_reports"
           end
 
           if Dir.exist?("#{@orig_results_dir}/test/reports")
-            FileUtils.mv "#{@orig_results_dir}/test/reports", "#{@test_results_dir}/minitest/reports"
+            FileUtils.cp_r "#{@orig_results_dir}/test/reports/.", "#{@test_results_dir}/minitest/reports"
           end
 
           # Delete the test folder if it is empty
