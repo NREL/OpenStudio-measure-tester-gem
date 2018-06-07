@@ -92,7 +92,7 @@ module OpenStudioMeasureTester
           FileUtils.rm_rf "#{@test_results_dir}/coverage" if Dir.exist? "#{@test_results_dir}/coverage"
           FileUtils.cp_r "#{@orig_results_dir}/coverage/.", "#{@test_results_dir}/coverage"
           FileUtils.rm_rf "#{@orig_results_dir}/coverage" if Dir.exist? "#{@orig_results_dir}/coverage"
-          
+
           cov = OpenStudioMeasureTester::Coverage.new("#{@test_results_dir}/coverage")
           cov.parse_results
           @results['coverage'] = cov.to_hash

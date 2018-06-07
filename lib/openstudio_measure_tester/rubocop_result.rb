@@ -131,10 +131,10 @@ module OpenStudioMeasureTester
                 @file_errors += 1
               end
               violations << {
-                  line: rc_error.attributes['line'],
-                  column: rc_error.attributes['column'],
-                  severity: rc_error.attributes['severity'],
-                  message: rc_error.attributes['message']
+                line: rc_error.attributes['line'],
+                column: rc_error.attributes['column'],
+                severity: rc_error.attributes['severity'],
+                message: rc_error.attributes['message']
               }
             end
             fhash['issues'] = @file_issues

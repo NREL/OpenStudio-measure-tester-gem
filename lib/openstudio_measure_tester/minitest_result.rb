@@ -77,8 +77,7 @@ module OpenStudioMeasureTester
         mhash['measure_failures'] = testsuite_element.attributes['failures'].to_i
         mhash['measure_skipped'] = testsuite_element.attributes['skipped'].to_i
 
-
-        mhash['issues'] = {errors: errors, failures: failures}
+        mhash['issues'] = { errors: errors, failures: failures }
 
         @measure_results[measure_name] = mhash
 

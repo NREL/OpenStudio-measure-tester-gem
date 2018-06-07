@@ -72,7 +72,7 @@ end
 module Git
   class Log
     def empty?
-      size.zero? # rubocop:disable Style/ZeroLengthPredicate
+      size.zero?
     end
   end
 end

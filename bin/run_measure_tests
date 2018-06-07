@@ -11,8 +11,8 @@ end
 
 begin
   runner = OpenStudioMeasureTester::Runner.new(measure_dir)
-  runner.run_all(Dir.pwd) 
-rescue => exception
+  runner.run_all(Dir.pwd)
+rescue StandardError => exception
   puts
   puts '!!!!!!!!!!!!!!!!!!!!! Error Occurred !!!!!!!!!!!!!!!!!!!!!'
   puts exception.message

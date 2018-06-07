@@ -41,7 +41,7 @@ RSpec.describe OpenStudioMeasureTester::RubocopResult do
   it 'should write the json file' do
     dir = 'spec/files/rubocop'
     write_file = "#{dir}/rubocop.json"
-    File.delete(write_file) if File.exists? write_file
+    File.delete(write_file) if File.exist? write_file
 
     mr = OpenStudioMeasureTester::RubocopResult.new(dir)
     expect(File.exist?(write_file)).to be true

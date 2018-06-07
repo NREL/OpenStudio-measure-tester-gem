@@ -39,8 +39,7 @@ SimpleCov.at_exit do
 end
 
 # Override the minitest autorun, to, well, not autorun
-def Minitest.autorun
-end
+def Minitest.autorun; end
 
 # Rubocop loads a lot of objects, anyway to minimize would be nice.
 require 'rubocop'

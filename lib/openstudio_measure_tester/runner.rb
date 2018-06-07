@@ -2,7 +2,6 @@ module OpenStudioMeasureTester
   # The runner is the workhorse that executes the tests. This class does not invoke Rake and can be run
   # as a library method or as a CLI call
   class Runner
-
     # Initialize the runner
     #
     # @param base_dir [string] Base dir, measures will be recursively tested from this location. Results will be here too.
@@ -79,7 +78,7 @@ module OpenStudioMeasureTester
     # Post process the various results and save them into the base_dir
     #
     # @param original_results_directory [string] Location of the results from coverag and minitest
-    def post_process_results(original_results_directory=nil)
+    def post_process_results(original_results_directory = nil)
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
@@ -118,7 +117,7 @@ module OpenStudioMeasureTester
       if skip_post_process
         return true
       else
-        return post_process_results 
+        return post_process_results
       end
     end
 
@@ -132,12 +131,12 @@ module OpenStudioMeasureTester
       # https://github.com/bbatsov/rubocop/blob/9bdbaba9dcaa3dedad5e857b440d0d8988b806f5/lib/rubocop/runner.rb#L25
       require 'rubocop/formatter/checkstyle_formatter'
       options = {
-          # out and output_path do not actually save the results, has to be appended after the formatter.
-          # out: 'junk.xml',
-          # output_path: 'junk.xml',
-          auto_correct: auto_correct,
-          color: false,
-          formatters: ['simple', ['RuboCop::Formatter::CheckstyleFormatter', rubocop_results_file]]
+        # out and output_path do not actually save the results, has to be appended after the formatter.
+        # out: 'junk.xml',
+        # output_path: 'junk.xml',
+        auto_correct: auto_correct,
+        color: false,
+        formatters: ['simple', ['RuboCop::Formatter::CheckstyleFormatter', rubocop_results_file]]
       }
 
       # Load in the ruby config from the root directory
@@ -151,7 +150,7 @@ module OpenStudioMeasureTester
       if skip_post_process
         return true
       else
-        return post_process_results 
+        return post_process_results
       end
     end
 
@@ -163,30 +162,29 @@ module OpenStudioMeasureTester
       # Specify the minitest reporters
       require 'minitest/reporters'
       Minitest::Reporters.use! [
-                                   Minitest::Reporters::HtmlReporter.new,
-                                   Minitest::Reporters::JUnitReporter.new
-                               ]
+        Minitest::Reporters::HtmlReporter.new,
+        Minitest::Reporters::JUnitReporter.new
+      ]
 
       # Load in the coverage before loading the test files
       SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-          [
-              SimpleCov::Formatter::HTMLFormatter
-          ]
+        [
+          SimpleCov::Formatter::HTMLFormatter
+        ]
       )
-      
+
       SimpleCov.start do
         # Track all files inside of @base_dir
         track_files "#{@base_dir}/**/*.rb"
-        
+
         use_merging false
-        
+
         # Exclude all files outside of @base_dir
         root_filter = nil
         add_filter do |src|
           root_filter ||= /\A#{Regexp.escape(@base_dir + File::SEPARATOR)}/io
           src.filename !~ root_filter
         end
-      
       end
 
       num_tests = 0
@@ -196,32 +194,32 @@ module OpenStudioMeasureTester
       end
 
       if num_tests < 1
-        puts "No tests found"
-        
+        puts 'No tests found'
+
         begin
           simplecov_exit_status = SimpleCov.end_now
-        rescue NoMethodError 
+        rescue NoMethodError
           # in case using some other version of SimpleCov
           SimpleCov.set_exit_exception
           exit_status = SimpleCov.exit_status_from_exception
           SimpleCov.result.format!
           simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
         end
-        
+
         if skip_post_process
           return true
         else
-          return post_process_results(original_results_directory) 
+          return post_process_results(original_results_directory)
         end
       else
         puts "Inspected #{num_tests} tests"
       end
-      
+
       # Now call run on the loaded files. Note that the Minitest.autorun method has been nulled out in the
       # openstudio_measure_tester.rb file, so it will not run.
       begin
         Minitest.run ['--verbose']
-      rescue => exception
+      rescue StandardError => exception
         puts
         puts '!!!!!!!!!!!!!!!!!!!!! Minitest Error Occurred !!!!!!!!!!!!!!!!!!!!!'
         puts exception.message
@@ -231,10 +229,10 @@ module OpenStudioMeasureTester
       end
 
       # Shutdown SimpleCov and collect results
-      # This will set SimpleCov.running to false which will prevent from running again at_exit 
+      # This will set SimpleCov.running to false which will prevent from running again at_exit
       begin
         simplecov_exit_status = SimpleCov.end_now
-      rescue NoMethodError 
+      rescue NoMethodError
         # in case using some other version of SimpleCov
         SimpleCov.set_exit_exception
         exit_status = SimpleCov.exit_status_from_exception
@@ -245,17 +243,15 @@ module OpenStudioMeasureTester
       if skip_post_process
         return true
       else
-        return post_process_results(original_results_directory) 
+        return post_process_results(original_results_directory)
       end
     end
 
     def run_all(original_results_directory)
-      self.run_test(true, original_results_directory)
-      self.run_rubocop(true)
-      self.run_style(true)
-      self.post_process_results(original_results_directory)
+      run_test(true, original_results_directory)
+      run_rubocop(true)
+      run_style(true)
+      post_process_results(original_results_directory)
     end
   end
 end
-
-
