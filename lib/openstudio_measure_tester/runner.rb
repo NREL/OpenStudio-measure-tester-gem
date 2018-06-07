@@ -155,7 +155,7 @@ module OpenStudioMeasureTester
     end
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
-    def run_test(skip_post_process, original_results_directory)
+    def run_test(skip_post_process, original_results_directory, run_coverage=true)
       # not sure what @base_dir has to be right now
       pre_process_minitest(original_results_directory)
 
@@ -166,24 +166,26 @@ module OpenStudioMeasureTester
         Minitest::Reporters::JUnitReporter.new
       ]
 
-      # Load in the coverage before loading the test files
-      SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-        [
-          SimpleCov::Formatter::HTMLFormatter
-        ]
-      )
+      if run_coverage
+        # Load in the coverage before loading the test files
+        SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+          [
+            SimpleCov::Formatter::HTMLFormatter
+          ]
+        )
 
-      SimpleCov.start do
-        # Track all files inside of @base_dir
-        track_files "#{@base_dir}/**/*.rb"
+        SimpleCov.start do
+          # Track all files inside of @base_dir
+          track_files "#{@base_dir}/**/*.rb"
 
-        use_merging false
+          use_merging false
 
-        # Exclude all files outside of @base_dir
-        root_filter = nil
-        add_filter do |src|
-          root_filter ||= /\A#{Regexp.escape(@base_dir + File::SEPARATOR)}/io
-          src.filename !~ root_filter
+          # Exclude all files outside of @base_dir
+          root_filter = nil
+          add_filter do |src|
+            root_filter ||= /\A#{Regexp.escape(@base_dir + File::SEPARATOR)}/io
+            src.filename !~ root_filter
+          end
         end
       end
 
@@ -196,14 +198,17 @@ module OpenStudioMeasureTester
       if num_tests < 1
         puts 'No tests found'
 
-        begin
-          simplecov_exit_status = SimpleCov.end_now
-        rescue NoMethodError
-          # in case using some other version of SimpleCov
-          SimpleCov.set_exit_exception
-          exit_status = SimpleCov.exit_status_from_exception
-          SimpleCov.result.format!
-          simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+        if run_coverage
+          # This doesn't seem to be working, it doesn't save off the .resultset.json.
+          begin
+            simplecov_exit_status = SimpleCov.end_now
+          rescue NoMethodError
+            # in case using some other version of SimpleCov
+            SimpleCov.set_exit_exception
+            exit_status = SimpleCov.exit_status_from_exception
+            SimpleCov.result.format!
+            simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+          end
         end
 
         if skip_post_process
@@ -230,14 +235,16 @@ module OpenStudioMeasureTester
 
       # Shutdown SimpleCov and collect results
       # This will set SimpleCov.running to false which will prevent from running again at_exit
-      begin
-        simplecov_exit_status = SimpleCov.end_now
-      rescue NoMethodError
-        # in case using some other version of SimpleCov
-        SimpleCov.set_exit_exception
-        exit_status = SimpleCov.exit_status_from_exception
-        SimpleCov.result.format!
-        simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+      if run_coverage
+        begin
+          simplecov_exit_status = SimpleCov.end_now
+        rescue NoMethodError
+          # in case using some other version of SimpleCov
+          SimpleCov.set_exit_exception
+          exit_status = SimpleCov.exit_status_from_exception
+          SimpleCov.result.format!
+          simplecov_exit_status = SimpleCov.process_result(SimpleCov.result, exit_status)
+        end
       end
 
       if skip_post_process
