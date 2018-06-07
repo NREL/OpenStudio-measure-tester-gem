@@ -6,7 +6,7 @@ require 'openstudio_measure_tester/version'
 Gem::Specification.new do |spec|
   spec.name          = 'openstudio_measure_tester'
   spec.version       = OpenStudioMeasureTester::VERSION
-  spec.authors       = ['Nicholas Long']
+  spec.authors       = ['Nicholas Long', 'Katherine Fleming', 'Daniel Macumber', 'Robert Guglielmetti']
   spec.email         = ['nicholas.long@nrel.gov']
 
   spec.summary       = 'Testing framework for OpenStudio measures'

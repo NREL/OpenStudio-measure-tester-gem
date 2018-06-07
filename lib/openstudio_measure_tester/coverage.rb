@@ -69,6 +69,11 @@ module OpenStudioMeasureTester
     def parse_results
       file = "#{@path_to_results}/.resultset.json"
 
+      unless File.exist? file
+        puts "Could not find the results of coverage in #{file}"
+        return false
+      end
+
       puts 'Parsing coverage results'
       json_data = File.read(file)
       hash = JSON.parse(json_data)
@@ -163,6 +168,8 @@ module OpenStudioMeasureTester
         @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
       end
       pp "Total Coverage: #{@total_percent_coverage}"
+
+      return true
     end
 
     def to_hash
