@@ -79,6 +79,7 @@ module OpenStudioMeasureTester
     #
     # @param original_results_directory [string] Location of the results from coverag and minitest
     def post_process_results(original_results_directory = nil)
+      puts " ========================= Starting Results Post Process ================================"
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
@@ -108,6 +109,7 @@ module OpenStudioMeasureTester
     end
 
     def run_style(skip_post_process)
+      puts " ========================= Starting Run for OpenStudio Style ================================"
       pre_process_style
 
       # Run the style tests
@@ -122,6 +124,7 @@ module OpenStudioMeasureTester
     end
 
     def run_rubocop(skip_post_process, auto_correct = false)
+      puts " ========================= Starting Run for Rubocop ================================"
       pre_process_rubocop
 
       rubocop_results_file = "#{test_results_dir}/rubocop/rubocop-results.xml"
@@ -156,6 +159,7 @@ module OpenStudioMeasureTester
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
     def run_test(skip_post_process, original_results_directory, run_coverage = true)
+      puts " ========================= Starting Run for Minitest (and coverage) ============================"
       # not sure what @base_dir has to be right now
       pre_process_minitest(original_results_directory)
 
@@ -191,6 +195,7 @@ module OpenStudioMeasureTester
 
       num_tests = 0
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].each do |file|
+        puts "Loading file for testing: #{file}"
         load File.expand_path(file)
         num_tests += 1
       end
