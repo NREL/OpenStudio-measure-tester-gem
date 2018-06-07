@@ -155,7 +155,7 @@ module OpenStudioMeasureTester
     end
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
-    def run_test(skip_post_process, original_results_directory, run_coverage=true)
+    def run_test(skip_post_process, original_results_directory, run_coverage = true)
       # not sure what @base_dir has to be right now
       pre_process_minitest(original_results_directory)
 
@@ -255,7 +255,8 @@ module OpenStudioMeasureTester
     end
 
     def run_all(original_results_directory)
-      run_test(true, original_results_directory)
+      # do not run coverage now since the at_exit is causing exceptions when running (GC?)
+      run_test(true, original_results_directory, false)
       run_rubocop(true)
       run_style(true)
       post_process_results(original_results_directory)
