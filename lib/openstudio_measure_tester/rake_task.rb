@@ -89,7 +89,7 @@ module OpenStudioMeasureTester
         desc 'Post process results into one directory'
         task :post_process do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
-          exit runner.post_process_results(false)
+          exit runner.post_process_results(Dir.pwd)
         end
 
         desc 'Generate dashboard'
@@ -99,9 +99,12 @@ module OpenStudioMeasureTester
         end
 
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
-        task all: ['openstudio:rubocop', 'openstudio:style', 'openstudio:test'] do
-          exit_status = post_process_results(false)
-          exit exit_status
+        task :all do
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          runner.run_rubocop(true)
+          runner.run_style(true)
+          runner.run_test(true, Dir.pwd)
+          exit runner.post_process_results(Dir.pwd)
         end
 
         # Hide the core tasks from being displayed when calling rake -T

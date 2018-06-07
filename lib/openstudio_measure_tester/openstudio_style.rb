@@ -207,8 +207,11 @@ module OpenStudioMeasureTester
     end
 
     def save_results
-      FileUtils.mkdir_p "#{@results_dir}/openstudio_style" unless Dir.exist? "#{@results_dir}/openstudio_style"
-      File.open("#{@results_dir}/openstudio_style/openstudio_style.json", 'w') do |file|
+      save_dir = "#{@results_dir}/openstudio_style"
+      save_file = "#{save_dir}/openstudio_style.json"
+      puts "Saving OpenStudio Style results to #{save_file}"
+      FileUtils.mkdir_p save_dir unless Dir.exist? save_dir
+      File.open(save_file, 'w') do |file|
         file << JSON.pretty_generate(@results)
       end
     end
