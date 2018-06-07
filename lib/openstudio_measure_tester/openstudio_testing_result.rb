@@ -40,6 +40,10 @@ module OpenStudioMeasureTester
       @orig_results_dir = orig_results_dir
       @results = {}
 
+      puts "results_dir is #{@results_dir}"
+      puts "test_results_dir is #{@test_results_dir}"
+      puts "orig_results_dir is #{@orig_results_dir}"
+
       # get the repository info
       repo_name = 'unknown'
       current_branch = 'unknown'
@@ -75,6 +79,7 @@ module OpenStudioMeasureTester
       # the @results hash
       filename = "#{@test_results_dir}/openstudio_style/openstudio_style.json"
       if File.exist? filename
+        puts "Found OpenStudio Style results, parsing"
         @results['openstudio_style'] = JSON.parse(File.read(filename))
       end
 
@@ -89,6 +94,7 @@ module OpenStudioMeasureTester
       if @test_results_dir != @orig_results_dir
         # coverage
         if Dir.exist? "#{@orig_results_dir}/coverage"
+          puts "Found Coverage results, parsing"
           FileUtils.rm_rf "#{@test_results_dir}/coverage" if Dir.exist? "#{@test_results_dir}/coverage"
           FileUtils.cp_r "#{@orig_results_dir}/coverage/.", "#{@test_results_dir}/coverage"
           FileUtils.rm_rf "#{@orig_results_dir}/coverage" if Dir.exist? "#{@orig_results_dir}/coverage"
@@ -100,15 +106,18 @@ module OpenStudioMeasureTester
 
         # minitest
         if Dir.exist?("#{@orig_results_dir}/test/html_reports") || Dir.exist?("#{@orig_results_dir}/test/reports")
+          puts "Found Minitest Results, parsing"
           FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
           FileUtils.mkdir_p "#{@test_results_dir}/minitest"
 
           # Copy the files over in case the folder is locked.
           if Dir.exist?("#{@orig_results_dir}/test/html_reports")
+            puts "Moving Minitest HTML results to results directory"
             FileUtils.cp_r "#{@orig_results_dir}/test/html_reports/.", "#{@test_results_dir}/minitest/html_reports"
           end
 
           if Dir.exist?("#{@orig_results_dir}/test/reports")
+            puts "Moving Minitest XML results to results directory"
             FileUtils.cp_r "#{@orig_results_dir}/test/reports/.", "#{@test_results_dir}/minitest/reports"
           end
 

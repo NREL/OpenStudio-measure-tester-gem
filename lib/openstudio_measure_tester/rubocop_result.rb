@@ -73,8 +73,11 @@ module OpenStudioMeasureTester
         @total_files = 0
         doc = REXML::Document.new(File.open(file)).root
 
+        puts "Finished reading #{file}"
+
         # Go through the XML and find all the measure names first
         doc.elements.each('file') do |rc_file|
+
           @total_files += 1
           measure_name = rc_file.attributes['name']
           if measure_name
@@ -159,7 +162,7 @@ module OpenStudioMeasureTester
         end
       end
 
-      puts "Total files: #{total_files}"
+      puts "Total files: #{@total_files}"
       puts "Total issues: #{@total_issues} (#{@total_info} info, #{@total_warnings} warnings, #{@total_errors} errors)"
 
       @error_status = true if @total_errors > 0
