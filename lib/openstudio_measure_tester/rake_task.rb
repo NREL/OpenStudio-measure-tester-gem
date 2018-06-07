@@ -101,10 +101,7 @@ module OpenStudioMeasureTester
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
         task :all do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
-          runner.run_rubocop(true)
-          runner.run_style(true)
-          runner.run_test(true, Dir.pwd)
-          exit runner.post_process_results(Dir.pwd)
+          exit runner.run_all(Dir.pwd)
         end
 
         # Hide the core tasks from being displayed when calling rake -T

@@ -261,9 +261,9 @@ module OpenStudioMeasureTester
 
     def run_all(original_results_directory)
       # do not run coverage now since the at_exit is causing exceptions when running (GC?)
-      run_test(true, original_results_directory, false)
       run_rubocop(true)
       run_style(true)
+      run_test(true, original_results_directory, false)
       post_process_results(original_results_directory)
     end
   end
