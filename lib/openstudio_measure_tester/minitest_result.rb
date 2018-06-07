@@ -59,6 +59,9 @@ module OpenStudioMeasureTester
         puts "Parsing minitest report #{file}"
         doc = REXML::Document.new(File.open(file)).root
 
+        # continue if doc is empty
+        next unless doc
+
         measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/, ''
 
         mhash = {}
