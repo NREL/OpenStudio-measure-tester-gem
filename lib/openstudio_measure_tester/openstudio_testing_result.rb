@@ -152,36 +152,43 @@ module OpenStudioMeasureTester
       # pp @results
       final_exit_code = 0
       if @results['rubocop']
-        if @results['rubocop']['total_errors'] > 0
-          puts 'RuboCop errors found.'
+        # more than 10 errors per file on average
+        status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
+        if status > 10
+          puts "More than 10 RuboCop errors per file found. Found #{status}"
           final_exit_code = 1
         end
       end
 
       if @results['openstudio_style']
-        if @results['openstudio_style']['total_errors'] > 0
-          puts 'OpenStudio Style errors found.'
+        total_files = @results['openstudio_style']['by_measure'].count
+        status = @results['openstudio_style']['total_errors'] / total_files
+        if status > 10
+          puts "More than 10 OpenStudio Style errors found per file. Found #{status}"
           final_exit_code = 1
         end
-        if @results['openstudio_style']['total_warnings'] > 10
-          puts 'More than 10 OpenStudio Style warnings found, reporting as error'
+
+        status = @results['openstudio_style']['total_warnings'] / total_files
+        if status > 25
+          puts "More than 25 OpenStudio Style warnings found per file, reporting as error. Found #{status}"
           final_exit_code = 1
         end
       end
 
       if @results['minitest']
         if @results['minitest']['total_errors'] > 0 || @results['minitest']['total_failures'] > 0
-          puts 'Unit Test (MiniTest) errors/failures found.'
+          puts 'Unit Test (Minitest) errors/failures found.'
           final_exit_code = 1
         end
       end
 
-      if @results['coverage']
-        if @results['coverage']['total_percent_coverage'] < 70
-          puts 'Code coverage is less than 70%, raising error.'
-          final_exit_code = 1
-        end
-      end
+      # if @results['coverage']
+      #   status = @results['coverage']['total_percent_coverage']
+      #   if status < 70
+      #     puts "Code coverage is less than 70%, raising error. Coverage was #{status}"
+      #     final_exit_code = 1
+      #   end
+      # end
 
       # Since the data are relative to the directory from which it has been run, then just show from current dir (.)
       puts 'Open ./test_results/dashboard/index.html to view measure testing dashboard.'

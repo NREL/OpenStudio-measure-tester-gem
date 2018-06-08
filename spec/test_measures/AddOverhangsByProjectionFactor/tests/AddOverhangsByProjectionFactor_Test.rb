@@ -5,7 +5,7 @@ require 'fileutils'
 require_relative '../measure.rb'
 require 'minitest/autorun'
 
-class AddOverhangsByProjectionFactor_Test < MiniTest::Unit::TestCase
+class AddOverhangsByProjectionFactor_Test < Minitest::Test
   
   # def setup
   # end
