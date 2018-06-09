@@ -150,9 +150,12 @@ module OpenStudioMeasureTester
         else
           measure = measure.get
           begin
+            # there seems to be a race condition with the infoExtractor method
             measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
           rescue NameError => error
             log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
+          rescue => error
+            log_message("Unknown error extracting measure info. Error #{error}", :general, :error)
           end
 
           measure_hash = generate_measure_hash(measure_dir, measure, measure_info)

@@ -81,7 +81,7 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass
-    expect(runner.run_test(false, Dir.pwd)).to eq 1
+    expect(runner.run_test(false, Dir.pwd, false)).to eq 1
 
     # verify that the results live in the base_dir
     expect(Dir.exist?("#{measure_dir}/test_results"))

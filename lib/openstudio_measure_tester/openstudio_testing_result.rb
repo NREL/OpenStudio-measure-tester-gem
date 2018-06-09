@@ -40,6 +40,10 @@ module OpenStudioMeasureTester
       @orig_results_dir = orig_results_dir
       @results = {}
 
+      puts "results_dir is #{@results_dir}"
+      puts "test_results_dir is #{@test_results_dir}"
+      puts "orig_results_dir is #{@orig_results_dir}"
+
       # get the repository info
       repo_name = 'unknown'
       current_branch = 'unknown'
@@ -75,6 +79,7 @@ module OpenStudioMeasureTester
       # the @results hash
       filename = "#{@test_results_dir}/openstudio_style/openstudio_style.json"
       if File.exist? filename
+        puts "Found OpenStudio Style results, parsing"
         @results['openstudio_style'] = JSON.parse(File.read(filename))
       end
 
@@ -89,6 +94,7 @@ module OpenStudioMeasureTester
       if @test_results_dir != @orig_results_dir
         # coverage
         if Dir.exist? "#{@orig_results_dir}/coverage"
+          puts "Found Coverage results, parsing"
           FileUtils.rm_rf "#{@test_results_dir}/coverage" if Dir.exist? "#{@test_results_dir}/coverage"
           FileUtils.cp_r "#{@orig_results_dir}/coverage/.", "#{@test_results_dir}/coverage"
           FileUtils.rm_rf "#{@orig_results_dir}/coverage" if Dir.exist? "#{@orig_results_dir}/coverage"
@@ -100,15 +106,19 @@ module OpenStudioMeasureTester
 
         # minitest
         if Dir.exist?("#{@orig_results_dir}/test/html_reports") || Dir.exist?("#{@orig_results_dir}/test/reports")
+          puts "Found Minitest Results, parsing"
           FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
           FileUtils.mkdir_p "#{@test_results_dir}/minitest"
 
+          # Copy the files over in case the folder is locked.
           if Dir.exist?("#{@orig_results_dir}/test/html_reports")
-            FileUtils.mv "#{@orig_results_dir}/test/html_reports", "#{@test_results_dir}/minitest/html_reports"
+            puts "Moving Minitest HTML results to results directory"
+            FileUtils.cp_r "#{@orig_results_dir}/test/html_reports/.", "#{@test_results_dir}/minitest/html_reports"
           end
 
           if Dir.exist?("#{@orig_results_dir}/test/reports")
-            FileUtils.mv "#{@orig_results_dir}/test/reports", "#{@test_results_dir}/minitest/reports"
+            puts "Moving Minitest XML results to results directory"
+            FileUtils.cp_r "#{@orig_results_dir}/test/reports/.", "#{@test_results_dir}/minitest/reports"
           end
 
           # Delete the test folder if it is empty
@@ -142,36 +152,43 @@ module OpenStudioMeasureTester
       # pp @results
       final_exit_code = 0
       if @results['rubocop']
-        if @results['rubocop']['total_errors'] > 0
-          puts 'RuboCop errors found.'
+        # more than 10 errors per file on average
+        status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
+        if status > 10
+          puts "More than 10 RuboCop errors per file found. Found #{status}"
           final_exit_code = 1
         end
       end
 
       if @results['openstudio_style']
-        if @results['openstudio_style']['total_errors'] > 0
-          puts 'OpenStudio Style errors found.'
+        total_files = @results['openstudio_style']['by_measure'].count
+        status = @results['openstudio_style']['total_errors'] / total_files
+        if status > 10
+          puts "More than 10 OpenStudio Style errors found per file. Found #{status}"
           final_exit_code = 1
         end
-        if @results['openstudio_style']['total_warnings'] > 10
-          puts 'More than 10 OpenStudio Style warnings found, reporting as error'
+
+        status = @results['openstudio_style']['total_warnings'] / total_files
+        if status > 25
+          puts "More than 25 OpenStudio Style warnings found per file, reporting as error. Found #{status}"
           final_exit_code = 1
         end
       end
 
       if @results['minitest']
         if @results['minitest']['total_errors'] > 0 || @results['minitest']['total_failures'] > 0
-          puts 'Unit Test (MiniTest) errors/failures found.'
+          puts 'Unit Test (Minitest) errors/failures found.'
           final_exit_code = 1
         end
       end
 
-      if @results['coverage']
-        if @results['coverage']['total_percent_coverage'] < 70
-          puts 'Code coverage is less than 70%, raising error.'
-          final_exit_code = 1
-        end
-      end
+      # if @results['coverage']
+      #   status = @results['coverage']['total_percent_coverage']
+      #   if status < 70
+      #     puts "Code coverage is less than 70%, raising error. Coverage was #{status}"
+      #     final_exit_code = 1
+      #   end
+      # end
 
       # Since the data are relative to the directory from which it has been run, then just show from current dir (.)
       puts 'Open ./test_results/dashboard/index.html to view measure testing dashboard.'

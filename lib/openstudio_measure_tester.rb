@@ -63,3 +63,16 @@ Encoding.default_internal = Encoding::UTF_8
 module OpenStudioMeasureTester
   # No action here. Most of this will be rake_tasks at the moment.
 end
+
+
+class Minitest::Test
+	def teardown
+		before = ObjectSpace.count_objects
+    	GC.start
+    	after = ObjectSpace.count_objects
+    	delta = {}
+    	before.each {|k, v| delta[k] = v - after[k] if after.has_key? k }
+    	puts "GC Delta: #{delta}"
+	end
+end
+
