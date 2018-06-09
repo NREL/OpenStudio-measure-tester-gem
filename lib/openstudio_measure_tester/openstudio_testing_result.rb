@@ -83,9 +83,11 @@ module OpenStudioMeasureTester
         @results['openstudio_style'] = JSON.parse(File.read(filename))
       end
 
-      # rubocop now saves the files in the correct place
-      if Dir.exist? "#{@test_results_dir}/rubocop"
-        # need to create parser here!
+      filename = "#{@test_results_dir}/rubocop/rubocop.json"
+      if File.exist? filename
+        @results['rubocop'] = JSON.parse(File.read(filename))
+      elsif Dir.exist? "#{@test_results_dir}/rubocop"
+        # Parse the rubocop results if they were not cached
         rc = OpenStudioMeasureTester::RubocopResult.new("#{@test_results_dir}/rubocop")
         @results['rubocop'] = rc.summary
       end

@@ -77,7 +77,6 @@ module OpenStudioMeasureTester
 
         # Go through the XML and find all the measure names first
         doc.elements.each('file') do |rc_file|
-
           @total_files += 1
           measure_name = rc_file.attributes['name']
           if measure_name
@@ -110,11 +109,15 @@ module OpenStudioMeasureTester
 
             # get the class name out of the measure file! wow, okay... sure why not.
             if fhash['file_name'] == 'measure.rb'
-              File.readlines(rc_file.attributes['name']).each do |line|
-                if (line.include? 'class') && line.split(' ')[0] == 'class'
-                  cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
-                  break
+              if File.exist? rc_file.attributes['name']
+                File.readlines(rc_file.attributes['name']).each do |line|
+                  if (line.include? 'class') && line.split(' ')[0] == 'class'
+                    cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
+                    break
+                  end
                 end
+              else
+                puts "Could not find measure to parse for extracting class name in Rubocop. PWD: #{Dir.pwd} filename: #{rc_file.attributes['name']}"
               end
             end
 
