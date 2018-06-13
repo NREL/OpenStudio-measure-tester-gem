@@ -3,8 +3,13 @@
     "AddOverhangsByProjectionFactor": {
       "measure_info": 1,
       "measure_warnings": 2,
-      "measure_errors": 10,
+      "measure_errors": 8,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
           "type": "deprecated",
@@ -24,21 +29,6 @@
           "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
           "type": "deprecated",
           "severity": "error"
-        },
-        {
-          "message": "'def description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "'def modeler_description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "MiniTest::Unit::TestCase is deprecated. Use Minitest::Test.",
-          "type": "syntax",
-          "severity": "warning"
         },
         {
           "message": "Measure directory name 'AddOverhangsByProjectionFactor' is not snake_case.",
@@ -74,9 +64,14 @@
     },
     "ChangeBuildingLocation": {
       "measure_info": 0,
-      "measure_warnings": 1,
-      "measure_errors": 9,
+      "measure_warnings": 2,
+      "measure_errors": 7,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/ChangeBuildingLocation'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
           "type": "deprecated",
@@ -95,16 +90,6 @@
         {
           "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
           "type": "deprecated",
-          "severity": "error"
-        },
-        {
-          "message": "'def description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "'def modeler_description' is missing.",
-          "type": "syntax",
           "severity": "error"
         },
         {
@@ -131,9 +116,14 @@
     },
     "EnergyPlusMeasureName": {
       "measure_info": 0,
-      "measure_warnings": 1,
+      "measure_warnings": 2,
       "measure_errors": 2,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/EnergyPlusMeasure'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "Measure directory name 'EnergyPlusMeasure' is not snake_case.",
           "type": "syntax",
@@ -153,9 +143,14 @@
     },
     "ModelMeasureName": {
       "measure_info": 0,
-      "measure_warnings": 1,
+      "measure_warnings": 2,
       "measure_errors": 2,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/ModelMeasure'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "Measure directory name 'ModelMeasure' is not snake_case.",
           "type": "syntax",
@@ -175,9 +170,14 @@
     },
     "ReportingMeasureName": {
       "measure_info": 0,
-      "measure_warnings": 1,
+      "measure_warnings": 2,
       "measure_errors": 2,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/ReportingMeasure'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "Measure directory name 'ReportingMeasure' is not snake_case.",
           "type": "syntax",
@@ -197,9 +197,14 @@
     },
     "RotateBuilding": {
       "measure_info": 1,
-      "measure_warnings": 2,
-      "measure_errors": 9,
+      "measure_warnings": 3,
+      "measure_errors": 7,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/RotateBuilding'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
           "type": "deprecated",
@@ -221,17 +226,7 @@
           "severity": "error"
         },
         {
-          "message": "'def description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "'def modeler_description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "MiniTest::Unit::TestCase is deprecated. Use Minitest::Test.",
+          "message": "MiniTest::Unit::TestCase is deprecated. Use MiniTest::Test.",
           "type": "syntax",
           "severity": "warning"
         },
@@ -264,9 +259,14 @@
     },
     "SetGasBurnerEfficiency": {
       "measure_info": 7,
-      "measure_warnings": 1,
-      "measure_errors": 17,
+      "measure_warnings": 2,
+      "measure_errors": 15,
       "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/SetGasBurnerEfficiency'.",
+          "type": "general",
+          "severity": "warning"
+        },
         {
           "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
           "type": "deprecated",
@@ -285,16 +285,6 @@
         {
           "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
           "type": "deprecated",
-          "severity": "error"
-        },
-        {
-          "message": "'def description' is missing.",
-          "type": "syntax",
-          "severity": "error"
-        },
-        {
-          "message": "'def modeler_description' is missing.",
-          "type": "syntax",
           "severity": "error"
         },
         {
@@ -393,9 +383,41 @@
           "severity": "error"
         }
       ]
+    },
+    "TestBrokenMeasure": {
+      "measure_info": 0,
+      "measure_warnings": 1,
+      "measure_errors": 4,
+      "issues": [
+        {
+          "message": "Could not find LICENSE.md in '/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/test_broken_measure'.",
+          "type": "general",
+          "severity": "warning"
+        },
+        {
+          "message": "Unable to parse info from measure. Error: 'uninitialized constant TestBrokenMeasure::THIS_CONSTANT_INTENTIONALLY_NOT_DEFINED_FOR_TESTING_MEASURE_MANAGER'",
+          "type": "general",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::ModelUserScript is deprecated, use OpenStudio::Measure::ModelMeasure instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgumentVector is deprecated, use OpenStudio::Measure::OSArgumentVector instead.",
+          "type": "deprecated",
+          "severity": "error"
+        },
+        {
+          "message": "OpenStudio::Ruleset::OSArgument is deprecated, use OpenStudio::Measure::OSArgument instead.",
+          "type": "deprecated",
+          "severity": "error"
+        }
+      ]
     }
   },
   "total_info": 9,
-  "total_warnings": 9,
-  "total_errors": 51
+  "total_warnings": 16,
+  "total_errors": 47
 }

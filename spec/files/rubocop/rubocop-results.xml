@@ -239,8 +239,8 @@
     <error line='187' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
     <error line='188' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
     <error line='189' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
-    <error line='195' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
-    <error line='196' column='3' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+    <error line='199' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='200' column='3' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
   </file>
   <file name='spec/test_measures/ChangeBuildingLocation/measure.rb'>
     <error line='6' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
@@ -506,4 +506,9 @@
     <error line='95' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
   </file>
   <file name='spec/test_measures/test_broken_measure/measure.rb'/>
+  <file name='spec/test_measures/test_broken_measure/never_loaded_file.rb'>
+    <error line='1' column='5' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='3' column='6' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='3' column='16' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
 </checkstyle>
