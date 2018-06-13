@@ -69,7 +69,7 @@ module OpenStudioMeasureTester
 
         # Note: only 1 failure and 1 error possible per test
         testsuite_element = doc.elements['testsuite']
-        errors, failures = parse_measure(testsuite_element)
+        errors, failures, skipped = parse_measure(testsuite_element)
 
         mhash['measure_tests'] = testsuite_element.attributes['tests'].to_i
         mhash['measure_assertions'] = testsuite_element.attributes['assertions'].to_i
@@ -77,7 +77,7 @@ module OpenStudioMeasureTester
         mhash['measure_failures'] = testsuite_element.attributes['failures'].to_i
         mhash['measure_skipped'] = testsuite_element.attributes['skipped'].to_i
 
-        mhash['issues'] = { errors: errors, failures: failures }
+        mhash['issues'] = { errors: errors, failures: failures, skipped: skipped }
 
         @measure_results[measure_name] = mhash
 
@@ -115,16 +115,19 @@ module OpenStudioMeasureTester
     def parse_measure(testsuite_element)
       errors = []
       failures = []
+      skipped = []
 
       testsuite_element.elements.each('testcase') do |testcase|
         if testcase.elements['error']
           errors << testcase.elements['error']
         elsif testcase.elements['failure']
           failures << testcase.elements['failure']
+        elsif testcase.elements['skipped']
+          skipped << "Skipped test: " + testcase.elements['skipped'].attributes['type']
         end
       end
 
-      return errors, failures
+      return errors, failures, skipped
     end
   end
 end

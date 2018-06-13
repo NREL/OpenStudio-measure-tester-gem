@@ -62,6 +62,14 @@
                         <% end %>
                         <div class="col-sm-5 badge-med-height badge-text">Errors</div>
                       </div>
+                       <div class="row pt-2">
+                        <% if @hash['minitest']['total_skipped'] > 0 %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-info"><span class='med-text'><%= @hash['minitest']['total_skipped'] %></span></div>
+                        <% else %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-success"><span class='med-text'><%= @hash['minitest']['total_skipped'] %></span></div>
+                        <% end %>
+                        <div class="col-sm-5 badge-med-height badge-text">Skipped</div>
+                      </div>
                     <% else %>
                       <div class="row pt-5">
                         <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-warning badge-text"><i data-feather="alert-triangle" class="size48"></i><br><span class="pt-2">No Data</span> </div>
@@ -136,7 +144,7 @@
                 <thead>
                   <tr>
                     <th>Measure Name</th>
-                    <th>Tests<br/><span class="small-text">Passed - Failures - Errors</span></th>
+                    <th>Tests<br/><span class="small-text">Passed - Failures - Errors - Skipped</span></th>
                     <th>OS Style Errors<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th>RuboCop<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th>Coverage</th>
@@ -175,6 +183,7 @@
                               <% label = 'success' %>
                           <% end %>
                           <span class="badge badge-<%= label %>"><%= @hash['minitest']['by_measure'][name]['measure_errors'] %></span>
+                          <span class="badge badge-info"><%= @hash['minitest']['by_measure'][name]['measure_skipped'] %></span>
                         <% end %>
                       </td>
                       <td>
@@ -334,7 +343,7 @@
                   <div class="col-sm-12">
                     <h4>Tests</h4>
                     <% if @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] && @hash['minitest']['by_measure'][name]['issues'] %>
-                      <% if @hash['minitest']['by_measure'][name]['issues']['failures'].length > 0 || @hash['minitest']['by_measure'][name]['issues']['errors'].length > 0 %>
+                      <% if @hash['minitest']['by_measure'][name]['issues']['failures'].length > 0 || @hash['minitest']['by_measure'][name]['issues']['errors'].length > 0 || @hash['minitest']['by_measure'][name]['issues']['skipped'].length > 0 %>
                         <table class="table table-striped">
                           <thead>
                             <tr>
@@ -353,6 +362,12 @@
                             <tr>
                               <td><span class="badge badge-dark">Error</span></td>
                               <td><%= err %></td>
+                            </tr>
+                          <% end %>
+                           <% @hash['minitest']['by_measure'][name]['issues']['skipped'].each do |skip| %>
+                            <tr>
+                              <td><span class="badge badge-info">Skipped</span></td>
+                              <td><%= skip %></td>
                             </tr>
                           <% end %>
                           </tbody>
