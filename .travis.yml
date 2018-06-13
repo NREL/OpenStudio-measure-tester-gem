@@ -1,15 +1,21 @@
 sudo: true
 language: ruby
 rvm:
-  - 2.2.4
+- 2.2.4
 matrix:
   include:
-    - env: OPENSTUDIO_VERSION=2.4.0 && OPENSTUDIO_SHA=f58a3e1808 && RUBYLIB=/usr/Ruby
-    - env: OPENSTUDIO_VERSION=2.5.1 && OPENSTUDIO_SHA=4f268e2854 && RUBYLIB=/usr/Ruby
+  - env: OPENSTUDIO_VERSION=2.4.0 && OPENSTUDIO_SHA=f58a3e1808 && RUBYLIB=/usr/Ruby
+  - env: OPENSTUDIO_VERSION=2.5.1 && OPENSTUDIO_SHA=4f268e2854 && RUBYLIB=/usr/Ruby
 before_install: gem install bundler -v 1.16.2
 before_script:
-  - curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
-  - chmod +x install_openstudio.sh
-  - sudo ./install_openstudio.sh $OPENSTUDIO_VERSION $OPENSTUDIO_SHA
+- curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
+- chmod +x install_openstudio.sh
+- sudo ./install_openstudio.sh $OPENSTUDIO_VERSION $OPENSTUDIO_SHA
 script:
-  - bundle exec rake
+- bundle exec rake
+deploy:
+  - provider: rubygems
+    api_key:
+      secure: IOYqPDXgaX5tZgsaeuSs2Q5hUry0l2RHrXDmuEeu7SElLDQSXS2z8c43eHg6GphtIho9NZgonXeCe1QoXb/GdHsyv2Up1XfaTtPkf7LHJo/zYPF7Yjc1mjGpKRPfk1srH8nfb6w9w7zjFlhk73a/Vh26BvdRCXqAA8W72d0ur2p8OTlGSYjcgLihWI13sSKrfHjTRXhOpv6gkziaY2pmvNWeeYdqOD3CpvlMDAMkHY/KptksaqWdBAT9Jr4gIfAGeGbKzye0OmBBrwMV4n/4KZqNNDyjiGYGoSbOhVEsAOHbeJz6IOoC93ICQi/nLuWBw+T8do79X2/GBIj2/N7eaEo4CcYsxMS0JX+dE4yL+OzQOFkDenq0WAEB7JjtBVW3sBHAIRGO2o2Cma6Ga5+86oSD0f5lAvnhiCejA1Fy9X5pnIMsk1zWlPLydPX4TwIm10JBaRLut+MFq0tL5tJunyIwlZnMgVofVdKYZHS7fVOvqSTQhM+iA0Gx5l7bKZQjpO3m91j14pKqdJij0PJ4oxy7ozc38YSUL85NKXnbf2KwnYVxMGz4yBrSalzMjftu6WfCM8liDTb0ACHby56KbPrlVlixJrrJIefZCLqaHtqL2lLlyVV36EtRbNl3It7DrOQ21HK3raOEuSxht3uuTu9FIdTx0TKraJUyToE6gbw=
+    on:
+      tags: true

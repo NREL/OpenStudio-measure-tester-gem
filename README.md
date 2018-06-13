@@ -81,3 +81,9 @@ chmod +x install_openstudio.sh
 ./install_openstudio.sh 2.4.0 f58a3e1808
 export RUBYLIB=/usr/Ruby
 ```
+
+
+# Releasing
+
+New versions of the OpenStudio Measure Tester Gem will be automatically released for any tags. Makes sure to increment 
+the version in `/lib/openstudio_measure_tester/version.rb` and tag the release (preferably off the master branch).
