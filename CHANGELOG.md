@@ -1,11 +1,11 @@
-# Version 0.1.5 (Unreleased)
+# Version 0.1.5
 
 * Run Minitest in foreground
 * Remove ActiveSupport XML parsing and use REXML
 * Enforce UTF-8 encoding on all files read by this package
 * Garbage collection on each Minitest teardown
 * Disable running coverage until access violations are resolved
-* More dlogging
+* More logging
 
 # Version 0.1.4
 
