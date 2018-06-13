@@ -5,7 +5,9 @@
 
 The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing OpenStudio measures.
 
-## Installation
+## Installation and Running
+
+### Rake-based
 
 * Add the following code to the Gemfile and Rakefile of a measure repo you desire to test.
 
@@ -35,11 +37,36 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
 
     ```
     Open ./test_results/dashboard/index.html to view measure testing dashboard.
-    ```
+        ```
+
+### Ruby-based
+
+* Require the OpenStudio-measure-tester gem
+
+```ruby
+require 'openstudio_measure_tester'
+measures_dir = 'spec/test_measures/AddOverhangsByProjectionFactor'
+# all measures (recursively) from measures_dir will be tested
+  
+runner = OpenStudioMeasureTester::Runner.new(measures_dir)
+
+# base_dir is needed for coverage results as they are written to disk on the at_exit calls
+base_dir = Dir.pwd
+ 
+result = runner.run_all(base_dir)
+puts result
+# result will be 0 or 1, 0=success, 1=failure
+
+runner.run_style(false)
+
+runner.run_test(false, base_dir)
+
+runner.run_rubocop(false)
+```
+
+* Results will be saved into the run directory (measures_dir from above).    
 
 ## Disclaimer
-
-This project is under active development and will be changing significantly.
 
 # Testing in Docker
 

@@ -74,13 +74,6 @@ module OpenStudioMeasureTester
         type: :deprecated,
         severity: :error,
         file_type: :measure
-        # }, {
-        #   regex: /require .openstudio_measure_tester\/test_helper./,
-        #   check_type: :if_missing,
-        #   message: "Must include 'require 'openstudio_measure_tester/test_helper'' in Test file to report coverage correctly.",
-        #   type: :syntax,
-        #   severity: :error,
-        #   file_type: :test
       }, {
         regex: /MiniTest::Unit::TestCase/,
         check_type: :if_exists,
@@ -99,9 +92,10 @@ module OpenStudioMeasureTester
     ].freeze
 
     # Pass in the measures_glob with the filename (typically measure.rb)
-    def initialize(measures_glob)
+    def initialize(results_dir, measures_glob)
       @measures_glob = measures_glob
       @results = { by_measure: {} }
+      @results_dir = results_dir
 
       # Individual measure messages
       @measure_messages = []
@@ -156,9 +150,12 @@ module OpenStudioMeasureTester
         else
           measure = measure.get
           begin
+            # there seems to be a race condition with the infoExtractor method
             measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
           rescue NameError => error
             log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
+          rescue => error
+            log_message("Unknown error extracting measure info. Error #{error}", :general, :error)
           end
 
           measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
@@ -213,8 +210,11 @@ module OpenStudioMeasureTester
     end
 
     def save_results
-      FileUtils.mkdir 'openstudio_style' unless Dir.exist? 'openstudio_style'
-      File.open('openstudio_style/openstudio_style.json', 'w') do |file|
+      save_dir = "#{@results_dir}/openstudio_style"
+      save_file = "#{save_dir}/openstudio_style.json"
+      puts "Saving OpenStudio Style results to #{save_file}"
+      FileUtils.mkdir_p save_dir unless Dir.exist? save_dir
+      File.open(save_file, 'w') do |file|
         file << JSON.pretty_generate(@results)
       end
     end

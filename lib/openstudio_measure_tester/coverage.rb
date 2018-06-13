@@ -69,6 +69,11 @@ module OpenStudioMeasureTester
     def parse_results
       file = "#{@path_to_results}/.resultset.json"
 
+      unless File.exist? file
+        puts "Could not find the results of coverage in #{file}"
+        return false
+      end
+
       puts 'Parsing coverage results'
       json_data = File.read(file)
       hash = JSON.parse(json_data)
@@ -95,9 +100,9 @@ module OpenStudioMeasureTester
         if parts.last == 'measure.rb'
           class_name = parse_class_name(key)
           measure_maps[class_name] = {
-              class_name: class_name,
-              root_path: File.dirname(key),
-              files: [key]
+            class_name: class_name,
+            root_path: File.dirname(key),
+            files: [key]
           }
         end
       end
@@ -135,7 +140,7 @@ module OpenStudioMeasureTester
           # remove nils from array
           cov_results_by_line.delete(nil)
 
-          cov = cov_results_by_line.count {|x| x > 0}
+          cov = cov_results_by_line.count { |x| x > 0 }
           fhash['percent_coverage'] = ((cov.to_f / cov_results_by_line.size.to_f) * 100).round(2)
           fhash['missed_lines'] = cov_results_by_line.size - cov
           fhash['relevant_lines'] = cov_results_by_line.size
@@ -156,7 +161,6 @@ module OpenStudioMeasureTester
         @total_missed_lines += mhash['missed_lines']
       end
 
-
       # pp @measure_coverages
       lines = @total_relevant_lines # unnecessary but breaks formatting otherwise
       # lines can be zero if coverage doesn't run correctly
@@ -164,6 +168,8 @@ module OpenStudioMeasureTester
         @total_percent_coverage = (@total_covered_lines.to_f / lines.to_f * 100).round(2)
       end
       pp "Total Coverage: #{@total_percent_coverage}"
+
+      return true
     end
 
     def to_hash

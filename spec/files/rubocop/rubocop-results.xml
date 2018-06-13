@@ -1,0 +1,509 @@
+<?xml version='1.0'?>
+<checkstyle>
+  <file name='spec/test_measures/AddOverhangsByProjectionFactor/measure.rb'>
+    <error line='1' column='0' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='3' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='4' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='6' column='11' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='9' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='13' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='14' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='15' column='55' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='15' column='76' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='15' column='95' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='16' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='20' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='22' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='23' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='24' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='25' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='26' column='44' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='26' column='65' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='27' column='26' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='28' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='31' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='32' column='62' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='32' column='81' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='32' column='107' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='33' column='44' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='37' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='41' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='48' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='49' column='43' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='50' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='51' column='9' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='57' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='58' column='50' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='58' column='71' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='58' column='135' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='59' column='32' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='62' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='64' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='64' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='66' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='67' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for run is too high. [178.4/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='70' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='71' column='7' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='75' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='76' column='54' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='76' column='73' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='77' column='43' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='77' column='51' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='78' column='59' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='78' column='85' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='79' column='64' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='79' column='78' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='79' column='93' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='81' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='84' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='93' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='96' column='53' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='96' column='67' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='98' column='28' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='106' column='9' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='109' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='112' column='7' severity='error' message='Layout/ExtraSpacing: Unnecessary spacing detected.' source='com.puppycrawl.tools.checkstyle.Layout/ExtraSpacing'/>
+    <error line='112' column='9' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='112' column='9' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='114' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='115' column='4' severity='error' message='Lint/NestedMethodDefinition: Method definitions must not be nested. Use `lambda` instead.' source='com.puppycrawl.tools.checkstyle.Lint/NestedMethodDefinition'/>
+    <error line='115' column='42' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='115' column='42' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `def` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='117' column='17' severity='error' message='Style/FormatString: Favor `format` over `sprintf`.' source='com.puppycrawl.tools.checkstyle.Style/FormatString'/>
+    <error line='117' column='25' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='121' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='122' column='31' severity='error' message='Style/RegexpLiteral: Use `//` around regular expression.' source='com.puppycrawl.tools.checkstyle.Style/RegexpLiteral'/>
+    <error line='122' column='58' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='123' column='8' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='123' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='125' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='126' column='4' severity='error' message='Lint/NestedMethodDefinition: Method definitions must not be nested. Use `lambda` instead.' source='com.puppycrawl.tools.checkstyle.Lint/NestedMethodDefinition'/>
+    <error line='126' column='26' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='126' column='43' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='127' column='35' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='127' column='88' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='127' column='135' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='130' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='131' column='4' severity='error' message='Lint/NestedMethodDefinition: Method definitions must not be nested. Use `lambda` instead.' source='com.puppycrawl.tools.checkstyle.Lint/NestedMethodDefinition'/>
+    <error line='134' column='8' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='135' column='29' severity='warning' message='Naming/UncommunicativeBlockParamName: Only use lowercase characters for block parameter.' source='com.puppycrawl.tools.checkstyle.Naming/UncommunicativeBlockParamName'/>
+    <error line='135' column='29' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='136' column='36' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='136' column='51' severity='error' message='Style/AndOr: Use `||` instead of `or`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='136' column='77' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='144' column='8' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='144' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='146' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='147' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='149' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='150' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='150' column='27' severity='error' message='Layout/SpaceAroundOperators: Operator `+=` should be surrounded by a single space.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='150' column='29' severity='error' message='Layout/ExtraSpacing: Unnecessary spacing detected.' source='com.puppycrawl.tools.checkstyle.Layout/ExtraSpacing'/>
+    <error line='150' column='82' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `*`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='152' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='156' column='45' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='157' column='8' severity='error' message='Style/SelfAssignment: Use self-assignment shorthand `+=`.' source='com.puppycrawl.tools.checkstyle.Style/SelfAssignment'/>
+    <error line='162' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='163' column='32' severity='error' message='Style/AndOr: Use `&amp;&amp;` instead of `and`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='166' column='47' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='174' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='177' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='179' column='4' severity='warning' message='Metrics/BlockLength: Block has too many lines. [51/50]' source='com.puppycrawl.tools.checkstyle.Metrics/BlockLength'/>
+    <error line='180' column='0' severity='error' message='Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundBlockBody'/>
+    <error line='181' column='14' severity='error' message='Style/InverseMethods: Use `!=` instead of inverting `==`.' source='com.puppycrawl.tools.checkstyle.Style/InverseMethods'/>
+    <error line='181' column='14' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='181' column='48' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='182' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='183' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='184' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='185' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='186' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='187' column='34' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='189' column='50' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='189' column='61' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='190' column='26' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='190' column='43' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='190' column='54' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='192' column='19' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='193' column='16' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='193' column='38' severity='error' message='Style/AndOr: Use `||` instead of `or`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='194' column='22' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='195' column='16' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='195' column='37' severity='error' message='Style/AndOr: Use `&amp;&amp;` instead of `and`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='196' column='22' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='197' column='16' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='197' column='38' severity='error' message='Style/AndOr: Use `&amp;&amp;` instead of `and`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='198' column='22' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='199' column='16' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='199' column='38' severity='error' message='Style/AndOr: Use `&amp;&amp;` instead of `and`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='201' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='201' column='71' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='205' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='209' column='39' severity='error' message='Lint/StringConversionInInterpolation: Redundant use of `Object#to_s` in interpolation.' source='com.puppycrawl.tools.checkstyle.Lint/StringConversionInInterpolation'/>
+    <error line='224' column='38' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='225' column='19' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='225' column='73' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='225' column='104' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='226' column='26' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='229' column='30' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='229' column='86' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='230' column='35' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='231' column='14' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='231' column='31' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='231' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='233' column='15' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='240' column='0' severity='error' message='Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundBlockBody'/>
+    <error line='241' column='8' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='241' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='243' column='7' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='248' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='249' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='249' column='27' severity='error' message='Layout/SpaceAroundOperators: Operator `+=` should be surrounded by a single space.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='249' column='29' severity='error' message='Layout/ExtraSpacing: Unnecessary spacing detected.' source='com.puppycrawl.tools.checkstyle.Layout/ExtraSpacing'/>
+    <error line='251' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='255' column='6' severity='error' message='Style/SelfAssignment: Use self-assignment shorthand `+=`.' source='com.puppycrawl.tools.checkstyle.Style/SelfAssignment'/>
+    <error line='257' column='217' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='260' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='261' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='261' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='262' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='263' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='263' column='4' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='265' column='0' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='266' column='58' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
+  <file name='spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb'>
+    <error line='1' column='0' severity='warning' message='Naming/FileName: The name of this source file (`AddOverhangsByProjectionFactor_Test.rb`) should use snake_case.' source='com.puppycrawl.tools.checkstyle.Naming/FileName'/>
+    <error line='8' column='6' severity='warning' message='Naming/ClassAndModuleCamelCase: Use CamelCase for classes and modules.' source='com.puppycrawl.tools.checkstyle.Naming/ClassAndModuleCamelCase'/>
+    <error line='9' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='16' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='17' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='30' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='31' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='32' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='33' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='38' column='38' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='39' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='42' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='43' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='46' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for test_AddOverhangsByProjectionFactor_good is too high. [109.7/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='46' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='47' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='56' column='57' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='58' column='12' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='60' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='62' column='9' severity='info' message='Performance/RedundantMatch: Use `=~` in places where the `MatchData` returned by `#match` will not be used.' source='com.puppycrawl.tools.checkstyle.Performance/RedundantMatch'/>
+    <error line='70' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='78' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='80' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='81' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='84' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='86' column='33' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='87' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='91' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='94' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='96' column='43' severity='error' message='Style/AndOr: Use `||` instead of `or`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='96' column='80' severity='error' message='Style/AndOr: Use `||` instead of `or`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='104' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='105' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='106' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='107' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='108' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='109' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='117' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='119' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='120' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='123' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='125' column='33' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='126' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='130' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='133' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='138' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='139' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='140' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='141' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='142' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='143' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='146' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='147' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='156' column='57' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='158' column='12' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='168' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='170' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='171' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='174' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='177' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='181' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='185' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='186' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='187' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='188' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='189' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='195' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='196' column='3' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
+  <file name='spec/test_measures/ChangeBuildingLocation/measure.rb'>
+    <error line='6' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='8' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='9' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='10' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='15' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='20' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='21' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='24' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='26' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='27' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='28' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='29' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='30' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='31' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='32' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='33' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='34' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='35' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='36' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='37' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='38' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='39' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='40' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='41' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='42' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='43' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='44' column='50' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='44' column='71' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='44' column='94' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='45' column='32' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='46' column='33' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='53' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for run is too high. [148.3/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='56' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='56' column='36' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='57' column='7' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='62' column='7' severity='error' message='Style/InverseMethods: Use `!=` instead of inverting `==`.' source='com.puppycrawl.tools.checkstyle.Style/InverseMethods'/>
+    <error line='62' column='7' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='69' column='54' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='70' column='49' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='70' column='63' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='115' column='26' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='118' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='121' column='9' severity='error' message='Style/ZeroLengthPredicate: Use `empty?` instead of `size == 0`.' source='com.puppycrawl.tools.checkstyle.Style/ZeroLengthPredicate'/>
+    <error line='122' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='130' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='141' column='27' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='141' column='78' severity='error' message='Style/SymbolProc: Pass `&amp;:remove` as an argument to `each` instead of a block.' source='com.puppycrawl.tools.checkstyle.Style/SymbolProc'/>
+    <error line='148' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='151' column='9' severity='error' message='Style/ZeroLengthPredicate: Use `empty?` instead of `size == 0`.' source='com.puppycrawl.tools.checkstyle.Style/ZeroLengthPredicate'/>
+    <error line='152' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='165' column='31' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='177' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='178' column='23' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='199' column='32' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='199' column='40' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='200' column='80' severity='error' message='Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.' source='com.puppycrawl.tools.checkstyle.Style/StringLiteralsInInterpolation'/>
+    <error line='210' column='50' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
+  <file name='spec/test_measures/ChangeBuildingLocation/resources/epw.rb'>
+    <error line='60' column='8' severity='error' message='Style/SignalException: Always use `raise` to signal exceptions.' source='com.puppycrawl.tools.checkstyle.Style/SignalException'/>
+    <error line='69' column='35' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='73' column='64' severity='error' message='Style/AsciiComments: Use only ascii symbols in comments.' source='com.puppycrawl.tools.checkstyle.Style/AsciiComments'/>
+    <error line='100' column='14' severity='error' message='Layout/IndentArray: Use 2 spaces for indentation in an array, relative to the start of the line where the left square bracket is.' source='com.puppycrawl.tools.checkstyle.Layout/IndentArray'/>
+    <error line='125' column='12' severity='error' message='Layout/IndentHash: Use 2 spaces for indentation in a hash, relative to the start of the line where the left curly brace is.' source='com.puppycrawl.tools.checkstyle.Layout/IndentHash'/>
+    <error line='149' column='18' severity='error' message='Layout/IndentHash: Use 2 spaces for indentation in a hash, relative to the start of the line where the left curly brace is.' source='com.puppycrawl.tools.checkstyle.Layout/IndentHash'/>
+    <error line='172' column='27' severity='info' message='Performance/StringReplacement: Use `tr` instead of `gsub`.' source='com.puppycrawl.tools.checkstyle.Performance/StringReplacement'/>
+  </file>
+  <file name='spec/test_measures/ChangeBuildingLocation/resources/stat_file.rb'>
+    <error line='58' column='9' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='58' column='38' severity='error' message='Style/MultilineIfThen: Do not use `then` for multi-line `if`.' source='com.puppycrawl.tools.checkstyle.Style/MultilineIfThen'/>
+    <error line='61' column='18' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `/`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='63' column='15' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='71' column='9' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='71' column='38' severity='error' message='Style/MultilineIfThen: Do not use `then` for multi-line `if`.' source='com.puppycrawl.tools.checkstyle.Style/MultilineIfThen'/>
+    <error line='72' column='39' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `-`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='74' column='18' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='84' column='6' severity='error' message='Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.' source='com.puppycrawl.tools.checkstyle.Style/GuardClause'/>
+    <error line='86' column='39' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='92' column='4' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for parse is too high. [68.51/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='101' column='36' severity='error' message='Style/RedundantParentheses: Don&apos;t use parentheses around a method call.' source='com.puppycrawl.tools.checkstyle.Style/RedundantParentheses'/>
+    <error line='101' column='56' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `/`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='106' column='36' severity='error' message='Style/RedundantParentheses: Don&apos;t use parentheses around a method call.' source='com.puppycrawl.tools.checkstyle.Style/RedundantParentheses'/>
+    <error line='106' column='56' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `/`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='128' column='6' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='137' column='6' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='146' column='6' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='155' column='6' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='164' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='165' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='188' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='190' column='3' severity='error' message='Layout/TrailingBlankLines: Final newline missing.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
+  <file name='spec/test_measures/ChangeBuildingLocation/tests/change_building_location_test.rb'>
+    <error line='8' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='9' column='6' severity='warning' message='Naming/ClassAndModuleCamelCase: Use CamelCase for classes and modules.' source='com.puppycrawl.tools.checkstyle.Naming/ClassAndModuleCamelCase'/>
+    <error line='10' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='12' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='22' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for apply_measure_to_model is too high. [69.48/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='23' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='28' column='61' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='39' column='59' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='41' column='14' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='52' column='14' severity='error' message='Style/PreferredHashMethods: Use `Hash#key?` instead of `Hash#has_key?`.' source='com.puppycrawl.tools.checkstyle.Style/PreferredHashMethods'/>
+    <error line='61' column='17' severity='error' message='Lint/DeprecatedClassMethods: `Dir.exists?` is deprecated in favor of `Dir.exist?`.' source='com.puppycrawl.tools.checkstyle.Lint/DeprecatedClassMethods'/>
+    <error line='69' column='0' severity='error' message='Layout/EmptyLinesAroundExceptionHandlingKeywords: Extra empty line detected before the `ensure`.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundExceptionHandlingKeywords'/>
+    <error line='94' column='31' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='99' column='9' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='100' column='55' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='100' column='77' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='100' column='81' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='103' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='105' column='9' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='106' column='55' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='106' column='77' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='106' column='81' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='111' column='9' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='112' column='55' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='112' column='77' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='112' column='81' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='117' column='9' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='118' column='55' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='118' column='77' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='118' column='78' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='118' column='84' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='120' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+  </file>
+  <file name='spec/test_measures/EnergyPlusMeasure/measure.rb'>
+    <error line='73' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='75' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+  </file>
+  <file name='spec/test_measures/EnergyPlusMeasure/tests/energyplus_measure_test.rb'>
+    <error line='8' column='6' severity='warning' message='Naming/ClassAndModuleCamelCase: Use CamelCase for classes and modules.' source='com.puppycrawl.tools.checkstyle.Naming/ClassAndModuleCamelCase'/>
+  </file>
+  <file name='spec/test_measures/ModelMeasure/measure.rb'/>
+  <file name='spec/test_measures/ModelMeasure/tests/model_measure_test.rb'/>
+  <file name='spec/test_measures/ReportingMeasure/measure.rb'>
+    <error line='35' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='52' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for run is too high. [66.71/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+  </file>
+  <file name='spec/test_measures/ReportingMeasure/tests/reporting_measure_test.rb'/>
+  <file name='spec/test_measures/RotateBuilding/measure.rb'>
+    <error line='1' column='0' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='3' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='4' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='6' column='11' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='9' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='13' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='14' column='64' severity='error' message='Style/ColonMethodCall: Do not use `::` for method calls.' source='com.puppycrawl.tools.checkstyle.Style/ColonMethodCall'/>
+    <error line='14' column='85' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='14' column='113' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='15' column='46' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='20' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='20' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='22' column='2' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='26' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='27' column='7' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='31' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='32' column='63' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='32' column='91' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='34' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='35' column='40' severity='error' message='Style/AndOr: Use `||` instead of `or`.' source='com.puppycrawl.tools.checkstyle.Style/AndOr'/>
+    <error line='36' column='6' severity='error' message='Style/SelfAssignment: Use self-assignment shorthand `-=`.' source='com.puppycrawl.tools.checkstyle.Style/SelfAssignment'/>
+    <error line='36' column='62' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `-`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='36' column='68' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `*`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='36' column='96' severity='error' message='Layout/SpaceAroundOperators: Surrounding space missing for operator `/`.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAroundOperators'/>
+    <error line='40' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='42' column='25' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='42' column='46' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='45' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='47' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='49' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='54' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='58' column='53' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='63' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='65' column='29' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='68' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='69' column='25' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='69' column='44' severity='error' message='Layout/SpaceAfterComma: Space missing after comma.' source='com.puppycrawl.tools.checkstyle.Layout/SpaceAfterComma'/>
+    <error line='73' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='74' column='6' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='74' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='76' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='76' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='77' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='77' column='4' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='79' column='0' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+  </file>
+  <file name='spec/test_measures/RotateBuilding/tests/RotateBuilding_Test.rb'>
+    <error line='1' column='0' severity='warning' message='Naming/FileName: The name of this source file (`RotateBuilding_Test.rb`) should use snake_case.' source='com.puppycrawl.tools.checkstyle.Naming/FileName'/>
+    <error line='2' column='60' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='4' column='1' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='9' column='1' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='14' column='1' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='27' column='0' severity='error' message='Layout/EmptyLines: Extra blank line detected.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLines'/>
+    <error line='28' column='6' severity='warning' message='Naming/ClassAndModuleCamelCase: Use CamelCase for classes and modules.' source='com.puppycrawl.tools.checkstyle.Naming/ClassAndModuleCamelCase'/>
+    <error line='29' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='35' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='36' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='37' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='40' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='43' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='46' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='50' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='54' column='57' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='56' column='12' severity='error' message='Style/Not: Use `!` instead of `not`.' source='com.puppycrawl.tools.checkstyle.Style/Not'/>
+    <error line='58' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='64' column='47' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='65' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='69' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='70' column='37' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='73' column='0' severity='error' message='Layout/TrailingWhitespace: Trailing whitespace detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingWhitespace'/>
+    <error line='77' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='78' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='91' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='101' column='47' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='102' column='17' severity='error' message='Style/StringLiterals: Prefer single-quoted strings when you don&apos;t need string interpolation or special symbols.' source='com.puppycrawl.tools.checkstyle.Style/StringLiterals'/>
+    <error line='107' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='108' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='109' column='4' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+    <error line='110' column='0' severity='error' message='Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundMethodBody'/>
+    <error line='112' column='0' severity='error' message='Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.' source='com.puppycrawl.tools.checkstyle.Layout/EmptyLinesAroundClassBody'/>
+    <error line='114' column='0' severity='error' message='Layout/TrailingBlankLines: 2 trailing blank lines detected.' source='com.puppycrawl.tools.checkstyle.Layout/TrailingBlankLines'/>
+  </file>
+  <file name='spec/test_measures/SetGasBurnerEfficiency/measure.rb'>
+    <error line='10' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for arguments is too high. [67.08/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='105' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='108' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for run is too high. [136/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='148' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='167' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='168' column='4' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='192' column='4' severity='error' message='Lint/NestedMethodDefinition: Method definitions must not be nested. Use `lambda` instead.' source='com.puppycrawl.tools.checkstyle.Lint/NestedMethodDefinition'/>
+    <error line='192' column='42' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `def` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='200' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='203' column='4' severity='error' message='Lint/NestedMethodDefinition: Method definitions must not be nested. Use `lambda` instead.' source='com.puppycrawl.tools.checkstyle.Lint/NestedMethodDefinition'/>
+    <error line='206' column='8' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='207' column='29' severity='warning' message='Naming/UncommunicativeBlockParamName: Only use lowercase characters for block parameter.' source='com.puppycrawl.tools.checkstyle.Naming/UncommunicativeBlockParamName'/>
+    <error line='207' column='29' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='216' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='230' column='23' severity='error' message='Lint/ShadowingOuterLocalVariable: Shadowing outer local variable - `air_loop`.' source='com.puppycrawl.tools.checkstyle.Lint/ShadowingOuterLocalVariable'/>
+    <error line='235' column='8' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='237' column='10' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='246' column='10' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='249' column='10' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='250' column='29' severity='warning' message='Naming/UncommunicativeBlockParamName: Only use lowercase characters for block parameter.' source='com.puppycrawl.tools.checkstyle.Naming/UncommunicativeBlockParamName'/>
+    <error line='250' column='29' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='273' column='12' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='275' column='14' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='277' column='12' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='278' column='10' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='279' column='8' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='289' column='8' severity='warning' message='Naming/VariableName: Use snake_case for variable names.' source='com.puppycrawl.tools.checkstyle.Naming/VariableName'/>
+    <error line='305' column='6' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+    <error line='306' column='4' severity='error' message='Style/CommentedKeyword: Do not place comments on the same line as the `end` keyword.' source='com.puppycrawl.tools.checkstyle.Style/CommentedKeyword'/>
+  </file>
+  <file name='spec/test_measures/SetGasBurnerEfficiency/tests/SetGasBurnerEfficiency_Test.rb'>
+    <error line='1' column='0' severity='warning' message='Naming/FileName: The name of this source file (`SetGasBurnerEfficiency_Test.rb`) should use snake_case.' source='com.puppycrawl.tools.checkstyle.Naming/FileName'/>
+    <error line='8' column='6' severity='warning' message='Naming/ClassAndModuleCamelCase: Use CamelCase for classes and modules.' source='com.puppycrawl.tools.checkstyle.Naming/ClassAndModuleCamelCase'/>
+    <error line='9' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for test_SetGasBurnerEfficiency_single_loop is too high. [119/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='9' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+    <error line='95' column='2' severity='warning' message='Metrics/AbcSize: Assignment Branch Condition size for test_SetGasBurnerEfficiency_all_loop is too high. [119/50]' source='com.puppycrawl.tools.checkstyle.Metrics/AbcSize'/>
+    <error line='95' column='6' severity='warning' message='Naming/MethodName: Use snake_case for method names.' source='com.puppycrawl.tools.checkstyle.Naming/MethodName'/>
+  </file>
+  <file name='spec/test_measures/test_broken_measure/measure.rb'/>
+</checkstyle>

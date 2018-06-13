@@ -1,54 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ModelMeasureNameTest" tests="3" time="0.790083" failures="0" errors="0" skipped="0" assertions="10" timestamp="2018-02-28T18:05:27-07:00">
-  <testcase name="test_number_of_arguments_and_argument_names" time="0.000345" assertions="2">
-  </testcase>
-  <testcase name="test_good_argument_values" time="0.779086" assertions="6">
-  </testcase>
-  <testcase name="test_bad_argument_values" time="0.000679" assertions="2">
-  </testcase>
-  <system-out>
-**MEASURE APPLICABILITY**
-0 = Success
-**INITIAL CONDITION**
-The building started with 4 spaces.
-**FINAL CONDITION**
-The building finished with 5 spaces.
-**INFO MESSAGES**
-Space New Space was added.
-**WARNING MESSAGES**
-**ERROR MESSAGES**
-***Machine-Readable Attributes**
-[
-{
-   "name" : "space_name",
-   "value" : "New Space"
-}
-]
-***Files Generated**
-
-
-**MEASURE APPLICABILITY**
-1 = Fail
-**INITIAL CONDITION**
-**FINAL CONDITION**
-**INFO MESSAGES**
-**WARNING MESSAGES**
-**ERROR MESSAGES**
-Empty space name was entered.
-***Machine-Readable Attributes**
-[
-{
-   "name" : "space_name",
-   "value" : ""
-}
-]
-***Files Generated**
-
-
-  </system-out>
-  <system-err>
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
-  </system-err>
-</testsuite>
+<test_suites>
+  <testsuite name="ModelMeasureNameTest" filepath="spec/test_measures/ModelMeasure/tests/model_measure_test.rb" skipped="0" failures="0" errors="0" tests="3" assertions="10" time="1.80004">
+    <testcase name="test_good_argument_values" lineno="67" classname="ModelMeasureNameTest" assertions="6" time="1.798336">
+    </testcase>
+    <testcase name="test_bad_argument_values" lineno="28" classname="ModelMeasureNameTest" assertions="2" time="0.001203">
+    </testcase>
+    <testcase name="test_number_of_arguments_and_argument_names" lineno="15" classname="ModelMeasureNameTest" assertions="2" time="0.000501">
+    </testcase>
+  </testsuite>
+</test_suites>

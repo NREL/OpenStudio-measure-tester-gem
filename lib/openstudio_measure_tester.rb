@@ -29,11 +29,22 @@
 require 'openstudio'
 
 require 'pp'
-require 'active_support'
-require 'active_support/core_ext'
 require 'git'
-require 'openstudio_measure_tester/core_ext'
+require 'rexml/document'
+require 'minitest'
+require 'simplecov'
 
+# override the default at_exit call
+SimpleCov.at_exit do
+end
+
+# Override the minitest autorun, to, well, not autorun
+def Minitest.autorun; end
+
+# Rubocop loads a lot of objects, anyway to minimize would be nice.
+require 'rubocop'
+
+require 'openstudio_measure_tester/core_ext'
 require 'openstudio_measure_tester/version'
 require 'openstudio_measure_tester/openstudio_style'
 require 'openstudio_measure_tester/minitest_result'
@@ -41,15 +52,27 @@ require 'openstudio_measure_tester/coverage'
 require 'openstudio_measure_tester/rubocop_result'
 require 'openstudio_measure_tester/openstudio_testing_result'
 require 'openstudio_measure_tester/dashboard'
+require 'openstudio_measure_tester/runner'
 
 require 'openstudio_measure_tester/rake_task'
-
 
 # Set the encoding to UTF-8. OpenStudio Docker images do not have this set by default
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8
 
-
 module OpenStudioMeasureTester
   # No action here. Most of this will be rake_tasks at the moment.
 end
+
+
+class Minitest::Test
+	def teardown
+		before = ObjectSpace.count_objects
+    	GC.start
+    	after = ObjectSpace.count_objects
+    	delta = {}
+    	before.each {|k, v| delta[k] = v - after[k] if after.has_key? k }
+    	puts "GC Delta: #{delta}"
+	end
+end
+

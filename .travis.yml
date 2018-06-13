@@ -5,10 +5,11 @@ rvm:
 matrix:
   include:
     - env: OPENSTUDIO_VERSION=2.4.0 && OPENSTUDIO_SHA=f58a3e1808 && RUBYLIB=/usr/Ruby
+    - env: OPENSTUDIO_VERSION=2.5.1 && OPENSTUDIO_SHA=4f268e2854 && RUBYLIB=/usr/Ruby
 before_install: gem install bundler -v 1.16.2
 before_script:
   - curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
   - chmod +x install_openstudio.sh
   - sudo ./install_openstudio.sh $OPENSTUDIO_VERSION $OPENSTUDIO_SHA
 script:
-  - rake
+  - bundle exec rake

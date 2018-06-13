@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ReportingMeasureNameTest" tests="2" time="34.990198" failures="0" errors="0" skipped="0" assertions="14" timestamp="2018-02-28T18:05:29-07:00">
-  <testcase name="test_number_of_arguments_and_argument_names" time="2.4e-05" assertions="1">
-  </testcase>
-  <testcase name="test_good_argument_values" time="34.989011" assertions="13">
-  </testcase>
-  <system-out>
-"/Applications/OpenStudio-2.4.1/Ruby/../bin/openstudio" run -w "/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/ReportingMeasure/tests/output/test_good_argument_values/in.osw"
-**MEASURE APPLICABILITY**
-0 = Success
-**INITIAL CONDITION**
-**FINAL CONDITION**
-**INFO MESSAGES**
-Found timeseries.
-**WARNING MESSAGES**
-**ERROR MESSAGES**
-***Machine-Readable Attributes**
-[
-
-]
-***Files Generated**
-
-
-  </system-out>
-  <system-err>
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:54: warning: instance variable @capture_out not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/test_suite.rb:55: warning: instance variable @capture_err not initialized
-/Users/nlong/.rbenv/versions/2.2.4/lib/ruby/gems/2.2.0/gems/ci_reporter-2.0.0/lib/ci/reporter/report_manager.rb:51: warning: File.exists? is a deprecated name, use File.exist? instead
-  </system-err>
-</testsuite>
+<test_suites>
+  <testsuite name="ReportingMeasureNameTest" filepath="spec/test_measures/ReportingMeasure/tests/reporting_measure_test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="14" time="37.091894">
+    <testcase name="test_good_argument_values" lineno="95" classname="ReportingMeasureNameTest" assertions="13" time="37.091852">
+    </testcase>
+    <testcase name="test_number_of_arguments_and_argument_names" lineno="86" classname="ReportingMeasureNameTest" assertions="1" time="4.2e-05">
+    </testcase>
+  </testsuite>
+</test_suites>
