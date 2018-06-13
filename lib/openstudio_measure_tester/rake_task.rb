@@ -45,213 +45,67 @@ module OpenStudioMeasureTester
 
     private
 
-    # Prepare the current directory and the root directory to remove old test results before running
-    # the new tests
-    def pre_process_minitest(base_dir)
-      current_dir = Dir.pwd
-      test_results_dir = "#{base_dir}/test_results"
-
-      puts "Current directory is #{current_dir}"
-      puts "Pre-processing tests run in #{base_dir}"
-      puts "Test results will be stored in: #{test_results_dir}"
-
-      FileUtils.rm_rf "#{test_results_dir}/coverage" if Dir.exist? "#{test_results_dir}/coverage"
-      FileUtils.rm_rf "#{test_results_dir}/test/html_reports" if Dir.exist? "#{test_results_dir}/test/html_reports"
-      FileUtils.rm_rf "#{test_results_dir}/test/reports" if Dir.exist? "#{test_results_dir}/test/reports"
-      # remove the test directory if it is empty (size == 2 for . and ..)
-      if Dir.exist?("#{test_results_dir}/test") && Dir.entries("#{test_results_dir}/test").size == 2
-        FileUtils.rm_rf "#{test_results_dir}/test"
-      end
-      FileUtils.rm_rf "#{test_results_dir}/minitest" if Dir.exist? "#{test_results_dir}/minitest"
-      FileUtils.rm_rf "#{base_dir}/coverage" if Dir.exist? "#{base_dir}/coverage"
-      FileUtils.rm_rf "#{base_dir}/test" if Dir.exist? "#{base_dir}/test"
-      FileUtils.rm_rf "#{base_dir}/minitest" if Dir.exist? "#{base_dir}/minitest"
-      FileUtils.rm_rf "#{current_dir}/coverage" if Dir.exist? "#{current_dir}/coverage"
-      FileUtils.rm_rf "#{current_dir}/test" if Dir.exist? "#{current_dir}/test"
-      FileUtils.rm_rf "#{current_dir}/minitest" if Dir.exist? "#{current_dir}/minitest"
-
-      # Create the test_results directory to store all the results
-      FileUtils.mkdir_p "#{base_dir}/test_results"
-    end
-
-    # Rubocop stores the results (for now) in the test_results directory
-    def pre_process_rubocop(base_dir)
-      current_dir = Dir.pwd
-      test_results_dir = "#{base_dir}/test_results"
-
-      puts "Current directory is #{current_dir}"
-      puts "Pre-processing tests run in #{base_dir}"
-      puts "Test results will be stored in: #{test_results_dir}"
-
-      FileUtils.rm_rf "#{test_results_dir}/rubocop" if Dir.exist? "#{test_results_dir}/rubocop"
-      FileUtils.rm_rf "#{base_dir}/rubocop" if Dir.exist? "#{base_dir}/rubocop"
-      FileUtils.rm_rf "#{current_dir}/rubocop" if Dir.exist? "#{current_dir}/rubocop"
-
-      # Create the test_results directory to store all the results
-      FileUtils.mkdir_p "#{base_dir}/test_results"
-    end
-
-    # OpenStudio style check preparation
-    def pre_process_style(base_dir)
-      current_dir = Dir.pwd
-      test_results_dir = "#{base_dir}/test_results"
-
-      puts "Current directory is #{current_dir}"
-      puts "Pre-processing tests run in #{base_dir}"
-      puts "Test results will be stored in: #{test_results_dir}"
-
-      FileUtils.rm_rf "#{test_results_dir}/openstudio_style" if Dir.exist? "#{test_results_dir}/openstudio_style"
-      FileUtils.rm_rf "#{base_dir}/openstudio_style" if Dir.exist? "#{base_dir}/openstudio_style"
-      FileUtils.rm_rf "#{current_dir}/openstudio_style" if Dir.exist? "#{current_dir}/openstudio_style"
-
-      # Create the test_results directory to store all the results
-      FileUtils.mkdir_p "#{base_dir}/test_results"
-    end
-
-    def run_style(base_dir)
-      style = OpenStudioMeasureTester::OpenStudioStyle.new("#{base_dir}/**/measure.rb")
-      style.save_results
-    end
-
-    # Post process the various results and save them into the base_dir
-    def post_process_results(base_dir)
-      current_dir = Dir.pwd
-      test_results_dir = "#{base_dir}/test_results"
-
-      puts "Current directory: #{current_dir}"
-      puts "Post-processing tests run in: #{base_dir}"
-      puts "Test results will be stored in: #{test_results_dir}"
-
-      FileUtils.mkdir_p test_results_dir
-
-      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(current_dir, test_results_dir)
-      results.save_results # one single file for dashboard
-
-      # call the create dashboard command now that we have results
-      dashboard(base_dir)
-
-      # return the results exit code
-      return results.exit_code
-    end
-
-    # Run ERB to create the dashboard
-    def dashboard(base_dir)
-      template = OpenStudioMeasureTester::Dashboard.new(base_dir)
-      template.render
-    end
-
     def setup_subtasks(name)
       namespace name do
-        task :prepare_minitest do
-          pre_process_minitest(Rake.application.original_dir)
+        ####################################### Minitest and Coverage #######################################
+        desc 'new test task'
+        task :test do
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          # Need to pass in the current directory because the results of minitest and coverage end up going into
+          # the root directorys
+          exit runner.run_test(false, Dir.pwd, false)
         end
 
-        task :prepare_rubocop do
-          # copy over the .rubocop.yml file
-          shared_rubocop_file = File.expand_path('../../.rubocop.yml', File.dirname(__FILE__))
-          dest_file = "#{Dir.pwd}/.rubocop.yml"
-          if shared_rubocop_file != dest_file
-            FileUtils.copy(shared_rubocop_file, dest_file)
-          end
-          pre_process_rubocop(Rake.application.original_dir)
-        end
-
-        task :prepare_style do
-          pre_process_style(Rake.application.original_dir)
-        end
-
-        task style_core: [] do
-          run_style(Rake.application.original_dir)
-        end
-
-        task :post_process_core do
-          post_process_results(Rake.application.original_dir)
-        end
-
-        Rake::TestTask.new(:test_core_command) do |task|
-          task.options = '--ci-reporter'
-          task.description = 'Run measures tests recursively from current directory'
-          task.pattern = [
-            "#{Rake.application.original_dir}/**/*_test.rb",
-            "#{Rake.application.original_dir}/**/*_Test.rb"
-          ]
-          task.verbose = true
-        end
-
-        task :test_core do
-          begin
-            Rake.application['openstudio:test_core_command'].invoke
-          rescue StandardError
-            puts 'Test failures in openstudio:test. Will continue to post-processing.'
-          ensure
-            Rake.application['openstudio:test_core_command'].reenable
-          end
-        end
-
-        # The .rubocop.yml file downloads the RuboCop rules from the OpenStudio-resources repo.
-        # This may cause an issue if the Gem directory does not have write access.
-        RuboCop::RakeTask.new(:rubocop_core) do |task|
-          task.options = ['--no-color', '--out=rubocop/rubocop-results.xml', '--format=simple']
-          task.formatters = ['RuboCop::Formatter::CheckstyleFormatter']
-          task.requires = ['rubocop/formatter/checkstyle_formatter']
-          # Run the rake at the original root directory
-          task.patterns = ["#{Rake.application.original_dir}/**/*.rb"]
-          # don't abort rake on failure
-          task.fail_on_error = false
-        end
-
-        desc 'Run OpenStudio Measure Unit Tests'
-        task test: ['openstudio:prepare_minitest', 'openstudio:test_core'] do
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
-        end
-
+        ####################################### RuboCop #######################################
         # Need to create a namespace so that we can have openstudio:rubocop and openstudio:rubocop:auto_correct.
         namespace :rubocop do
-          task check: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core'] do
-            exit_status = post_process_results(Rake.application.original_dir)
-            exit exit_status
+          task :check do
+            # original_dir is the location where Rakefile exists, Dir.pwd is where the rake task was called.
+            runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+
+            exit runner.run_rubocop(false)
           end
 
           desc 'Run RuboCop Auto Correct on Measures'
-          task auto_correct: ['openstudio:prepare_rubocop', 'openstudio:rubocop_core:auto_correct']
+          task :auto_correct do
+            # original_dir is the location where Rakefile exists, Dir.pwd is where the rake task was called.
+            runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir, Dir.pwd)
+
+            exit runner.run_rubocop(false, true)
+          end
         end
 
         desc 'Run RuboCop on Measures'
         task rubocop: 'openstudio:rubocop:check'
 
+        ####################################### Style #######################################
         desc 'Run OpenStudio Style Checks'
-        task style: ['openstudio:prepare_style', 'openstudio:style_core'] do
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
+        task :style do
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          exit runner.run_style(false)
         end
 
+        ####################################### Post Processing and Dashboarding #######################################
         desc 'Post process results into one directory'
         task :post_process do
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          exit runner.post_process_results(Dir.pwd)
         end
 
         desc 'Generate dashboard'
         task :dashboard do
-          dashboard(Rake.application.original_dir)
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          runner.dashboard
         end
 
         desc 'Run MiniTest, Coverage, RuboCop, and Style on measures, then dashboard results'
-        task all: ['openstudio:prepare_minitest',
-                   'openstudio:test_core',
-                   'openstudio:prepare_rubocop',
-                   'openstudio:rubocop_core',
-                   'openstudio:prepare_style',
-                   'openstudio:style_core'] do
-          exit_status = post_process_results(Rake.application.original_dir)
-          exit exit_status
+        task :all do
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          exit runner.run_all(Dir.pwd)
         end
 
         # Hide the core tasks from being displayed when calling rake -T
-        Rake::Task['openstudio:rubocop_core'].clear_comments
-        Rake::Task['openstudio:test_core_command'].clear_comments
-        Rake::Task['openstudio:rubocop_core:auto_correct'].clear_comments
+        # Rake::Task['openstudio:test_core_command'].clear_comments
       end
     end
   end

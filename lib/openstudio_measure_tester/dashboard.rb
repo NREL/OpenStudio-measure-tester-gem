@@ -3,20 +3,20 @@ module OpenStudioMeasureTester
   class Dashboard
     attr_reader :html
 
-    # @param base_dir [String]: The directory from where the rake test was instantiated
-    def initialize(base_dir)
-      @base_dir = base_dir
+    # @param test_results_directory [String]: The directory
+    def initialize(test_results_directory)
+      @test_results_directory = test_results_directory
 
       erb_file = File.expand_path('templates/dashboard.html.erb', File.dirname(__FILE__))
       @template = File.read(erb_file)
-      file = File.read("#{base_dir}/test_results/combined_results.json")
+      file = File.read("#{@test_results_directory}/combined_results.json")
       @data = file
       @hash = JSON.parse(@data)
     end
 
     def render
       rendered = ERB.new(@template, 0, '', '@html').result(binding)
-      save_dir = "#{@base_dir}/test_results/dashboard"
+      save_dir = "#{@test_results_directory}/dashboard"
 
       # Render the dashboard
       FileUtils.mkdir_p save_dir unless Dir.exist? save_dir

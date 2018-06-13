@@ -29,14 +29,14 @@
 RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
   it 'should not find measure in unknown path' do
     measure_path = 'spec/test_measures/RotateBuildingDNE/*'
-    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+    style = OpenStudioMeasureTester::OpenStudioStyle.new("#{measure_path}/test_results", measure_path)
 
     expect(style.results[:by_measure].empty?).to eq true
   end
 
   it 'should parse an OpenStudio Measure' do
     measure_path = 'spec/test_measures/RotateBuilding/*'
-    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+    style = OpenStudioMeasureTester::OpenStudioStyle.new("#{measure_path}/test_results", measure_path)
 
     # make sure that the infoExtractor method loads correctly (from OpenStudio)
     expect(style.respond_to?(:infoExtractor)).to eq true
@@ -47,16 +47,16 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
   end
 
   it 'should check for naming conventions' do
-    measure_path = 'spec/test_measures/pristine/*'
-    style = OpenStudioMeasureTester::OpenStudioStyle.new(measure_path)
+    measure_path = 'spec/test_measures/ModelMeasure'
+    style = OpenStudioMeasureTester::OpenStudioStyle.new("#{measure_path}/test_results", measure_path)
 
-    style.validate_name('Name', 'period.in.names.are.bad')
-    expect(style.measure_messages.first[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
     style.measure_messages.clear
+    style.validate_name('Name', 'period.in.names.are.bad')
+    expect(style.measure_messages.last[:message]).to eq "Name 'period.in.names.are.bad' cannot contain ?#.[] characters."
 
+    style.measure_messages.clear
     style.validate_name('Name', 'snake_case_is_right', :warning, ensure_snakecase: true)
     style.validate_name('Name', 'CamelCaseIsUpAndDown', :warning, ensure_camelcase: true)
-
     style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_camelcase: true)
     style.validate_name('Name', 'MixedUp_And_case', :warning, ensure_snakecase: true)
     expect(style.measure_messages.first[:message]).to eq "Name 'MixedUp_And_case' is not CamelCase."
@@ -72,7 +72,7 @@ RSpec.describe OpenStudioMeasureTester::OpenStudioStyle do
     style.validate_name('Name', 'Square Footage (ft2)')
     expect(style.measure_messages.first[:message]).to eq "Name 'Square Footage (ft2)' appears to have units. Set units in the setUnits method."
 
-    outfile = 'openstudio_style/openstudio_style.json'
+    outfile = "#{measure_path}/test_results/openstudio_style/openstudio_style.json"
     File.delete(outfile) if File.exist? outfile
     style.save_results
     expect(File.exist?(outfile)).to eq true
