@@ -44,17 +44,17 @@ def Minitest.autorun; end
 # Rubocop loads a lot of objects, anyway to minimize would be nice.
 require 'rubocop'
 
-require 'openstudio_measure_tester/core_ext'
-require 'openstudio_measure_tester/version'
-require 'openstudio_measure_tester/openstudio_style'
-require 'openstudio_measure_tester/minitest_result'
-require 'openstudio_measure_tester/coverage'
-require 'openstudio_measure_tester/rubocop_result'
-require 'openstudio_measure_tester/openstudio_testing_result'
-require 'openstudio_measure_tester/dashboard'
-require 'openstudio_measure_tester/runner'
+require_relative 'openstudio_measure_tester/core_ext'
+require_relative 'openstudio_measure_tester/version'
+require_relative 'openstudio_measure_tester/openstudio_style'
+require_relative 'openstudio_measure_tester/minitest_result'
+require_relative 'openstudio_measure_tester/coverage'
+require_relative 'openstudio_measure_tester/rubocop_result'
+require_relative 'openstudio_measure_tester/openstudio_testing_result'
+require_relative 'openstudio_measure_tester/dashboard'
+require_relative 'openstudio_measure_tester/runner'
 
-require 'openstudio_measure_tester/rake_task'
+require_relative 'openstudio_measure_tester/rake_task'
 
 # Set the encoding to UTF-8. OpenStudio Docker images do not have this set by default
 Encoding.default_external = Encoding::UTF_8

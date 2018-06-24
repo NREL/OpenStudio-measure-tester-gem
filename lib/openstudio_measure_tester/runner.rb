@@ -196,8 +196,18 @@ module OpenStudioMeasureTester
       num_tests = 0
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].uniq.each do |file|
         puts "Loading file for testing: #{file}"
-        load File.expand_path(file)
-        num_tests += 1
+        begin
+          load File.expand_path(file)
+          num_tests += 1
+        rescue StandardError => exception
+          puts
+          puts '!!!!!!!!!!!!!!!!!!!!! Error Loading File !!!!!!!!!!!!!!!!!!!!!'
+          puts File.expand_path(file)
+          puts exception.message
+          puts exception.backtrace
+          puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+          puts
+        end
       end
 
       if num_tests < 1
