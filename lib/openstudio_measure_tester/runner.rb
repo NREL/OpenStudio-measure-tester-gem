@@ -199,7 +199,7 @@ module OpenStudioMeasureTester
         begin
           load File.expand_path(file)
           num_tests += 1
-        rescue StandardError => exception
+        rescue StandardError, LoadError => exception
           puts
           puts '!!!!!!!!!!!!!!!!!!!!! Error Loading File !!!!!!!!!!!!!!!!!!!!!'
           puts File.expand_path(file)
