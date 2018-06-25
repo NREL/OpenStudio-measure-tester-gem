@@ -194,15 +194,53 @@ module OpenStudioMeasureTester
       end
 
       num_tests = 0
+      openstudio_version = OpenStudio::VersionString.new(OpenStudio::openStudioVersion)
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].uniq.each do |file|
+        file = File.expand_path(file)
+        measure_dir = File.expand_path(File.join(File.dirname(file), '..'))
+        
+        # check measure xml
+        compatible = true
+        compatible_error = ''
+        begin 
+          measure = OpenStudio::BCLMeasure.new(measure_dir)
+          measure.files.each do |f|
+            if f.fileName == 'measure.rb'
+              if !f.minCompatibleVersion.empty?
+                min_version = f.minCompatibleVersion.get
+                if openstudio_version < min_version
+                  compatible = false
+                  compatible_error = "OpenStudio Version #{openstudio_version.str} < Min Version #{min_version.str}"
+                end
+              end
+              if !f.maxCompatibleVersion.empty?
+                max_version = f.maxCompatibleVersion.get
+                if openstudio_version > max_version
+                  compatible = false
+                  compatible_error = "OpenStudio Version #{openstudio_version.str} > Max Version #{max_version.str}"
+                end
+              end
+            end
+          end
+        rescue StandardError => exception
+          compatible = false
+          compatible_error = exception.message
+        end
+        
+        if !compatible
+          puts "Measure not compatible: #{measure_dir}, #{compatible_error}" 
+          next
+        end
+        
+        # load test
         puts "Loading file for testing: #{file}"
         begin
-          load File.expand_path(file)
+          load file
           num_tests += 1
         rescue StandardError, LoadError => exception
           puts
           puts '!!!!!!!!!!!!!!!!!!!!! Error Loading File !!!!!!!!!!!!!!!!!!!!!'
-          puts File.expand_path(file)
+          puts file
           puts exception.message
           puts exception.backtrace
           puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
