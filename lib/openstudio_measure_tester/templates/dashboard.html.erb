@@ -155,7 +155,7 @@
                   <!-- use the largest 'by_measure' array, in case the tests weren't all run (coverage & minitest run together) -->
                   <% max = 0 %>
                   <% test_type = ''%>
-                  <% ['coverage', 'openstudio_style', 'rubocop'].each do |type| %>
+                  <% ['coverage', 'openstudio_style', 'minitest','rubocop'].each do |type| %>
                     <% if @hash[type] && @hash[type]['by_measure'] %>
                       <% if @hash[type]['by_measure'].length > max %>
                         <% max = @hash[type]['by_measure'].length %>
