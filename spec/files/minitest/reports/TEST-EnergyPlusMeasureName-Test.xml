@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test_suites>
-  <testsuite name="EnergyPlusMeasureName_Test" filepath="spec/test_measures/EnergyPlusMeasure/tests/energyplus_measure_test.rb" skipped="0" failures="0" errors="0" tests="3" assertions="12" time="0.008105000000000001">
-    <testcase name="test_bad_argument_values" lineno="27" classname="EnergyPlusMeasureName_Test" assertions="4" time="0.001326">
+  <testsuite name="EnergyPlusMeasureName_Test" filepath="spec/test_measures/EnergyPlusMeasure/tests/energyplus_measure_test.rb" skipped="0" failures="0" errors="0" tests="3" assertions="12" time="0.07141">
+    <testcase name="test_good_argument_values" lineno="59" classname="EnergyPlusMeasureName_Test" assertions="6" time="0.027676">
     </testcase>
-    <testcase name="test_number_of_arguments_and_argument_names" lineno="14" classname="EnergyPlusMeasureName_Test" assertions="2" time="0.000981">
+    <testcase name="test_bad_argument_values" lineno="27" classname="EnergyPlusMeasureName_Test" assertions="4" time="0.021159">
     </testcase>
-    <testcase name="test_good_argument_values" lineno="59" classname="EnergyPlusMeasureName_Test" assertions="6" time="0.005798">
+    <testcase name="test_number_of_arguments_and_argument_names" lineno="14" classname="EnergyPlusMeasureName_Test" assertions="2" time="0.022575">
     </testcase>
   </testsuite>
 </test_suites>
