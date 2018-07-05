@@ -152,12 +152,14 @@
                 <thead>
                   <tr>
                     <th rowspan="2">Measure Name</th>
-                    <th rowspan="2">OpenStudio Version</th>
+                    <th rowspan="2">Min OS Version</th>
+                    <th rowspan="2">Max OS Version</th>
+                    <th rowspan="2">Tested OS Version</th>
                     <th colspan="5">Tests</th>
                     <th rowspan="2">OS Style Errors<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th rowspan="2">RuboCop<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th rowspan="2">Coverage</th>
-                    <th>&nbsp;</th>
+                    <th>&nbsp</th>
                   </tr>
                   <tr>
                     <th>Pass</th>
@@ -183,6 +185,20 @@
                     <% @hash[test_type]['by_measure'].each do |name, measure| %>
                     <tr>
                       <td><%= name %></td>
+                      <td>
+                        <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
+                          <%= @hash['minitest']['by_measure'][name]['measure_min_version'] %>
+                        <% else %>
+                          Unknown
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
+                          <%= @hash['minitest']['by_measure'][name]['measure_max_version'] %>
+                        <% else %>
+                          Unknown
+                        <% end %>
+                      </td>
                       <td>
                         <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
                           <%= @hash['minitest']['by_measure'][name]['openstudio_version'] %>

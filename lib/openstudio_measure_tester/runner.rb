@@ -203,7 +203,9 @@ module OpenStudioMeasureTester
         compatible = {
           compatible: true,
           message: '',
-          openstudio_version: openstudio_version.str
+          openstudio_version: openstudio_version.str,
+          measure_min_version: 'None',
+          measure_max_version: 'None'
         }
         begin
           measure = OpenStudio::BCLMeasure.new(measure_dir)
