@@ -1,13 +1,16 @@
 {
   "test_directory": "spec/files/minitest",
-  "total_tests": 21,
-  "total_assertions": 144,
+  "total_tests": 16,
+  "total_assertions": 120,
   "total_errors": 1,
   "total_failures": 1,
   "total_skipped": 1,
+  "total_compatibility_errors": 1,
   "by_measure": {
     "AddOverhangsByProjectionFactor": {
       "tested_class": "AddOverhangsByProjectionFactor",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
       "measure_tests": 5,
       "measure_assertions": 39,
       "measure_errors": 1,
@@ -22,11 +25,14 @@
         ],
         "skipped": [
           "Skipped test: test_skip"
-        ]
+        ],
+        "compatibility_error": 0
       }
     },
     "ChangeBuildingLocation": {
       "tested_class": "ChangeBuildingLocation",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
       "measure_tests": 4,
       "measure_assertions": 13,
       "measure_errors": 0,
@@ -41,11 +47,14 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
       }
     },
     "EnergyPlusMeasureName": {
       "tested_class": "EnergyPlusMeasureName",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
       "measure_tests": 3,
       "measure_assertions": 12,
       "measure_errors": 0,
@@ -60,13 +69,16 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
       }
     },
     "ModelMeasureName": {
       "tested_class": "ModelMeasureName",
-      "measure_tests": 3,
-      "measure_assertions": 10,
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
+      "measure_tests": 0,
+      "measure_assertions": 0,
       "measure_errors": 0,
       "measure_failures": 0,
       "measure_skipped": 0,
@@ -79,13 +91,38 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
+      }
+    },
+    "NonApplicableVersionOpenStudio": {
+      "tested_class": "NonApplicableVersionOpenStudio",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 1,
+      "measure_tests": 0,
+      "measure_assertions": 0,
+      "measure_errors": 0,
+      "measure_failures": 0,
+      "measure_skipped": 0,
+      "issues": {
+        "errors": [
+
+        ],
+        "failures": [
+
+        ],
+        "skipped": [
+
+        ],
+        "compatibility_error": 1
       }
     },
     "ReportingMeasureName": {
       "tested_class": "ReportingMeasureName",
-      "measure_tests": 2,
-      "measure_assertions": 14,
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
+      "measure_tests": 0,
+      "measure_assertions": 0,
       "measure_errors": 0,
       "measure_failures": 0,
       "measure_skipped": 0,
@@ -98,11 +135,14 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
       }
     },
     "RotateBuilding": {
       "tested_class": "RotateBuilding",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
       "measure_tests": 2,
       "measure_assertions": 10,
       "measure_errors": 0,
@@ -117,11 +157,14 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
       }
     },
     "SetGasBurnerEfficiency": {
       "tested_class": "SetGasBurnerEfficiency",
+      "openstudio_version": "2.5.1",
+      "measure_compatibility_errors": 0,
       "measure_tests": 2,
       "measure_assertions": 46,
       "measure_errors": 0,
@@ -136,7 +179,8 @@
         ],
         "skipped": [
 
-        ]
+        ],
+        "compatibility_error": 0
       }
     }
   }

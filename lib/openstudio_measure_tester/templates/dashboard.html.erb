@@ -39,7 +39,7 @@
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">Tests</h5>
-             
+
                     <% if @hash['minitest'] && @hash['minitest']['total_failures'] %>
                       <div class="row pt-3">
                         <% passed = @hash['minitest']['total_tests'] - (@hash['minitest']['total_failures'] + @hash['minitest']['total_errors'] + @hash['minitest']['total_skipped']) %>
@@ -62,13 +62,21 @@
                         <% end %>
                         <div class="col-sm-5 badge-med-height badge-text">Errors</div>
                       </div>
-                       <div class="row pt-2">
+                      <div class="row pt-2">
                         <% if @hash['minitest']['total_skipped'] > 0 %>
                           <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-info"><span class='med-text'><%= @hash['minitest']['total_skipped'] %></span></div>
                         <% else %>
                           <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-success"><span class='med-text'><%= @hash['minitest']['total_skipped'] %></span></div>
                         <% end %>
                         <div class="col-sm-5 badge-med-height badge-text">Skipped</div>
+                      </div>
+                      <div class="row pt-2">
+                        <% if @hash['minitest']['total_compatibility_errors'] > 0 %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-info"><span class='med-text'><%= @hash['minitest']['total_compatibility_errors'] %></span></div>
+                        <% else %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-success"><span class='med-text'><%= @hash['minitest']['total_compatibility_errors'] %></span></div>
+                        <% end %>
+                        <div class="col-sm-5 badge-med-height badge-text">Incompatible</div>
                       </div>
                     <% else %>
                       <div class="row pt-5">
@@ -144,7 +152,8 @@
                 <thead>
                   <tr>
                     <th>Measure Name</th>
-                    <th>Tests<br/><span class="small-text">Passed - Failures - Errors - Skipped</span></th>
+                    <th>OpenStudio Version</th>
+                    <th>Tests<br/><span class="small-text">Passed - Failures - Errors - Skipped - Incompatible</span></th>
                     <th>OS Style Errors<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th>RuboCop<br/><span class="small-text">Errors - Warnings - Info</span></th>
                     <th>Coverage</th>
@@ -169,6 +178,12 @@
                       <td><%= name %></td>
                       <td>
                         <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
+                          <%= @hash['minitest']['by_measure'][name]['openstudio_version'] %></td>
+                        <% else %>
+                          Unknown
+                        <% end %>
+                      <td>
+                        <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
                           <% passed =  @hash['minitest']['by_measure'][name]['measure_tests'] - (@hash['minitest']['by_measure'][name]['measure_failures'] + @hash['minitest']['by_measure'][name]['measure_errors'] + @hash['minitest']['by_measure'][name]['measure_skipped']) %>
                           <span class="badge badge-success"><%= passed %></span>
                           <% if @hash['minitest']['by_measure'][name]['measure_failures'] > 0 %>
@@ -184,6 +199,7 @@
                           <% end %>
                           <span class="badge badge-<%= label %>"><%= @hash['minitest']['by_measure'][name]['measure_errors'] %></span>
                           <span class="badge badge-info"><%= @hash['minitest']['by_measure'][name]['measure_skipped'] %></span>
+                          <span class="badge badge-info"><%= @hash['minitest']['by_measure'][name]['measure_compatibility_errors'] %></span>
                         <% end %>
                       </td>
                       <td>

@@ -1,0 +1,7 @@
+{
+  "compatible": false,
+  "message": "OpenStudio Version 2.5.1 < Min Version 2.9.0",
+  "openstudio_version": "2.5.1",
+  "measure_name": "NonApplicableVersionOpenStudio",
+  "measure_min_version": "2.9.0"
+}

@@ -35,6 +35,7 @@ module OpenStudioMeasureTester
     attr_reader :total_failures
     attr_reader :total_skipped
     attr_reader :total_tests
+    attr_reader :total_compatibility_errors
     attr_reader :measure_results
     attr_reader :summary
 
@@ -46,6 +47,7 @@ module OpenStudioMeasureTester
       @total_errors = 0
       @total_failures = 0
       @total_skipped = 0
+      @total_compatibility_errors = 0
 
       @measure_results = {}
       @summary = {}
@@ -55,37 +57,61 @@ module OpenStudioMeasureTester
     end
 
     def parse_results
-      Dir["#{@path_to_results}/reports/*.xml"].each do |file|
-        puts "Parsing minitest report #{file}"
-        doc = REXML::Document.new(File.open(file)).root
-
-        # continue if doc is empty
-        next unless doc
-
-        measure_name = file.split('/')[-1].split('.')[0].split('-')[1].gsub /-?[tT]est\z/, ''
+      # use the compatibility file to find the measure name and other files
+      Dir["#{@path_to_results}/compatibility/*.json"].each do |file|
+        puts "Parsing compatibility report #{file}"
+        json_data = JSON.parse(File.read(file), symbolize_names: true)
 
         mhash = {}
-        mhash['tested_class'] = measure_name
+        mhash[:tested_class] = json_data[:measure_name]
+        mhash[:openstudio_version] = json_data[:openstudio_version]
+        # initiazize a bunch of data
+        mhash[:measure_compatibility_errors] = json_data[:compatible] ? 0 : 1
+        mhash[:measure_tests] = 0
+        mhash[:measure_assertions] = 0
+        mhash[:measure_errors] = 0
+        mhash[:measure_failures] = 0
+        mhash[:measure_skipped] = 0
+        mhash[:issues] = {
+            errors: [],
+            failures: [],
+            skipped: [],
+            compatibility_error: json_data[:compatible] ? 0 : 1
+        }
 
-        # Note: only 1 failure and 1 error possible per test
-        testsuite_element = doc.elements['testsuite']
-        errors, failures, skipped = parse_measure(testsuite_element)
+        # find the report XML - if it exists
+        report_xml = "#{@path_to_results}/reports/TEST-#{json_data[:measure_name]}-Test.xml"
+        if File.exist? report_xml
+          puts "Parsing minitest report #{report_xml}"
+          doc = REXML::Document.new(File.open(report_xml)).root
 
-        mhash['measure_tests'] = testsuite_element.attributes['tests'].to_i
-        mhash['measure_assertions'] = testsuite_element.attributes['assertions'].to_i
-        mhash['measure_errors'] = testsuite_element.attributes['errors'].to_i
-        mhash['measure_failures'] = testsuite_element.attributes['failures'].to_i
-        mhash['measure_skipped'] = testsuite_element.attributes['skipped'].to_i
+          if doc
+            # Note: only 1 failure and 1 error possible per test
+            testsuite_element = doc.elements['testsuite']
+            errors, failures, skipped = parse_measure(testsuite_element)
 
-        mhash['issues'] = { errors: errors, failures: failures, skipped: skipped }
+            mhash[:measure_tests] = testsuite_element.attributes['tests'].to_i
+            mhash[:measure_assertions] = testsuite_element.attributes['assertions'].to_i
+            mhash[:measure_errors] = testsuite_element.attributes['errors'].to_i
+            mhash[:measure_failures] = testsuite_element.attributes['failures'].to_i
+            mhash[:measure_skipped] = testsuite_element.attributes['skipped'].to_i
 
-        @measure_results[measure_name] = mhash
+            mhash[:issues][:errors] = errors
+            mhash[:issues][:failures] = failures
+            mhash[:issues][:skipped] = skipped
+          end
+        else
+          # There is no XML, probably because the measure was not applicable to version of OpenStudio
+        end
 
-        @total_tests += mhash['measure_tests']
-        @total_assertions += mhash['measure_assertions']
-        @total_errors += mhash['measure_errors']
-        @total_failures += mhash['measure_failures']
-        @total_skipped += mhash['measure_skipped']
+        @measure_results[mhash[:tested_class]] = mhash
+
+        @total_tests += mhash[:measure_tests]
+        @total_assertions += mhash[:measure_assertions]
+        @total_errors += mhash[:measure_errors]
+        @total_failures += mhash[:measure_failures]
+        @total_skipped += mhash[:measure_skipped]
+        @total_compatibility_errors += mhash[:measure_compatibility_errors]
       end
 
       @error_status = true if @total_errors > 0
@@ -94,13 +120,14 @@ module OpenStudioMeasureTester
     def to_file
       # save as a json and have something else parse it/plot it.
 
-      @summary['test_directory'] = @path_to_results
-      @summary['total_tests'] = @total_tests
-      @summary['total_assertions'] = @total_assertions
-      @summary['total_errors'] = @total_errors
-      @summary['total_failures'] = @total_failures
-      @summary['total_skipped'] = @total_skipped
-      @summary['by_measure'] = @measure_results
+      @summary[:test_directory] = @path_to_results
+      @summary[:total_tests] = @total_tests
+      @summary[:total_assertions] = @total_assertions
+      @summary[:total_errors] = @total_errors
+      @summary[:total_failures] = @total_failures
+      @summary[:total_skipped] = @total_skipped
+      @summary[:total_compatibility_errors] = @total_compatibility_errors
+      @summary[:by_measure] = @measure_results
 
       # pp @summary
 

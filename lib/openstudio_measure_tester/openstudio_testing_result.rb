@@ -109,7 +109,10 @@ module OpenStudioMeasureTester
         # minitest
         if Dir.exist?("#{@orig_results_dir}/test/html_reports") || Dir.exist?("#{@orig_results_dir}/test/reports")
           puts 'Found Minitest Results, parsing'
-          FileUtils.rm_rf "#{@test_results_dir}/minitest" if Dir.exist? "#{@test_results_dir}/minitest"
+          # Do not delete the compatibilty directory which is generated when the test is run
+          FileUtils.rm_rf "#{@test_results_dir}/minitest/html_reports" if Dir.exist? "#{@test_results_dir}/minitest/html_reports"
+          FileUtils.rm_rf "#{@test_results_dir}/minitest/reports" if Dir.exist? "#{@test_results_dir}/minitest/reports"
+
           FileUtils.mkdir_p "#{@test_results_dir}/minitest"
 
           # Copy the files over in case the folder is locked.
@@ -178,7 +181,7 @@ module OpenStudioMeasureTester
       end
 
       if @results['minitest']
-        if @results['minitest']['total_errors'] > 0 || @results['minitest']['total_failures'] > 0
+        if @results['minitest'][:total_errors] > 0 || @results['minitest'][:total_failures] > 0
           puts 'Unit Test (Minitest) errors/failures found.'
           final_exit_code = 1
         end
