@@ -62,13 +62,16 @@ module OpenStudioMeasureTester
         puts "Parsing compatibility report #{file}"
         json_data = JSON.parse(File.read(file), symbolize_names: true)
 
+        # Test if the measure has already been parse, if so, then continue
+        next if @measure_results.keys.include? json_data[:measure_name]
+
         mhash = {}
         mhash[:tested_class] = json_data[:measure_name]
         mhash[:openstudio_version] = json_data[:openstudio_version]
         mhash[:measure_min_version] = json_data[:measure_min_version]
         mhash[:measure_max_version] = json_data[:measure_max_version]
 
-        # initiazize a bunch of data
+        # initialize a bunch of data
         mhash[:measure_compatibility_errors] = json_data[:compatible] ? 0 : 1
         mhash[:measure_tests] = 0
         mhash[:measure_assertions] = 0
@@ -83,10 +86,10 @@ module OpenStudioMeasureTester
         }
 
         # find the report XML - if it exists
-        report_xml = "#{@path_to_results}/reports/TEST-#{json_data[:measure_name]}-Test.xml"
-        if File.exist? report_xml
-          puts "Parsing minitest report #{report_xml}"
-          doc = REXML::Document.new(File.open(report_xml)).root
+        report_xmls = Dir["#{@path_to_results}/reports/TEST-#{json_data[:measure_name]}*.xml"]
+        if report_xmls.count == 1
+          puts "Parsing minitest report #{report_xmls[0]}"
+          doc = REXML::Document.new(File.open(report_xmls[0])).root
 
           if doc
             # Note: only 1 failure and 1 error possible per test
@@ -104,7 +107,8 @@ module OpenStudioMeasureTester
             mhash[:issues][:skipped] = skipped
           end
         else
-          # There is no XML, probably because the measure was not applicable to version of OpenStudio
+          # There are more than one XMLs or there are no XML
+          # No XMLs is typically because the measure was not applicable to then version of OpenStudio
         end
 
         @measure_results[mhash[:tested_class]] = mhash
