@@ -200,35 +200,50 @@ module OpenStudioMeasureTester
         measure_dir = File.expand_path(File.join(File.dirname(file), '..'))
 
         # check measure xml
-        compatible = true
-        compatible_error = ''
+        compatible = {
+          compatible: true,
+          message: '',
+          openstudio_version: openstudio_version.str
+        }
         begin
           measure = OpenStudio::BCLMeasure.new(measure_dir)
+          compatible[:measure_name] = measure.className
           measure.files.each do |f|
             if f.fileName == 'measure.rb'
               if !f.minCompatibleVersion.empty?
                 min_version = f.minCompatibleVersion.get
+                compatible[:measure_min_version] = min_version.str
                 if openstudio_version < min_version
-                  compatible = false
-                  compatible_error = "OpenStudio Version #{openstudio_version.str} < Min Version #{min_version.str}"
+                  compatible[:compatible] = false
+                  compatible[:message] = "OpenStudio Version #{openstudio_version.str} < Min Version #{min_version.str}"
                 end
               end
               if !f.maxCompatibleVersion.empty?
                 max_version = f.maxCompatibleVersion.get
+                compatible[:measure_max_version] = max_version.str
                 if openstudio_version > max_version
-                  compatible = false
-                  compatible_error = "OpenStudio Version #{openstudio_version.str} > Max Version #{max_version.str}"
+                  compatible[:compatible] = false
+                  compatible[:message] = "OpenStudio Version #{openstudio_version.str} > Max Version #{max_version.str}"
                 end
               end
             end
           end
         rescue StandardError => exception
-          compatible = false
-          compatible_error = exception.message
+          compatible[:compatible] = false
+          compatible[:message] = exception.message
         end
 
-        if !compatible
-          puts "Measure not compatible: #{measure_dir}, #{compatible_error}"
+        # Write out the compatibility
+        # write out to a file that the measure is not applicable
+        os_compatible_file = "#{@base_dir}/test_results/minitest/compatibility/#{File.basename(file, '.rb')}.json"
+        puts os_compatible_file
+        FileUtils.mkdir_p File.dirname(os_compatible_file) unless Dir.exists? File.dirname(os_compatible_file)
+        File.open(os_compatible_file, 'w') do |f|
+          f << JSON.pretty_generate(compatible)
+        end
+
+        if !compatible[:compatible]
+          puts "Measure not compatible: #{measure_dir}, #{compatible[:message]}"
           next
         end
 

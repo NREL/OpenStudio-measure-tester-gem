@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test_suites>
-  <testsuite name="AddOverhangsByProjectionFactor_Test" filepath="spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb" skipped="1" failures="1" errors="1" tests="5" assertions="39" time="5.173019">
-    <testcase name="test_skip" lineno="196" classname="AddOverhangsByProjectionFactor_Test" assertions="0" time="0.021147">
-    <skipped type="test_skip"/>
+  <testsuite name="AddOverhangsByProjectionFactor_Test" filepath="spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb" skipped="1" failures="1" errors="1" tests="5" assertions="39" time="5.203839">
+    <testcase name="test_AddOverhangsByProjectionFactor_good_noDefault" lineno="146" classname="AddOverhangsByProjectionFactor_Test" assertions="7" time="2.571461">
     </testcase>
-    <testcase name="test_AddOverhangsByProjectionFactor_good" lineno="46" classname="AddOverhangsByProjectionFactor_Test" assertions="25" time="2.558664">
-    <failure type="test_AddOverhangsByProjectionFactor_good" message="Expected: 1...">
-Failure:
-test_AddOverhangsByProjectionFactor_good(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:132]:
-Expected: 1
-  Actual: 5
-    </failure>
-    </testcase>
-    <testcase name="test_AddOverhangsByProjectionFactor_bad" lineno="16" classname="AddOverhangsByProjectionFactor_Test" assertions="7" time="0.028074">
-    </testcase>
-    <testcase name="test_failure" lineno="192" classname="AddOverhangsByProjectionFactor_Test" assertions="0" time="0.021932">
+    <testcase name="test_failure" lineno="192" classname="AddOverhangsByProjectionFactor_Test" assertions="0" time="0.028272">
     <error type="test_failure" message="RuntimeError: This will be an error...">
 Failure:
 test_failure(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:193]:
@@ -22,7 +11,18 @@ RuntimeError: This will be an error
     /Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:193:in `test_failure'
     </error>
     </testcase>
-    <testcase name="test_AddOverhangsByProjectionFactor_good_noDefault" lineno="146" classname="AddOverhangsByProjectionFactor_Test" assertions="7" time="2.543202">
+    <testcase name="test_AddOverhangsByProjectionFactor_bad" lineno="16" classname="AddOverhangsByProjectionFactor_Test" assertions="7" time="0.022672">
+    </testcase>
+    <testcase name="test_AddOverhangsByProjectionFactor_good" lineno="46" classname="AddOverhangsByProjectionFactor_Test" assertions="25" time="2.548959">
+    <failure type="test_AddOverhangsByProjectionFactor_good" message="Expected: 1...">
+Failure:
+test_AddOverhangsByProjectionFactor_good(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:132]:
+Expected: 1
+  Actual: 5
+    </failure>
+    </testcase>
+    <testcase name="test_skip" lineno="196" classname="AddOverhangsByProjectionFactor_Test" assertions="0" time="0.032475">
+    <skipped type="test_skip"/>
     </testcase>
   </testsuite>
 </test_suites>

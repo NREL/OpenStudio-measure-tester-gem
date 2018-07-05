@@ -411,7 +411,6 @@ module OpenStudioMeasureTester
         result[:version_modified] = nil
       end
       result[:xml_checksum] = measure.xmlChecksum
-      result[:name] = measure.name
       result[:display_name] = measure.displayName
       result[:class_name] = measure.className
       result[:description] = measure.description

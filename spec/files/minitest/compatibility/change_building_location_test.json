@@ -1,0 +1,7 @@
+{
+  "compatible": true,
+  "message": "",
+  "openstudio_version": "2.5.1",
+  "measure_name": "ChangeBuildingLocation",
+  "measure_min_version": "1.3.4"
+}
