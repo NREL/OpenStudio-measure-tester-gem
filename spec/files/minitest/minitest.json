@@ -19,6 +19,9 @@
         ],
         "failures": [
           "<failure message='Expected: 1...' type='test_AddOverhangsByProjectionFactor_good'>\nFailure:\ntest_AddOverhangsByProjectionFactor_good(AddOverhangsByProjectionFactor_Test) [/Users/nlong/working/OpenStudio-measure-tester-gem/spec/test_measures/AddOverhangsByProjectionFactor/tests/AddOverhangsByProjectionFactor_Test.rb:132]:\nExpected: 1\n  Actual: 5\n    </failure>"
+        ],
+        "skipped": [
+          "Skipped test: test_skip"
         ]
       }
     },
@@ -34,6 +37,9 @@
 
         ],
         "failures": [
+
+        ],
+        "skipped": [
 
         ]
       }
@@ -51,6 +57,9 @@
         ],
         "failures": [
 
+        ],
+        "skipped": [
+
         ]
       }
     },
@@ -66,6 +75,9 @@
 
         ],
         "failures": [
+
+        ],
+        "skipped": [
 
         ]
       }
@@ -83,6 +95,9 @@
         ],
         "failures": [
 
+        ],
+        "skipped": [
+
         ]
       }
     },
@@ -99,6 +114,9 @@
         ],
         "failures": [
 
+        ],
+        "skipped": [
+
         ]
       }
     },
@@ -114,6 +132,9 @@
 
         ],
         "failures": [
+
+        ],
+        "skipped": [
 
         ]
       }

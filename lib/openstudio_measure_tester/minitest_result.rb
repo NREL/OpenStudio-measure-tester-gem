@@ -123,7 +123,7 @@ module OpenStudioMeasureTester
         elsif testcase.elements['failure']
           failures << testcase.elements['failure']
         elsif testcase.elements['skipped']
-          skipped << "Skipped test: " + testcase.elements['skipped'].attributes['type']
+          skipped << 'Skipped test: ' + testcase.elements['skipped'].attributes['type']
         end
       end
 

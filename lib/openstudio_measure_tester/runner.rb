@@ -79,7 +79,7 @@ module OpenStudioMeasureTester
     #
     # @param original_results_directory [string] Location of the results from coverag and minitest
     def post_process_results(original_results_directory = nil)
-      puts " ========================= Starting Results Post Process ================================"
+      puts ' ========================= Starting Results Post Process ================================'
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
@@ -109,7 +109,7 @@ module OpenStudioMeasureTester
     end
 
     def run_style(skip_post_process)
-      puts " ========================= Starting Run for OpenStudio Style ================================"
+      puts ' ========================= Starting Run for OpenStudio Style ================================'
       pre_process_style
 
       # Run the style tests
@@ -124,7 +124,7 @@ module OpenStudioMeasureTester
     end
 
     def run_rubocop(skip_post_process, auto_correct = false)
-      puts " ========================= Starting Run for Rubocop ================================"
+      puts ' ========================= Starting Run for Rubocop ================================'
       pre_process_rubocop
 
       rubocop_results_file = "#{test_results_dir}/rubocop/rubocop-results.xml"
@@ -159,7 +159,7 @@ module OpenStudioMeasureTester
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
     def run_test(skip_post_process, original_results_directory, run_coverage = true)
-      puts " ========================= Starting Run for Minitest (and coverage) ============================"
+      puts ' ========================= Starting Run for Minitest (and coverage) ============================'
       # not sure what @base_dir has to be right now
       pre_process_minitest(original_results_directory)
 
@@ -194,15 +194,15 @@ module OpenStudioMeasureTester
       end
 
       num_tests = 0
-      openstudio_version = OpenStudio::VersionString.new(OpenStudio::openStudioVersion)
+      openstudio_version = OpenStudio::VersionString.new(OpenStudio.openStudioVersion)
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].uniq.each do |file|
         file = File.expand_path(file)
         measure_dir = File.expand_path(File.join(File.dirname(file), '..'))
-        
+
         # check measure xml
         compatible = true
         compatible_error = ''
-        begin 
+        begin
           measure = OpenStudio::BCLMeasure.new(measure_dir)
           measure.files.each do |f|
             if f.fileName == 'measure.rb'
@@ -226,12 +226,12 @@ module OpenStudioMeasureTester
           compatible = false
           compatible_error = exception.message
         end
-        
+
         if !compatible
-          puts "Measure not compatible: #{measure_dir}, #{compatible_error}" 
+          puts "Measure not compatible: #{measure_dir}, #{compatible_error}"
           next
         end
-        
+
         # load test
         puts "Loading file for testing: #{file}"
         begin

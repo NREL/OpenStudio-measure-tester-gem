@@ -40,6 +40,20 @@ module OpenStudioMeasureTester
         severity: :error,
         file_type: :measure
       }, {
+        regex: /OpenStudio::Ruleset::WorkspaceUserScript/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::WorkspaceUserScript is deprecated, use OpenStudio::Measure::EnergyPlusMeasure instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
+        regex: /OpenStudio::Ruleset::ReportingUserScript/,
+        check_type: :if_exists,
+        message: 'OpenStudio::Ruleset::ReportingUserScript is deprecated, use OpenStudio::Measure::ReportingMeasure instead.',
+        type: :deprecated,
+        severity: :error,
+        file_type: :measure
+      }, {
         regex: /OpenStudio::Ruleset::OSRunner/,
         check_type: :if_exists,
         message: 'OpenStudio::Ruleset::OSRunner is deprecated, use OpenStudio::Measure::OSRunner.new(OpenStudio::WorkflowJSON.new) instead.',
@@ -154,7 +168,7 @@ module OpenStudioMeasureTester
             measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
           rescue NameError => error
             log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
-          rescue => error
+          rescue StandardError => error
             log_message("Unknown error extracting measure info. Error #{error}", :general, :error)
           end
 
