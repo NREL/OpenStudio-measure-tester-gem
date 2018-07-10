@@ -39,7 +39,23 @@
                 <div class="card-block">
                   <div class="card-body">
                     <h5 class="card-title">Tests</h5>
-
+                    <% if @hash['minitest'] && @hash['minitest']['total_load_errors'] %>
+                      <div class="row pt-3">
+                        <% total_load_errors = @hash['minitest']['total_load_errors'].count %>
+                        <% if total_load_errors > 0 %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-danger"><span class='med-text'><%= total_load_errors %></span></div>
+                        <% else %>
+                          <div class="col-sm-3 offset-sm-2 badge-med-height badge badge-success"><span class='med-text'><%= total_load_errors %></span></div>
+                        <% end %>
+                        <div class="col-sm-3 badge-med-height badge-text">Load Errors</div>
+                      </div>
+                    <% else %>
+                      <div class="row pt-3">
+                        <div class="col-sm-6 offset-sm-3 badge-lg-height badge badge-warning badge-text"><i data-feather="alert-triangle" class="size48"></i><br><span class="pt-2">No Data</span> </div>
+                        <div class="col-sm-3 badge-med-height badge-text">Load Errors</div>
+                      </div>
+                    <% end %>
+                    
                     <% if @hash['minitest'] && @hash['minitest']['total_failures'] %>
                       <div class="row pt-3">
                         <% passed = @hash['minitest']['total_tests'] - (@hash['minitest']['total_failures'] + @hash['minitest']['total_errors'] + @hash['minitest']['total_skipped']) %>
