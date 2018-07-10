@@ -73,7 +73,11 @@ module OpenStudioMeasureTester
         mhash[:measure_min_version] = json_data[:measure_min_version]
         mhash[:measure_max_version] = json_data[:measure_max_version]
         mhash[:loaded] = json_data[:loaded]
-        mhash[:load_errors] = json_data[:load_errors]
+        if json_data[:load_errors].nil?
+          mhash[:load_errors] = []
+        else
+          mhash[:load_errors] = json_data[:load_errors]
+        end
 
         # initialize a bunch of data
         mhash[:measure_compatibility_errors] = json_data[:compatible] ? 0 : 1
