@@ -152,6 +152,7 @@
                 <thead>
                   <tr>
                     <th rowspan="2">Measure Name</th>
+                    <th rowspan="2">Loaded</th>
                     <th rowspan="2">Min OS Version</th>
                     <th rowspan="2">Max OS Version</th>
                     <th rowspan="2">Tested OS Version</th>
@@ -185,6 +186,13 @@
                     <% @hash[test_type]['by_measure'].each do |name, measure| %>
                     <tr>
                       <td><%= name %></td>
+                      <td>
+                        <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] && @hash['minitest']['by_measure'][name]['loaded'] %>
+                          Yes
+                        <% else %>
+                          False
+                        <% end %>
+                      </td>
                       <td>
                         <% if  @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
                           <%= @hash['minitest']['by_measure'][name]['measure_min_version'] %>
@@ -383,6 +391,39 @@
                   </div>
                 </div>
 
+                <div class="row pb-3">
+                  <div class="col-sm-12">
+                    <h4>Loaded</h4>
+                    <% if @hash['minitest'] && @hash['minitest']['by_measure'] && @hash['minitest']['by_measure'][name] %>
+                      <% if @hash['minitest']['by_measure'][name]['loaded'] %>
+                        <div>True</div>
+                      <% else %>
+                        <div>False</div>
+                        <% if @hash['minitest']['by_measure'][name]['load_errors'] %>
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Error</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% @hash['minitest']['by_measure'][name]['load_errors'].each do |load_error| %>
+                                <tr>
+                                  <td><%= load_error %></td>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <div>
+                        <span class="badge badge-danger">NO DATA</span>  Test was not run
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                
                 <div class="row pb-3">
                   <div class="col-sm-12">
                     <h4>Tests</h4>

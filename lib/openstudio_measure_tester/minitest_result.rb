@@ -48,6 +48,8 @@ module OpenStudioMeasureTester
       @total_failures = 0
       @total_skipped = 0
       @total_compatibility_errors = 0
+      @total_loaded = true
+      @total_load_errors = []
 
       @measure_results = {}
       @summary = {}
@@ -70,6 +72,8 @@ module OpenStudioMeasureTester
         mhash[:openstudio_version] = json_data[:openstudio_version]
         mhash[:measure_min_version] = json_data[:measure_min_version]
         mhash[:measure_max_version] = json_data[:measure_max_version]
+        mhash[:loaded] = json_data[:loaded]
+        mhash[:load_errors] = json_data[:load_errors]
 
         # initialize a bunch of data
         mhash[:measure_compatibility_errors] = json_data[:compatible] ? 0 : 1
@@ -119,6 +123,8 @@ module OpenStudioMeasureTester
         @total_failures += mhash[:measure_failures]
         @total_skipped += mhash[:measure_skipped]
         @total_compatibility_errors += mhash[:measure_compatibility_errors]
+        @total_loaded = @total_loaded && mhash[:loaded]
+        @total_load_errors.concat(mhash[:load_errors])
       end
 
       @error_status = true if @total_errors > 0
@@ -134,8 +140,10 @@ module OpenStudioMeasureTester
       @summary[:total_failures] = @total_failures
       @summary[:total_skipped] = @total_skipped
       @summary[:total_compatibility_errors] = @total_compatibility_errors
+      @summary[:total_loaded] = @total_loaded
+      @summary[:total_load_errors] = @total_load_errors
       @summary[:by_measure] = @measure_results
-
+      
       # pp @summary
 
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
