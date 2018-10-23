@@ -1,4 +1,3 @@
-
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'openstudio_measure_tester/version'
@@ -23,11 +22,18 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rspec', '3.7.0'
 
+  if /^2\.2/.match(RUBY_VERSION)
+    spec.add_dependency 'rubocop', '0.54.0'
+  elsif /^2\.0/.match(RUBY_VERSION)
+    spec.add_dependency 'nokogiri', '1.6.8' 
+    spec.add_dependency 'rainbow', '2.2.2' 
+    spec.add_dependency 'rubocop', '0.50.0'
+  end
+  
   spec.add_dependency 'git', '1.3.0'
   spec.add_dependency 'minitest', '5.4.3'
   spec.add_dependency 'minitest-reporters', '1.2.0'
   spec.add_dependency 'rake', '12.3.1'
-  spec.add_dependency 'rubocop', '0.54.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '0.4'
   spec.add_dependency 'simplecov', '0.16.1'
 end

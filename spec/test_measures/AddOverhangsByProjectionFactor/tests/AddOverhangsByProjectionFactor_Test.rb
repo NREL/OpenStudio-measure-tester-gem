@@ -193,4 +193,8 @@ class AddOverhangsByProjectionFactor_Test < Minitest::Test
     raise 'This will be an error'
   end
 
+  def test_skip
+    skip 'This test will be skipped'
+  end
+
 end

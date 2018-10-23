@@ -1,0 +1,59 @@
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>non_applicable_version_openstudio</name>
+  <uid>b2742307-bce7-4747-8f94-977718217305</uid>
+  <version_id>f2036894-b95f-482c-bff5-b7cca0fe8e7b</version_id>
+  <version_modified>20180627T224342Z</version_modified>
+  <xml_checksum>49BEF039</xml_checksum>
+  <class_name>NonApplicableVersionOpenStudio</class_name>
+  <display_name>Non Applicable Version OpenStudio</display_name>
+  <description>Rotate your building relative to its current orientation. This will not rotate site shading objects.</description>
+  <modeler_description>Get the North Axis field for the  OS:Building object and adjusted it based on the user specified value. If the starting value is 20 degrees and the user value is 5 degrees, then the resulting value is 25 degrees.</modeler_description>
+  <arguments/>
+  <outputs/>
+  <provenances/>
+  <tags>
+    <tag>Envelope.Form</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Measure Function</name>
+      <value>Measure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Requires EnergyPlus Results</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+    <attribute>
+      <name>Uses SketchUp API</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.4.0</identifier>
+        <min_compatible>2.9.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>862382F2</checksum>
+    </file>
+    <file>
+      <filename>non_applicable_version_openstudio_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>13939DDE</checksum>
+    </file>
+  </files>
+</measure>

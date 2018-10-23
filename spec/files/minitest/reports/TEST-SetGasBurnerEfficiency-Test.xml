@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test_suites>
-  <testsuite name="SetGasBurnerEfficiency_Test" filepath="spec/test_measures/SetGasBurnerEfficiency/tests/SetGasBurnerEfficiency_Test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="46" time="21.582151000000003">
-    <testcase name="test_SetGasBurnerEfficiency_all_loop" lineno="95" classname="SetGasBurnerEfficiency_Test" assertions="23" time="10.34336">
+  <testsuite name="SetGasBurnerEfficiency_Test" filepath="spec/test_measures/SetGasBurnerEfficiency/tests/SetGasBurnerEfficiency_Test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="46" time="9.843982">
+    <testcase name="test_SetGasBurnerEfficiency_all_loop" lineno="95" classname="SetGasBurnerEfficiency_Test" assertions="23" time="4.850707">
     </testcase>
-    <testcase name="test_SetGasBurnerEfficiency_single_loop" lineno="9" classname="SetGasBurnerEfficiency_Test" assertions="23" time="11.238791">
+    <testcase name="test_SetGasBurnerEfficiency_single_loop" lineno="9" classname="SetGasBurnerEfficiency_Test" assertions="23" time="4.993275">
     </testcase>
   </testsuite>
 </test_suites>

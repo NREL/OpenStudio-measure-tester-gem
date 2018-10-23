@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test_suites>
-  <testsuite name="ReportingMeasureNameTest" filepath="spec/test_measures/ReportingMeasure/tests/reporting_measure_test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="14" time="37.091894">
-    <testcase name="test_good_argument_values" lineno="95" classname="ReportingMeasureNameTest" assertions="13" time="37.091852">
+  <testsuite name="ReportingMeasureNameTest" filepath="spec/test_measures/ReportingMeasure/tests/reporting_measure_test.rb" skipped="0" failures="0" errors="0" tests="2" assertions="14" time="19.088477">
+    <testcase name="test_good_argument_values" lineno="95" classname="ReportingMeasureNameTest" assertions="13" time="19.058712">
     </testcase>
-    <testcase name="test_number_of_arguments_and_argument_names" lineno="86" classname="ReportingMeasureNameTest" assertions="1" time="4.2e-05">
+    <testcase name="test_number_of_arguments_and_argument_names" lineno="86" classname="ReportingMeasureNameTest" assertions="1" time="0.029765">
     </testcase>
   </testsuite>
 </test_suites>

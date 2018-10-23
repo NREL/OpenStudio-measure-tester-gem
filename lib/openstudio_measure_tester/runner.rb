@@ -79,7 +79,7 @@ module OpenStudioMeasureTester
     #
     # @param original_results_directory [string] Location of the results from coverag and minitest
     def post_process_results(original_results_directory = nil)
-      puts " ========================= Starting Results Post Process ================================"
+      puts ' ========================= Starting Results Post Process ================================'
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
@@ -109,7 +109,7 @@ module OpenStudioMeasureTester
     end
 
     def run_style(skip_post_process)
-      puts " ========================= Starting Run for OpenStudio Style ================================"
+      puts ' ========================= Starting Run for OpenStudio Style ================================'
       pre_process_style
 
       # Run the style tests
@@ -124,7 +124,7 @@ module OpenStudioMeasureTester
     end
 
     def run_rubocop(skip_post_process, auto_correct = false)
-      puts " ========================= Starting Run for Rubocop ================================"
+      puts ' ========================= Starting Run for Rubocop ================================'
       pre_process_rubocop
 
       rubocop_results_file = "#{test_results_dir}/rubocop/rubocop-results.xml"
@@ -159,7 +159,7 @@ module OpenStudioMeasureTester
 
     # The results of the coverage and minitest are stored in the root of the directory structure (if Rake)
     def run_test(skip_post_process, original_results_directory, run_coverage = true)
-      puts " ========================= Starting Run for Minitest (and coverage) ============================"
+      puts ' ========================= Starting Run for Minitest (and coverage) ============================'
       # not sure what @base_dir has to be right now
       pre_process_minitest(original_results_directory)
 
@@ -194,10 +194,76 @@ module OpenStudioMeasureTester
       end
 
       num_tests = 0
+      openstudio_version = OpenStudio::VersionString.new(OpenStudio.openStudioVersion)
       Dir["#{@base_dir}/**/*_Test.rb", "#{@base_dir}/**/*_test.rb"].uniq.each do |file|
-        puts "Loading file for testing: #{file}"
-        load File.expand_path(file)
-        num_tests += 1
+      
+        begin
+          file = File.expand_path(file)
+          measure_dir = File.expand_path(File.join(File.dirname(file), '..'))
+
+          # check measure xml
+          compatible = {
+            compatible: true,
+            message: '',
+            openstudio_version: openstudio_version.str,
+            measure_min_version: 'None',
+            measure_max_version: 'None', 
+            loaded: false,
+            load_errors: []
+          }
+          begin
+            measure = OpenStudio::BCLMeasure.new(measure_dir)
+            compatible[:measure_name] = measure.className
+            measure.files.each do |f|
+              if f.fileName == 'measure.rb'
+                if !f.minCompatibleVersion.empty?
+                  min_version = f.minCompatibleVersion.get
+                  compatible[:measure_min_version] = min_version.str
+                  if openstudio_version < min_version
+                    compatible[:compatible] = false
+                    compatible[:message] = "OpenStudio Version #{openstudio_version.str} < Min Version #{min_version.str}"
+                  end
+                end
+                if !f.maxCompatibleVersion.empty?
+                  max_version = f.maxCompatibleVersion.get
+                  compatible[:measure_max_version] = max_version.str
+                  if openstudio_version > max_version
+                    compatible[:compatible] = false
+                    compatible[:message] = "OpenStudio Version #{openstudio_version.str} > Max Version #{max_version.str}"
+                  end
+                end
+              end
+            end
+          rescue StandardError => exception
+            compatible[:compatible] = false
+            compatible[:message] = exception.message
+          end
+
+          if !compatible[:compatible]
+            puts "Measure not compatible: #{measure_dir}, #{compatible[:message]}"
+            next
+          end
+
+          # load test
+          puts "Loading file for testing: #{file}"
+          begin
+            load file
+            compatible[:loaded] = true
+            num_tests += 1
+          rescue StandardError, LoadError => exception
+            compatible[:load_errors] << exception.message
+          end
+          
+        ensure
+          # Write out the compatibility
+          # write out to a file that the measure is not applicable
+          os_compatible_file = "#{@base_dir}/test_results/minitest/compatibility/#{File.basename(file, '.rb')}.json"
+          puts os_compatible_file
+          FileUtils.mkdir_p File.dirname(os_compatible_file) unless Dir.exists? File.dirname(os_compatible_file)
+          File.open(os_compatible_file, 'w') do |f|
+            f << JSON.pretty_generate(compatible)
+          end
+        end
       end
 
       if num_tests < 1
