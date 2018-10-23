@@ -6,12 +6,20 @@
   "total_failures": 1,
   "total_skipped": 1,
   "total_compatibility_errors": 1,
+  "total_loaded": null,
+  "total_load_errors": [
+
+  ],
   "by_measure": {
     "AddOverhangsByProjectionFactor": {
       "tested_class": "AddOverhangsByProjectionFactor",
       "openstudio_version": "2.5.1",
       "measure_min_version": "0.10.2",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 5,
       "measure_assertions": 39,
@@ -36,6 +44,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "1.3.4",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 4,
       "measure_assertions": 13,
@@ -60,6 +72,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "2.4.1",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 3,
       "measure_assertions": 12,
@@ -84,6 +100,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "2.4.1",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 3,
       "measure_assertions": 10,
@@ -108,6 +128,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "2.9.0",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 1,
       "measure_tests": 0,
       "measure_assertions": 0,
@@ -132,6 +156,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "2.4.1",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 2,
       "measure_assertions": 14,
@@ -156,6 +184,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "1.3.0",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 2,
       "measure_assertions": 10,
@@ -180,6 +212,10 @@
       "openstudio_version": "2.5.1",
       "measure_min_version": "0.10.2",
       "measure_max_version": null,
+      "loaded": null,
+      "load_errors": [
+
+      ],
       "measure_compatibility_errors": 0,
       "measure_tests": 2,
       "measure_assertions": 46,
