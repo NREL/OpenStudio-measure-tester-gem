@@ -29,10 +29,15 @@
 require 'openstudio'
 
 require 'pp'
-require 'git'
 require 'rexml/document'
 require 'minitest'
 require 'simplecov'
+
+begin
+require 'git'
+rescue LoadError => error
+  puts 'Could not load git, will not be able to report git information'
+end
 
 # override the default at_exit call
 SimpleCov.at_exit do
