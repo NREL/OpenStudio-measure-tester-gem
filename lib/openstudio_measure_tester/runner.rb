@@ -257,7 +257,7 @@ module OpenStudioMeasureTester
         ensure
           # Write out the compatibility
           # write out to a file that the measure is not applicable
-          os_compatible_file = "#{@base_dir}/test_results/minitest/compatibility/#{File.basename(file, '.rb')}.json"
+          os_compatible_file = "#{@base_dir}/test_results/minitest/compatibility/#{compatible[:measure_name]}.json"
           puts os_compatible_file
           FileUtils.mkdir_p File.dirname(os_compatible_file) unless Dir.exists? File.dirname(os_compatible_file)
           File.open(os_compatible_file, 'w') do |f|
