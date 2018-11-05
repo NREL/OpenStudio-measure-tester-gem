@@ -1,3 +1,8 @@
+# Version 0.1.6
+
+* Do not require git to run
+* Change name of compatibility JSON to the measure name (instead of file name)
+
 # Version 0.1.5
 
 * Run Minitest in foreground
