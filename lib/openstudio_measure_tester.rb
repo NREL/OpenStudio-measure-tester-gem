@@ -76,6 +76,6 @@ class Minitest::Test
     after = ObjectSpace.count_objects
     delta = {}
     before.each { |k, v| delta[k] = v - after[k] if after.key? k }
-    puts "GC Delta: #{delta}"
+    # puts "GC Delta: #{delta}"
   end
 end
