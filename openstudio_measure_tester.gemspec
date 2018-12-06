@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   if /^2\.2/.match(RUBY_VERSION)
     spec.add_dependency 'rubocop', '0.54.0'
   elsif /^2\.0/.match(RUBY_VERSION)
-    spec.add_dependency 'nokogiri', '1.6.8' 
     spec.add_dependency 'rainbow', '2.2.2' 
     spec.add_dependency 'rubocop', '0.50.0'
   end
