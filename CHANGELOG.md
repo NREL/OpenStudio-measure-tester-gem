@@ -1,3 +1,7 @@
+# Version 0.1.7
+
+* Support running measure tester in the directory of the measure.rb with OpenStudio CLI (e.g. `openstudio measure -r .`)
+
 # Version 0.1.6
 
 * Do not require git to run
