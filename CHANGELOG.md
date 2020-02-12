@@ -3,6 +3,7 @@
 * Remove support for Ruby 2.2.4 (Use 2.5.5)
 * Remove NREL's fork of simplecov
 * Update copyrights
+* Remove travis and leverage NREL's Jenkins CI
 
 # Version 0.1.7
 
