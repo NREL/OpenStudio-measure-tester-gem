@@ -1,12 +1,12 @@
 sudo: true
 language: ruby
 rvm:
-  - 2.2.4
+  - 2.5.5
 matrix:
   include:
-  - env: OPENSTUDIO_VERSION=2.4.0 && OPENSTUDIO_SHA=f58a3e1808 && RUBYLIB=/usr/Ruby
-  - env: OPENSTUDIO_VERSION=2.5.1 && OPENSTUDIO_SHA=4f268e2854 && RUBYLIB=/usr/Ruby
-before_install: gem install bundler -v 1.16.2
+#  - env: OPENSTUDIO_VERSION=2.4.0 && OPENSTUDIO_SHA=f58a3e1808 && RUBYLIB=/usr/Ruby
+  - env: OPENSTUDIO_VERSION=3.0.0 && OPENSTUDIO_SHA=pre1 && RUBYLIB=/usr/Ruby
+before_install: gem install bundler -v 2.1.4
 before_script:
   - curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
   - chmod +x install_openstudio.sh
