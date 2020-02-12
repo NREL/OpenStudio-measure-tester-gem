@@ -1,7 +1,8 @@
 # Version 0.2.0 (Unreleased)
 
-* Remove support for Ruby 2.2.4
+* Remove support for Ruby 2.2.4 (Use 2.5.5)
 * Remove NREL's fork of simplecov
+* Update copyrights
 
 # Version 0.1.7
 
