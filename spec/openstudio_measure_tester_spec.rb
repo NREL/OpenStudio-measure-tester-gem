@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
-#  OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC. All rights reserved.
+#  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
 #  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 #  following conditions are met:
@@ -41,13 +43,11 @@ RSpec.describe OpenStudioMeasureTester do
   end
 
   it 'should load openstudio' do
-    begin
-      require 'openstudio'
-      puts "OpenStudio Loaded. Version: #{OpenStudio.openStudioLongVersion}"
-    rescue LoadError
-      puts 'Could not load OpenStudio'
-      expect(false).to eq true
-    end
+    require 'openstudio'
+    puts "OpenStudio Loaded. Version: #{OpenStudio.openStudioLongVersion}"
+  rescue LoadError
+    puts 'Could not load OpenStudio'
+    expect(false).to eq true
   end
 
   context 'Measure tests in non-root directory' do

@@ -1,3 +1,14 @@
+# Version 0.2.0
+
+* Remove support for Ruby 2.2.4. Use Ruby 2.5.5.
+* Remove NREL's fork of simplecov
+* Update copyrights
+* Remove travis and leverage NREL's Jenkins CI
+
+# Version 0.1.7
+
+* Support running measure tester in the directory of the measure.rb with OpenStudio CLI (e.g. `openstudio measure -r .`)
+
 # Version 0.1.6
 
 * Do not require git to run

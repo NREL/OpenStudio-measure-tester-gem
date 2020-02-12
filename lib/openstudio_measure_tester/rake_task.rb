@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
-#  OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC. All rights reserved.
+#  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
 #  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 #  following conditions are met:
@@ -69,7 +71,7 @@ module OpenStudioMeasureTester
           desc 'Run RuboCop Auto Correct on Measures'
           task :auto_correct do
             # original_dir is the location where Rakefile exists, Dir.pwd is where the rake task was called.
-            runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir, Dir.pwd)
+            runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
 
             exit runner.run_rubocop(false, true)
           end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
-#  OpenStudio(R), Copyright (c) 2008-2018, Alliance for Sustainable Energy, LLC. All rights reserved.
+#  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
 #  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 #  following conditions are met:
@@ -65,7 +67,7 @@ module OpenStudioMeasureTester
     end
 
     def parse_results
-      Dir["#{@path_to_results}/rubocop-results.xml"].each do |file|
+      Dir[File.join(@path_to_results, 'rubocop-results.xml')].each do |file|
         puts "Parsing Rubocop report #{file}"
 
         measure_names = []
@@ -76,13 +78,22 @@ module OpenStudioMeasureTester
         puts "Finished reading #{file}"
 
         # Go through the XML and find all the measure names first
-        doc.elements.each('file') do |rc_file|
+        doc.elements.each('//checkstyle/file') do |rc_file|
           @total_files += 1
           measure_name = rc_file.attributes['name']
           if measure_name
-            parts = measure_name.split('/')
-            if parts.last == 'measure.rb'
-              measure_names << parts[-2]
+            # If the user runs the tests from within the directory (where the measure.rb) file exists, then the
+            # measure name is not included in the XML. Therefore, the measure_name will need to be abstracted by
+            # the name of the directory relative to where the test_results are.
+            if measure_name.include? File::SEPARATOR
+              parts = measure_name.split(File::SEPARATOR)
+              if parts.last == 'measure.rb'
+                measure_names << parts[-2]
+              end
+            elsif measure_name == 'measure.rb'
+              # the measure name must be extracted from the directory
+              parts = file.split(File::SEPARATOR)
+              measure_names << parts[-4]
             end
           end
         end
@@ -99,12 +110,21 @@ module OpenStudioMeasureTester
           mhash['files'] = []
 
           cn = ''
-          doc.elements.each('file') do |rc_file|
-            next unless rc_file.attributes['name'].include? measure_name
+          doc.elements.each('//checkstyle/file') do |rc_file|
+            # Allow processing when the file is just the measure.rb
+            if rc_file.attributes['name'] != 'measure.rb'
+              if !rc_file.attributes['name'].include? measure_name
+                next
+              end
+            end
 
             # Save off the file information
             fhash = {}
-            fhash['file_name'] = rc_file.attributes['name'].split('/')[-1]
+            if rc_file.attributes['name'].include? File::SEPARATOR
+              fhash['file_name'] = rc_file.attributes['name'].split(File::SEPARATOR)[-1]
+            else
+              fhash['file_name'] = rc_file.attributes['name']
+            end
             fhash['violations'] = []
 
             # get the class name out of the measure file! wow, okay... sure why not.
