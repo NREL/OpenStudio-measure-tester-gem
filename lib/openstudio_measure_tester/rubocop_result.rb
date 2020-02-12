@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
 #  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
@@ -65,7 +67,7 @@ module OpenStudioMeasureTester
     end
 
     def parse_results
-      Dir[File.join(@path_to_results,'rubocop-results.xml')].each do |file|
+      Dir[File.join(@path_to_results, 'rubocop-results.xml')].each do |file|
         puts "Parsing Rubocop report #{file}"
 
         measure_names = []

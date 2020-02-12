@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
 #  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
@@ -87,10 +89,10 @@ module OpenStudioMeasureTester
         mhash[:measure_failures] = 0
         mhash[:measure_skipped] = 0
         mhash[:issues] = {
-            errors: [],
-            failures: [],
-            skipped: [],
-            compatibility_error: json_data[:compatible] ? 0 : 1
+          errors: [],
+          failures: [],
+          skipped: [],
+          compatibility_error: json_data[:compatible] ? 0 : 1
         }
 
         # find the report XML - if it exists
@@ -127,7 +129,7 @@ module OpenStudioMeasureTester
         @total_failures += mhash[:measure_failures]
         @total_skipped += mhash[:measure_skipped]
         @total_compatibility_errors += mhash[:measure_compatibility_errors]
-        @total_loaded = @total_loaded && mhash[:loaded]
+        @total_loaded &&= mhash[:loaded]
         @total_load_errors.concat(mhash[:load_errors])
       end
 
@@ -147,7 +149,7 @@ module OpenStudioMeasureTester
       @summary[:total_loaded] = @total_loaded
       @summary[:total_load_errors] = @total_load_errors
       @summary[:by_measure] = @measure_results
-      
+
       # pp @summary
 
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"

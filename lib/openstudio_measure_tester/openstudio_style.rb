@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ########################################################################################################################
 #  OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC. All rights reserved.
 #
@@ -236,7 +238,7 @@ module OpenStudioMeasureTester
     def run_regex_checks(measure_dir)
       def check(data, check)
         if check[:check_type] == :if_exists
-          if data =~ check[:regex]
+          if data.match?(check[:regex])
             log_message(check[:message], check[:type], check[:severity])
           end
         elsif check[:check_type] == :if_missing
@@ -273,11 +275,11 @@ module OpenStudioMeasureTester
       clean_name = name
 
       # Check for parenthetical names
-      if clean_name =~ /\(.+?\)/
+      if clean_name.match?(/\(.+?\)/)
         log_message("#{name_type} '#{name}' appears to have units. Set units in the setUnits method.", severity)
       end
 
-      if clean_name =~ /\?|\.|\#/
+      if clean_name.match?(/\?|\.|\#/)
         log_message("#{name_type} '#{name}' cannot contain ?#.[] characters.", :syntax, severity)
       end
 
