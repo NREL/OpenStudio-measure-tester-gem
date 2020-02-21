@@ -1,6 +1,10 @@
+# Version 0.2.1 (Unreleased)
+
+* Update to SimpleCov 0.18.2
+
 # Version 0.2.0
 
-* Remove support for Ruby 2.2.4. Use Ruby 2.5.5.
+* Remove support for Ruby 2.2.4. Use Ruby ~> 2.5.x
 * Remove NREL's fork of simplecov
 * Update copyrights
 * Remove travis and leverage NREL's Jenkins CI
