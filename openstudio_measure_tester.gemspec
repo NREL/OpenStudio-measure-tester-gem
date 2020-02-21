@@ -29,19 +29,11 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.5.0'
 
-  if /^2\.5/.match?(RUBY_VERSION)
-    spec.add_dependency 'rubocop', '0.54.0'
-  elsif /^2\.2/.match?(RUBY_VERSION)
-    spec.add_dependency 'rubocop', '0.54.0'
-  elsif /^2\.0/.match?(RUBY_VERSION)
-    spec.add_dependency 'rainbow', '2.2.2'
-    spec.add_dependency 'rubocop', '0.50.0'
-  end
-
   spec.add_dependency 'git', '1.6.0'
   spec.add_dependency 'minitest', '5.4.3'
   spec.add_dependency 'minitest-reporters', '1.2.0'
   spec.add_dependency 'rake', '12.3.1'
+  spec.add_dependency 'rubocop', '0.54.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '0.4'
   spec.add_dependency 'simplecov', '0.18.2'
 
