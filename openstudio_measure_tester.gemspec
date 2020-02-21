@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'openstudio_measure_tester/version'
@@ -12,10 +14,10 @@ Gem::Specification.new do |spec|
   spec.summary = 'Testing framework for OpenStudio measures'
   spec.description = 'Testing framework for OpenStudio measures'
   spec.metadata = {
-      'bug_tracker_uri' => 'https://github.com/NREL/OpenStudio-measure-tester-gem/issues',
-      'changelog_uri' => 'https://github.com/NREL/OpenStudio-measure-tester-gem/blob/develop/CHANGELOG.md',
-      #'documentation_uri' =>  'https://www.rubydoc.info/gems/openstudio_measure_tester/#{gem.version}',
-      'source_code_uri' => "https://github.com/NREL/OpenStudio-measure-tester-gem/tree/v#{spec.version}"
+    'bug_tracker_uri' => 'https://github.com/NREL/OpenStudio-measure-tester-gem/issues',
+    'changelog_uri' => 'https://github.com/NREL/OpenStudio-measure-tester-gem/blob/develop/CHANGELOG.md',
+    # 'documentation_uri' =>  'https://www.rubydoc.info/gems/openstudio_measure_tester/#{gem.version}',
+    'source_code_uri' => "https://github.com/NREL/OpenStudio-measure-tester-gem/tree/v#{spec.version}"
   }
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
@@ -27,11 +29,11 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.5.0'
 
-  if /^2\.5/.match(RUBY_VERSION)
+  if /^2\.5/.match?(RUBY_VERSION)
     spec.add_dependency 'rubocop', '0.54.0'
-  elsif /^2\.2/.match(RUBY_VERSION)
+  elsif /^2\.2/.match?(RUBY_VERSION)
     spec.add_dependency 'rubocop', '0.54.0'
-  elsif /^2\.0/.match(RUBY_VERSION)
+  elsif /^2\.0/.match?(RUBY_VERSION)
     spec.add_dependency 'rainbow', '2.2.2'
     spec.add_dependency 'rubocop', '0.50.0'
   end
