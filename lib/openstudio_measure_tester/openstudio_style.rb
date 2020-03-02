@@ -242,7 +242,7 @@ module OpenStudioMeasureTester
             log_message(check[:message], check[:type], check[:severity])
           end
         elsif check[:check_type] == :if_missing
-          if data !~ check[:regex]
+          if !data&.match?(check[:regex])
             log_message(check[:message], check[:type], check[:severity])
           end
         end
