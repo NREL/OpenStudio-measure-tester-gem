@@ -1,8 +1,8 @@
-# Version 0.2.1 (Unreleased)
+# Version 0.2.1
 
 * Update to SimpleCov 0.18.2
-* Update other dependencies
-
+* Pessimistically version dependencies
+  
 # Version 0.2.0
 
 * Remove support for Ruby 2.2.4. Use Ruby ~> 2.5.x
