@@ -98,7 +98,7 @@ module OpenStudioMeasureTester
         severity: :warning,
         file_type: :test
       }, {
-        regex: /require .openstudio\/ruleset  /,
+        regex: %r{require .openstudio/ruleset  },
         check_type: :if_exists,
         message: "Require openstudio/ruleset/* is deprecated. Use require 'openstudio/measure/*'",
         type: :syntax,
@@ -168,10 +168,10 @@ module OpenStudioMeasureTester
           begin
             # there seems to be a race condition with the infoExtractor method
             measure_info = infoExtractor(measure, OpenStudio::Model::OptionalModel.new, OpenStudio::OptionalWorkspace.new)
-          rescue NameError => error
-            log_message("Unable to parse info from measure. Error: '#{error}'", :general, :error)
-          rescue StandardError => error
-            log_message("Unknown error extracting measure info. Error #{error}", :general, :error)
+          rescue NameError => e
+            log_message("Unable to parse info from measure. Error: '#{e}'", :general, :error)
+          rescue StandardError => e
+            log_message("Unknown error extracting measure info. Error #{e}", :general, :error)
           end
 
           measure_hash = generate_measure_hash(measure_dir, measure, measure_info)
