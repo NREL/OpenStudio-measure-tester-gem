@@ -37,7 +37,7 @@ require 'simplecov'
 
 begin
   require 'git'
-rescue LoadError => error
+rescue LoadError => e
   puts 'Could not load git, will not be able to report git information'
 end
 

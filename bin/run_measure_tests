@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'openstudio_measure_tester'
 
@@ -12,11 +13,11 @@ end
 begin
   runner = OpenStudioMeasureTester::Runner.new(measure_dir)
   runner.run_all(Dir.pwd)
-rescue StandardError => exception
+rescue StandardError => e
   puts
   puts '!!!!!!!!!!!!!!!!!!!!! Error Occurred !!!!!!!!!!!!!!!!!!!!!'
-  puts exception.message
-  puts exception.backtrace
+  puts e.message
+  puts e.backtrace
   puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
   puts
 end

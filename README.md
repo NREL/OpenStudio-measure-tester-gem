@@ -1,6 +1,5 @@
 # OpenStudio® Measure Tester
 
-[![Build Status](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem.svg?branch=develop)](https://travis-ci.org/NREL/OpenStudio-measure-tester-gem)
 [![Gem Version](https://badge.fury.io/rb/openstudio_measure_tester.svg)](https://badge.fury.io/rb/openstudio_measure_tester)
 
 The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing OpenStudio measures.
@@ -71,14 +70,13 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
 # Testing in Docker
 
 ```bash
-
 apt-get update && apt-get install -y curl
 curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_ruby.sh
 curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
 chmod +x install_ruby.sh
 chmod +x install_openstudio.sh
-./install_ruby.sh 2.2.4 b6eff568b48e0fda76e5a36333175df049b204e91217aa32a65153cc0cdcb761
-./install_openstudio.sh 2.4.0 f58a3e1808
+./install_ruby.sh 2.5.5 28a945fdf340e6ba04fc890b98648342e3cccfd6d223a48f3810572f11b2514c
+./install_openstudio.sh 3.0.0 <tdb>
 export RUBYLIB=/usr/Ruby
 ```
 

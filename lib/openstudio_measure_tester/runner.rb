@@ -234,9 +234,9 @@ module OpenStudioMeasureTester
               end
             end
           end
-        rescue StandardError => exception
+        rescue StandardError => e
           compatible[:compatible] = false
-          compatible[:message] = exception.message
+          compatible[:message] = e.message
         end
 
         if !compatible[:compatible]
@@ -250,8 +250,8 @@ module OpenStudioMeasureTester
           load file
           compatible[:loaded] = true
           num_tests += 1
-        rescue StandardError, LoadError => exception
-          compatible[:load_errors] << exception.message
+        rescue StandardError, LoadError => e
+          compatible[:load_errors] << e.message
         end
 
       ensure
@@ -294,11 +294,11 @@ module OpenStudioMeasureTester
       # openstudio_measure_tester.rb file, so it will not run.
       begin
         Minitest.run ['--verbose']
-      rescue StandardError => exception
+      rescue StandardError => e
         puts
         puts '!!!!!!!!!!!!!!!!!!!!! Minitest Error Occurred !!!!!!!!!!!!!!!!!!!!!'
-        puts exception.message
-        puts exception.backtrace
+        puts e.message
+        puts e.backtrace
         puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
         puts
       end
