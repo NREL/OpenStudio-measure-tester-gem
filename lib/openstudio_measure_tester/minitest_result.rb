@@ -67,7 +67,7 @@ module OpenStudioMeasureTester
         json_data = JSON.parse(File.read(file), symbolize_names: true)
 
         # Test if the measure has already been parse, if so, then continue
-        next if @measure_results.keys.include? json_data[:measure_name]
+        next if @measure_results.key?(json_data[:measure_name])
 
         mhash = {}
         mhash[:tested_class] = json_data[:measure_name]
