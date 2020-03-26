@@ -1,6 +1,7 @@
 # Version 0.2.1 (Unreleased)
 
 * Update to SimpleCov 0.18.2
+* Update other dependencies
 
 # Version 0.2.0
 
