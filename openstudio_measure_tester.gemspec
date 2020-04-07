@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'minitest', '~> 5.14.0'
   spec.add_dependency 'minitest-reporters', '~> 1.4.2'
   spec.add_dependency 'rake', '~> 13.0'
-  spec.add_dependency 'rubocop', '~> 0.80.1'
+  spec.add_dependency 'rubocop', '~> 0.54.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '~> 0.4.0'
   spec.add_dependency 'simplecov', '~> 0.18.2'
 
