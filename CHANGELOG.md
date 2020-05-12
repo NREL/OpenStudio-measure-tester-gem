@@ -1,3 +1,7 @@
+# Version 0.2.X (Unreleased)
+
+* Use updated rubocop style (v3)
+
 # Version 0.2.2
 
 * Revert to using Rubocop 0.54 to support non-native gems in OpenStudio CLI.
