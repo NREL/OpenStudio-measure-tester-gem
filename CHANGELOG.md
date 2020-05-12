@@ -1,6 +1,7 @@
-# Version 0.2.X (Unreleased)
+# Version 0.2.3
 
 * Use updated rubocop style (v3)
+* Update instructions on running tests in Docker.
 
 # Version 0.2.2
 

@@ -70,16 +70,22 @@ The OpenStudio Measure Tester is a rubygem that exposes rake tasks for testing O
 # Testing in Docker
 
 ```bash
+docker run -it -v $(pwd):/root/test -w '/root' ubuntu:18.04 bash
+
+# within container
 apt-get update && apt-get install -y curl
 curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_ruby.sh
-curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/docker/deployment/scripts/install_openstudio.sh
+curl -sLO https://raw.githubusercontent.com/NREL/OpenStudio-server/develop/ci/travis/install_openstudio.sh
 chmod +x install_ruby.sh
 chmod +x install_openstudio.sh
 ./install_ruby.sh 2.5.5 28a945fdf340e6ba04fc890b98648342e3cccfd6d223a48f3810572f11b2514c
-./install_openstudio.sh 3.0.0 <tdb>
+./install_openstudio.sh 3.0.0 1c9617fa4e
 export RUBYLIB=/usr/Ruby
-```
 
+cd /root/test
+bundle update
+bundle exec rake
+```
 
 # Releasing
 
