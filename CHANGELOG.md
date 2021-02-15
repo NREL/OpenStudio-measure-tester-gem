@@ -1,3 +1,7 @@
+# Version 0.3.0
+
+* Upgrade to Ruby 2.7.0
+
 # Version 0.2.3
 
 * Use updated rubocop style (v3)
