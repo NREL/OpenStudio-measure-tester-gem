@@ -17,7 +17,7 @@ module OpenStudioMeasureTester
     end
 
     def render
-      rendered = ERB.new(@template, 0, '', '@html').result(binding)
+      rendered = ERB.new(@template, 0, nil, '@html').result(binding)
       save_dir = "#{@test_results_directory}/dashboard"
 
       # Render the dashboard
