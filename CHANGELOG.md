@@ -1,4 +1,4 @@
-# Version 0.3.0
+# Version 0.3.0 (Unreleased)
 
 * Upgrade to Ruby 2.7.0
 
