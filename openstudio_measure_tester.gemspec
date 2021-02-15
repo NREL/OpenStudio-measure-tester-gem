@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '~> 2.5.0'
+  spec.required_ruby_version = '~> 2.7.0'
 
   spec.add_dependency 'git', '~> 1.6.0'
   spec.add_dependency 'minitest', '~> 5.14.0'
@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop-checkstyle_formatter', '~> 0.4.0'
   spec.add_dependency 'simplecov', '~> 0.18.2'
 
-  spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'bundler', '>= 2.1.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
 end
