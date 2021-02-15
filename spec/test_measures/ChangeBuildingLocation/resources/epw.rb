@@ -57,7 +57,7 @@ module OpenStudio
       end
 
       def self.load(filename)
-        fail "EPW file does not exist: #{filename}" unless File.exist?(filename)
+        raise "EPW file does not exist: #{filename}" unless File.exist?(filename)
         f = OpenStudio::Weather::Epw.new(filename)
       end
 
@@ -66,7 +66,7 @@ module OpenStudio
           xml_builder_obj.name @city
           xml_builder_obj.visibility '0'
           xml_builder_obj.description do
-            xml_builder_obj.cdata!("<img src=\"kml/ep_header8.png\" width=180 align=right><br><table><tr><td colspan=\"2\">"\
+            xml_builder_obj.cdata!('<img src="kml/ep_header8.png" width=180 align=right><br><table><tr><td colspan="2">'\
                            "<b>#{@city}</b></href></td></tr>\n" +
                                        # "<tr><td></td><td><b>Data Type</td></tr>\n"+
                                        "<tr><td></td><td>WMO <b>#{@wmo}</b></td></tr>\n" +
@@ -97,8 +97,8 @@ module OpenStudio
         CSV.open(filename, 'wb') do |csv|
           @header_data.each { |r| csv << r }
           csv << [
-              'DATA PERIODS', @data_period[:count], @data_period[:records_per_hour], @data_period[:name],
-              @data_period[:start_day_of_week], @data_period[:start_date], @data_period[:end_date]
+            'DATA PERIODS', @data_period[:count], @data_period[:records_per_hour], @data_period[:name],
+            @data_period[:start_day_of_week], @data_period[:start_date], @data_period[:end_date]
           ]
           @weather_data.each { |r| csv << r }
         end
@@ -122,14 +122,14 @@ module OpenStudio
 
       def metadata_to_hash
         {
-            city: @city,
-            state: @state,
-            country: @country,
-            data_type: @data_type,
-            wmo: @wmo,
-            latitude: @lat,
-            longitude: @lon,
-            elevation: @elevation
+          city: @city,
+          state: @state,
+          country: @country,
+          data_type: @data_type,
+          wmo: @wmo,
+          latitude: @lat,
+          longitude: @lon,
+          elevation: @elevation
         }
       end
 
@@ -146,12 +146,12 @@ module OpenStudio
           if header_section
             if row[0] =~ /data.periods/i
               @data_period = {
-                  count: row[1].to_i,
-                  records_per_hour: row[2].to_i,
-                  name: row[3],
-                  start_day_of_week: row[4],
-                  start_date: row[5],
-                  end_date: row[6]
+                count: row[1].to_i,
+                records_per_hour: row[2].to_i,
+                name: row[3],
+                start_day_of_week: row[4],
+                start_date: row[5],
+                end_date: row[6]
               }
 
               header_section = false

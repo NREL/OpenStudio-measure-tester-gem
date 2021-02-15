@@ -55,12 +55,12 @@ module EnergyPlus
 
     # the mean of the mean monthly dry bulbs
     def mean_dry_bulb
-      if not @monthly_dry_bulb.empty? then
+      if !@monthly_dry_bulb.empty?
         sum = 0
         @monthly_dry_bulb.each { |db| sum += db }
-        mean = sum/@monthly_dry_bulb.size
+        mean = sum / @monthly_dry_bulb.size
       else
-        mean = ""
+        mean = ''
       end
 
       mean.to_f
@@ -68,10 +68,10 @@ module EnergyPlus
 
     # max - min of the mean monthly dry bulbs
     def delta_dry_bulb
-      if not @monthly_dry_bulb.empty? then
-        delta_t = @monthly_dry_bulb.max-@monthly_dry_bulb.min
+      if !@monthly_dry_bulb.empty?
+        delta_t = @monthly_dry_bulb.max - @monthly_dry_bulb.min
       else
-        delta_t = ""
+        delta_t = ''
       end
 
       delta_t.to_f
@@ -83,7 +83,7 @@ module EnergyPlus
     def init
       if @path.exist?
         File.open(@path) do |f|
-          text = f.read.force_encoding("iso-8859-1")
+          text = f.read.force_encoding('iso-8859-1')
           parse(text)
         end
       end
@@ -98,12 +98,12 @@ module EnergyPlus
         return
       else
 
-        @lat = match_data[2].to_f + (match_data[3].to_f)/60.0
+        @lat = match_data[2].to_f + match_data[3].to_f / 60.0
         if match_data[1] == 'S'
           @lat = -@lat
         end
 
-        @lon = match_data[5].to_f + (match_data[6].to_f)/60.0
+        @lon = match_data[5].to_f + match_data[6].to_f / 60.0
         if match_data[4] == 'W'
           @lon = -@lon
         end
@@ -161,8 +161,7 @@ module EnergyPlus
         @hdd18 = match_data[1].to_f
       end
 
-
-      #use regex to get the temperatures
+      # use regex to get the temperatures
       regex = /Daily Avg(.*)\n/
       match_data = text.match(regex)
       if match_data.nil?
@@ -185,6 +184,5 @@ module EnergyPlus
       # now we are valid
       @valid = true
     end
-
   end
 end
