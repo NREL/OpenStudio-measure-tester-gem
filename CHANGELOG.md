@@ -1,3 +1,8 @@
+# Version 0.3.1
+
+* Upgrade to new version of rubocop, 1.15.0
+* Use new Rubocop OpenStudio rules from S3 (version 4)
+
 # Version 0.3.0
 
 * Upgrade to Ruby 2.7.0
