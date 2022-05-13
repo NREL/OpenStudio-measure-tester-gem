@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '~> 2.7.0'
 
-  spec.add_dependency 'git', '~> 1.8.1'
+  spec.add_dependency 'git', '~> 1.11.0'
   spec.add_dependency 'minitest', '~> 5.14.0'
   spec.add_dependency 'minitest-reporters', '~> 1.4.2'
   spec.add_dependency 'rake', '~> 13.0'
