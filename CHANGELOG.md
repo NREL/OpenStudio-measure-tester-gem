@@ -1,3 +1,7 @@
+# Version 0.3.3
+
+* Update license
+
 # Version 0.3.2
  
 * Upgrade to new version of git, 1.12.0
