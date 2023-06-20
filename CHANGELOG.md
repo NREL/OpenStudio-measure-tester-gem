@@ -1,3 +1,8 @@
+# Version 0.3.3
+
+* Update license
+* Fixed [#66] ( [https://github.com/urbanopt/urbanopt-cli/issues/421](https://github.com/NREL/OpenStudio-measure-tester-gem/issues/66) ), Pin parser dependency to avoid native extensions issue
+
 # Version 0.3.2
  
 * Upgrade to new version of git, 1.12.0
