@@ -5,9 +5,6 @@
 # See also https://openstudio.net/license
 # *******************************************************************************
 
-require 'json'
-require 'rexml'
-
 module OpenStudioMeasureTester
   class GithubActionsReport
     attr_reader :minitest_summary_table, :all_annotations

@@ -11,6 +11,7 @@ require 'pp'
 require 'rexml/document'
 require 'minitest'
 require 'simplecov'
+require 'json'
 
 begin
   require 'git'
