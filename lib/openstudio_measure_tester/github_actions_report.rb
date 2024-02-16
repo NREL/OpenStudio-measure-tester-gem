@@ -20,7 +20,7 @@ module OpenStudioMeasureTester
 
     def write_step_summary(msg)
       puts msg
-      if !ENV['GITHUB_ACTIONS'].nil?
+      if !ENV['GITHUB_STEP_SUMMARY'].nil?
         File.write(ENV['GITHUB_STEP_SUMMARY'], "#{msg}\n", mode: 'a+')
       end
     end
