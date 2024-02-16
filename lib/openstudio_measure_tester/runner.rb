@@ -32,6 +32,12 @@ module OpenStudioMeasureTester
       template.render
     end
 
+    def github_actions_report
+      gha_reporter = OpenStudioMeasureTester::GithubActionsReport.new(test_results_dir)
+      gha_reporter.make_minitest_step_summary_table
+      gha_reporter.make_minitest_annotations
+    end
+
     # Prepare the current directory and the root directory to remove old test results before running
     # the new tests
     #
@@ -95,6 +101,8 @@ module OpenStudioMeasureTester
 
       # call the create dashboard command now that we have results
       dashboard
+
+      github_actions_report if ENV["GITHUB_ACTIONS"]
 
       # return the results exit code
       return results.exit_code
