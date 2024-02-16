@@ -10,13 +10,15 @@ require 'rexml'
 
 module OpenStudioMeasureTester
   class GithubActionsReport
-    attr_reader :html
+    attr_reader :minitest_summary_table, :all_annotations
 
     # @param test_results_directory [String]: The directory
     def initialize(test_results_directory)
       @test_results_directory = test_results_directory
       file = File.read("#{@test_results_directory}/combined_results.json")
       @hash = JSON.parse(file)
+      @minitest_summary_table = nil
+      @all_annotations = []
     end
 
     def write_step_summary(msg)
@@ -48,7 +50,7 @@ module OpenStudioMeasureTester
       total_failures = @hash['minitest']['total_failures']
       total_skipped = @hash['minitest']['total_skipped']
       total_compatibility_errors = @hash['minitest']['total_compatibility_errors']
-      total_load_errors = @hash['minitest']['total_load_errors'].count
+      total_load_errors = @hash['minitest'].fetch('total_load_errors', []).count
 
       passed = total_tests - (total_failures + total_errors + total_skipped)
       pct = passed.to_f / (total_tests - total_skipped).to_f
@@ -72,6 +74,8 @@ module OpenStudioMeasureTester
     end
 
     def make_minitest_annotations
+      @all_annotations = []
+
       report_xmls = Dir["#{@test_results_directory}/minitest/reports/TEST-*.xml"]
       report_xmls.each do |report_xml|
         doc = REXML::Document.new(File.open(report_xml)).root
@@ -85,20 +89,25 @@ module OpenStudioMeasureTester
           testcase.elements.each('failure') do |x|
             title = x.attributes['type']
             message = x.attributes['message']
-            puts "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{tested_class}.#{test_name}: #{message}"
+            annot = "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{tested_class}.#{test_name}: #{message}"
+            @all_annotations <<  annot
           end
           testcase.elements.each('error') do |x|
             title = x.attributes['type']
             message = x.attributes['message']
-            puts "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
+            annot = "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
+            @all_annotations <<  annot
           end
           testcase.elements.each('skipped') do |x|
             title = x.attributes['type']
             message = x.attributes['message']
-            puts "::warning file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
+            annot = "::warning file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
+            @all_annotations <<  annot
           end
         end
       end
+      @all_annotations.each { |a| puts a}
+      nil
     end
   end
 end
