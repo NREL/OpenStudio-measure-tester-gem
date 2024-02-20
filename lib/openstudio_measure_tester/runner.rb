@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pathname'
+
 # *******************************************************************************
 # OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
 # See also https://openstudio.net/license
@@ -10,13 +12,77 @@ module OpenStudioMeasureTester
   # as a library method or as a CLI call
   class Runner
     # Initialize the runner
-    #
-    # @param base_dir [string] Base dir, measures will be recursively tested from this location. Results will be here too.
-    def initialize(base_dir)
-      @base_dir = base_dir
 
-      puts "Base dir is #{base_dir}"
+    attr_reader :base_dir, :base_dir_path, :run_only_changed_measures, :repo_root
+
+    # @param base_dir [string] Base dir, measures will be recursively tested from this location. Results will be here too.
+    # @param run_only_changed_measures [bool] Default false. If true, will check the changed files
+    #        in the last commit + the current changes to determine which measures to run for
+    def initialize(base_dir, run_only_changed_measures = false)
+      @base_dir = base_dir
+      @base_dir_path = Pathname.new(base_dir)
+      @run_only_changed_measures = run_only_changed_measures
+      @repo_root = locate_git_dir
+
+      puts "Base dir is #{base_dir}, run_only_changed_measures=#{run_only_changed_measures}"
     end
+
+    def all_measure_dirs
+      return @base_dir_path.glob("**/measure.{rb,py}").map(&:dirname)
+    end
+
+    def locate_git_dir
+      repo_root = @base_dir_path.expand_path
+      while !(repo_root / '.git').directory?
+        if repo_root.root?
+          puts "Reached root, did not find a .git folder"
+          return nil
+        end
+        repo_root = repo_root.parent
+      end
+      return repo_root
+    end
+
+    # This only considers changed files under @base_dir
+    def get_git_changed_files
+      g = Git.open(@repo_root)
+      d = g.diff('HEAD^1', 'HEAD')
+      changed_files = d.stats[:files].keys.uniq
+      current_changes = (g.status.changed.keys + g.status.added.keys + g.status.deleted.keys + g.status.untracked.keys).uniq
+      if current_changes
+        puts "Found current changed files: #{current_changes}"
+      end
+      if changed_files
+        puts "Last commit changed files: #{changed_files}"
+      end
+      changed_files = (current_changes + changed_files).map{|f| Pathname.new(f)}
+      puts "Found #{changed_files} in the entire repo"
+      changed_files.select!{|changed_file| changed_file.expand_path(@repo_root).ascend { |path| break true if path == @base_dir_path.expand_path } || false}
+      puts "Found #{changed_files} under base_dir"
+      changed_files
+    end
+
+    def changed_measure_dirs
+      if @repo_root.nil?
+        puts "No git repo found, will just run all measures"
+        return all_measures_dir
+      end
+
+      changed_files = get_git_changed_files
+      if changed_files.empty?
+        puts "Nothing changed"
+      end
+      all_mdirs = all_measure_dirs
+      changed_mdirs = all_mdirs.select{|mdir|
+        mdir_rel = mdir.expand_path.relative_path_from(@repo_root)
+        changed_files.any?{|changed_file| changed_file.ascend { |path| break true if path == mdir_rel } || false}
+      }
+      if changed_mdirs.empty?
+        puts "No change in last commit nor current changes"
+      end
+      return changed_mdirs
+    end
+
 
     # Create and return the location where the tests results need to be stored
     def test_results_dir
@@ -90,7 +156,7 @@ module OpenStudioMeasureTester
       puts "Current directory: #{@base_dir}"
       puts "Test results will be stored in: #{test_results_dir}"
 
-      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(@base_dir, test_results_dir, original_results_directory)
+      results = OpenStudioMeasureTester::OpenStudioTestingResult.new(@base_dir, test_results_dir, original_results_directory, @repo_root)
       results.save_results # one single file for dashboard
 
       # call the create dashboard command now that we have results
