@@ -11,6 +11,7 @@ require 'pp'
 require 'rexml/document'
 require 'minitest'
 require 'simplecov'
+require 'json'
 
 begin
   require 'git'
@@ -36,6 +37,7 @@ require_relative 'openstudio_measure_tester/coverage'
 require_relative 'openstudio_measure_tester/rubocop_result'
 require_relative 'openstudio_measure_tester/openstudio_testing_result'
 require_relative 'openstudio_measure_tester/dashboard'
+require_relative 'openstudio_measure_tester/github_actions_report'
 require_relative 'openstudio_measure_tester/runner'
 
 require_relative 'openstudio_measure_tester/rake_task'
