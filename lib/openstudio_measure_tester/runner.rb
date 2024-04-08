@@ -73,8 +73,10 @@ module OpenStudioMeasureTester
       # copy over the .rubocop.yml file into the root directory of where this is running.
       shared_rubocop_file = File.expand_path('../../.rubocop.yml', File.dirname(__FILE__))
       dest_file = "#{File.expand_path(@base_dir)}/.rubocop.yml"
-      if shared_rubocop_file != dest_file
+      if !File.exist?(dest_file)
         FileUtils.copy(shared_rubocop_file, dest_file)
+      elsif File.read(shared_rubocop_file) != File.read(dest_file)
+        puts "Using specific custom .rubocop.yml rather than the OpenStudio-measure-tester-gem's one"
       end
 
       puts "Current directory is #{@base_dir}"
