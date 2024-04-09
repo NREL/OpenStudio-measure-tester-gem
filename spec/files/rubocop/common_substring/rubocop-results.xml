@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<checkstyle>
+  <file name='my_measure_mod/measure.rb'>
+    <error line='1' column='0' severity='error' message='Layout/LeadingCommentSpace: Missing space after `#`.' source='com.puppycrawl.tools.checkstyle.Layout/LeadingCommentSpace'/>
+  </file>
+  <file name='my_measure/measure.rb'/>
+</checkstyle>
