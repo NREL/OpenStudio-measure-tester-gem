@@ -90,7 +90,8 @@ module OpenStudioMeasureTester
           doc.elements.each('//checkstyle/file') do |rc_file|
             # Allow processing when the file is just the measure.rb
             if rc_file.attributes['name'] != 'measure.rb'
-              if !rc_file.attributes['name'].include? measure_name
+              parts = rc_file.attributes['name'].split(File::SEPARATOR)
+              if !parts.include? measure_name
                 next
               end
             end
