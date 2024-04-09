@@ -156,6 +156,9 @@ module OpenStudioMeasureTester
         # output_path: 'junk.xml',
         auto_correct: auto_correct,
         color: false,
+        # cf #76 - Because we pass a glob to the Runner.run, we must pass
+        # force_exclusion to respect the files excluded in the .rubocop.yml
+        force_exclusion: true,
         formatters: ['simple', ['RuboCop::Formatter::CheckstyleFormatter', rubocop_results_file]]
       }
 
