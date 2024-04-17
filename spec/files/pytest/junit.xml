@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="pytest" errors="0" failures="1" skipped="0" tests="6" time="0.826" timestamp="2024-04-17T16:07:36.989631" hostname="julien-desktop">
+    <testcase classname="python_energyplusmeasure.tests.test_my_example_python_energyplus_measure.TestMyExamplePythonEnergyPlusMeasure" name="test_number_of_arguments_and_argument_names" file="test_python_energyplusmeasure/tests/test_my_example_python_energyplus_measure.py" line="18" time="0.003"/>
+    <testcase classname="python_energyplusmeasure.tests.test_my_example_python_energyplus_measure.TestMyExamplePythonEnergyPlusMeasure" name="test_bad_argument_values" file="test_python_energyplusmeasure/tests/test_my_example_python_energyplus_measure.py" line="33" time="0.004"/>
+    <testcase classname="python_energyplusmeasure.tests.test_my_example_python_energyplus_measure.TestMyExamplePythonEnergyPlusMeasure" name="test_good_argument_values" file="test_python_energyplusmeasure/tests/test_my_example_python_energyplus_measure.py" line="62" time="0.003"/>
+    <testcase classname="python_modelmeasure.tests.test_my_example_python_model_measure.TestMyExamplePythonModelMeasure" name="test_number_of_arguments_and_argument_names" file="python_modelmeasure/tests/test_my_example_python_model_measure.py" line="18" time="0.002">
+      <failure message="assert 1 == 2">self = &lt;test_my_example_python_model_measure.TestMyExamplePythonModelMeasure object at 0x7fc9c1145cd0&gt;
+
+    def test_number_of_arguments_and_argument_names(self):
+        """Test that the arguments are what we expect."""
+        # create an instance of the measure
+        measure = MyExamplePythonModelMeasure()
+    
+        # make an empty model
+        model = openstudio.model.Model()
+    
+        # get arguments and test that they are what we are expecting
+        arguments = measure.arguments(model)
+        num_args = arguments.size()
+&gt;       assert num_args == 2
+E       assert 1 == 2
+
+python_modelmeasure/tests/test_my_example_python_model_measure.py:30: AssertionError</failure>
+    </testcase>
+    <testcase classname="python_modelmeasure.tests.test_my_example_python_model_measure.TestMyExamplePythonModelMeasure" name="test_bad_argument_values" file="python_modelmeasure/tests/test_my_example_python_model_measure.py" line="32" time="0.001"/>
+    <testcase classname="python_modelmeasure.tests.test_my_example_python_model_measure.TestMyExamplePythonModelMeasure" name="test_good_argument_values" file="python_modelmeasure/tests/test_my_example_python_model_measure.py" line="72" time="0.062"/>
+  </testsuite>
+</testsuites>
