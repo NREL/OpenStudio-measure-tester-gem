@@ -32,6 +32,12 @@ module OpenStudioMeasureTester
       template.render
     end
 
+    def github_actions_report
+      gha_reporter = OpenStudioMeasureTester::GithubActionsReport.new(test_results_dir)
+      gha_reporter.make_minitest_step_summary_table
+      gha_reporter.make_minitest_annotations
+    end
+
     # Prepare the current directory and the root directory to remove old test results before running
     # the new tests
     #
@@ -67,8 +73,10 @@ module OpenStudioMeasureTester
       # copy over the .rubocop.yml file into the root directory of where this is running.
       shared_rubocop_file = File.expand_path('../../.rubocop.yml', File.dirname(__FILE__))
       dest_file = "#{File.expand_path(@base_dir)}/.rubocop.yml"
-      if shared_rubocop_file != dest_file
+      if !File.exist?(dest_file)
         FileUtils.copy(shared_rubocop_file, dest_file)
+      elsif File.read(shared_rubocop_file) != File.read(dest_file)
+        puts "Using specific custom .rubocop.yml rather than the OpenStudio-measure-tester-gem's one"
       end
 
       puts "Current directory is #{@base_dir}"
@@ -95,6 +103,8 @@ module OpenStudioMeasureTester
 
       # call the create dashboard command now that we have results
       dashboard
+
+      github_actions_report if ENV["GITHUB_ACTIONS"]
 
       # return the results exit code
       return results.exit_code
@@ -146,6 +156,9 @@ module OpenStudioMeasureTester
         # output_path: 'junk.xml',
         auto_correct: auto_correct,
         color: false,
+        # cf #76 - Because we pass a glob to the Runner.run, we must pass
+        # force_exclusion to respect the files excluded in the .rubocop.yml
+        force_exclusion: true,
         formatters: ['simple', ['RuboCop::Formatter::CheckstyleFormatter', rubocop_results_file]]
       }
 
