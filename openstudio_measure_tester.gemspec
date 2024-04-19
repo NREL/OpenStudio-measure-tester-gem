@@ -39,6 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop-checkstyle_formatter', '~> 0.4.0'
   spec.add_dependency 'simplecov', '~> 0.18.2'
 
-  spec.add_development_dependency 'bundler', '>= 2.5.5'
+  spec.add_development_dependency 'bundler', '2.4.10'
   spec.add_development_dependency 'rspec', '~> 3.9'
 end
