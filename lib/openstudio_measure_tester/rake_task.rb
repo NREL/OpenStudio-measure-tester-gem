@@ -27,7 +27,7 @@ module OpenStudioMeasureTester
     def setup_subtasks(name)
       namespace name do
         ####################################### Minitest and Coverage #######################################
-        desc 'Run Minitest and Coverage'
+        desc 'Run Minitest and Coverage on Measures'
         task :test do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
           # Need to pass in the current directory because the results of minitest and coverage end up going into
