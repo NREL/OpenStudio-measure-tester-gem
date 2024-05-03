@@ -1,6 +1,7 @@
 # Version 0.4.0
 
 * Upgrade to Ruby 3.2.2
+* updaring gem versions of rubocop and simplecov
 
 # Version 0.3.3
 
