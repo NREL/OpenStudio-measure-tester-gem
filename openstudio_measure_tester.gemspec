@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'minitest-reporters', '~> 1.4.2'
   spec.add_dependency 'rake', '~> 13.0'
   spec.add_dependency 'parser', '3.2.2.2'
-  spec.add_dependency 'rubocop', '1.50'
+  spec.add_dependency 'rubocop', :github => 'jmarrec/rubocop', :ref => '1.50.0-no_json'
   spec.add_dependency 'rubocop-performance', '1.20.0'
   spec.add_dependency 'rubocop-checkstyle_formatter', '0.6.0'
   spec.add_dependency 'simplecov', '0.22.0'
