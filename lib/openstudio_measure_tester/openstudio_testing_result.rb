@@ -137,10 +137,12 @@ module OpenStudioMeasureTester
       final_exit_code = 0
       if @results['rubocop']
         # more than 10 errors per file on average
-        status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
-        if status > 10
-          puts "More than 10 RuboCop errors per file found. Found #{status}"
-          final_exit_code = 1
+        if @results['rubocop']['total_errors'].nonzero? and @results['rubocop']['total_files'].nonzero?
+          status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
+          if status > 10
+            puts "More than 10 RuboCop errors per file found. Found #{status}"
+            final_exit_code = 1
+          end
         end
       end
 
