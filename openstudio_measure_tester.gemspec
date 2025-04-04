@@ -32,11 +32,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'git', '~> 1.12.0'
   spec.add_dependency 'minitest', '~> 5.14.0'
   spec.add_dependency 'minitest-reporters', '~> 1.4.2'
-  spec.add_dependency 'rake', '~> 13.0'
   spec.add_dependency 'parser', '3.2.2.2'
+  spec.add_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rubocop', '1.50'
-  spec.add_development_dependency 'rubocop-performance', '1.20.0'
   spec.add_development_dependency 'rubocop-checkstyle_formatter', '0.6.0'
+  spec.add_development_dependency 'rubocop-performance', '1.20.0'
   spec.add_dependency 'simplecov', '0.22.0'
 
   spec.add_development_dependency 'bundler', '2.4.10'
