@@ -135,14 +135,12 @@ module OpenStudioMeasureTester
       # there must be no unit test failures
       # pp @results
       final_exit_code = 0
-      if @results['rubocop']
-        # more than 10 errors per file on average
-        if @results['rubocop']['total_errors'].nonzero? and @results['rubocop']['total_files'].nonzero?
-          status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
-          if status > 10
-            puts "More than 10 RuboCop errors per file found. Found #{status}"
-            final_exit_code = 1
-          end
+      # more than 10 errors per file on average
+      if @results['rubocop'] && (@results['rubocop']['total_errors'].nonzero? && @results['rubocop']['total_files'].nonzero?)
+        status = @results['rubocop']['total_errors'] / @results['rubocop']['total_files']
+        if status > 10
+          puts "More than 10 RuboCop errors per file found. Found #{status}"
+          final_exit_code = 1
         end
       end
 
@@ -161,11 +159,9 @@ module OpenStudioMeasureTester
         end
       end
 
-      if @results['minitest']
-        if @results['minitest'][:total_errors] > 0 || @results['minitest'][:total_failures] > 0
-          puts 'Unit Test (Minitest) errors/failures found.'
-          final_exit_code = 1
-        end
+      if @results['minitest'] && (@results['minitest'][:total_errors] > 0 || @results['minitest'][:total_failures] > 0)
+        puts 'Unit Test (Minitest) errors/failures found.'
+        final_exit_code = 1
       end
 
       # if @results['coverage']

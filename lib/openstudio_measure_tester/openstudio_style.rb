@@ -7,8 +7,7 @@
 
 module OpenStudioMeasureTester
   class OpenStudioStyle
-    attr_reader :results
-    attr_reader :measure_messages
+    attr_reader :results, :measure_messages
 
     CHECKS = [
       {
@@ -180,9 +179,9 @@ module OpenStudioMeasureTester
 
     def log_message(message, type = :syntax, severity = :info)
       new_message = {
-        message: message,
-        type: type,
-        severity: severity
+        message:,
+        type:,
+        severity:
       }
       @measure_messages << new_message
     end
