@@ -2,7 +2,8 @@
 # The version that was on AWS S3 is going to be removed, but should
 # probably wait until 6 months after this is released to ensure 
 # old versions are not still in use. (If you see this message after Jan 1, 2026,
-# then remove this comment and delete the AWS rubocop configs.)
+# then remove this comment and delete the AWS rubocop configs.
+#    http://s3.amazonaws.com/openstudio-resources/styles/
 
 Gemspec/OrderedDependencies:
   Enabled: true
