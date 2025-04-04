@@ -7,16 +7,7 @@
 
 module OpenStudioMeasureTester
   class MinitestResult
-    attr_reader :error_status
-
-    attr_reader :total_assertions
-    attr_reader :total_errors
-    attr_reader :total_failures
-    attr_reader :total_skipped
-    attr_reader :total_tests
-    attr_reader :total_compatibility_errors
-    attr_reader :measure_results
-    attr_reader :summary
+    attr_reader :error_status, :total_assertions, :total_errors, :total_failures, :total_skipped, :total_tests, :total_compatibility_errors, :measure_results, :summary
 
     def initialize(path_to_results)
       @path_to_results = path_to_results
@@ -79,7 +70,7 @@ module OpenStudioMeasureTester
           doc = REXML::Document.new(File.open(report_xmls[0])).root
 
           if doc
-            # Note: only 1 failure and 1 error possible per test
+            # NOTE: only 1 failure and 1 error possible per test
             testsuite_element = doc.elements['testsuite']
             errors, failures, skipped = parse_measure(testsuite_element)
 
@@ -127,8 +118,6 @@ module OpenStudioMeasureTester
       @summary[:total_load_errors] = @total_load_errors
       @summary[:by_measure] = @measure_results
 
-      # pp @summary
-
       FileUtils.mkdir "#{@path_to_results}/" unless Dir.exist? "#{@path_to_results}/"
       File.open("#{@path_to_results}/minitest.json", 'w') do |file|
         file << JSON.pretty_generate(summary)
@@ -148,7 +137,7 @@ module OpenStudioMeasureTester
         elsif testcase.elements['failure']
           failures << testcase.elements['failure']
         elsif testcase.elements['skipped']
-          skipped << 'Skipped test: ' + testcase.elements['skipped'].attributes['type']
+          skipped << "Skipped test: #{testcase.elements['skipped'].attributes['type']}"
         end
       end
 

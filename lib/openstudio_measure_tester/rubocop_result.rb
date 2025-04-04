@@ -7,23 +7,7 @@
 
 module OpenStudioMeasureTester
   class RubocopResult
-    attr_reader :error_status
-
-    attr_reader :file_issues
-    attr_reader :file_info
-    attr_reader :file_warnings
-    attr_reader :file_errors
-
-    attr_reader :total_measures
-    attr_reader :total_files
-
-    attr_reader :total_issues
-    attr_reader :total_info
-    attr_reader :total_warnings
-    attr_reader :total_errors
-
-    attr_reader :summary
-    attr_reader :by_measure
+    attr_reader :error_status, :file_issues, :file_info, :file_warnings, :file_errors, :total_measures, :total_files, :total_issues, :total_info, :total_warnings, :total_errors, :summary, :by_measure
 
     def initialize(path_to_results)
       @path_to_results = path_to_results
@@ -110,7 +94,7 @@ module OpenStudioMeasureTester
               if File.exist? rc_file.attributes['name']
                 File.readlines(rc_file.attributes['name']).each do |line|
                   if (line.include? 'class') && line.split(' ')[0] == 'class'
-                    cn = line.split(' ')[1].gsub /_?[tT]est\z/, ''
+                    cn = line.split(' ')[1].gsub(/_?[tT]est\z/, '')
                     break
                   end
                 end
@@ -127,11 +111,12 @@ module OpenStudioMeasureTester
             violations = []
             rc_file.elements.each('error') do |rc_error|
               @file_issues += 1
-              if rc_error.attributes['severity'] == 'info'
+              case rc_error.attributes['severity']
+              when 'info'
                 @file_info += 1
-              elsif rc_error.attributes['severity'] == 'warning'
+              when 'warning'
                 @file_warnings += 1
-              elsif rc_error.attributes['severity'] == 'error'
+              when 'error'
                 @file_errors += 1
               end
               violations << {

@@ -23,7 +23,6 @@ Style:
 Layout/BlockAlignment:
   Enabled: true
 
-
 # Need to allow indented case statements
 # Configuration parameters: IndentWhenRelativeTo, SupportedStyles, IndentOneStep.
 Layout/CaseIndentation:
@@ -35,38 +34,29 @@ Layout/EmptyLineAfterGuardClause:
 Layout/EmptyLines:
   Enabled: true
 
-
 Layout/EmptyLinesAroundBlockBody:
   Enabled: true
-
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: true
 
-
 Layout/EmptyLinesAroundExceptionHandlingKeywords:
   Enabled: true
-
 
 Layout/EmptyLinesAroundMethodBody:
   Enabled: true
 
-
 Layout/ExtraSpacing:
   Enabled: true
-
 
 Layout/FirstArrayElementIndentation:
   Enabled: true
 
-
 Layout/FirstHashElementIndentation:
   Enabled: true
 
-
 Layout/LeadingCommentSpace:
   Enabled: true
-
 
 # Allow long lines to encourage sufficiently
 # detailed user-facing log messages.
@@ -74,7 +64,6 @@ Layout/LineLength:
   Enabled: true
   Max: 1200
   Severity: warning
-
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: aligned
@@ -123,21 +112,17 @@ Lint/NestedMethodDefinition:
 Lint/ParenthesesAsGroupedExpression:
   Enabled: true
 
-
 Lint/RequireParentheses:
   Enabled: true
 
 Lint/RedundantRequireStatement:
   Enabled: true
 
-
 Lint/RedundantStringCoercion:
   Enabled: true
 
-
 Lint/SelfAssignment:
   Enabled: true
-
 
 Lint/ShadowingOuterLocalVariable:
   Enabled: true
@@ -146,7 +131,6 @@ Lint/ShadowingOuterLocalVariable:
 # TC renamed from Lint/HandleExceptions to Lint/SuppressedException for v4 style
 Lint/SuppressedException:
   Enabled: false
-
 
 Lint/UnreachableCode:
   Enabled: false
@@ -166,14 +150,12 @@ Lint/UnusedMethodArgument:
 Lint/UselessAssignment:
   Enabled: false
 
-
 # ==================== Metrics ====================
 # NL 2020-05-03: Drastically increase the length of assignment branch condition
 Metrics/AbcSize:
   Max: 250
   Enabled: true
   Severity: warning
-
 
 # NL 2020-05-03: Quintuple the length of allowable blocks
 Metrics/BlockLength:
@@ -191,7 +173,6 @@ Metrics/ClassLength:
   Severity: warning
   Enabled: true
 
-
 # NL 2020-05-03: Increase the allowable cyclomatic complexity
 Metrics/CyclomaticComplexity:
   Max: 100
@@ -203,7 +184,6 @@ Metrics/MethodLength:
   CountComments: false
   Severity: warning
   Enabled: true
-
 
 Metrics/ModuleLength:
   Max: 500
@@ -223,7 +203,6 @@ Metrics/PerceivedComplexity:
   Severity: warning
   Enabled: true
 
-
 # ==================== Naming ====================
 # Intentionally allow set_foo because these methods do not
 # have corresponding getters.
@@ -233,22 +212,17 @@ Naming/AccessorMethodName:
 Naming/BlockParameterName:
   Enabled: true
 
-
 Naming/ClassAndModuleCamelCase:
   Enabled: true
-
 
 Naming/FileName:
   Enabled: true
 
-
 Naming/MethodName:
   Enabled: true
 
-
 Naming/MethodParameterName:
   Enabled: true
-
 
 Naming/VariableName:
   Enabled: true
@@ -265,7 +239,6 @@ Naming/VariableNumber:
 # Performance/RegexpMatch:
 #   Enabled: false
 
-
 # NL 2020-05-03: Allow gsub (instead of the preferred tr)
 # Performance/StringReplacement:
 #   Enabled: false
@@ -274,25 +247,20 @@ Naming/VariableNumber:
 Security/Eval:
   Enabled: true
 
-
 # ==================== Styles ====================
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 
 Style/AccessorGrouping:
   Enabled: true
 
-
 Style/AndOr:
   Enabled: true
-
 
 Style/CaseLikeIf:
   Enabled: true
 
-
 Style/ClassAndModuleChildren:
   Enabled: false
-
 
 Style/ClassVars:
   Enabled: false
@@ -300,14 +268,11 @@ Style/ClassVars:
 Style/ColonMethodCall:
   Enabled: true
 
-
 Style/CombinableLoops:
   Enabled: true
 
-
 Style/CommentAnnotation:
   Enabled: true
-
 
 Style/CommentedKeyword:
   Enabled: true
@@ -321,11 +286,9 @@ Style/CommentedKeyword:
 Style/ConditionalAssignment:
   Enabled: false
 
-
 # Documentation will be covered by YARD.
 Style/Documentation:
   Enabled: false
-
 
 Style/EachWithObject:
   Enabled: false
@@ -344,27 +307,22 @@ Style/For:
 Style/FormatString:
   Enabled: true
 
-
 # NL 2020-05-08: Do not add the frozen_string_literal: true to the top of the files.
 Style/FrozenStringLiteralComment:
   Enabled: false
-
 
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
   Enabled: false
 
-
 # Disabled because in most of this codebase, the current approach is more readable.
 Style/GuardClause:
   Enabled: false
-
 
 # Allow duplication inside conditional branches to keep
 # code that does certain tasks more consolidated.
 Style/IdenticalConditionalBranches:
   Enabled: false  
-
 
 Style/HashEachMethods:
   Enabled: true
@@ -376,11 +334,9 @@ Style/HashSyntax:
 Style/IfInsideElse:
   Enabled: false  
 
-
 # Do not force people to use one-line if statements.
 Style/IfUnlessModifier:
   Enabled: false
-
 
 Style/InverseMethods:
   Enabled: true
@@ -395,17 +351,14 @@ Style/MultilineIfThen:
 Style/MultipleComparison:
   Enabled: false
 
-
 # Allow negatives
 # https://rubocop.readthedocs.io/en/latest/cops_style/#stylenegatedif
 Style/NegatedIf:
   Enabled: false
 
-
 # Do not force people to use Next.
 Style/Next:
   Enabled: false
-
 
 Style/Not:
   Enabled: true
@@ -418,26 +371,20 @@ Style/NumericLiterals:
 Style/NumericPredicate:
   Enabled: false
 
-
 Style/OptionalBooleanParameter:
   Enabled: true
-
 
 Style/PreferredHashMethods:
   Enabled: true
 
-
 Style/RedundantFileExtensionInRequire:
   Enabled: true
-
 
 Style/RedundantFreeze:
   Enabled: true
 
-
 Style/RedundantParentheses:
   Enabled: true
-
 
 Style/RedundantRegexpEscape:
   Enabled: true
@@ -445,7 +392,6 @@ Style/RedundantRegexpEscape:
 # encourage explicit returns for clarity
 Style/RedundantReturn:
   Enabled: false
-
 
 Style/RegexpLiteral:
   Enabled: true
@@ -457,14 +403,11 @@ Style/SafeNavigation:
 Style/SelfAssignment:
   Enabled: true
 
-
 Style/SignalException:
   Enabled: true
 
-
 Style/SlicingWithRange:
   Enabled: true
-
 
 Style/SoleNestedConditional:
   Enabled: true
@@ -476,10 +419,8 @@ Style/SpecialGlobalVars:
 Style/StringConcatenation:
   Enabled: true
 
-
 Style/StringLiterals:
   Enabled: true
-
 
 Style/StringLiteralsInInterpolation:
   Enabled: true
@@ -492,7 +433,6 @@ Style/SymbolArray:
 
 Style/SymbolProc:
   Enabled: true
-
 
 Style/TrailingCommaInArrayLiteral:
   Enabled: true
@@ -508,5 +448,4 @@ Style/WordArray:
 
 Style/ZeroLengthPredicate:
   Enabled: true
-
-
+  

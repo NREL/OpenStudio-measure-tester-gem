@@ -7,7 +7,6 @@
 
 require 'openstudio'
 
-require 'pp'
 require 'rexml/document'
 require 'minitest'
 require 'simplecov'

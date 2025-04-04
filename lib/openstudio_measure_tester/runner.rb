@@ -104,7 +104,7 @@ module OpenStudioMeasureTester
       # call the create dashboard command now that we have results
       dashboard
 
-      github_actions_report if ENV["GITHUB_ACTIONS"]
+      github_actions_report if ENV['GITHUB_ACTIONS']
 
       # return the results exit code
       return results.exit_code
@@ -154,7 +154,7 @@ module OpenStudioMeasureTester
         # out and output_path do not actually save the results, has to be appended after the formatter.
         # out: 'junk.xml',
         # output_path: 'junk.xml',
-        auto_correct: auto_correct,
+        auto_correct:,
         color: false,
         # cf #76 - Because we pass a glob to the Runner.run, we must pass
         # force_exclusion to respect the files excluded in the .rubocop.yml
