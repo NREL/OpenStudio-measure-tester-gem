@@ -38,7 +38,6 @@ RSpec.describe OpenStudioMeasureTester::Runner do
     runner = OpenStudioMeasureTester::Runner.new(measure_dir)
 
     # this measure does not pass --- more than 10 rubocop errors
-    result = runner.run_rubocop(false)
     expect(runner.run_rubocop(false)).to eq 1
 
     # verify that the results live in the base_dir
