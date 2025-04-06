@@ -1,0 +1,29 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "Adak",
+        "ASHRAE",
+        "autocalculate",
+        "autorun",
+        "Condns",
+        "curdir",
+        "Drybulb",
+        "energyplus",
+        "Floorto",
+        "Goldwasser",
+        "HVAC",
+        "openstudio",
+        "Placemark",
+        "popen",
+        "roundto",
+        "snakecase",
+        "Timestep",
+        "weatherlocation",
+        "wmoundefined"
+    ],
+    "ignoreWords": [],
+    "import": []
+}

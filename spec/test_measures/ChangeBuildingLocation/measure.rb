@@ -18,7 +18,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
 
     weather_file_name = OpenStudio::Ruleset::OSArgument.makeStringArgument('weather_file_name', true)
     weather_file_name.setDisplayName("Weather File Name")
-    weather_file_name.setDescription("Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can inclucde the full file path, but for most use cases should just be file name.")
+    weather_file_name.setDescription("Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can include the full file path, but for most use cases should just be file name.")
     args << weather_file_name
 
     #make choice argument for climate zone
@@ -119,7 +119,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
         return false
       end
       if stat_files.size == 0
-        runner.registerError("Cound not find the stat file in the EPW directory")
+        runner.registerError("Count not find the stat file in the EPW directory")
         return false
       end
 

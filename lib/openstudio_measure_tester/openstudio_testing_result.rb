@@ -88,7 +88,7 @@ module OpenStudioMeasureTester
         # minitest
         if Dir.exist?("#{@orig_results_dir}/test/html_reports") || Dir.exist?("#{@orig_results_dir}/test/reports")
           puts 'Found Minitest Results, parsing'
-          # Do not delete the compatibilty directory which is generated when the test is run
+          # Do not delete the compatibility directory which is generated when the test is run
           FileUtils.rm_rf "#{@test_results_dir}/minitest/html_reports" if Dir.exist? "#{@test_results_dir}/minitest/html_reports"
           FileUtils.rm_rf "#{@test_results_dir}/minitest/reports" if Dir.exist? "#{@test_results_dir}/minitest/reports"
 

@@ -92,7 +92,7 @@ module OpenStudioMeasureTester
 
     # Post process the various results and save them into the base_dir
     #
-    # @param original_results_directory [string] Location of the results from coverag and minitest
+    # @param original_results_directory [string] Location of the results from coverage and minitest
     def post_process_results(original_results_directory = nil)
       puts ' ========================= Starting Results Post Process ================================'
       puts "Current directory: #{@base_dir}"
