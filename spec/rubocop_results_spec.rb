@@ -26,6 +26,7 @@ RSpec.describe OpenStudioMeasureTester::RubocopResult do
     expect(File.exist?(write_file)).to be true
   end
 
+  # Note: Not sure what this test does.  Commenting it.
   # it 'should not double count measures with a common substring' do
   #   dir = 'spec/files/rubocop/common_substring'
   #   mr = OpenStudioMeasureTester::RubocopResult.new(dir)
