@@ -119,7 +119,7 @@ class ChangeBuildingLocation < OpenStudio::Ruleset::ModelUserScript
         return false
       end
       if stat_files.size == 0
-        runner.registerError("Count not find the stat file in the EPW directory")
+        runner.registerError("Could not find the stat file in the EPW directory")
         return false
       end
 
