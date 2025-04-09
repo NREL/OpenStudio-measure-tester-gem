@@ -31,7 +31,7 @@ module OpenStudioMeasureTester
         task :test do
           runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
           # Need to pass in the current directory because the results of minitest and coverage end up going into
-          # the root directorys
+          # the root directories
           exit runner.run_test(false, Dir.pwd, false)
         end
 

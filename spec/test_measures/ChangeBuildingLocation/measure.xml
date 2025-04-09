@@ -13,7 +13,7 @@
     <argument>
       <name>weather_file_name</name>
       <display_name>Weather File Name</display_name>
-      <description>Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can inclucde the full file path, but for most use cases should just be file name.</description>
+      <description>Name of the weather file to change to. This is the filename with the extension (e.g. NewWeather.epw). Optionally this can include the full file path, but for most use cases should just be file name.</description>
       <type>String</type>
       <required>true</required>
       <model_dependent>false</model_dependent>

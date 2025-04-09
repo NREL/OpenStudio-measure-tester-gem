@@ -21,7 +21,9 @@ Gemfile.lock
 /rubocop-results.xml
 !spec/files/rubocop-results.xml
 spec/files/rubocop/rubocop.json
+spec/files/minitest/minitest.json
 spec/**/.rubocop.yml
+
 
 # mac and rbenv stuff
 .DS_Store
