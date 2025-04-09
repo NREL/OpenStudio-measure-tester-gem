@@ -1,7 +1,13 @@
+# Version 0.4.1
+
+* Switch rubocop and simplecov to development dependencies
+* Update rubocop syntax
+* Updates to support rubocop's new format
+
 # Version 0.4.0
 
 * Upgrade to Ruby 3.2.2
-* updaring gem versions of rubocop and simplecov
+* Updating gem versions of rubocop and simplecov
 
 # Version 0.3.3
 

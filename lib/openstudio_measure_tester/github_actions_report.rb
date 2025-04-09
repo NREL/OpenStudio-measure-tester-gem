@@ -31,15 +31,14 @@ module OpenStudioMeasureTester
 
       content = [
         "| #{header0.ljust(n0)} | #{header1.ljust(n1)} |",
-        "| " + "-" * n0 + " | " + "-" * n1 + " |",
-      ] + h.map{|k, v| "| #{k.ljust(n0)} | #{v.to_s.ljust(n1)} |"}
+        "| #{'-' * n0} | #{'-' * n1} |"
+      ] + h.map { |k, v| "| #{k.ljust(n0)} | #{v.to_s.ljust(n1)} |" }
       return content.join("\n")
     end
 
     def make_minitest_step_summary_table
-
-      write_step_summary("## Minitest")
-      write_step_summary("")
+      write_step_summary('## Minitest')
+      write_step_summary('')
 
       total_tests = @hash['minitest']['total_tests']
       total_assertions = @hash['minitest']['total_assertions']
@@ -50,24 +49,24 @@ module OpenStudioMeasureTester
       total_load_errors = @hash['minitest'].fetch('total_load_errors', []).count
 
       passed = total_tests - (total_failures + total_errors + total_skipped)
-      pct = passed.to_f / (total_tests - total_skipped).to_f
+      pct = passed.to_f / (total_tests - total_skipped)
 
       h = {
         'Total Tests' => total_tests,
         'Load Error' => total_load_errors,
         'Passed' => passed,
-        'Success Rate' => '%.2f%%' % (pct * 100.0),
+        'Success Rate' => format('%.2f%%', (pct * 100.0)),
         'Failures' => total_failures,
         'Errors' => total_errors,
         'Skipped' => total_skipped,
         'Incompatible' => total_compatibility_errors,
-        'Total Assertions' => total_assertions,
+        'Total Assertions' => total_assertions
       }
 
-      @minitest_summary_table = hash_to_markdown(h, "Metric", "Value")
+      @minitest_summary_table = hash_to_markdown(h, 'Metric', 'Value')
 
       write_step_summary(@minitest_summary_table)
-      write_step_summary("")
+      write_step_summary('')
     end
 
     def make_minitest_annotations
@@ -87,23 +86,23 @@ module OpenStudioMeasureTester
             title = x.attributes['type']
             message = x.attributes['message']
             annot = "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{tested_class}.#{test_name}: #{message}"
-            @all_annotations <<  annot
+            @all_annotations << annot
           end
           testcase.elements.each('error') do |x|
             title = x.attributes['type']
             message = x.attributes['message']
             annot = "::error file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
-            @all_annotations <<  annot
+            @all_annotations << annot
           end
           testcase.elements.each('skipped') do |x|
             title = x.attributes['type']
             message = x.attributes['message']
             annot = "::warning file=#{filepath},line=#{line},endLine=#{line + 1},title=#{title}::#{message}"
-            @all_annotations <<  annot
+            @all_annotations << annot
           end
         end
       end
-      @all_annotations.each { |a| puts a}
+      @all_annotations.each { |a| puts a }
       nil
     end
   end
