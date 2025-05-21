@@ -1,3 +1,7 @@
+# Version 0.5.0
+
+* bump git dep
+
 # Version 0.4.1
 
 * Switch rubocop and simplecov to development dependencies
