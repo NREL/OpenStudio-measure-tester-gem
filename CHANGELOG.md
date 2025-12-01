@@ -1,3 +1,7 @@
+# Version 0.5.1
+
+* bump ruby package dependencies
+
 # Version 0.5.0
 
 * bump git dep
