@@ -1,3 +1,7 @@
+# Version 0.5.2
+
+* Pin back ruby package dependencies (rubocop and more importantly parser)
+
 # Version 0.5.1
 
 * bump ruby package dependencies
