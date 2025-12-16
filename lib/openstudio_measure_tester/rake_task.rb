@@ -35,6 +35,13 @@ module OpenStudioMeasureTester
           exit runner.run_test(false, Dir.pwd, false)
         end
 
+        desc 'List changed measures'
+        task :changed_measure_dirs do
+          puts 'Listing changed measures'
+          runner = OpenStudioMeasureTester::Runner.new(Rake.application.original_dir)
+          puts runner.changed_measure_dirs
+        end
+
         ####################################### RuboCop #######################################
         # Need to create a namespace so that we can have openstudio:rubocop and openstudio:rubocop:auto_correct.
         namespace :rubocop do

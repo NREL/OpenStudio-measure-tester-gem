@@ -13,7 +13,7 @@ module OpenStudioMeasureTester
     # @param results_dir [String]: Directory where the results are scattered. Typically the root dir or where rake was executed
     # @param test_results_dir [String]: Where the final results are to be stored
     # @param orig_results_dir [String]: Optional directory where results are sometimes thrown into that need to be moved (coverage and minitest)
-    def initialize(results_dir, test_results_dir, orig_results_dir = nil)
+    def initialize(results_dir, test_results_dir, orig_results_dir = nil, repo_root = nil)
       @results_dir = results_dir
       @test_results_dir = test_results_dir
       @orig_results_dir = orig_results_dir
@@ -27,8 +27,9 @@ module OpenStudioMeasureTester
       repo_name = 'unknown'
       current_branch = 'unknown'
       sha = 'unknown'
+
       begin
-        g = Git.open(Dir.pwd)
+        g = Git.open(repo_root.nil? ? Dir.pwd : repo_root)
         config = g.config
         repo_name = config['remote.origin.url'] ? config['remote.origin.url'].split('/').last.chomp('.git') : nil
         current_branch = g.branch.name || nil
